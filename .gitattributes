@@ -8,7 +8,17 @@
 *.tex text
 
 # Declare files that will always have CRLF line endings on checkout.
-*.sln text eol=crlf
+# 20200114, dtashley:  Line below commented out in favor of suggestion from Stack
+# Overflow,
+# https://stackoverflow.com/questions/11162267/how-do-i-make-git-treat-a-file-as-binary
+# that suggested setting up Visual Studio files so that they can't be merged
+# but diffs will still be displayed.
+# *.sln text eol=crlf
+
+# Handle Visual Studio files per Stack Overflow suggestion mentioned above.
+*.sln -merge -text
+*.suo binary
+*.vcxproj binary
 
 # Denote all files that are truly binary and should not be modified.
 *.png binary
