@@ -1,0 +1,224 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_inv0/s_inv0.tex,v 1.6 2002/01/30 00:51:04 dtashley Exp $
+%
+\section{Invocation Of The Software}
+\label{sinv0}
+
+\swname{} is an ordinary Win32 console application, produced using Microsoft 
+Visual C++ Version 6.0.  When \swname{} is invoked, it undertakes the following actions:
+
+\begin{itemize}
+\item \index{command-line parameters}Command-line 
+      parameters are parsed.  Fatal errors are possible if 
+      the command-line parameters are ill-formatted.
+\item The input file (which specifies the model to verify) is parsed.  
+      Fatal errors are possible if the model file is ill-formatted.
+\item 
+      \index{model design rules}Design-rule 
+      checks are applied to the model specified.
+      Fatal errors are possible if the model specified violates the design 
+      rules.
+\item A reachability algorithm is applied to determine if any of the configurations
+      marked as illegal in the model are reachable.  When invoked and
+      unless stopped by the user, \swname{} will do 
+      one of the following:
+      
+      \begin{itemize}
+      \item Verify that no illegal state is reachable.
+      \item Determine that an illegal configuration is reachable, and indicate how, 
+            starting from the initial configurations, an illegal configuration can be reached.
+      \item Terminate abnormally without a reachability determination because 
+            not enough computer resources (memory) are available to perform 
+            the verification.
+      \end{itemize}
+\end{itemize}
+
+Once invoked, \swname{} can be terminated before it completes normally in
+two ways:
+
+\begin{itemize}
+\item Using the CTRL-C or CTRL-BREAK key combinations while the console
+      window in which \swname{} is running has the focus.
+\item Using the CTRL-ALT-DELETE key combination to obtain a list of applications
+      or processes, and then electing to terminte \swname{}.
+\end{itemize}
+
+Of the two termination alternatives, the first is preferred, as it works using
+the 'C' runtime library and is a gentler type of termination.
+
+
+\subsection{Invocation Format}
+%Subsection Tag: SINF0
+\label{sinv0:sinf0}
+
+The general invocation format is: \\
+
+\texttt{hyreach option\_1 option\_2 \ldots option\_N} \\
+
+\noindent{}where the options are any of the options 
+described in Section \ref{sinv0:sclo0}.  Note that 
+one of the options (the \texttt{-mf}, or \emph{model file} 
+option) is not truly optional, as \swname{} will not 
+do any useful work without it.
+
+Note that each option consists of an option flag
+(``\texttt{-mf}'', for example) followed by zero
+or more option parameters.  The number of required
+option parameters is fixed for each option.
+
+Options may always appear in any order, but may not
+appear twice.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Command-Line Options}
+%Subsection Tag: SCLO0
+\label{sinv0:sclo0}
+
+This section describes the command-line options that may be used to modify the 
+behavior of \swname{}.
+
+\subsubsection{-mf Command-Line Option (1 Option Parameter)}
+The \index{-mf@\texttt{-mf}}\texttt{-mf} (``model file'') specifies to 
+\swname{} the name of the model file to be used (the format of
+the model file is described in Section \ref{siff0}).
+\swname{} performs no processing or interpretation of the string
+supplied, so the filename specified may be any filename accepted
+by the underlying operating system.
+
+If the model file name specified contains spaces, the name must be
+surrounded by quotes.\footnote{Strictly speaking, this isn't always true.
+The issue is how \swname{} receives its arguments (the \texttt{argv[]} 
+array).  If a file name containing spaces is specified from within a DOS
+box, the quotes prevent the DOS command interpreter from interpreting the
+file name as multiple parameters and breaking it up.  However, if a
+scripting language such a Tcl is used, it may not be necessary to quote
+such a file name (and in fact it may cause errors) because the 
+spawning mechanisms (the \texttt{exec} command in Tcl for example) 
+bypass the DOS command interpeter.}
+
+\subsubsection{-ch Command-Line Option (No Option Parameters)}
+The \index{-ch@\texttt{-ch}}\texttt{-ch} (``convex hull'') command-line 
+option causes \swname{} to transform unions of convex zones to
+the minimal convex zone (the \index{convex hull}convex hull) 
+that will enclose the union.  
+(Note that the convex hull is at least as large as union.)
+Since these 
+unions are used to represent the subset of $\mathbb{R}^N$ that 
+clock variables may be in, any states that are reachable using the exact
+representation (the union) are also reachable using the convex hull 
+approximation; but the converse is not true.  Thus:
+
+\begin{itemize}
+\item A result of ``no illegal configurations reachable'' when the 
+      \texttt{-ch} option is used implies that the configurations will also
+      not be reachable when the more exact representation is used.
+\item A result of ``illegal configurations reachable'' when the 
+      \texttt{-ch} option is used does not necessarily imply that 
+      illegal configurations will be reachable when the more exact
+      representation is used.
+\end{itemize}
+
+Thus, with respect to the safeness of systems, the \texttt{-ch}
+option cannot lead to a false determination of \emph{safe}, but
+can lead to a false determination of \emph{unsafe}.
+
+\subsubsection{-q Command-Line Option (No Option Parameters)}
+The \index{-q@\texttt{-q}}\texttt{-q} (``quiet'') command-line option causes \swname{}
+to produce a minimal amount of output.  This option is approximately opposite
+to the \texttt{-d} (debug level) and \texttt{-v} (verbose)
+command-line options.
+
+\subsubsection{-v Command-Line Option (No Option Parameters)}
+The \index{-v@\texttt{-v}}\texttt{-v} (``verbose'') command-line option causes 
+\swname{} to produce more than the normal 
+amount of output.  The output is of an informational nature, and not 
+designed to assist in debugging.
+
+\subsubsection{-d Command-Line Option (2 Option Parameters)}
+The \index{-d@\texttt{-d}}\texttt{-d <debug\_level> <debug\_file\_name>} (``debug'') 
+command-line option causes 
+\swname{} to produce information 
+useful in debugging.  The \texttt{debug\_level}
+integral parameter to this option 
+must be one of the numerical parameters described in Table 
+\ref{tbl:sinv0:sclo0:01}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+\texttt{-d} Option Value & Interpretation \\
+\hline
+\hline
+0 (default) & No debugging information is produced.  Although a              \\
+            & file name must be specified because of the syntax              \\
+            & of the option, no debug file will be produced.                 \\
+\hline
+1           & Information is provided to trace what the program              \\
+            & is doing and when.  Certain abstract information,              \\
+            & such as size or complexity measures for data                   \\
+            & structures or timing information will be produced.             \\
+\hline
+2           & Abstract data structure information will be                    \\
+            & produced.  Generally by \emph{abstract} we mean that           \\
+            & the interpretation of data structures (the                     \\
+            & represented polytopes, for example) will be                    \\
+            & produced, but the implementation details of data               \\
+            & structures (pointer values, bitfield values, etc)              \\
+            & will not be produced.                                          \\
+\hline
+3           & Detailed data structure information (including                 \\
+            & implementation details) will be produced.                      \\
+\hline
+4           & All available information will be produced.                    \\
+\hline
+\end{tabular}
+\end{center}
+\caption{\texttt{-d} Option Parameters And Their Interpretation}
+\label{tbl:sinv0:sclo0:01}
+\end{table}
+
+The \texttt{debug\_file\_name} parameter must be a file that can be
+opened by the operating system.  At the higher debug levels, operation
+of \swname{} will be slowed substantially, and the debug information
+file may become quite large.  Note also that \swname{} can be compiled
+without debug support (for the sake of speed), in which case 
+the \texttt{-d} option will not be allowed.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: s_inv0.tex,v $
+$Source: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_inv0/s_inv0.tex,v $
+$Revision: 1.6 $
+$Author: dtashley $
+$Date: 2002/01/30 00:51:04 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: s_inv0.tex,v $
+%Revision 1.6  2002/01/30 00:51:04  dtashley
+%Nightly safety checkin.
+%
+%Revision 1.5  2002/01/29 17:04:00  dtashley
+%Version control info added, and minor edits.
+%
+%Revision 1.4  2001/10/12 22:32:30  dtashley
+%Substantial edits.
+%
+%Revision 1.3  2001/10/10 02:09:07  dtashley
+%Edits.
+%
+%Revision 1.2  2001/09/26 04:51:13  dtashley
+%Edits.
+%
+%Revision 1.1  2001/09/26 02:31:14  dtashley
+%Initial checkin, and some edits of main TEX file.
+%
+%End of S_INV0.TEX.

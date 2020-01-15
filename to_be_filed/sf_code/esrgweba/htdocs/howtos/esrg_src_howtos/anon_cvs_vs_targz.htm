@@ -1,0 +1,99 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Overview Of Differences Between Obtaining Source Code And Materials Using
+TAR.GZ Distributions Versus Anonymous CVS Access</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">Overview Of Differences Between Obtaining
+Source Code And Materials Using TAR.GZ Distributions Versus Anonymous CVS Access</font></b></p>
+<hr>
+<p>This web page describes the differences between the two methods to obtain all
+the source code and other materials for the ESRG products:</p>
+<ul>
+  <li><b>Anonymous CVS Access:</b>&nbsp; obtain the latest source code directly
+    from the CVS archives.
+    <ul>
+      <li><b>Overview</b>
+        <ul>
+          <li>Use CVS (a version control system) to obtain all source files and
+            other materials from the project CVS archives.</li>
+          <li>Works on both Windows® and Unix systems.</li>
+        </ul>
+      </li>
+      <li><b>Advantages</b>
+        <ul>
+          <li>CVS will automatically adjust line endings for text files to the
+            appropriate type for the system (Windows® vs. Unix).</li>
+          <li>The very latest source code is available.</li>
+        </ul>
+      </li>
+      <li><b>Disadvantages</b>
+        <ul>
+          <li>The source code and other materials obtained may not correspond to
+            any specific release of the ESRG products.</li>
+          <li>The source code and other materials may be developmental or on the
+            &quot;bleeding edge&quot; (they may not function reliably, or may
+            not even compile).</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><b>Packaged TAR.GZ Files:</b>&nbsp; download and use the .TAR.GZ file
+    packaged with each release of the ESRG products.
+    <ul>
+      <li><b>Advantages</b>
+        <ul>
+          <li>.TAR.GZ files can be processed by both *nix systems (using <i>tar</i>
+            and/or <i>gzip</i>) and by Windows® systems (using <a href="http://www.winzip.com">WinZip</a>
+            or <a href="http://www.7-zip.org/">7-Zip</a>).</li>
+          <li>Represent the source code and other materials used for a specific
+            release.</li>
+          <li>Will definitely compile.</li>
+        </ul>
+      </li>
+      <li><b>Disadvantages</b>
+        <ul>
+          <li>Line endings are not automatically adjusted.&nbsp; The line
+            endings for text files will be consistent with Windows®
+            conventions.</li>
+          <li>There is a subtle difference between the way that the Windows®
+            products are produced and the way that the source materials are
+            packaged in a TAR.GZ file.&nbsp; This difference has never led to
+            problems, but in principle it could.
+            <ul>
+              <li>The Windows® products are produced by using CVS on a Windows
+                system and checking out the necessary materials.&nbsp; Line
+                endings of text files are adjusted automatically by the
+                Windows® version of CVS.</li>
+              <li>The TAR.GZ distributions are produced on a Unix system.&nbsp;
+                The <i>unix2dos</i> utility is used to convert line endings for
+                a Windows® system.</li>
+              <li>This means that, in principle, the text files used to produce
+                the Windows® distributions could be different than what appears
+                in the TAR.GZ distribution (if, for example, <i>unix2dos</i>
+                contained a bug or processed the last line in a file differently
+                than CVS).&nbsp; This is not seen as a realistic mechanism for a
+                bug, but one should be aware of this.&nbsp;</li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/howtos/esrg_src_howtos/anon_cvs_vs_targz.htm,v 1.2 2003/04/27 21:01:28 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

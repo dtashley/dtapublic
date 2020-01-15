@@ -1,0 +1,510 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_bmf0/c_bmf0.tex,v 1.10 2010/01/28 21:18:32 dashley Exp $
+
+\chapter{Block Memory Functions}
+
+\label{cbmf0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  iov0
+\label{cbmf0:siov0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Block Clear and Set Functions}
+%Section tag:  bcs0
+\label{cbmf0:sbcs0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuBmMemclrSmNu(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuBmMemclrSmNu(\protect\mbox{\protect\boldmath $\cdot$})}}
+%%Subsection tag:  mcl0
+%\label{cbmf0:sbcs0:smcl0}
+%
+%\index{UcuBmMemclrSmNu()@\emph{UcuBmMemclrSmNu($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuBmMemclrSmNu(void *block, UCU_UINT8 dim)
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Sets each byte of the memory area \emph{block} to zero, 
+%with \emph{block} consisting of \emph{dim} bytes.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{block}}\\
+%      Pointer to the first byte of the memory block whose
+%      bytes are to be set to zero.  
+%      No reserved values of this pointer are honored,
+%      so the pointer may not be \emph{NULL} or otherwise invalid
+%      if $dim > 0$.
+%\item \emph{\textbf{dim}}\\
+%      Number of contiguous bytes in the block, starting at 
+%      $array[0]$, to be set to zero.
+%      Zero is a valid value for this parameter; and if this
+%      parameter is zero, \emph{array} will not be dereferenced
+%      (hence the provision above that \emph{array} may be \emph{NULL}
+%      or otherwise invalid only if $dim = 0$).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The clearing of each individual byte is atomic
+%      by design, so that an ISR cannot:
+%      \begin{itemize}
+%      \item Obtain an intermediate value of a byte (the byte will
+%            either be its previous value or zero).
+%      \end{itemize}
+%\item However, the clear operation applied to multiple bytes
+%      is not atomic (an interrupt may occur between the operation on
+%      one byte and the operation on its successor).
+%\end{list}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Block Decrement Functions}
+%Section tag:  bdf0
+\label{cbmf0:sbdf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuBmListDecZf8SmNc(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuBmListDecZf8SmNc(\protect\mbox{\protect\boldmath $\cdot$})}}
+%%Subsection tag:  dar0
+%\label{cbmf0:sbdf0:sdar0}
+%
+%\index{UcuBmListDecZf8SmNc()@\emph{UcuBmListDecZf8SmNc($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuBmListDecZf8SmNc(UCU_UINT8 *array, UCU_UINT8 dim)
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Decrements each of an array \emph{array} of \emph{dim} bytes, but not below zero.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{array}}\\
+%      Pointer to the first byte of the array whose elements are to be
+%      decremented.  No reserved values of this pointer are honored,
+%      so the pointer may not be \emph{NULL} or otherwise invalid
+%      if $dim > 0$.
+%\item \emph{\textbf{dim}}\\
+%      Number of contiguous bytes in the array, starting at 
+%      $array[0]$, to be decremented but not below zero.
+%      Zero is a valid value for this parameter; and if this
+%      parameter is zero, \emph{array} will not be dereferenced
+%      (hence the provision above that \emph{array} may be \emph{NULL}
+%      or otherwise invalid only if $dim = 0$).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The decrement of each individual byte is atomic
+%      by design, so that an ISR cannot:
+%
+%      \begin{itemize}
+%      \item Obtain a faulty snapshot of an intermediate value of a byte.
+%      \item Corrupt the modification of a byte by writing to the byte.
+%      \end{itemize}
+%
+%\item However, the decrement operation applied to multiple bytes
+%      is not atomic (an interrupt may occur between the operation on
+%      one byte and the operation on its successor).
+%
+%\item Thus, an ISR may safely set and test the individual byte
+%      values concurrently with nISR software (so long as the nISR
+%      software employs appropriate critical section protocol), but 
+%      the ISR may not in general count on relationships between
+%      different bytes in the \emph{array}.
+%
+%\item Classic DI/EI critical section protocol is employed because it is unlikely
+%      that this function (because it is an array operation and could have a long
+%      execution time)
+%      will be used from within a larger critical section, and hence a restorative
+%      protocol is perceived to have no advantages.
+%
+%\item The DI/EI critical section is just a few machine instructions long
+%      (nearly negligible),
+%      so critical section timing data is not provided. 
+%\end{list}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuBmListDecZf16SmNc(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuBmListDecZf16SmNc(\protect\mbox{\protect\boldmath $\cdot$})}}
+%%Subsection tag:  dar1
+%\label{cbmf0:sbdf0:sdar1}
+%
+%\index{UcuBmListDecZf16SmNc()@\emph{UcuBmListDecZf16SmNc($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuBmListDecZf16SmNc(UCU_UINT16 *array, UCU_UINT16 dim)
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Decrements each of an array \emph{array} of \emph{dim} 16-bit values, 
+%but not below zero.  (The storage order of the bytes 
+%within each element of \emph{array} is machine-dependent.)
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{array}}\\
+%      Pointer to the first 16-bit integer of the array whose elements are to be
+%      decremented.  No reserved values of this pointer are honored,
+%      so the pointer may not be \emph{NULL} or otherwise invalid
+%      if $dim > 0$.
+%\item \emph{\textbf{dim}}\\
+%      Number of contiguous 16-bit values in the array, starting at 
+%      $array[0]$, to be decremented but not below zero.
+%      Zero is a valid value for this parameter; and if this
+%      parameter is zero, \emph{array} will not be dereferenced
+%      (hence the provision above that \emph{array} may be \emph{NULL}
+%      or otherwise invalid only if $dim = 0$).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The decrement of each individual 16-bit quantity is atomic
+%      by design, so that an ISR cannot:
+%
+%      \begin{itemize}
+%      \item Obtain a faulty snapshot of an intermediate value of a 16-bit quantity.
+%      \item Corrupt the modification of a 16-bit quantity by writing to it.
+%      \end{itemize}
+%
+%\item However, the decrement operation applied to multiple 16-bit quantities
+%      is not atomic (an interrupt may occur between the operation on
+%      one 16-bit quantity and the operation on its successor).
+%
+%\item Thus, an ISR may safely set and test the individual 16-bit quantity
+%      values concurrently with nISR software (so long as the nISR
+%      software employs appropriate critical section protocol), but 
+%      the ISR may not in general count on relationships between
+%      different 16-bit quantities in the \emph{array}.
+%
+%\item Classic DI/EI critical section protocol is employed because it is unlikely
+%      that this function (because it is an array operation and could have a long
+%      execution time)
+%      will be used from within a larger critical section, and hence a restorative
+%      protocol is perceived to have no advantages.
+%
+%\item The DI/EI critical section is just a few machine instructions long
+%      (nearly negligible),
+%      so critical section timing data is not provided. 
+%\end{list}
+%\vspace{2.8ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Block Increment Functions}
+%Section tag:  bif0
+\label{cbmf0:sbif0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuBmListIncFf8SmNc(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuBmListIncFf8SmNc(\protect\mbox{\protect\boldmath $\cdot$})}}
+%%Subsection tag:  iar0
+%\label{cbmf0:sibf0:siar0}
+%
+%\index{UcuBmListIncFf8SmNc()@\emph{UcuBmListIncFf8SmNc($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuBmListIncFf8SmNc(UCU_UINT8 *array, UCU_UINT8 dim)
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Increments each of an array \emph{array} of \emph{dim} bytes, but not above \$FF.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{array}}\\
+%      Pointer to the first byte of the array whose elements are to be
+%      incremented.  No reserved values of this pointer are honored,
+%      so the pointer may not be \emph{NULL} or otherwise invalid
+%      if $dim > 0$.
+%\item \emph{\textbf{dim}}\\
+%      Number of contiguous bytes in the array, starting at 
+%      $array[0]$, to be incremented but not above \$FF.
+%      Zero is a valid value for this parameter; and if this
+%      parameter is zero, \emph{array} will not be dereferenced
+%      (hence the provision above that \emph{array} may be \emph{NULL}
+%      or otherwise invalid only if $dim = 0$).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The increment of each individual byte is atomic
+%      by design, so that an ISR cannot:
+%
+%      \begin{itemize}
+%      \item Obtain a faulty snapshot of an intermediate value of a byte.
+%      \item Corrupt the modification of a byte by writing to the byte.
+%      \end{itemize}
+%
+%\item However, the increment operation applied to multiple bytes
+%      is not atomic (an interrupt may occur between the operation on
+%      one byte and the operation on its successor).
+%
+%\item Thus, an ISR may safely set and test the individual byte
+%      values concurrently with nISR software (so long as the nISR
+%      software employs appropriate critical section protocol), but 
+%      the ISR may not in general count on relationships between
+%      different bytes in the \emph{array}.
+%
+%\item Classic DI/EI critical section protocol is employed because it is unlikely
+%      that this function (because it is an array operation and could have a long
+%      execution time)
+%      will be used from within a larger critical section, and hence a restorative
+%      protocol is perceived to have no advantages.
+%
+%\item The DI/EI critical section is just a few machine instructions long
+%      (nearly negligible),
+%      so critical section timing data is not provided. 
+%\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Block Sum and Average Functions}
+%Section tag:  bsa0
+\label{cbmf0:sbsa0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Block Shift Functions}
+%Section tag:  bsh0
+\label{cbmf0:sbsh0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuBmMemRshift8SmNc(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuBmMemRshift8SmNc(\protect\mbox{\protect\boldmath $\cdot$})}}
+%%Subsection tag:  mrs0
+%\label{cbmf0:sibf0:smrs0}
+%
+%\index{UcuBmMemRshift8SmNc()@\emph{UcuBmMemRshift8SmNc($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuBmMemRshift8SmNc(UCU_UINT8 *block, UCU_UINT8 num)
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Shifts \emph{block} of size \emph{num} right by one byte.
+%
+%Logically, this function is equivalent to the following assignments:
+%
+%\begin{verbatim}
+%block[num]     = block[num-1];
+%block[num-1]   = block[num-2];
+%...
+%block[2]       = block[1];
+%block[1]       = block[0];
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{block}}\\
+%      Pointer to the first byte of the block whose elements are to be
+%      shifted right.  No reserved values of this pointer are honored,
+%      so the pointer may not be \emph{NULL} or otherwise invalid
+%      if $num > 0$.
+%\item \emph{\textbf{num}}\\
+%      Number of bytes to be shifted.
+%      Zero is a valid value for this parameter; and if this
+%      parameter is zero, \emph{block} will not be dereferenced
+%      (hence the provision above that \emph{block} may be \emph{NULL}
+%      or otherwise invalid only if $num = 0$).
+%
+%      As a point of caution, note that the rightmost byte specified
+%      by \emph{block} and \emph{num} is shifted beyond the area
+%      specified, hence it is a logical error to use the size of
+%      an array as \emph{num} (use one less than the size of the
+%      array instead).
+%
+%\begin{figure}
+%\begin{verbatim}
+%unsigned char buf[BUFSIZE];
+%
+%UcuBmMemRshift8SmNc(buf, sizeof(buf)-1);
+%\end{verbatim}
+%\caption{Correct Usage of \emph{UcuBmMemRshift8SmNc($\cdot$)} to Shift an Array}
+%\label{fig:cbmf0:sibf0:smrs0:01}
+%\end{figure}
+%
+%       An example of correct usage to shift a \emph{block} right so that
+%       a new value can be placed in \emph{block[0]} is supplied as
+%       Figure \ref{fig:cbmf0:sibf0:smrs0:01}.\\
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Each assignment as specified in the synopsis is atomic (although in practice
+%      this is likely to be of little value).
+%
+%\item Classic DI/EI critical section protocol is employed because it is unlikely
+%      that this function (because it is an array operation and could have a long
+%      execution time)
+%      will be used from within a larger critical section, and hence a restorative
+%      protocol is perceived to have no advantages.
+%
+%\item The DI/EI critical section is just a few machine instructions long
+%      (nearly negligible),
+%      so critical section timing data is not provided. 
+%\end{list}
+%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_bmf0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_bmf0/c_bmf0.tex,v $
+$Revision: 1.10 $
+$Author: dashley $
+$Date: 2010/01/28 21:18:32 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_bmf0.tex,v $
+%Revision 1.10  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.9  2010/01/28 17:35:15  dashley
+%Unimplemented functions commented out for now.
+%
+%Revision 1.8  2010/01/27 16:04:16  dashley
+%Formatting difficulty corrections.
+%
+%Revision 1.7  2007/10/10 19:47:18  dtashley
+%Edits.
+%
+%Revision 1.6  2007/10/10 18:28:33  dtashley
+%Addition of UcuBmMemclrSmNu() function.
+%
+%Revision 1.5  2007/10/10 17:42:27  dtashley
+%Edits.
+%
+%Revision 1.4  2007/10/09 02:11:40  dtashley
+%Edits.
+%
+%Revision 1.3  2007/10/08 19:51:59  dtashley
+%Edits toward getting function documentation looking good.
+%
+%Revision 1.2  2007/10/08 18:16:33  dtashley
+%Edits.
+%
+%Revision 1.1  2007/10/06 16:49:32  dtashley
+%Initial checkin.
+%
+%End of $RCSfile: c_bmf0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

@@ -1,0 +1,4004 @@
+%% $Header: /cvsroot/esrg/sfesrg/esrgdstb/common/suppmatls/papers_articles/embedded_control/uc_math/rat_app/ieee_rap_2000.txt,v 1.1 2002/04/24 07:23:58 dtashley Exp $
+%
+%Made liaison with Stephany Gervasi at IEEE Computer;
+%she now accepts initial papers for review (Yu-Tzu's old
+%job).  Must give her .PS or .PDF on initial submission.  Best e-mail
+%is tse@computer.org.  Her physical mailing address is exactly
+%the same as Yu-Tzu's, below.
+%==================================================================
+%Made liaison with Yu-Tzu Tsai at IEEE Computer, the contact
+%information for where she works is below.  Final
+%manuscript should be submitted to her as .PDF
+%or .PS electronically.  I was also advised that paper
+%should not exceed 20 pages.
+%
+%Her e-mail is YTSAI@COMPUTER.ORG.
+%
+%Publications Office
+%10662 Los Vaqueros Circle
+%P. O. Box 3014
+%Los Alamitos, CA 90720-1264
+%Phone: +1-714-821-8380
+%FAX: +1-714-821-4010
+%Publications Orders: +1-800-272-6657
+%
+%===================================================================
+%Notes from conversation with Joe on 12/31/99.
+%
+%  a)Joe indicated to change "load" to algorithm on p.1.  Done.
+%
+%  b)Joe indicated that the quantization error for a rational number
+%    could be compactly expressed as (a mod b)/b.  We might want to
+%    include this, but it may not assist in the error analysis, but
+%    it may be useful as a way of thinking.
+%
+%  c)Joe indicated that for equations (10) and (11), the the sign
+%    seemed inconsistent with the subsequent equations.  We should
+%    discuss and resolve this.
+%
+%%01/10/00:  Pasting in e-mail from Dr. Zhigljavsky for reference.
+%%
+%%Concerning
+%%"I" to denote the set of integers,
+%%your collegues is right, the standard notation is:
+%%
+%%Z for the set of all integers
+%%Z_{+} for the set of non-negative integers
+%%N for the set of positive integers (1,2,3,...)
+%%R for reals
+%%
+%%They are actually not standard R,Z,N. To generate proper ones one
+%%should use
+%%
+%%\usepackage{amsfonts}
+%%
+%%and then, in the mathematical mode,  type
+%%
+%%\Bbb{R}
+%%
+%%\Bbb{N}
+%%or
+%%\Bbb{Z}
+%%
+%%rather than just R,Z or N.
+%%
+%%Dave's Note:  LaTeX warned me that \Bbb{} is outdated, and to use \mathbb{} instead.  It appears that
+%%\Bbb{} is no longer fully supported, as it gives Greek symbols where there should be none, appears
+%%to be a bug because \Bbb{} no longer supported, so will use \mathbb{}, which does not have this
+%%bug.
+%%
+%%Dave's Second Note:  Was advised by Robert Berman
+%%that normally Q used for rationals, sometimes P or I for irrationals, all in those alternate typefaces
+%%similar to R, Z, etc.
+%%May want to adopt those for brevity.  He also advised that some flexibility in
+%%definitions, as long as this is made clear.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Notes on using the "hyperref" package.
+%%
+%%On about 03/30/00, the hyperref package was tested, and the results were impressive.  It
+%%causes generation of a PostScript file that, when distilled using Acrobat Distiller,
+%%contains bookmarks.  A newsgroup posting from Una Smith was very helpful.
+%%
+%%Here are the important points from Una's post:
+%%
+%%The last package invoked must be the hyperref package,
+%%   \usepackage[ps2pdf]{hyperref}
+%%
+%%This must be immediately followed by the following line to deal with
+%%a bug in hyperref which will be fixed later.
+%%   \let\x\undefined
+%%
+%%There must be a file hyperref.cfg with the following contents:
+%%   \hypersetup{%
+%%    backref=false,
+%%    colorlinks=false,
+%%    pageanchor=false,
+%%    bookmarks=true,
+%%    bookmarksopen=true}%
+%%
+%%Una's e-mail is UNA.SMITH@YALE.EDU
+%%
+%%It is also noteworthy that there may be errors on the first few compilations because of
+%%(I'm guessing) different formats on the .AUX files.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Notes from conversation with Bill Hagen on 04/05/00.
+%%
+%%I had sent an e-mail to Bill with four questions about what is and what is not allowed under
+%%IEEE copyright.  Bill answered my questions on the phone so he won't respond to the E-mail.
+%%
+%%  a)E-mailing ... don't worry about it so long as the purpose is research collaboration or
+%%    sharing paper.
+%%
+%%  b)Postal mailing ... don't worry about it so long as it is for research collaboration or
+%%    sharing paper and not a "for profit" or "vending" thing.
+%%
+%%  c)Teaching an internal corporate class.  Bill indicated that he does not believe the IEEE
+%%    would have a problem with it, but that it might be best to have an exchange of letters
+%%    before this is done.  In other words, probably Visteon would not have to pay the copyright
+%%    fees "per student", but need to confirm via more formal mechanism.  This would also
+%%    ease any concerns by our corporate librarian.
+%%
+%%  d)Use of material in a book ... Bill does not believe there will be a problem so long as
+%%    it is my own material (not a DIFFERENT IEEE paper); but, again, a more formal mechanism
+%%    might be advised, i.e. an exchange of letters.  This might also ease any concerns by
+%%    a publisher.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Not sure what notation to use for the set of rational numbers.  I believe (if memory
+%%serves me correctly), that "Q" can be used, but don't remember for sure.  To protect
+%%for this, will define a new LaTeX command so can change all occurences in one place
+%%until we have talked and confirmed with Dr. Zhigljavsky.  In fact, will define all
+%%sets this way just in case there needs to be a global change.
+%%
+%%Sets of real numbers.
+\newcommand{\realset}{{\mathbb{R}}}
+\newcommand{\realsetnonneg}{{\mathbb{R}^+}}
+%%
+%%Sets of integers.
+\newcommand{\intset}{{\mathbb{Z}}}
+\newcommand{\intsetnonneg}{{\mathbb{Z}^+}}
+\newcommand{\intsetpos}{{\mathbb{N}}}
+%%
+%%Sets of rational numbers.
+\newcommand{\ratset}{{\mathbb{Q}}}
+\newcommand{\ratsetnonneg}{{\mathbb{Q}^+}}
+%%
+%%Sets of irrational numbers.
+\newcommand{\irratset}{{\mathbb{error}}}
+\newcommand{\irratsetnonneg}{{\mathbb{error}^+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%Not sure what Greek letter to use to denote the difference
+%%at the terminal L(x_{MAX}).  For that reason will
+%%leave that option open and define it as a new command,
+%%so it can be changed in one place.
+\newcommand{\lxtermdifffuncsymbol}{\psi}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% STYLE FILES, ETC.                                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[twocolumn]{ieee_pq} %!PN
+
+\usepackage{amsfonts}
+\usepackage{amsmath}
+
+\usepackage{graphicx}
+
+%Using hyperref reserved for generating a .PDF only.
+%\usepackage[ps2pdf]{hyperref}
+%\let\x\undefined
+
+\def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+    T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEW NUMBERED ENVIRONMENTS (THEOREMS, EXAMPLES, ETC.)                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newtheorem{algorithm}{Algorithm}
+
+\newtheorem{example}{Example}
+
+\newtheorem{theorem}{Theorem}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% NEW ENVIRONMENT DEFINITIONS                                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The "itemize" environment defined by the IEEE style files didn't seem to have
+%quite the right appearance for presenting our algorithms.  For this reason, the
+%following environments were defined.  Level 0 is flush left with bullets, Level 1
+%is slightly more indented, etc.
+\newenvironment{alglvl0}{\begin{list}
+               {$\bullet$}{\setlength{\labelwidth}{3mm}\setlength{\leftmargin}{6mm}}}
+               {\end{list}}
+\newenvironment{alglvl1}{\begin{list}
+               {$\bullet$}{\setlength{\labelwidth}{3mm}\setlength{\leftmargin}{6mm}}}
+               {\end{list}}
+
+%The following environment is intended for listing properties (of continued fractions,
+%convergents, etc.).
+\newenvironment{propenum}{\begin{list}
+               {$\bullet$}{\setlength{\labelwidth}{3mm}\setlength{\leftmargin}{6mm}}}
+               {\end{list}}
+
+%The following environment is intended for general enumeration.
+\newenvironment{generalenum}{\begin{list}
+               {$\bullet$}{\setlength{\labelwidth}{3mm}\setlength{\leftmargin}{6mm}}}
+               {\end{list}}
+
+%The following environment is intended for general enumeration with a slight indent.
+\newenvironment{generalenumindent01}{\begin{list}
+               {$\bullet$}{\setlength{\labelwidth}{3mm}\setlength{\leftmargin}{12mm}}}
+               {\end{list}}
+
+
+
+%The following environment is for the glossary at the end.
+\newenvironment{glossaryenum}{\begin{list}
+               {}{\setlength{\labelwidth}{0mm}
+                  \setlength{\leftmargin}{4mm}
+                  \setlength{\itemindent}{-4mm}
+                  \setlength{\parsep}{0.85mm}}}
+               {\end{list}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% SET THE PAGE NUMBER                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setcounter{page}{99}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% HYPHENATION EXCEPTION RULES                                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\hyphenation{http:-//-www.-cf.-ac.-uk/-uwcc/-maths/-zhig-ljavskyaa/}
+\hyphenation{micro-con-trol-ler}
+\hyphenation{rat-io-met-ric}
+\hyphenation{rat-ion-al}
+\hyphenation{Zhig-ljav-sky}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% START OF DOCUMENT                                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\thispagestyle{empty}
+
+%\begin{centering}
+
+\begin{large}
+
+\textbf{December 8, 2000:}  This paper
+is distributed with the \emph{IjuTools} suite.
+The paper contained on the following pages was rejected by ``\emph{IEEE Transactions On Computers}'' in 2000.
+Therefore, the five authors listed hold the copyright.
+\LaTeX{} source code is also included in this distribution.  The five authors hereby waive all rights under
+copyright law and grant permission to reproduce or use this paper and the accompanying
+\LaTeX{} source code, in whole or in part, for any purpose whatsoever,
+commercial or non-commercial, with no requirement for
+renumeration of the authors, and no requirement to cite or otherwise supply the identity
+of the authors.
+
+Under Adobe Arobat 3, some subscripts in this paper disappear when printed.  Adobe Acrobat 4
+or its successors are recommended for printing.
+\end{large}
+
+%\end{centering}
+
+\cleardoublepage
+
+\title{Economical Implementation Of Linear Scaling Functions
+In Microcontroller Software Using Rational Number
+Approximation Techniques}
+
+\author{David T. Ashley,
+        Joseph P. DeVoe,
+        Cory Pratt,
+        Karl Perttunen,
+        Anatoly Zhigljavsky
+        \thanks{D.T. Ashley, J.P. DeVoe, C. Pratt, and K.
+                Perttunen are with Visteon Automotive
+                Systems in Dearborn, Michigan, USA.  E-mail:
+                \{dashley1, jdevoe, cpratt2, kperttun\}@visteon.com.
+                Anatoly Zhigljavsky is with Cardiff University,
+                Cardiff, UK.
+                E-mail:  zhigljavskyaa@cardiff.ac.uk.}}
+
+\markboth{ }{ }
+
+\maketitle
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (1) ABSTRACT AND KEYWORDS                                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{abstract}
+Inexpensive microcontrollers are widely used in
+vehicles, consumer
+electronics, laboratory equipment, and medical equipment.
+A significant problem in the design of software
+for these devices
+is the efficient and reliable implementation of
+arithmetic.  In this paper,
+techniques are developed to use an
+instruction set typical of an
+inexpensive microcontroller to economically approximate
+linear scaling functions of the form
+$f(x)=r_{I}x$ ($r_{I}$ non-negative and real but
+not necessarily rational)
+in the first quadrant using a rational approximation factor
+$r_{A}=h/k$.
+Methods and considerations in choosing $h$ and $k$ are
+developed, and error terms are derived which bound the
+error introduced by the rational approximation.
+\end{abstract}
+
+
+\begin{keywords}
+Microcontroller arithmetic, linear scaling, rational approximation, Farey series,
+continued fractions.
+\end{keywords}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (2) INTRODUCTION                                                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+\PARstart{L}{ow-cost} microcontrollers provide
+weak instruction sets, and a significant
+design challenge in the development of
+software for these devices is the
+economical implementation of arithmetic.
+This paper presents techniques which are
+suitable for economically implementing
+high-precision linear scalings using
+instructions which are characteristic of
+inexpensive 4-bit and 8-bit microcontrollers.
+
+This paper is confined
+to the approximation of linear
+scalings of the form
+$y=r_{I}x$ ($r_I \in \realsetnonneg{}$, not
+necessarily $\in \ratsetnonneg{}$)
+by linear scalings of the form $y=hx/k$
+($h \in \intsetnonneg{}$, $k \in \intsetpos{}$).
+In
+Section \ref{sec:analysisapproxerr},
+error terms for rational approximations
+are derived without regard for how
+integers $h$ and $k$ are chosen.
+In
+Section \ref{sec:methodshkchoose},
+results from
+number theory are presented which give
+insight into how to choose rational
+numbers $h/k$ for use as scaling factors.
+In
+Section \ref{sec:probresults},
+probabilistic results from number theory are
+presented outlining how close
+to a real $r_I$ a rational
+$r_A = h/k$ can typically be chosen.
+In
+Section \ref{sec:tabscalingfactors},
+a special case in which
+$k$ is chosen as an integral power of
+two is developed with the aim of providing a
+framework for tabulating scaling factors.
+In
+Section \ref{sec:imptechniques},
+practical techniques for economically
+implementing rational scaling functions
+using inexpensive microcontroller
+instruction sets are presented.
+In Section \ref{sec:designexamples},
+design examples which illustrate
+the techniques are presented.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3) ANALYSIS OF APPROXIMATION ERROR (WITHOUT REGARD FOR HOW R_A IS CHOSEN)                           %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Analysis Of Approximation Error}
+\label{sec:analysisapproxerr}
+
+A function $y=r_{I}x$
+($r_{I} \in \realsetnonneg{}$,
+not necessarily $\in \ratsetnonneg{}$)
+is to be approximated
+by a function $y=r_{A}x$;
+$r_{A}=h/k$, $\in \ratsetnonneg$.\footnote{Mnemonic for $r_I$ and $r_A$:
+\emph{I}=ideal, \emph{A}=actual.}
+In this section, error terms are
+developed which bound
+the error introduced when
+$f(x)=r_{I}x$ is approximated
+by $f(x)=r_{A}x$ in the first
+quadrant only ($x \in \realsetnonneg{}$).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (2)(A) MODEL FUNCTIONS                                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Model Functions}
+
+(\ref{eq:eq0001}) through
+(\ref{eq:eq0003}) provide
+models of the function
+to be approximated
+which vary in whether
+the domain is real or
+integral, and in
+whether the range is
+real or integral.
+The \emph{floor($\cdot{}$)} function,
+denoted $\lfloor \cdot{} \rfloor$,
+is used to model
+the effect of quantization,
+such as occurs when a real argument
+is quantized for implementation
+using integer arithmetic, or
+when the fractional
+part of a quotient is
+discarded.\footnote{The \emph{ceiling($\cdot{}$)} function, denoted
+$\lceil \cdot{} \rceil$, is also used and appears in many algebraic
+results throughout the paper.  There is often ambiguity in how
+the \emph{floor($\cdot{}$)} and
+\emph{ceiling($\cdot{}$)} functions are defined for negative
+arguments.  Here,
+$\lfloor -1.1 \rfloor = \lceil -2.1 \rceil = -2$.}
+
+In practical problems,
+the domain and range may
+be integral rather
+than real for either
+practical or conceptual reasons.
+As an example of
+a domain which is
+integral for \emph{practical}
+reasons, consider an embedded
+software algorithm which has access
+only to integral data
+(as might happen with
+integral vehicle speed
+reported to an embedded software algorithm
+over a network).
+In this case,
+the behavior of the software
+may be specified only over
+$\intsetnonneg$, as it is
+impossible to excite the
+software with non-integral
+values.  It may also happen that
+the domain is \emph{conceptually}
+integral, as occurs when the
+input argument is a count or other
+inherently integral quantity.
+The range may also be integral for
+similar practical or conceptual reasons.
+
+(\ref{eq:eq0001}) provides a model of the ideal
+function to be approximated when
+both domain and range are the
+non-negative real numbers.
+
+\begin{equation}
+\label{eq:eq0001}
+F(x)=r_{I}x
+\end{equation}
+
+(\ref{eq:eq0002}) provides a model
+of the ideal function to be
+approximated when the function
+is to be evaluated on a domain
+of non-negative integers only.
+
+\begin{equation}
+\label{eq:eq0002}
+G(x)= r_{I} \lfloor x \rfloor
+\end{equation}
+
+(\ref{eq:eq0004}) provides
+a model of the ideal
+function to be
+approximated when
+only the range is integral.
+
+\begin{equation}
+\label{eq:eq0004}
+H(x)=\lfloor r_{I}x\rfloor
+\end{equation}
+
+(\ref{eq:eq0003}) provides
+a model of the ideal
+function to be aproximated
+when both the
+domain and range are the
+non-negative integers.
+
+\begin{equation}
+\label{eq:eq0003}
+I(x)=\lfloor r_{I}\lfloor x\rfloor\rfloor
+\end{equation}
+
+(\ref{eq:eq0005}) defines $r_{A}$,
+the rational number used
+to approximate $r_{I}$.
+$h/k$ is always assumed reduced.
+
+\begin{equation}
+\label{eq:eq0005}
+r_{A}=\frac{h}{k}; \; h \in \intsetnonneg; \; k \in \intsetpos
+\end{equation}
+
+(\ref{eq:eq0006}) provides
+a model of the function which is
+used to approximate
+(\ref{eq:eq0001}),
+(\ref{eq:eq0002}),
+(\ref{eq:eq0004}),
+or
+(\ref{eq:eq0003}).
+The approximation
+always has an integral domain and range.
+
+\begin{equation}
+\label{eq:eq0006}
+J(x) = \left\lfloor {r_A \left\lfloor x \right\rfloor } \right\rfloor
+   = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor }}{k}} \right\rfloor
+\end{equation}
+
+(\ref{eq:eq0007})
+defines an enhancement to
+(\ref{eq:eq0006}).
+The approximation error introduced
+can be shifted using integral parameter $z$.
+
+\begin{equation}
+\label{eq:eq0007}
+K(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor
+     + z}}{k}} \right\rfloor ; \; z \in \intset{}
+\end{equation}
+
+(\ref{eq:eq0009}) and (\ref{eq:eq0009b})
+are special cases of (\ref{eq:eq0006}) and (\ref{eq:eq0007})
+which are useful
+in microcontroller work, since division by a power of two can be achieved
+very economically using right-shift instructions.
+
+\begin{equation}
+\label{eq:eq0009}
+L(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor }}{{2^q }}} \right\rfloor ;
+\; k = 2^q ; \;r_A  = \frac{h}{{2^q }}
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0009b}
+M(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor } + z }{{2^q }}} \right\rfloor;
+\; k = 2^q ; \; r_A  = \frac{h}{{2^q }}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3)(B)METHODS OF ERROR ANALYSIS                                                                            %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Methods Of Error Analysis}
+
+Quantization of a real argument which is not necessarily
+rational is treated by noting that
+quantization introduces an error
+$\varepsilon \in [0,1)$ (Eq. \ref{eq:dtaea0001}).
+
+\begin{equation}
+\label{eq:dtaea0001}
+\left\lfloor x \right\rfloor  = x - \varepsilon ;\;\varepsilon  \in [0,1)
+\end{equation}
+
+Quantization of a rational argument $a/b$ is treated by
+noting that the largest quantization error
+$\varepsilon$ occurs when
+$a$ is one less than an integral multiple of $b$
+(Eq. \ref{eq:dtaea0002}).\footnote{Strictly speaking,
+$\varepsilon \in \left\{ 0, \frac{1}{b}, \ldots,
+\frac{b-2}{b}, \frac{b-1}{b} \right\}$; however, since
+only the smallest and largest values are of interest,
+(\ref{eq:dtaea0002}) is used.}
+
+\begin{equation}
+\label{eq:dtaea0002}
+\left\lfloor \frac{a}{b} \right\rfloor
+   = \frac{a}{b} - \varepsilon ; \; \; \varepsilon  \in \left[0, \frac{b-1}{b} \right]
+\end{equation}
+
+Since a difference of integers must also be
+an integer, results on differences of quantized values
+are constrained further by intersection with the set of integers.
+Care must be taken in the intersection of an interval
+with the
+set of integers, as the
+distinction between an open interval and a closed
+interval is significant.  The identities
+in (\ref{eq:dtaea0003}) through
+(\ref{eq:dtaea0006}) are employed.\footnote{In (\ref{eq:dtaea0003})
+through (\ref{eq:dtaea0006}) and throughout the paper,
+a subscript of $\intset{}$ is used to denote that
+a set may contain only integers.}
+
+\begin{equation}
+\label{eq:dtaea0003}
+{[ x , y ] \cap \intset{} = [ \lceil x \rceil , \lfloor y \rfloor ]}_{\intset{}}
+\end{equation}
+
+\begin{equation}
+\label{eq:dtaea0004}
+{[ x , y ) \cap \intset{} = [ \lceil x \rceil , \lceil y-1 \rceil ]}_{\intset{}}
+\end{equation}
+
+\begin{equation}
+\label{eq:dtaea0005}
+{( x , y ] \cap \intset{} = [ \lfloor x+1 \rfloor , \lfloor y \rfloor ]}_{\intset{}}
+\end{equation}
+
+\begin{equation}
+\label{eq:dtaea0006}
+{( x , y ) \cap \intset{} = [ \lfloor x+1 \rfloor , \lceil y-1 \rceil ]}_{\intset{}}
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3)(C)ERROR ANALYSIS OF {J(X),K(X)}-I(X)                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Error Analysis Of $ \{ J(x),K(x) \} - I(x)$}
+
+(\ref{eq:eq0006}) is a
+special case of (\ref{eq:eq0007}),
+so the difference function
+$K(x)-I(x)$ with $z=0$
+is $J(x)-I(x)$.  For this reason it is not necessary
+to derive $J(x)-I(x)$ separately.
+The difference function (or error function) is the
+difference between the ideal model function
+with integral domain and range [$I(x)$], and the
+approximation function with integral domain and range
+[$J(x)$ or $K(x)$] (Eq. \ref{eq:eq0010}).
+
+\begin{equation}
+\label{eq:eq0010}
+K(x) - I(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor
+     + z}}{k}} \right\rfloor
+     - \left\lfloor {r_I \left\lfloor x \right\rfloor } \right\rfloor
+\end{equation}
+
+The inner \emph{floor($\cdot{}$)} function can be removed
+with the understanding that
+the difference function
+will be evaluated on a
+domain of integers only (\ref{eq:eq0011}).
+
+\begin{equation}
+\label{eq:eq0011}
+K(x) - I(x) = \left\lfloor {\frac{{hx
++ z}}{k}} \right\rfloor
+- \left\lfloor {r_I x} \right\rfloor ;\quad x \in \intsetnonneg{}
+\end{equation}
+
+Quantization (two occurrences of the
+\emph{floor($\cdot{}$)} function)
+can be modeled as introducing
+errors $\varepsilon_1$ and $\varepsilon_2$
+(\ref{eq:eq0012}).
+Because the domain is integral,
+the largest quantization error in
+$\varepsilon_{1}$ occurs when $hx+z$
+is one less than an integral multiple of $k$,
+hence $\varepsilon _1  \in \left[ {0,\frac{{k - 1}}{k}} \right]$.
+Because $r_{I}$ may be irrational,
+$\varepsilon_{2}\in [0,1)$.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0012}
+K(x) - I(x) =
+   \frac{{hx + z}}{k} - \varepsilon _1  - r_I x + \varepsilon _2 ;\;x \in \intsetnonneg{};
+   \;\;
+\varepsilon _1  \in \left[ {0,\frac{{k - 1}}{k}} \right];\;\;\varepsilon _2  \in \left[ {0,1} \right)
+\end{equation}
+\end{figure*}
+
+Choosing the extremes
+of $\varepsilon_{1}$ and $\varepsilon_{2}$
+so as to minimize and maximize the
+difference function
+bounds the approximation error (\ref{eq:eq0014}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0014}
+K(x) - I(x) \in
+  \left[ {(r_A  - r_I )x + \frac{z}{k} -
+    \frac{{k - 1}}{k},(r_A  - r_I )x + \frac{z}{k} + 1} \right)
+\end{equation}
+\end{figure*}
+
+(\ref{eq:eq0014}) may
+be intersected with the set of integers,
+because the result, a difference of integers,
+must also be an integer (\ref{eq:eq0015}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0015}
+K(x) - I(x) \in
+  \left[ {\left\lceil {(r_A  - r_I )x + \frac{z}{k} -
+  \frac{{k - 1}}{k}} \right\rceil ,
+  \left\lceil {(r_A  - r_I )x + \frac{z}{k}} \right\rceil } \right]_{\intset{}}
+\end{equation}
+\end{figure*}
+
+With $z=0$, (\ref{eq:eq0015}) supplies $J(x)-I(x)$ (\ref{eq:eq0016}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0016}
+J(x) - I(x) \in
+ \left[ {\left\lceil {(r_A  - r_I )x -
+   \frac{{k - 1}}{k}} \right\rceil ,
+   \left\lceil {(r_A  - r_I )x} \right\rceil } \right]_{\intset{}}
+\end{equation}
+\end{figure*}
+
+$r_{A}$ must almost always
+be chosen unequal to $r_{I}$,
+and as a result the approximation error is
+larger for larger $x$.  Most
+approximations are used only in a
+restricted domain, and it is useful
+to know the upper bound on approximation
+error when the approximation
+is used only in an interval
+$[0,x_{MAX}]_{\intset{}}$, $x_{MAX} \in \intsetpos{}$.\footnote{Throughout
+the paper, it is assumed that $x_{MAX} \in \intsetpos{}$.}
+These upper bounds can be obtained by
+substitution into (\ref{eq:eq0015}),
+and are presented as (\ref{eq:eq0017}).
+Note that the second case of (\ref{eq:eq0017})
+may not be distinct,
+depending on the choice of $z$.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0017}
+ \left. {K(x) - I(x)} \right|_{x \in [0,x_{MAX} ]_{\intset{}}}  \in
+   \left\{ {\begin{array}{*{20}l}
+   {\left[ {\left\lceil {(r_A  - r_I )x_{MAX} + \frac{z}{k} - \frac{{k - 1}}{k}}
+    \right\rceil , \left\lceil {\frac{z}{k}} \right\rceil} \right]_{\intset{}} ,} \hfill & {r_A  \le r_I  - \frac{z+1}{{x_{MAX} k}}} \\
+    \\
+   { \left[ {0, \left\lceil {\frac{z}{k} } \right\rceil} \right]_{\intset{}},} \hfill & {r_I  - \frac{z+1}{{x_{MAX} k}} < r_A  \le r_I } \\
+   \\
+    \left[ { \left\lceil {\frac{z}{k} - \frac{k-1}{k}} \right\rceil , \left\lceil {\frac{z}{k}} \right\rceil  } \right]_{\intset{}} , \hfill & {r_A = r_I} \\
+   \\
+   {\left[ { \left\lceil {\frac{z}{k} - \frac{k-1}{k}} \right\rceil ,
+        \left\lceil {(r_A  - r_I )x_{MAX} + \frac{z}{k} } \right\rceil } \right]_{\intset{}} ,}
+    \hfill & {r_A  > r_I } \\
+   \end{array}} \right.
+\end{equation}
+\end{figure*}
+
+With $z=0$, analogous results for $J(x)-I(x)$
+are obtained (\ref{eq:eq0018}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0018}
+ \left. {J(x) - I(x)} \right|_{x \in [0,x_{MAX} ]_{\intset{}}}  \in
+   \left\{ {\begin{array}{*{20}l}
+   {\left[ {\left\lceil {(r_A  - r_I )x_{MAX}  - \frac{{k - 1}}{k}} \right\rceil ,0}
+    \right]_{\intset{}} ,} \hfill & {r_A  \le r_I  - \frac{1}{{x_{MAX} k}}} \\
+   \\
+   {\{ 0\} ,} \hfill & {r_I  - \frac{1}{{x_{MAX} k}} < r_A  \le r_I } \\
+   \\
+   {\left[ {0,\left\lceil {(r_A  - r_I )x_{MAX} } \right\rceil } \right]_{\intset{}} ,}
+    \hfill & {r_A  > r_I } \\
+  \end{array}} \right.
+\end{equation}
+\end{figure*}
+
+In practice, there are three useful choices of the
+parameter $z$.  (\ref{eq:eq0019})
+supplies the choice of $z$ which will assure that the
+approximation error is never negative.  (\ref{eq:eq0020}) supplies
+the choice of $z$ which will assure that the approximation error
+is never positive.  (\ref{eq:eq0021})
+supplies the choice of $z$ which will
+center the approximation error about zero.
+
+\begin{equation}
+\label{eq:eq0019}
+z_{NONEG}  = \left\{ {\begin{array}{*{20}c}
+   {\left\lceil {(r_I  - r_A )x_{MAX} k} \right\rceil ,}
+    \hfill & {} \hfill & {r_A  < r_I } \hfill  \\
+   {0,} \hfill & {} \hfill & {r_A  \ge r{}_I} \hfill  \\
+\end{array}} \right.
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0020}
+z_{NOPOS}  = \left\{ {\begin{array}{*{20}c}
+   {0,} \hfill & {} \hfill & {r_A  \le r_I } \hfill  \\
+   {\left\lfloor {(r_I  - r_A )x_{MAX} k} \right\rfloor ,}
+    \hfill & {} \hfill & {r_A  > r{}_I} \hfill  \\
+\end{array}} \right.
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0021}
+z_{CENTER}  = \left\lfloor {\frac{{(r_I  - r_A )x_{MAX} k}}{2}} \right\rfloor
+\end{equation}
+
+\begin{example}
+In a vehicle software load, vehicle speed
+is received in network messages as
+integral KPH, and is to be converted to MPH and
+retransmitted over a second network as integral MPH.
+If $r_{A}$=59/95$\approx$0.62105263 is used to approximate
+$r_{I}\approx$ 0.6214 (the ideal conversion factor
+from KPH to MPH), how much error might be introduced by
+this rational approximation (vs.
+retransmitting the quantized product of $r_I$
+and the received vehicle speed) for received
+vehicle speeds up to 255 KPH?
+\end{example}
+
+\emph{Solution:} In this example,
+the domain is integral and the range
+is integral, so (\ref{eq:eq0018})
+applies with $x_{MAX}=255$.
+The first row of (\ref{eq:eq0018})
+predicts that the error
+will always be in $[-1,0]_{\intset{}}$=\{-1,0\},
+so that the calculated integral
+MPH may be up to one count less than
+implied by $I(x)$ with $r_{I}=0.6214$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3)(D)ERROR ANALYSIS OF {J(X),K(X)}-G(X)                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Error Analysis Of $\{ J(x),K(x) \} - G(x)$ }
+
+Because (\ref{eq:eq0006}) is a special
+case of (\ref{eq:eq0007}),
+the difference function $K(x)-G(x)$ with $z=0$
+is $J(x)-G(x)$; hence
+there is no need to derive $J(x)-G(x)$
+explicitly.
+
+\begin{equation}
+\label{eq:eq0022}
+K(x) - G(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor
+     + z}}{k}} \right\rfloor  - r_I \left\lfloor x \right\rfloor
+\end{equation}
+
+The inner \emph{floor($\cdot{}$)}
+function of (\ref{eq:eq0022}) can be removed with the
+understanding that the difference function will be
+evaluated on a domain of
+integers only (\ref{eq:eq0023}).
+The difference
+function (\ref{eq:eq0023}) is real
+(not required to be rational or integral).
+
+\begin{equation}
+\label{eq:eq0023}
+K(x) - G(x) = \left\lfloor {\frac{{hx
+     + z}}{k}} \right\rfloor  - r_I x;\quad x \in \intsetnonneg{}
+\end{equation}
+
+The arguments which support the
+derivation of (\ref{eq:eq0011}) through
+(\ref{eq:eq0021}) also support the derivation
+of (\ref{eq:eq0023}) through (\ref{eq:eq0030}).
+(\ref{eq:eq0028}), (\ref{eq:eq0029}), and (\ref{eq:eq0030})
+supply choices of the parameter $z$
+which ensure that the difference
+function is never negative,
+never positive, and
+centered about zero, respectively.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0024}
+K(x) - G(x) \in
+   \left[ {(r_A  - r_I )x + \frac{z}{k} - \frac{{k - 1}}{k},(r_A  - r_I )x +
+   \frac{z}{k}} \right]
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0025}
+   \left. {K(x) - G(x)} \right|_{x \in [0,x_{MAX} ]_{\intset{}}}  \in
+    \left\{ {\begin{array}{*{20}c}
+   {\left[ {(r_A  - r_I )x_{MAX}  + \frac{z}{k} - \frac{{k - 1}}{k},\frac{z}{k}} \right] ,}
+    \hfill & {r_A  < r_I } \hfill  \\
+   \\
+   {\left[ {\frac{z}{k} - \frac{{k - 1}}{k},\frac{z}{k}} \right] ,} \hfill & {r_A  = r_I }
+    \hfill  \\
+   \\
+   {\left[ {\frac{z}{k} - \frac{{k - 1}}{k},(r_A  - r_I )x_{MAX}  + \frac{z}{k}} \right] ,}
+    \hfill & {r_A  > r_I } \hfill  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0026}
+  J(x) - G(x) \in
+  \left[ {(r_A  - r_I )x - \frac{{k - 1}}{k},(r_A  - r_I )x} \right]
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0027}
+   \left. {J(x) - G(x)} \right|_{x \in [0,x_{MAX} ]_{\intset{}}}  \in
+   \left\{ {\begin{array}{*{20}c}
+   {\left[ {(r_A  - r_I )x_{MAX}  - \frac{{k - 1}}{k},0} \right] ,} \hfill & {r_A  < r_I }
+    \hfill  \\
+   \\
+   {\left[ { - \frac{{k - 1}}{k},0} \right] ,} \hfill & {r_A  = r_I } \hfill  \\
+   \\
+   {\left[ { - \frac{{k - 1}}{k},(r_A  - r_I )x_{MAX} } \right] ,} \hfill & {r_A  > r_I }
+    \hfill  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0028}
+z_{NONEG}  = \left\{ {\begin{array}{ll}
+   {\left\lceil {(r_I  - r_A )x_{MAX} k + k - 1} \right\rceil ,} & {r_A  < r_I } \\
+   & \\
+   {k-1,} \hfill & {r_A  \ge r{}_I} \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{equation}
+\label{eq:eq0029}
+z_{NOPOS}  = \left\{ {\begin{array}{*{20}c}
+   {0,} \hfill & {} \hfill & {r_A  \le r_I } \hfill  \\
+   {\left\lfloor {(r_I  - r_A )x_{MAX} k} \right\rfloor ,} \hfill & {} \hfill & {r_A  > r{}_I}
+    \hfill  \\
+\end{array}} \right.
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0030}
+z_{CENTER}  = \left\lfloor {\frac{{(r_I  - r_A )x_{MAX} k + k}}{2}} \right\rfloor
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3)(E)ERROR ANALYSIS OF {J(X),K(X)}-H(X)                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Error Analysis Of $ \{ J(x),K(x) \} - H(x)$}
+
+Because (\ref{eq:eq0006}) is a special case of (\ref{eq:eq0007}),
+the difference function $K(x)-H(x)$ with $z=0$
+is $J(x)-H(x)$; hence there is no
+need to derive $J(x)-H(x)$ explicitly.
+
+\begin{equation}
+\label{eq:eq0037}
+K(x) - H(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor
++ z}}{k}} \right\rfloor  - \left\lfloor {r_I x} \right\rfloor
+\end{equation}
+
+(\ref{eq:eq0037}) corresponds to the
+approximation error introduced when a function with
+a real domain and integral range is approximated using a
+function with an integral domain and range.  The error
+term supplied by (\ref{eq:eq0037}) is integral.
+
+The three quantizations in (\ref{eq:eq0037}) can be treated
+by introducing $\varepsilon_{1}$, $\varepsilon_{2}$, and $\varepsilon_{3}$
+(\ref{eq:eq0038}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0038}
+K(x) - H(x) = \frac{{h(x - \varepsilon _1 ) + z}}{k} - \varepsilon _2  - r_I x + \varepsilon _3
+ ; \;\;
+\varepsilon _1  \in [0,1)
+ ; \;\;
+ \varepsilon _2  \in \left[ {0,\frac{{k - 1}}{k}} \right]
+ ; \;\;
+ \varepsilon _3  \in [0,1)
+\end{equation}
+\end{figure*}
+
+Evaluating (\ref{eq:eq0038}) at the
+extremes of $\varepsilon_{1}$,
+$\varepsilon_{2}$,
+and $\varepsilon_{3}$ leads
+to (\ref{eq:eq0042}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0042}
+  K(x) - H(x) \in
+  \left( {(r_A  - r_I )x - r_A  + \frac{z}{k} - \frac{{k - 1}}{k},(r_A  - r_I )x +
+    \frac{z}{k} + 1} \right)
+\end{equation}
+\end{figure*}
+
+Intersection of (\ref{eq:eq0042}) with the set
+of integers leads to (\ref{eq:eq0042b}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0042b}
+  K(x) - H(x) \in
+  {
+  \left[
+     {
+        {
+        \left\lfloor
+           {
+           (r_A - r_I) x - r_A + \frac{z}{k} + \frac{1}{k}
+           }
+        \right\rfloor
+        }
+     ,
+        {
+        \left\lceil
+           {
+           (r_A - r_I) x + \frac{z}{k}
+           }
+        \right\rceil
+        }
+     }
+  \right]
+  }_{\intset{}}
+\end{equation}
+\end{figure*}
+
+Evaluating (\ref{eq:eq0042b}) at the
+extremes of $[0,x_{MAX}]$
+yields (\ref{eq:eq0043}).  With $z=0$, (\ref{eq:eq0043})
+supplies $J(x) - H(x)$ (Eq. \ref{eq:eq0044}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0043}
+   \left. {K(x) - H(x)} \right|_{x \in [0,x_{MAX} ] }  \in
+   \left\{ {\begin{array}{*{20}l}
+   {\left[ {\left\lfloor {(r_A  - r_I )x_{MAX}  - r_A  + \frac{z}{k} + \frac{1}{k}}
+    \right\rfloor ,\left\lceil {\frac{z}{k}} \right\rceil } \right] _{\intset{}} ,}
+    \hfill & {r_A  < r_I }  \\
+   \\
+   {\left[ {\left\lfloor { - r_A  + \frac{z}{k} + \frac{1}{k}} \right\rfloor ,
+    \left\lceil {\frac{z}{k}} \right\rceil } \right] _{\intset{}} ,}
+   \hfill & {r_A  = r_I }\\
+   \\
+   {\left[ {\left\lfloor { - r_A  + \frac{z}{k} + \frac{1}{k}} \right\rfloor ,
+    \left\lceil {(r_A  - r_I )x_{MAX}  + \frac{z}{k}} \right\rceil } \right] _{\intset{}},}
+   \hfill & {r_A  > r_I }  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0044}
+   \left. {J(x) - H(x)} \right|_{x \in [0,x_{MAX} ] }  \in
+   \left\{ {\begin{array}{*{20}l}
+   {\left[ {\left\lfloor {(r_A  - r_I )x_{MAX}  - r_A  + \frac{1}{k}}
+    \right\rfloor , 0 } \right] _{\intset{}} ,}
+    \hfill & {r_A  < r_I }  \\
+   \\
+   {\left[ {\left\lfloor { - r_A  + \frac{1}{k}} \right\rfloor ,
+    { 0 } } \right] _{\intset{}} ,}
+   \hfill & {r_A  = r_I }\\
+   \\
+   {\left[ {\left\lfloor { - r_A  + \frac{1}{k}} \right\rfloor ,
+    \left\lceil {(r_A  - r_I )x_{MAX}} \right\rceil } \right] _{\intset{}},}
+   \hfill & {r_A  > r_I }  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+(\ref{eq:eq0044a}), (\ref{eq:eq0044b}), and (\ref{eq:eq0044c})
+supply choices of the parameter $z$ which
+ensure that the difference function is never negative,
+never positive, and centered about zero, respectively.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0044a}
+z_{NONEG}  = \left\{ {\begin{array}{ll}
+   {\left\lceil {(r_I  - r_A )x_{MAX} k + r_A k - 1} \right\rceil ,} & {r_A  < r_I } \\
+   & \\
+   {\lceil r_A k-1 \rceil ,} \hfill & {r_A  \ge r_I} \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{equation}
+\label{eq:eq0044b}
+z_{NOPOS}  = \left\{ {\begin{array}{*{20}c}
+   {0,} \hfill & {} \hfill & {r_A  \le r_I } \hfill  \\
+   {\left\lfloor {(r_I  - r_A )x_{MAX} k} \right\rfloor ,} \hfill & {} \hfill & {r_A  > r{}_I}
+    \hfill  \\
+\end{array}} \right.
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0044c}
+z_{CENTER}
+=
+\left\lfloor {\frac{{(r_I  - r_A )x_{MAX} k + r_A k}}{2}} \right\rfloor
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (3)(F)ERROR ANALYSIS OF {J(X),K(X)}-F(X)                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Error Analysis Of $ \{ J(x), K(x) \} - F(x)$}
+
+Because (\ref{eq:eq0006}) is a special case of (\ref{eq:eq0007}),
+the difference function $K(x)-F(x)$ with $z=0$ is
+$J(x)-F(x)$; hence there is no
+need to derive $J(x)-F(x)$ explicitly.
+
+\begin{equation}
+\label{eq:eq0031}
+K(x) - F(x) = \left\lfloor {\frac{{h\left\lfloor x \right\rfloor
+     + z}}{k}} \right\rfloor  - r_I x
+\end{equation}
+
+(\ref{eq:eq0031}) corresponds to the approximation
+error introduced when a function with a
+real domain and range is approximated
+using a function with an integral domain and range.
+The error term supplied by (\ref{eq:eq0031})
+is real rather than integral.
+
+The two quantizations in (\ref{eq:eq0031})
+can be treated by introducing $\varepsilon_{1}$
+and $\varepsilon_{2}$ (\ref{eq:eq0032}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0032}
+K(x) - F(x) = \frac{{h(x - \varepsilon _1 ) + z}}{k} - \varepsilon _2  - r_I x
+; \;
+\varepsilon _1  \in [0,1)
+; \;
+\varepsilon _2  \in \left[ {0,\frac{{k - 1}}{k}} \right]
+\end{equation}
+\end{figure*}
+
+Choosing the extremes of
+$\varepsilon_{1}$ and $\varepsilon_{2}$
+so as to minimize and maximize the difference
+function bounds the approximation error (\ref{eq:eq0035}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0035}
+  K(x) - F(x) \in
+  \left( {(r_A  - r_I )x - r_A  + \frac{z}{k} - \frac{{k - 1}}{k},(r_A  - r_I )x +
+  \frac{z}{k}} \right]
+\end{equation}
+\end{figure*}
+
+Minimizing and maximizing (\ref{eq:eq0035}) over
+a domain of $[0,x_{MAX}]$ gives (\ref{eq:eq0035b}).  With
+$z=0$, (\ref{eq:eq0035b}) supplies $J(x)-F(x)$ (Eq. \ref{eq:eq0036}).
+
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0035b}
+  \left. {K(x) - F(x)} \right|_{x \in [0,x_{MAX} ]}  \in
+  \left\{ {\begin{array}{*{20}c}
+   {\left( {(r_A  - r_I )x_{MAX}  - r_A  + \frac{z}{k }- \frac{{k - 1}}{k}, \frac{z}{k}} \right],}
+    \hfill & {r_A  < r_I } \hfill  \\
+   \\
+   {\left( { - r_A  + \frac{z}{k} - \frac{{k - 1}}{k}, \frac{z}{k}} \right],} \hfill & {r_A  = r_I } \hfill  \\
+   \\
+   {\left( { - r_A  + \frac{z}{k} - \frac{{k - 1}}{k},(r_A  - r_I )x_{MAX} + \frac{z}{k}} \right] ,}
+    \hfill & {r_A  > r_I } \hfill  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0036}
+  \left. {J(x) - F(x)} \right|_{x \in [0,x_{MAX} ]}  \in
+  \left\{ {\begin{array}{*{20}c}
+   {\left( {(r_A  - r_I )x_{MAX}  - r_A  - \frac{{k - 1}}{k},0} \right],}
+    \hfill & {r_A  < r_I } \hfill  \\
+   \\
+   {\left( { - r_A  - \frac{{k - 1}}{k},0} \right],} \hfill & {r_A  = r_I } \hfill  \\
+   \\
+   {\left( { - r_A  - \frac{{k - 1}}{k},(r_A  - r_I )x_{MAX} } \right] ,}
+    \hfill & {r_A  > r_I } \hfill  \\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+(\ref{eq:eqkminusfzterm01}),
+(\ref{eq:eqkminusfzterm02}), and
+(\ref{eq:eqkminusfzterm03}) supply choices of the
+parameter $z$ which ensure that the difference function
+is never negative, never positive, and centered
+about zero, respectively.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eqkminusfzterm01}
+z_{NONEG}  = \left\{ {\begin{array}{ll}
+   {\left\lceil {(r_I - r_A) x_{MAX} k + r_A k + k - 1} \right\rceil ,} & {r_A  < r_I } \\
+   & \\
+   {\left\lceil {r_A k + k - 1} \right\rceil ,} & {r_A  \ge r{}_I}\\
+\end{array}} \right.
+\end{equation}
+\end{figure*}
+
+\begin{equation}
+\label{eq:eqkminusfzterm02}
+z_{NOPOS}  = \left\{ {\begin{array}{*{20}c}
+   {0,} \hfill & {} \hfill & {r_A  \le r_I } \hfill  \\
+   {\left\lfloor {(r_I  - r_A )x_{MAX} k} \right\rfloor ,}
+    \hfill & {} \hfill & {r_A  > r{}_I} \hfill  \\
+\end{array}} \right.
+\end{equation}
+
+\begin{equation}
+\label{eq:eqkminusfzterm03}
+z_{CENTER}
+=
+\left\lfloor {\frac{{(r_I  - r_A )x_{MAX} k + r_A k + k}}{2}} \right\rfloor
+\end{equation}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4) METHODS OF CHOOSING H AND K TO MATCH R_I WITH AN R_A                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Methods Of Choosing $h$ And $k$}
+\label{sec:methodshkchoose}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(A)INTRODUCTION TO THE SECTION, GENERAL REMARKS                                                   %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+In this section, algorithms for choosing
+$h$ and $k$ subject to the constraints $h \leq h_{MAX}$ and
+$k \leq k_{MAX}$ in order to place $r_{A}=h/k$
+close to $r_{I}$ are presented.  The algorithms are presented
+in order of increasing sophistication
+(and efficiency).\footnote{Although
+it won't be shown in this paper,
+if $N = k_{MAX}$ is the maximum allowable denominator,
+Algorithm \ref{alg:algstartingatint}
+is $O(N^2)$,
+Algorithm \ref{alg:algstartingatprime} is
+$O(N)$, and the continued fraction
+algorithm is $O(log N)$.}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(C)FAREY SERIES AND RELATED THEOREMS)                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Farey Series Methods Of Choosing $h$ And $k$}
+
+The \emph{Farey series
+of order $N$}, denoted $F_{N}$,
+is the ordered set of all irreducible
+rational numbers $h/k$ in the interval
+[0,1]
+with a denominator $k\leq k_{MAX}$.
+As an example, the Farey series of
+order 5, $F_5$, is shown in (\ref{eq:eq0045}).
+
+\begin{equation}
+\label{eq:eq0045}
+F_5  = \left\{ {\frac{0}{1},\frac{1}{5},\frac{1}{4},
+                \frac{1}{3},\frac{2}{5},\frac{1}{2},
+                \frac{3}{5},\frac{2}{3},\frac{3}{4},
+                \frac{4}{5},\frac{1}{1}} \right\}
+\end{equation}
+
+The distribution of Farey rational numbers in
+[0,1] is repeated
+in any
+$[n,n+1]$, $n\in \intset$; so that the distribution of
+Farey rationals in [0,1] supplies complete
+information about the distribution in
+all of $\realset$.\footnote{We
+occasionally abuse the proper nomenclature by referring
+to sequential rational numbers outside the
+interval [0,1] as Farey terms or as part of
+$F_N$, which, technically, they are not.
+All of the results presented in
+this paper can be shown to apply
+everywhere in $\realset$, so this abuse
+is not harmful.}
+
+\begin{theorem}
+\label{thm:thm01}
+If $H/K$ and $h/k$ are two successive terms of $F_{N}$,
+then:
+\end{theorem}
+
+\begin{equation}
+\label{eq:eq0048}
+K h - H k = 1
+\end{equation}
+
+\emph{Note:} This condition is necessary but not
+sufficient for $h/k$ to be the Farey successor of $H/K$.
+In general, there is
+more than one $h/k$ with $k \leq k_{MAX}$ such that $Kh - Hk = 1$.
+
+\begin{proof}
+See \cite{HardyAndWrightClassic} p.23, \cite{LeVeque} p.222.
+\end{proof}
+
+\begin{theorem}
+\label{thm:thm03}
+If $H/K$ and $h/k$ are two successive terms of $F_{N}$, then:
+\end{theorem}
+
+\begin{equation}
+\label{eq:eq0050}
+K + k > N
+\end{equation}
+
+\emph{Note:} This condition is necessary but not
+sufficient for $h/k$ to be the Farey successor of $H/K$.
+
+\begin{proof}
+See \cite{HardyAndWrightClassic} p.23.
+\end{proof}
+
+\begin{theorem}
+\label{thm:thm04}
+If $h_{j-2}/k_{j-2}$, $h_{j-1}/k_{j-1}$, and $h_{j}/k_{j}$
+are three consecutive terms of $F_{N}$, then:
+\end{theorem}
+
+\begin{equation}
+\label{eq:eq0051}
+h_{j}  = \left\lfloor {\frac{{k_{j-2}
+     + N}}{{k_{j - 1} }}} \right\rfloor h_{j - 1}  - h_{j-2}
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0052}
+k_{j}  = \left\lfloor {\frac{{k_{j-2}  + N}}{{k_{j
+     - 1} }}} \right\rfloor k_{j - 1}  - k_{j-2}
+\end{equation}
+
+\emph{Notes:} (1)Theorem \ref{thm:thm04} gives
+recursive formulas for
+generating successive terms in $F_N$
+if two consecutive terms are known.
+(2)Equations (\ref{eq:eq0051}) and
+(\ref{eq:eq0052}) can be solved to
+allow generation of terms in the decreasing direction
+(\ref{eq:eq0053}, \ref{eq:eq0054}).
+
+\begin{equation}
+\label{eq:eq0053}
+h_j  = \left\lfloor {\frac{{k_{j + 2}  + N}}{{k_{j + 1} }}} \right\rfloor h_{j + 1}  - h_{j + 2}
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0054}
+k_j  = \left\lfloor {\frac{{k_{j + 2}  + N}}{{k_{j + 1} }}} \right\rfloor k_{j + 1}  - k_{j + 2}
+\end{equation}
+
+\begin{proof}
+See \cite{SchroederClassic} p.83.
+\end{proof}
+
+In general, given only a single irreducible rational number $h/k$,
+there is no method to find the immediate
+predecessor or successor in $F_N$ without some
+iteration (Eqns. \ref{eq:eq0051},
+\ref{eq:eq0052},
+\ref{eq:eq0053}, and \ref{eq:eq0054} require
+two successive elements).  However, if the
+irreducible rational number is an integer $i=i/1$, the
+predecessor and successor in $F_N$ are $(i N - 1)/N$ and
+$(i N + 1)/N$, so it is convenient to build $F_N$
+in either direction starting
+at an integer.  This suggests an algorithm for
+finding the closest rational numbers in
+$F_N$ to an $r_I$ when $N$ is small.
+
+\begin{algorithm}\label{alg:algstartingatint}\end{algorithm}
+\begin{alglvl0}
+\item Choose an integer $i$ as either
+      $\lfloor{}r_I\rfloor$ or $\lceil{}r_I\rceil$.
+\item If $i=\lfloor{}r_I\rfloor$ is chosen, use
+      $h_{j-2}/k_{j-2} = i/1$, $h_{j-1}/k_{j-1} = (i N + 1)/N$
+      and use (\ref{eq:eq0051}) and (\ref{eq:eq0052})
+      to build successive increasing
+      terms in $F_N$ until
+      the terms which enclose $r_I$ are found.
+      If $i=\lceil{}r_I\rceil$ is chosen, use
+      $h_{j+2}/k_{j+2} = i/1$, $h_{j+1}/k_{j+1} = (i N - 1)/N$
+      and use (\ref{eq:eq0053})
+      and (\ref{eq:eq0054}) to build successive
+      decreasing terms in $F_N$ until
+      the terms which enclose $r_I$ are
+      found.\footnote{This procedure is easily carried
+      out with spreadsheet software, such as
+      \emph{Microsoft Excel}.}
+\end{alglvl0}
+
+The following additional theorem is presented,
+which can be useful in finding the next term
+of $F_N$ given only a single term.
+
+\begin{theorem}
+\label{thm:thm05}
+If $H/K$ is a term of $F_{N}$,
+the immediate successor of $H/K$
+in $F_{N}$ is the $h/k$ satisfying
+$Kh-Hk=1$ with the largest
+denominator $k\leq N$.
+\end{theorem}
+
+\begin{proof}
+Any potential successor of $H/K$
+which meets $Kh-Hk=1$ can be formed
+by adding $1/Kk$ to $H/K$
+(\ref{eq:eq0055}, \ref{eq:eq0056}).
+
+\begin{eqnarray}
+\label{eq:eq0055}
+& Kh - Hk = 1 & \\
+& \Downarrow  & \nonumber \\
+\label{eq:eq0056}
+& \displaystyle {\frac{h}{k} = \frac{{1 + Hk}}{{Kk}} = \frac{H}{K} + \frac{1}{{Kk}}} &
+\end{eqnarray}
+
+If $h/k$ and $h'/k'$ both
+satisfy $Kh-Hk=1$ with $k'<k\leq{}N$, then
+$H/K<h/k<h'/k'$.  Thus the $h/k$
+with the largest denominator $\leq N$
+that meets $Kh-Hk=1$ is the successor
+in $F_{N}$ to $H/K$.
+\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(D)ALGORITHM 1:  BUILD F_N AND SURROUND R_I                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(E)ALGORITHM 2:  BUILD F_N STARTING AT P/K_MAX                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Finding the Farey successor from a single Farey
+term $\notin \intset{}$
+is labor-intensive and not easily done
+without a computer for even moderate $N$.
+Theorems \ref{thm:thm01}, \ref{thm:thm03},
+and \ref{thm:thm05} outline a computationally
+tractable way (Algorithm \ref{alg:algstartingatprime})
+to use a computer to
+form the successor in $F_{N}$ given
+only a single Farey term, even for large $N$.
+Once two successive Farey terms are known,
+Theorem \ref{thm:thm04} can be applied to
+generate additional terms at low cost.
+Algorithm \ref{alg:algstartingatprime}
+below outlines a method to
+economically find Farey terms on the left
+and right of a real number.
+
+\begin{algorithm}\label{alg:algstartingatprime}\end{algorithm}
+\begin{alglvl0}
+\item Choose a prime number $\alpha\ll N$.  $\alpha$ is
+      the number of denominators that a computer
+      can test against $Kh-Hk=1$ in a practical period of
+      time.\footnote{Useful primes at each order of
+      magnitude are 11; 101; 1,009; 10,007;
+      100,003; 1,000,003; and 10,000,019.}
+\item Choose a rational number $h'/\alpha$ to the left of $r_{I}$
+      ($h'=\lfloor r_{I}\alpha\rfloor$ is usually a good choice).
+\item Because $\alpha$ is prime,
+      $h'/\alpha$ is not reducible unless
+      $h'/\alpha$ is an integer.
+\item Denote the Farey term succeeding $h'/\alpha$ as $h/k$.
+      Theorem \ref{thm:thm03} asserts
+      that $\alpha +k>N$, implying that
+      $k>N-\alpha$.
+\item Apply Theorems \ref{thm:thm01} and \ref{thm:thm05}.
+      Search downward
+      from $k=N$ to $k=N-\alpha +1$ for an $h/k$ which satisfies
+      Theorem \ref{thm:thm01}.
+      This will require at most $\alpha$ iterations.
+\item $h'/\alpha$ and $h/k$ are now known to be successive Farey
+      terms in $F_N$ to the left of $r_I$.
+      Theorem \ref{thm:thm04} can be employed to economically
+      generate successive Farey terms until $r_I$ is enclosed.
+\end{alglvl0}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)FRAMEWORK OF CONTINUED FRACTIONS                                                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)(i)DEFINITION OF A CONTINUED FRACTION                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Continued Fraction Methods Of Choosing $h$ And $k$}
+
+For selection of a suitable rational number from $F_N$ when
+$N$ is a few hundred or less, building $F_N$
+starting at an integer (Algorithm \ref{alg:algstartingatint})
+or at a rational number with a large
+prime denominator (Algorithm \ref{alg:algstartingatprime})
+are practical techniques.\footnote{\label{footnote:exceldaveashleyfootnote}\emph{Microsoft Excel},
+which maintains
+integers with 48 bits of precision, can be used to
+build $F_N$ and select a suitable rational number
+for at least $N \approx 2^{24}$.  (Multiplying
+two 24-bit numbers yields a 48-bit result, and so \emph{Excel}
+should be usable until at least order $\approx 2^{24}$.)}
+However, the number of elements of $F_N$ is approximately
+$3N^2/\pi^2$; and so for large $N$, $\realset{}$ is
+too dense with Farey rationals to economically search.
+
+A more direct algorithm for locating
+the Farey neighbors of an arbitrary real
+$r_I$
+comes from the study of \emph{continued fractions}
+(a topic in number theory).
+
+A \emph{finite simple continued fraction} is a fraction in the form
+of (\ref{eq:eq0057}), where $a_0 \in \intsetnonneg$
+and $a_{k} \in \intsetpos$ for $k > 0$.  A continued fraction
+in the form of (\ref{eq:eq0057}) is denoted $[a_0; a_1, a_2, \ldots, a_n]$.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0057}
+a_0 + \cfrac{1}{a_1 + \cfrac{1}{a_2
+    + \cfrac{1}{\;\;\;\;\;\;\;\;\;\;\;\;\;\;\ldots + \cfrac{1}{a_n}}}}
+    =
+    [a_0; a_1, a_2, \ldots , a_n]
+\end{equation}
+\end{figure*}
+
+Continued fractions provide an alternate apparatus for
+representing real numbers.  The form of (\ref{eq:eq0057}) has
+important properties which are presented without proof.
+
+\begin{propenum}
+\item Every rational number can be represented by a finite
+      simple continued fraction $[a_{0};a_{1},a_{2},\ldots{} ,a_{n}]$.
+\item Each unique $[a_{0};a_{1},a_{2},\ldots{} ,a_{n}]$ corresponds to a
+      uniquely valued rational number, so long as
+      $a_{n}\neq 1$.\footnote{If $a_n=1$, the continued fraction
+      can be reduced in order by
+      one, and $a_{n-1}$ can be increased by one while
+      still preserving the value of the continued fraction.
+      The restriction that the
+      final element $a_n \neq 1$ is necessary to guarantee that
+      each uniquely valued
+      rational number has a unique finite simple continued fraction
+      representation.}
+\end{propenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)(ii) ALGORITHM 3:  FORMING A CONTINUED FRACTION FROM AN IRRATIONAL NUMBER                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)(iii) ALGORITHM 4:  FORMING A CONTINUED FRACTION FROM A RATIONAL NUMBER                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Without proof, we present the following procedure for
+finding the continued fraction representation of an arbitrary
+non-negative rational number $a/b$.
+
+\begin{algorithm}\label{alg:akgenalg}\end{algorithm}
+\begin{alglvl0}
+\item Start with $k=0$, dividend=$a$, divisor=$b$.
+
+\item Repeat
+
+\begin{alglvl1}
+\item Carry out the division of dividend/divisor to form an
+integer quotient $a_k$ and an integer remainder.
+
+\item The divisor from the current iteration becomes the dividend
+for the next iteration, and the remainder from the current
+iteration becomes the divisor for the next iteration.
+
+\item Increment $k$.
+
+\end{alglvl1}
+
+\item Until (remainder is zero).
+\end{alglvl0}
+
+Without proof, we present the following properties of
+Algorithm \ref{alg:akgenalg}.
+
+\begin{propenum}
+\item  The algorithm will produce the same continued
+       fraction representation $[a_{0};a_{1},a_{2},\ldots{} ,a_{n}]$
+       for any $(ia)/(ib)$, $i \in \intsetpos{}$, i.e.
+       the rational number $a/b$ need not be reduced before
+       applying the algorithm.
+\item  The algorithm will always terminate (i.e. the
+       continued fraction representation
+       $[a_{0};a_{1},a_{2},\ldots{} ,a_{n}]$ will be
+       finite).
+\item  The last non-zero remainder will be the greatest
+       common divisor of $a$ and $b$.%
+       { }
+\end{propenum}
+
+\begin{example}
+Find the continued fraction representation
+of $a/b$=3,362,997/2,924,082.
+\end{example}
+
+\emph{Solution:}  Table \ref{tbl:cfexplrgratnum01} shows the application of
+Algorithm \ref{alg:akgenalg}
+to form the continued fraction representation of
+$a/b$.
+
+\begin{table}
+\caption{Continued Fraction Representation Of $3,362,997/2,924,082$}
+\label{tbl:cfexplrgratnum01}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+Index (k) & Dividend  & Divisor   & $a_{k}$ & Remainder \\
+\hline
+\hline
+0         & 3,362,997 & 2,924,082 &      1  & 438,915   \\
+\hline
+1         & 2,924,082 &   438,915 &      6  & 290,592   \\
+\hline
+2         &   438,915 &   290,592 &      1  & 148,323   \\
+\hline
+3         &   290,592 &   148,323 &      1  & 142,269   \\
+\hline
+4         &   148,323 &   142,269 &      1  &   6,054   \\
+\hline
+5         &   142,269 &     6,054 &     23  &   3,027   \\
+\hline
+6         &     6,054 &     3,027 &      2  &       0   \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:cfexplrgratnum01}
+implies that the continued fraction representation of
+$a/b$ = 3,362,997/2,924,082 is $[1;6,1,1,1,23,2]$.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0058}
+\frac{{{\rm 3,362,997}}}{{{\rm 2,924,082}}} =
+1 + \cfrac{1}{{6 + \cfrac{1}{{1 + \cfrac{1}{{1 + \cfrac{1}{{1 + \cfrac{1}{{23 + \cfrac{1}{2}}}}}}}}}}}
+=
+a_0 + \cfrac{1}{{a_1 + \cfrac{1}{{a_2 + \cfrac{1}{{a_3 + \cfrac{1}{{a_4 + \cfrac{1}{{a_5 + \cfrac{1}{a_6}}}}}}}}}}}
+=
+[1; 6, 1, 1, 1, 23, 2]
+\end{equation}
+\end{figure*}
+
+Note in Table \ref{tbl:cfexplrgratnum01}
+that the final non-zero remainder is 3,027,
+the g.c.d. of 3,362,997 and 2,924,082.
+
+Irrational numbers also have a continued fraction representation,
+but this representation is necessarily infinite (non-terminating).
+
+An algorithm does exist for obtaining the continued
+fraction representation of an irrational number; but in practice the
+algorithm must be carried out symbolically (which
+can be difficult and not amenable to automation).
+For this reason, only the algorithm for obtaining the
+continued fraction representation of
+\emph{rational} numbers is presented here.
+Using a rational number as close as
+practical\footnote{Let $\alpha$ be
+the irrational number to be approximated,
+let $a/b$ be the rational number used as an approximation
+of $\alpha$ when applying Algorithm \ref{alg:akgenalg}, and let
+$H/K$ and $h/k$ be the two Farey neighbors identified
+through Theorem \ref{thm:thm06}.
+In a worst case, $\alpha < H/K < a/b < h/k$ or
+$H/K < a/b < h/k < \alpha$.  In such cases, the misidentification
+of the two Farey neighbors is not detectable (because $\alpha$
+is not known precisely enough, otherwise a more precise
+$a/b$ would have been used).  In \emph{all}
+cases, $H/K < a/b < h/k$.}
+to the irrational number to be approximated
+(such as using 3141592654/1000000000 for $\pi$, as is done in
+Example \ref{example:examplepi01}) is the
+recommended technique.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)(v) CONVERGENTS OF A CONTINUED FRACTION                                                        %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+The \emph{kth convergent} of a finite simple continued fraction
+$[a_{0};a_{1},a_{2},\ldots{},a_{n}]$,
+denoted $s_{k} = p_k/q_k$, is the rational number corresponding to the
+continued fraction $[a_{0};a_{1},a_{2},\ldots{},a_{k}]$,
+$k \leq n$.
+
+Each convergent $s_{k}$ is a rational number with a
+numerator $p_{k}$ and denominator $q_{k}$.
+Eqns. (\ref{eq:eq0059}) through (\ref{eq:eq0064})
+define the canonical way to
+construct all $s_{k}=p_{k}/q_{k}$ from all $a_{k}$.
+
+\begin{equation}
+\label{eq:eq0059}
+p_{ - 1}  = 1
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0060}
+q_{ - 1}  = 0
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0061}
+p_0  = a_0  = \left\lfloor {r_I } \right\rfloor
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0062}
+q_0  = 1
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0063}
+p_k  = a_k p_{k - 1}  + p_{k - 2}
+\end{equation}
+
+\begin{equation}
+\label{eq:eq0064}
+q_k  = a_k q_{k - 1}  + q_{k - 2}
+\end{equation}
+
+When $p_{k}$ and $q_{k}$ (the numerator and denominator of the
+$k$th convergent $s_{k}$) are formed as specified by (\ref{eq:eq0059})
+through (\ref{eq:eq0064}), convergents $s_{k}=p_{k}/q_{k}$ have the following
+properties, which are presented without proof.
+
+\begin{propenum}
+
+\item Each even-ordered convergent
+      $s_{k} = p_k/q_k = [a_{0}; a_{1}, a_{2}, \ldots{}, a_{k}]$
+      is less than $[a_{0}; a_{1}, a_{2}, \ldots{}, a_{n}]$, and
+      each odd-ordered convergent $s_{k}$ is greater than
+      $[a_{0}; a_{1}, a_{2}, \ldots{}, a_{n}]$,
+      with the exception of the final convergent $s_{k}$, $k=n$,
+      which is equal to $[a_{0}; a_{1}, a_{2}, \ldots{}, a_{n}]$.
+
+\item Each convergent is irreducible; that is, $p_k$ and
+      $q_k$ are coprime.
+
+\item Each $q_{k}$ is greater than $q_{k-1}$; that is, the denominators
+      of convergents are ever-increasing.
+
+\end{propenum}
+
+\begin{example}
+Find all convergents of the continued
+fraction representation of $a/b$=3,362,997/2,924,082; shown in
+Example 2 to be
+$[a_0;a_1,a_2,a_3,a_4,a_5,a_6]$=[1;6,1,1,1,23,2]
+\end{example}
+
+\emph{Solution:}  Table \ref{tbl:convcfexplrgratnum01}
+shows the results of the
+application of equations (\ref{eq:eq0059})
+through (\ref{eq:eq0064}) to form all
+convergents.
+
+\begin{table}
+\caption{Convergents Of Continued Fraction
+         Representation Of $3,362,997/2,924,082$}
+\label{tbl:convcfexplrgratnum01}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Index (k) & $a_{k}$     & $p_{k}$   & $q_{k}$  \\
+\hline
+\hline
+-1        & Not defined &       1   &       0  \\
+\hline
+0         &           1 &       1   &       1  \\
+\hline
+1         &           6 &       7   &       6  \\
+\hline
+2         &           1 &       8   &       7  \\
+\hline
+3         &           1 &      15   &      13  \\
+\hline
+4         &           1 &      23   &      20  \\
+\hline
+5         &          23 &     544   &     473  \\
+\hline
+6         &           2 &   1,111   &     966  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Note that the final convergent, $s_{6}$=$p_{6}/q_{6}$=1,111/966 is
+the reduced form of $a/b$.  Note also that all convergents
+$s_{k}=p_{k}/q_{k}$ are irreducible.  It may also be verified that each
+even-ordered convergent is less than $a/b$, and that each odd-ordered
+convergent is greater than $a/b$, with the exception of
+the final convergent, which is equal to $a/b$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)(VI) THEOREM:  USING CONTINUED FRACTIONS TO FIND FAREY NEIGHBORS                               %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{theorem}
+\label{thm:thm06}
+For a non-negative rational number $a/b$ not in
+$F_N$ which has a
+continued fraction representation
+$[a_0;a_1,a_2,\ldots{} ,a_n]$, the
+highest-order convergent $s_k = p_k/q_k$ with $q_k \leq N$ is one
+neighbor\footnote{By neighbors in $F_N$ we mean the rational numbers
+in $F_N$ immediately to the left and immediately to the right
+of $a/b$.}
+in $F_N$ to $a/b$, and the other neighbor in $F_N$ is given by
+(\ref{eq:eq0065}).\footnote{We were not able to locate
+Theorem \ref{thm:thm06} or a proof in print,
+but this theorem is known within the number theory community.
+It appears on the Web
+page of David Eppstein in the form of a
+`C'-language computer program,
+\texttt{http://www.ics.uci.edu/\~{}{}eppstein/numth/frap.c}.}
+\end{theorem}
+
+\begin{equation}
+\label{eq:eq0065}
+\frac{{\displaystyle{\left\lfloor {\frac{{N - q_{k - 1} }}{{q_k }}} \right\rfloor}
+ p_k  + p_{k - 1} }}{{\displaystyle{\left\lfloor {\frac{{N - q_{k - 1} }}{{q_k }}}
+ \right\rfloor} q_k  + q_{k - 1} }}
+\end{equation}
+
+\begin{proof}
+First, it is proved that the highest-order
+convergent $s_k = p_k/q_k$ with $q_k \leq N$ is one of the two
+neighbors to $a/b$ in $F_N$.  Note that $s_k \in F_N$, since $s_k$ is rational
+and reduced with denominator not exceeding $N$.
+By theorem (\cite{KhinchinClassic}, Theorem 9, p. 9), the upper bound on the
+difference between $a/b$ and $s_k$ is given by (\ref{eq:eq0066}).
+
+\begin{equation}
+\label{eq:eq0066}
+\left| {\frac{a}{b}  - \frac{{p_k }}{{q_k }}} \right| < \frac{1}{{q_k q_{k + 1} }}
+\end{equation}
+
+For two consecutive terms in $F_N$, $Kh-Hk=1$.
+For a Farey neighbor $H/K$ to $s_k$ in $F_N$, (\ref{eq:eq0067}) must hold.
+
+\begin{equation}
+\label{eq:eq0067}
+\frac{1}{q_k N} \leq \left| {\frac{H}{K} - \frac{p_k}{q_k}} \right|
+\end{equation}
+
+$q_{k+1}>N$, because $q_{k+1}>q_k$ and $p_k/q_k$ was chosen to be the
+highest-order convergent with $q_k\leq N$.  Using this knowledge and
+combining (\ref{eq:eq0066}) and (\ref{eq:eq0067}) leads to
+(\ref{eq:eq0069}).
+
+\begin{equation}
+\label{eq:eq0069}
+\left| {\frac{a}{b}  - \frac{{p_k }}{{q_k }}} \right| < \frac{1}{{q_k q_{k + 1} }}
+<
+\frac{1}{q_k N} \leq \left| {\frac{H}{K} - \frac{p_k}{q_k}} \right|
+\end{equation}
+
+This proves that $s_k$ is one neighbor to $a/b$ in $F_N$.
+The apparatus of continued fractions ensures that the
+highest order convergent $s_k$ with $q_k\leq N$ is closer to $a/b$ than
+to any neighboring term in $F_N$.  Thus, there is
+no intervening term of $F_N$ between $s_k$ and $a/b$.
+If $k$ is even, $s_k<a/b$, and if $k$ is
+odd, $s_k>a/b$.
+
+It must be proved that (\ref{eq:eq0065}) is the other Farey
+neighbor.  (\ref{eq:eq0065}) is of the form (\ref{eq:eq0071}),
+where $i \in \intsetnonneg$.
+
+\begin{equation}
+\label{eq:eq0071}
+\frac{{ip_k  + p_{k - 1} }}{{iq_k  + q_{k - 1} }}
+\end{equation}
+
+If $k$ is even, $s_k < a/b$, and the two Farey terms enclosing $a/b$, in
+order, are given in the first clause
+of (\ref{eq:eq0072}).  If $k$ is odd,
+$s_k > a/b$, and the two Farey terms enclosing $a/b$, in order, are
+given in the second clause of (\ref{eq:eq0072}).
+
+\begin{equation}
+\label{eq:eq0072}
+\begin{array}{ll}
+      \left\{ \displaystyle{{\frac{{p_k }}{{q_k }},\frac{{ip_k  + p_{k - 1} }}{{iq_k  + q_{k - 1} }}}} \right\}
+      &
+      (k \; even)
+      \\  & \\
+      \left\{ \displaystyle{{\frac{{ip_k  + p_{k - 1} }}{{iq_k  + q_{k - 1} }},\frac{{p_k }}{{q_k }}}} \right\}
+      &
+      (k \; odd)
+      \\
+\end{array}
+\end{equation}
+
+In either clause of (\ref{eq:eq0072}),
+applying the $Kh - Hk = 1$ test, (\ref{eq:eq0074}), gives the
+result of 1, since by theorem
+(\cite{KhinchinClassic}, Theorem 2, p. 5),
+$q_kp_{k-1}-p_kq_{k-1}=(-1)^k$, with the
+exponent of $k$ compensating
+for the ordering difference between
+the two clauses of
+(\ref{eq:eq0072}), as shown in (\ref{eq:eq0075}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:eq0074}
+\begin{array}{*{20}c}
+   {(q_k )(ip_k  + p_{k - 1} ) - (p_k )(iq_k  + q_{k - 1} ) = 1,} \hfill & {{\rm (k \; even)}} \hfill  \\
+   {(iq_k  + q_{k - 1} )(p_k ) - (ip_k  + p_{k - 1} )(q_k ) = 1,} \hfill & {{\rm (k \; odd)}} \hfill  \\
+\end{array}
+\end{equation}
+\end{figure*}
+
+\begin{equation}
+\label{eq:eq0075}
+\begin{array}{*{20}c}
+   {q_k p_{k - 1}  - p_k q_{k - 1}  = ( - 1)^k  = 1,} \hfill & {{\rm (k \; even)}} \hfill  \\
+   {q_{k - 1} p_k  - p_{k - 1} q_k  =  - ( - 1)^k  = 1,} \hfill & {{\rm (k \; odd)}} \hfill  \\
+\end{array}
+\end{equation}
+
+Thus, every potential Farey neighbor of the form (\ref{eq:eq0071})
+meets the $Kh - Hk = 1$ test.  In order to show
+that (\ref{eq:eq0065}) is the
+companion Farey neighbor to $p_k/q_k$, it is only necessary
+to show that a term meeting the $Hk-Hk=1$ test with a
+larger denominator still not greater than $N$ cannot exist
+(Theorem \ref{thm:thm05}).
+
+It must first be established that a
+rational number of the form (\ref{eq:eq0071})
+is irreducible.  This result comes directly from (\ref{eq:eq0074}) and
+(\ref{eq:eq0075}), since if the numerator
+and denominator of (\ref{eq:eq0065}) or
+(\ref{eq:eq0071}) are not coprime, the difference of 1 is
+not possible.
+
+The denominator of (\ref{eq:eq0065})
+can be rewritten as (\ref{eq:eq0076}).
+
+\begin{equation}
+\label{eq:eq0076}
+N - \left[ {\left( {N - q_{k - 1} } \right)\bmod q_k } \right] \in \left\{ {N - q_k  + 1,...,N} \right\}
+\end{equation}
+
+Finally, it must be shown that if one irreducible
+rational number---namely, the rational number given by
+(\ref{eq:eq0065})---with a denominator
+$\in \{ N-q_k+1,\ldots{} ,N \}$ meets the $Kh - Hk = 1$
+test, there can be no other irreducible rational number
+in $F_N$ with a larger
+denominator which also meets this test.
+
+Let $c/d$ be the irreducible rational number given by
+(\ref{eq:eq0065}), with $d$ already shown
+above to be $\in \{N - q_k  + 1,...,N\}$.
+Since $c/d$ and $s_k = p_k/q_k$ meet the $Kh - Hk = 1$ test,
+(\ref{eq:eq0076b}) follows.
+
+\begin{equation}
+\label{eq:eq0076b}
+c = \frac{1}{q_k} + \frac{p_k d}{q_k}; \; c \in \intset{}
+\end{equation}
+
+$c$ as shown in (\ref{eq:eq0076b}) is necessarily an
+integer.  Assume that $d \in \intset{}$ is to be perturbed by
+some amount $\Delta \in \intset{}$ to form a different
+integer $d + \Delta \in \intset{}$.  In order for the $Kh - Hk = 1$ test
+to be met with the new choice of denominator
+$d + \Delta$, (\ref{eq:eq0076c}) is required.
+
+\begin{equation}
+\label{eq:eq0076c}
+\frac{1}{q_k} + \frac{p_k d}{q_k} + \frac{p_k \Delta}{q_k} \in \intset{}
+\end{equation}
+
+Comparing (\ref{eq:eq0076b}) with (\ref{eq:eq0076c}), it can be seen
+that since the first two terms of (\ref{eq:eq0076c}) sum to an integer,
+(\ref{eq:eq0076c}) implies that
+$p_k \Delta / q_k \in \intset{}$.
+$p_k$ and $q_k$
+are coprime, and so in order for $q_k$ to divide $p_k \Delta$ with
+no remainder, $\Delta$ must contain at least every prime factor of
+$q_k$, which implies that $\Delta \geq q_k$.  Noting that the
+denominator of (\ref{eq:eq0065}) is necessarily
+$d \in \{N - q_k  + 1,...,N\}$, any positive perturbation
+$\Delta \geq q_k$ will form a $d + \Delta > N$.  Thus,
+no other irreducible rational number in $F_N$ besides that given
+by (\ref{eq:eq0065}) with a larger denominator
+$\leq N$ and which meets the $Kh - Hk = 1$ test can exist; therefore
+(\ref{eq:eq0065}) is the other enclosing Farey neighbor to
+$a/b$ in $F_N$.
+\end{proof}
+
+\begin{example}
+\label{example:examplepi01}
+Find the members of $F_{65535}$ immediately
+before and immediately after $\pi$.
+\end{example}
+
+\emph{Solution:}  $\pi$ is transcendental and cannot be expressed
+as a rational number.  Using 3141592654/1000000000
+as a rational approximation to $\pi$ and applying
+Algorithm \ref{alg:akgenalg}
+yields Table \ref{tbl:cfexpansrapppi}.
+
+\begin{table}
+\caption{Continued Fraction Representation Of 3,141,592,654/1,000,000,000
+        (A Rational Approximation To $\pi$)}
+\label{tbl:cfexpansrapppi}
+\begin{center}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\small{Index}     &      \small{Dividend}  &       \small{Divisor} &  $a_k$ &   \small{Remainder} \\
+\small{(k)}       &                        &                       &        &                     \\
+\hline
+\hline
+       \small{0}  & \small{3,141,592,654}  & \small{1,000,000,000} &     \small{3}  & \small{141,592,654} \\
+\hline
+       \small{1}  & \small{1,000,000,000}  &   \small{141,592,654} &     \small{7}  &   \small{8,851,422} \\
+\hline
+       \small{2}  &   \small{141,592,654}  &     \small{8,851,422} &    \small{15}  &   \small{8,821,324} \\
+\hline
+       \small{3}  &     \small{8,851,422}  &     \small{8,821,324} &     \small{1}  &      \small{30,098} \\
+\hline
+       \small{4}  &     \small{8,821,324}  &        \small{30,098} &   \small{293}  &       \small{2,610} \\
+\hline
+       \small{5}  &        \small{30,098}  &         \small{2,610} &    \small{11}  &       \small{1,388} \\
+\hline
+       \small{6}  &         \small{2,610}  &         \small{1,388} &     \small{1}  &       \small{1,222} \\
+\hline
+       \small{7}  &         \small{1,388}  &         \small{1,222} &     \small{1}  &         \small{166} \\
+\hline
+       \small{8}  &         \small{1,222}  &           \small{166} &     \small{7}  &          \small{60} \\
+\hline
+       \small{9}  &           \small{166}  &            \small{60} &     \small{2}  &          \small{46} \\
+\hline
+      \small{10}  &            \small{60}  &            \small{46} &     \small{1}  &          \small{14} \\
+\hline
+      \small{11}  &            \small{46}  &            \small{14} &     \small{3}  &           \small{4} \\
+\hline
+      \small{12}  &            \small{14}  &             \small{4} &     \small{3}  &           \small{2} \\
+\hline
+      \small{13}  &             \small{4}  &             \small{2} &     \small{2}  &           \small{0} \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+Table \ref{tbl:cfconvofpi} shows the formation of the convergents
+of the continued fraction
+representation of the
+rational approximation to $\pi$ using (\ref{eq:eq0059}) through (\ref{eq:eq0064}).
+
+\begin{table}
+\caption{Convergents Of Continued Fraction Representation Of
+         3,141,592,654/1,000,000,000 (A Rational Approximation
+         To $\pi$)}
+\label{tbl:cfconvofpi}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+Index (k) & $a_{k}$     &       $p_{k}$   &     $q_{k}$  \\
+\hline
+\hline
+       -1 & Not defined &             1   &           0  \\
+\hline
+        0 &           3 &             3   &           1  \\
+\hline
+        1 &           7 &            22   &           7  \\
+\hline
+        2 &          15 &           333   &         106  \\
+\hline
+        3 &           1 &           355   &         113  \\
+\hline
+        4 &         293 &       104,348   &      33,215  \\
+\hline
+        5 &          11 &     1,148,183   &     365,478  \\
+\hline
+        6 &           1 &     1,252,531   &     398,693  \\
+\hline
+        7 &           1 &     2,400,714   &     764,171  \\
+\hline
+        8 &           7 &    18,057,529   &   5,747,890  \\
+\hline
+        9 &           2 &    38,515,772   &  12,259,951  \\
+\hline
+       10 &           1 &    56,573,301   &  18,007,841  \\
+\hline
+       11 &           3 &   208,235,675   &  66,283,474  \\
+\hline
+       12 &           3 &   681,280,326   & 216,858,263  \\
+\hline
+       13 &           2 & 1,570,796,327   & 500,000,000  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+By Theorem \ref{thm:thm06}, one Farey neighbor is the convergent
+with the largest denominator not greater than 65,535.
+From Table \ref{tbl:cfconvofpi}, this convergent is $s_4$ = $p_4/q_4$ =
+104,348/33,215 (and note that since this is an
+even-ordered convergent, it will be less than $a/b$).  Also by
+Theorem \ref{thm:thm06}, applying equation
+(\ref{eq:eq0065}), the other Farey
+neighbor is 104,703/33,328.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(F)CASE OF CONSTRAINED h                                                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Case Of Constrained $h$}
+
+In a practical design problem, a rational approximation
+will typically be implemented by multiplying the input
+argument $x$ by $h$, adding an offset $z$, then dividing
+by $k$. Efficiency will often depend on being able to
+implement multiplication, addition, or
+division using single machine instructions, which are
+constrained in the size of the operands they can accomodate.
+
+The results from number theory presented earlier are based
+only on the constraint $k \leq k_{MAX}$, i.e. only the constraint
+on the denominator is considered.  However, in practical problems,
+the numerator is also typically constrained, usually by the
+size of operands that an integer multiplication instruction
+can accomodate.
+
+$r_I$, $h_{MAX}$, and $k_{MAX}$
+can be specified so that the restriction on the numerator
+is the dominant constraint, which
+does not allow the Farey series of order
+$N=k_{MAX}$ to be economically
+used to find the best rational approximation to $r_{I}$,
+because $F_{k_{MAX}}$ near $r_I$ will contain
+predominantly terms with
+numerators violating $h \leq h_{MAX}$.
+
+To provide for a more economical search for the best
+rational approximations when the numerator is constrained,
+Theorem \ref{thm:thmconstrainednumerator} is presented.
+
+\begin{theorem}
+\label{thm:thmconstrainednumerator}
+Given a positive
+real number $r_I$ and constraints
+on a rational approximation $h/k$ to $r_I$,
+$0 \leq h \leq h_{MAX}$ and $0 < k \leq k_{MAX}$, the closest
+rational numbers to $r_I$ on the left and right
+subject to the constraints lie
+in $F_{N'}$, with $N'$ chosen as in (\ref{eq:eqconsth:aa}).
+\end{theorem}
+
+\begin{equation}
+\label{eq:eqconsth:aa}
+N'=\left\lfloor
+   {
+   \frac{h_{MAX}}{r_I } + 1
+   }
+\right\rfloor
+\end{equation}
+
+\begin{proof}
+Note that by (\ref{eq:eqconsth:aa}),
+$N' > h_{MAX}/r_I$, for all choices
+of $h_{MAX}$ and $r_I$.
+
+If $r_I \leq h_{MAX}/k_{MAX}$, $N' > k_{MAX}$;
+therefore $F_{N'} \supset F_{k_{MAX}}$,
+and the theorem is true.
+
+If $r_I > h_{MAX}/k_{MAX}$, then $h_{MAX}/N' < r_I$.
+Note that $h_{MAX}/N'$ or its reduced form if it
+is reducible is necessarily in $F_{N'}$.  Any
+rational number $a/b > h_{MAX}/N'$ with $b>N'$
+must also have $a > h_{MAX}$, which violates
+the constraints.  Therefore, any $a/b$ such
+that $h_{MAX}/N' < a/b < r_I$ must lie
+in $F_{N'}$, and the closest rational number
+to $r_I$ on the right subject to the constraints
+must also lie in $F_{N'}$.
+\end{proof}
+
+\begin{example}
+\label{ex:expiconstrainednumandden}
+Find the two best rational approximations to $\pi$ subject to
+$h_{MAX} = 255$ and $k_{MAX} = 255$.
+\end{example}
+
+\emph{Solution:} In this problem, both the numerator and
+denominator are constrained.  The constrained numerator is
+not treated directly by the results from number theory.
+Applying (\ref{eq:eqconsth:aa}) gives $N'$=82, thus it is only necessary
+to examine $F_{82}$ for best approximations to $\pi$ which
+meet both constraints.  Building $F_{82}$ yields 245/78 and
+22/7 as the two best rational approximations to $\pi$
+under the constraints.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (4)(B)HOW CLOSE WE CAN USUALLY GET TO R_I WHEN CHOOSING R_A                                          %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Probabilistic Results On $ | R_I - R_A | $}
+\label{sec:probresults}
+
+In this section we consider different asymptotics for
+the precision of the approximation of an arbitrary $r_I$ by a fraction
+$r_A= h/k$ with $k \leq k_{ \rm MAX }$. For simplicity of notation
+we
+denote $\alpha= r_I$ and $N=k_{ \rm MAX }$ and assume, without
+loss of generality, that
+$ \alpha \in [0,1]$.
+
+We are thus interested in the asymptotic behaviour, when $N
+\rightarrow \infty$,
+of the quantity
+ $$
+%\begin{equation}
+\label{eq:dist}
+\rho_N(\alpha) = \min_{h/k \in F_N} \left|\alpha - h/k\right|\, ,
+$$
+%\end{equation}
+which is the distance between $\alpha$ and $F_N$, the Farey
+series of order $N$.
+
+The worst--case scenario is not very interesting: from the
+construction of the Farey series
+we observe that for a fixed $N$ the longest intervals between the
+neighbours of  $F_N$
+are $[0,1/N]$ and  $[1-1/N,1]$ and therefore for all $N$
+\begin{equation}
+\label{eq:max_error}
+\max_{\alpha \in [0,1]} \rho_N(\alpha) = \frac{1}{2N}\, .
+\end{equation}
+(This supremum is achieved at the points $1/(2N)$ and $1-1/(2N)$.)
+
+Such behaviour of $\rho_N(\alpha)$ is however not typical: as we
+shall see below,
+typical values of the approiximation error $\rho_N(\alpha)$ are
+much smaller.
+
+Let us first consider the behaviour of $\rho_N(\alpha)$ for almost all
+$\alpha \in [0,1]$.\footnote{ A statement is true
+for almost all $\alpha \in [0,1]$ if the measure of the set where this
+statement is wrong has measure zero.}
+We then have, see \cite{KargaevZ} and also \cite{Harman},
+that for almost all $\alpha \in [0,1]$ and any $\varepsilon >0$,
+(\ref{eq:liminf}) and (\ref{eq:limsup}) hold.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:liminf}
+\lim_{N\rightarrow\infty}\rho_N(\alpha) N^2 \log^{1+\varepsilon} N =
++ \infty, \quad
+\liminf_{N\rightarrow\infty}  \rho_N(\alpha) N^2 \log N = 0
+\end{equation}
+\end{figure*}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:limsup}
+\limsup_{N\rightarrow\infty} \frac{ \rho_N(\alpha) N^2 }{ \log N } = +
+\infty, \quad
+\lim_{N\rightarrow\infty} \frac{ \rho_N(\alpha) N^2 }{
+\log^{1+\varepsilon} N } = 0
+\end{equation}
+\end{figure*}
+
+Even more is true: in (\ref{eq:liminf}) and (\ref{eq:limsup})
+one can replace $\log N$ by $\log N \log \log N $, $\log N \log \log
+N \log \log \log N$ and so on.
+Analogously,   $\log^{1+\varepsilon} N$ could be replaced by
+$\log N (\log \log N)^{1+\varepsilon} $, $\log N \log \log N (\log \log
+\log N)^{1+\varepsilon}$ and so on.
+
+These statements are analogues of Khinchin's metric theorem,
+the classic result
+in the metric number theory, see e.g. \cite{Harman}.
+
+The asymptotic distribution of the suitably normalised
+$\rho_N(\alpha)$
+was derived in  \cite{KargaevZ1}.  A main result of this
+paper is that
+the sequence of functions
+$N^2\rho_N(\alpha)$ converges in distribution, when $N\rightarrow
+\infty$,
+to the probability measure on $[0, \infty)$ with the density given
+by (\ref{eq:dens-ab}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:dens-ab}
+{p}(\tau) =
+\left\{\begin{array}{ll}
+                 6/\pi^2 & \mbox{ if $0 \leq \tau \leq \frac{1}{2}$ }\\
+                 & \\
+                 \frac{6}{\pi^2 \tau} \left(1 + \log \tau - \tau
+               \right) & \mbox{ if $\frac{1}{2}\leq \tau\leq 2 $ } \\
+                 & \\
+               \frac{ 3}{\pi^2 \tau}\left(2\log(2 \tau)\!
+               -\!4\log(\sqrt{\tau}\!+\!\sqrt{\tau\!-\!2})\!
+               -\! (\sqrt{\tau}\!-\!\sqrt{\tau\!-\!2})^2 \right)
+                             & \mbox{ if $2 \leq \tau < \infty  $ }
+                  \end{array}
+             \right.
+\end{equation}
+\end{figure*}
+
+This means that
+for all $a,A$
+such that
+ $0<a<A<\infty$,
+(\ref{eq:davedrzinsert01}) applies,
+where
+{\rm `meas'} denotes for the standard Lebesgue measure on $[0,1]$.
+
+\begin{figure*}
+\begin{equation}
+\label{eq:davedrzinsert01}
+{\rm meas}  \{ \alpha \in [0,1]: \;a < N^2 \rho_N(\alpha) \leq A \}
+\rightarrow
+\int_a^A {p}(\tau) d \tau\,
+\;\;{\rm as}\; N \rightarrow \infty
+\end{equation}
+\end{figure*}
+
+Another  result in \cite{KargaevZ1} concerns the asymptotic
+behavior
+of the moments of the approximation error $\rho_N(\alpha) $. It
+says that
+for any $\delta\neq 0$ and $N \rightarrow \infty$,
+(\ref{eq:moments}) applies,
+ where  $\zeta(\cdot)$ and B$(\cdot,\cdot)$
+are the Riemann zeta--function and the Beta--function,
+correspondingly.
+
+
+\begin{figure*}
+\begin{equation}
+\label{eq:moments}
+\hspace{-8mm}
+{
+%\textstile
+\small
+\frac{\delta+1}{2}
+}
+\int_0^1 \rho_N^{\delta} (\alpha) d \alpha =
+\left\{\begin{array}{ll}
+    \infty & \mbox{if $ \delta \leq -1 $}\\
+    & \\
+ % \frac{6}{\delta^2 (\delta+1)\pi^2 } \left(2^{-\delta} +
+  \frac{3}{\delta^2 \pi^2 } \left(2^{-\delta} +
+   \delta 2^{\delta+2} {\rm B}(\!-\delta,\frac{1}{2}) \right)
+   N^{-2\delta}\left(1\! +\! o(1)\right)
+   &  \mbox{if $-1\!<\!\delta\!<\!1, \delta\! \neq\! 0$ }\\
+   & \\
+\frac{3}{\pi^2} N^{-2} \log N +
+O\left( N^{-2} \right)
+&  \mbox{if $\delta =1 $ }\\
+& \\
+%\frac{2^{1-\delta}}{1+\delta}
+2^{-\delta}
+\frac{\zeta(\delta)}{ \zeta(\delta+1)}
+N^{-\delta-1}+
+O\left( N^{-2\delta} \right)
+                 &  \mbox{if $\delta >1$ }
+                  \end{array}
+             \right.
+\end{equation}
+\end{figure*}
+
+In particular, the average of the approximation error $\rho_N
+(\alpha)$ asymptotically equals
+\begin{equation}
+\label{eq:average_as}
+\int_{0}^1 \rho_N(\alpha) d\alpha = \frac{3}{\pi^2} \frac{\log N}{N^2} +
+O\left(\frac{1}{N^2}\right),
+\;\;\;\; N\rightarrow \infty \,.
+\end{equation}
+
+Comparison of (\ref{eq:average_as})
+with (\ref{eq:limsup}) shows that the
+asymptotic behavior of the average approximation error $\int
+\rho_N(\alpha) d\alpha$
+resembles the behavior of the superior limit of $\rho_N(\alpha)$.
+Even this limit
+decreases much faster than the maximum error $\max_{\alpha }
+\rho_N(\alpha)$, see
+(\ref{eq:max_error}): for typical $\alpha$ the rate of decrease of
+$\rho_N(\alpha)$, when $ N\rightarrow \infty ,$
+is, roughly speaking,  $N^{-2}$ rather than $N^{-1}$, the error for the
+worst combination of $\alpha$ and $N$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (5) TABULATED VALUES AND THE H=2^Q CASE                                                              %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tabulated Scaling Factors}
+\label{sec:tabscalingfactors}
+
+Choosing $r_{A}=h/k$ using Farey series techniques as
+outlined in Section \ref{sec:methodshkchoose}
+is a suitable solution
+when $r_I$ is invariant and known at the time
+the scaling function is designed.
+The error terms developed allow
+prediction of the maximum approximation error over a
+domain $[0,x_{MAX}]$ when a specific $r_{A}\approx r_I$ is chosen.
+
+A different problem which occurs in practice is
+the need to tabulate scaling factors in ROM or EEPROM.
+These scaling factors (which represent $r_A$) may depend
+on sensor or actuator calibrations and are not known
+precisely in advance at the time
+the software is designed, and so the technique of choosing
+and evaluating a
+rational number $r_A$ at design time
+as presented earlier cannot be
+applied.
+
+
+
+\subsection{Method Of Tabulating Scaling Factors}
+
+The previous sections have concentrated on scaling factors
+expressed as an arbitrary rational number $h/k$.
+However, it is usually not practical to tabulate scaling factors
+as rational numbers with an arbitrary denominator $k$ for the following
+reasons.
+
+\begin{generalenum}
+\item Not all processors have division instructions,
+      and division in software (as
+      would be required with an arbitrary
+      tabulated denominator $k$) is expensive.
+\item Even for processors with division
+      instructions, if the required maximum
+      arbitrary denominator $k$ exceeds
+      the size which can be accomodated
+      by the division instructions, there is no general way to perform
+      a division of large operands
+      using small division instructions (a solution
+      involving arbitrary division is not
+      scaleable).
+\item The rational elements of $F_N$ are irregularly spaced
+      in $\realset$.  The worst case occurs near integers,
+      where the elements are $1/N$ apart.  Allowing arbitrary tabulated
+      rational
+      numbers $r_A = h/k$ means that in some regions of $\realset{}$,
+      $r_A$ can be placed very close to $r_I$, whereas in other
+      regions, the maximum error may degrade to $|r_A - r_I| \leq 1/2N$.
+      This irregular error is usually not useful in engineering endeavors,
+      as the worst-case error must typically be assumed.  The division by
+      an arbitrary tabulated $k$ carries computational cost but
+      a limited engineering
+      benefit.
+\end{generalenum}
+
+The method of tabulating scaling factors presented in this paper is to
+create scaling factors of the form $h/2^q$, so that the denominator is
+an integral power of two.  This approach has the following advantages.
+
+\begin{generalenum}
+\item The required multiplication by $h$ is scaleable, allowing large $h$ when
+      necessary.
+\item The division by $2^q$ is economically performed using right shift
+      instructions, which every processor has, and which are
+      scaleable.
+\end{generalenum}
+
+
+\subsection{Design Approaches For $h/2^q$ Tabulated Linear Scalings}
+
+Fig. \ref{figthreeelementsofchoice} shows the three elements of design
+choice in engineering an $h/2^q$ tabulated linear scaling.
+If any two of these elements are fixed, the third can be derived.
+The \emph{Maximum Approximation Error}
+(A)
+is the maximum approximation error that
+can be tolerated for any element of the domain and
+any tabulated $r_A$.  The
+\emph{Domain And Range Of Approximation}
+(B)
+are the domain over which
+the approximation will be used, and the range which must be reachable
+by the appropriate choice of tabulated scaling factor $h$.
+The \emph{Data Size Of Tabulated $h$ And Value Of $q$, $2^q$}
+(C)
+are the number of bits which must be reserved for each
+tabulated $h$, and the number of bits by which the multiplication
+result $hx$ must be right-shifted (this value is typically hard-coded
+into the scaling strategy).
+
+\begin{figure}
+\caption{Three Elements Of Design Choice In Tabulated Linear $h/2^q$ Scaling Design}
+\label{figthreeelementsofchoice}
+\begin{picture}(240,167)
+
+\put(76,120){\line(1,0){100}}
+\put(141,35){\line(1,1){62}}
+\put(121,35){\line(-1,1){62}}
+
+\put(35,133){\makebox(0,0){(A) Maximum}}
+\put(35,121){\makebox(0,0){Approximation}}
+\put(35,109){\makebox(0,0){Error}}
+
+\put(217,133){\makebox(0,0){(B) Domain}}
+\put(217,121){\makebox(0,0){And Range Of}}
+\put(217,109){\makebox(0,0){Approximation}}
+
+\put(126,24){\makebox(0,0){(C) Data Size Of Tabulated $h$}}
+\put(126,12){\makebox(0,0){And Value Of $q$, $2^q$}}
+
+\end{picture}
+\end{figure}
+
+The most typical case for beginning a design is that
+(A) (Fig. \ref{figthreeelementsofchoice})
+and
+(B) are known, so that
+(C)
+can be derived.  A less typical case for beginning
+a design is that (B)
+and (C)
+are tentatively known, so that (A) can
+be derived (and if this error is unacceptable, the tentative design
+must be reevaluated).  Although it is possible to make the
+necessary derivations, it never occurs in practice that
+a design begins with (A) and
+(C),
+with the intent of deriving
+(B).  For this
+reason, only the first two cases are discussed in this paper.
+
+
+\subsection{Design By Placement Of $r_A$}
+
+A useful paradigm of design is to consider the problem of engineering
+a tabulated $h/2^q$ scaling in terms of what abilities we preserve
+for placing $r_A$ with respect to $r_I$.
+
+\begin{figure}
+\caption{Specification Of Domain And Possible Values Of $r_I$ As Triangular
+         Region}
+\label{fig:specdomainrangetriangular}
+
+\begin{picture}(240,130)
+
+\put(20,20){\line(1,0){142}}
+\put(20,20){\line(0,1){97}}
+\put(20,20){\line(3,2){142}}
+
+\put(162,20){\dashbox{.5}(0,97)}
+\put(8,75){\makebox(0,0){$\scriptstyle L(x)$}}
+
+\put(93,12){\makebox(0,0){$\scriptstyle x$}}
+\put(163,12){\makebox(0,0){$\scriptstyle x_{MAX}$}}
+\put(210,115){\makebox(0,0){$\scriptstyle (x_{MAX}, \lfloor r_{IMAX} x_{MAX}\rfloor)$}}
+
+\put(110, 55){\makebox(0,0){\small{Triangular}}}
+\put(110, 45){\makebox(0,0){\small{Region Of}}}
+\put(110, 35){\makebox(0,0){\small{Tabulated Approximation}}}
+
+\end{picture}
+\end{figure}
+
+Assume that at design time,
+we know that the linear scaling will be
+used over the domain $[0,x_{MAX}]$, $x_{MAX} \in \intsetpos{}$,
+and that $0 \leq r_I \leq r_{IMAX}$ for all of the $r_I$ we
+wish to tabulate.  This establishes a triangular region in
+which the approximation will be used
+(Fig. \ref{fig:specdomainrangetriangular}).
+
+The forms of $L(x)$ and $M(x)$
+(Eqns. \ref{eq:eq0009}, \ref{eq:eq0009b}) reveal that
+a specific choice of $q$ allows the selection of $r_A$
+in steps of $1/2^q$.  With $q$ selected,
+there are four obvious choices for placement of $r_A$
+(\ref{dbpora01aa00}, \ref{dbpora01aa01},
+\ref{dbpora01aa02}, \ref{dbpora01aa03}), with almost no
+practical distinction between (\ref{dbpora01aa01})
+and (\ref{dbpora01aa02}).  For brevity, only
+(\ref{dbpora01aa00}) will be developed---i.e. we
+will consider only placing $r_A$ at or to the left
+of $r_I$.  Also for brevity, only
+$F(x)$ as a model function will be
+considered.  All other cases can be developed
+using similar methods.
+
+\begin{equation}
+\label{dbpora01aa00}
+r_I - \frac{1}{2^q} < r_A \leq r_I
+\end{equation}
+
+\begin{equation}
+\label{dbpora01aa01}
+r_I - \frac{1}{2^{q+1}} \leq r_A < r_I + \frac{1}{2^{q+1}}
+\end{equation}
+
+\begin{equation}
+\label{dbpora01aa02}
+r_I - \frac{1}{2^{q+1}} < r_A \leq r_I + \frac{1}{2^{q+1}}
+\end{equation}
+
+\begin{equation}
+\label{dbpora01aa03}
+r_I  \leq r_A < r_I + \frac{1}{2^q}
+\end{equation}
+
+Placing $r_A$ consistently at or to the left
+of $r_I$ (\ref{dbpora01aa00}) will be accomplished
+if $h$ is chosen by (\ref{eq:dbpora03}).
+
+\begin{equation}
+\label{eq:dbpora03}
+h = \left\lfloor {r_I 2^q} \right\rfloor
+\end{equation}
+
+When $h$ is selected using (\ref{eq:dbpora03}),
+$r_A \leq r_I$ and (\ref{eq:dbpora05}) applies.
+
+\begin{equation}
+\label{eq:dbpora05}
+r_A - r_I \in \left( { - \frac{1}{2^q} , 0 } \right]
+\end{equation}
+
+To obtain a relationship
+(B,C)$\to$(A) (Fig. \ref{figthreeelementsofchoice}),
+(\ref{eq:dbpora05}) may be
+substituted into (\ref{eq:eq0035b})
+to yield (\ref{eq:dbpora03baa}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:dbpora03baa}
+\left. {M(x) - F(x)} \right|_{x \in [0,x_{MAX}], r_A - r_I \in \left( {- \frac{1}{2^q}, 0} \right] }
+\in
+\left( {\frac{- x_{MAX} + z + 1}{2^q} - r_{IMAX} - 1, \frac{z}{2^q}} \right]
+\end{equation}
+\end{figure*}
+
+To obtain a relationship (A,B)$\to$(C), define
+$\varepsilon_{SPAN}$ as the
+maximum span of error with a fixed
+$z$ and fixed $r_I$ as $x$ is allowed to vary
+throughout $[0,x_{MAX}]$ (Eq. \ref{eq:eq0035b}).  It can be shown
+by solving (\ref{eq:eq0035b}) that
+$q$ must be chosen so as to meet (\ref{eq:dbpora03ba}) if
+the error span is not to exceed
+$\varepsilon_{SPAN}$.  (\ref{eq:dbpora03ca}) supplies the
+smallest choice of $q$ which
+satisfies (\ref{eq:dbpora03ba}).
+
+\begin{equation}
+\label{eq:dbpora03ba}
+q  \geq \log{}_2 \left( {\frac{x_{MAX} - 1}{\varepsilon{}_{SPAN} - r_{IMAX} - 1}} \right)
+\end{equation}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:dbpora03ca}
+q
+=
+\left\lceil
+   {
+   \log{}_2 \left( {\frac{x_{MAX} - 1}{\varepsilon{}_{SPAN} - r_{IMAX} - 1}} \right)
+   }
+\right\rceil
+=
+\left\lceil
+   {
+   \frac
+      {
+         {
+         \ln{} \left( \displaystyle{{\frac{x_{MAX} - 1}{\varepsilon{}_{SPAN} - r_{IMAX} - 1}}} \right)
+         }
+      }
+      {
+      \ln 2
+      }
+   }
+\right\rceil
+\end{equation}
+\end{figure*}
+
+
+$q$ may be chosen larger than
+suggested by (\ref{eq:dbpora03ca}), but not smaller,
+while still meeting (\ref{eq:dbpora03ba}).  In practice,
+this may be done because it is economical
+to choose $q$ to be a multiple of eight so that
+the division by $2^q$ is accomplished by ignoring
+the least significant byte(s) of $hx+z$, rather than by
+shifting.  (This technique, however, will eliminate
+shifting at the expense of $h_{MAX}$, and
+usually only makes sense when $h_{MAX}$ can be
+increased without choosing different
+processor instructions
+to calculate $hx+z$.)
+
+Once $q$ is fixed, $h_{MAX}$ can be
+calculated.  Substituting $r_I = r_{IMAX}$
+into (\ref{eq:dbpora03}) yields (\ref{eq:dbpora03d}).
+
+\begin{equation}
+\label{eq:dbpora03d}
+h_{MAX} = \left\lfloor {r_{IMAX} 2^q} \right\rfloor
+\end{equation}
+
+
+
+\subsection{Design By Placement Of $L(x_{MAX})$}
+
+A second useful paradigm of design is to
+consider the problem of engineering a
+tabulated $h/2^q$ scaling in terms of what abilities
+we preserve for placing the terminal point
+$L(x_{MAX})$ with respect to the terminal
+point of the model function $I(x)$, $I(x_{MAX})$,
+$\lxtermdifffuncsymbol{}_L \leq 0 \leq \lxtermdifffuncsymbol{}_U$,
+so that (\ref{eq:errplace02a}) is met
+(Fig \ref{fig:specdomainrangerectangular}).
+
+\begin{eqnarray}
+   \label{eq:errplace02a}
+   &
+   I(x_{MAX}) + \lxtermdifffuncsymbol{}_L
+   \leq
+   L(x_{MAX})
+   \leq
+   I(x_{MAX}) + \lxtermdifffuncsymbol{}_U
+   &
+   \\
+   & \displaystyle{\Downarrow} &  \nonumber
+   \\
+   \label{eq:errplace02b}
+   &
+   r_A - r_I \in
+      \left(
+            {
+            \displaystyle
+            {
+            \frac{\lxtermdifffuncsymbol{}_L - 1}{x_{MAX}},
+            \frac{\lxtermdifffuncsymbol{}_U + 1}{x_{MAX}}
+            }
+            } \right)
+   &
+\end{eqnarray}
+
+\begin{figure}
+\caption{Specification Of Domain And Possible Values Of $r_I$ As Rectangular
+         Region}\begin{picture}(240,140)
+\label{fig:specdomainrangerectangular}
+
+\put(25,20){\line(1,0){142}}
+\put(25,20){\line(0,1){110}}
+\put(25,20){\line(3,2){142}}
+\put(25,20){\line(5,2){142}}
+
+\put(167,20){\dashbox{.5}(0,110)}
+\put(25,130){\dashbox{.5}(142,0)}
+\put(12,75){\makebox(0,0){$\scriptstyle L(x)$}}
+\put(12,130){\makebox(0,0){$\scriptstyle y_{MAX}$}}
+
+\put(98,12){\makebox(0,0){$\scriptstyle x$}}
+\put(168,12){\makebox(0,0){$\scriptstyle x_{MAX}$}}
+
+\put(212,115){\makebox(0,0){$\scriptstyle (x_{MAX}, I(x_{MAX})+ \lxtermdifffuncsymbol{}_U)$}}
+\put(204,96){\makebox(0,0){$\scriptstyle (x_{MAX}, L(x_{MAX}))$}}
+\put(212,77){\makebox(0,0){$\scriptstyle (x_{MAX}, I(x_{MAX})+ \lxtermdifffuncsymbol{}_L)$}}
+
+\put(167,115){\circle*{4}}
+\put(167,96){\circle*{4}}
+\put(167,77){\circle*{4}}
+
+\put(55, 120){\makebox(0,0){\small{Rectangular}}}
+\put(55, 110){\makebox(0,0){\small{Region Of}}}
+\put(55, 100){\makebox(0,0){\small{Required}}}
+\put(55, 90){\makebox(0,0){\small{Placeability}}}
+
+\end{picture}
+\end{figure}
+
+(\ref{eq:errplace02a}) places restrictions
+on the relationship between
+$r_A$ and $r_I$, and implies (\ref{eq:errplace02b}).
+This implication is
+not reversible.
+
+For brevity, only $F(x)$ will be considered
+as a model function and only
+$L(x)$ will be considered as an approximation.
+To obtain a relationship
+which shows how the choice of
+$\lxtermdifffuncsymbol{}_L$
+and
+$\lxtermdifffuncsymbol{}_U$
+affect the error function
+$L(x) - F(x)$,
+(\ref{eq:errplace02b}) may be substituted
+into (\ref{eq:eq0035b}) to
+yield (\ref{eq:dbpolxmax01}).
+
+\begin{figure*}
+\begin{equation}
+\label{eq:dbpolxmax01}
+\left. {L(x) - F(x)}
+       \right|_{
+               x \in [0,x_{MAX}],
+               r_A - r_I \in
+                  \left(
+                     {
+                     \frac{\lxtermdifffuncsymbol{}_L - 1}{x_{MAX}},
+                     \frac{\lxtermdifffuncsymbol{}_U + 1}{x_{MAX}}
+                     }
+                  \right)
+               }
+\in
+   \left(
+        {
+        \lxtermdifffuncsymbol{}_L - 1 - r_A - \frac{2^q - 1}{2^q},
+        \lxtermdifffuncsymbol{}_L + 1
+        }
+   \right)
+\end{equation}
+\end{figure*}
+
+The ability to place the target
+point $L(x_{MAX})$ in the interval
+indicated in (\ref{eq:errplace02a}) requires (\ref{eq:errplace03}).  Solving
+for $q$ leads to the constraint in
+(\ref{eq:errplace04}) and the smallest possible choice
+of $q$ in (\ref{eq:errplace05}).
+
+\begin{equation}
+\label{eq:errplace03}
+\frac{1}{2^q} \leq \frac{\lxtermdifffuncsymbol{}_U - \lxtermdifffuncsymbol{}_L + 1}{x_{MAX}}
+\end{equation}
+
+\begin{equation}
+\label{eq:errplace04}
+q \geq \log_2 \left({\frac{x_{MAX}}{\lxtermdifffuncsymbol{}_U - \lxtermdifffuncsymbol{}_L + 1}} \right)
+\end{equation}
+
+\begin{figure*}
+\begin{equation}
+\label{eq:errplace05}
+q  = \left\lceil {\log _2 \left( {\frac{x_{MAX}}{\lxtermdifffuncsymbol{}_U - \lxtermdifffuncsymbol{}_L + 1}} \right) } \right\rceil
+   = \left\lceil {\frac{\ln \left( \displaystyle{{\frac{x_{MAX}}{\lxtermdifffuncsymbol{}_U - \lxtermdifffuncsymbol{}_L + 1}}} \right) }{\ln 2}} \right\rceil
+\end{equation}
+\end{figure*}
+
+With $q$ chosen by (\ref{eq:errplace04})
+or (\ref{eq:errplace05}), $h$ can be chosen by
+(\ref{eq:errplace07}) so as to meet (\ref{eq:errplace02a}).
+
+\begin{equation}
+\label{eq:errplace07}
+h = \left\lceil {\frac{2^{q} \left( {\left\lfloor {r_I x_{MAX}} \right\rfloor} + \lxtermdifffuncsymbol{}_L\right)}{x_{MAX}}} \right\rceil
+\end{equation}
+
+(\ref{eq:errplace03}) through (\ref{eq:errplace05})
+give useful rules of thumb
+for sizing $q$ based on allowed variability in
+$L(x_{MAX})$.  There are two
+additional useful practical applications for the paradigm
+of thought
+(\emph{observation} implies \emph{scaling factor}),
+and for the equations themselves.
+
+The first additional practical application (for the
+paradigm of thought) is in the error analysis of
+self-calibrating systems.  In Example
+\ref{ex:bathroomscale}, it is assumed that we
+precisely know
+the transfer characteristics of each
+bathroom scale transducer and can thereby
+choose $h$.  A practical bathroom scale
+is more likely to be self-calibrating, so that
+at manufacture
+a known calibration weight $x_{CAL} \in \realsetnonneg{}$
+can be placed on the
+scale and the scale itself will determine the
+transfer characteristics of the transducer
+and choose $h$.\footnote{In this discussion
+and in (\ref{eq:errselfcal01}) and (\ref{eq:errselfcal02}),
+$r_I$ is taken to be the transfer characteristic of
+of the transducer; whereas in Example \ref{ex:bathroomscale},
+$1/r_I$ is the transfer characteristic of the transducer,
+and $r_I$ is the desired transfer characteristic of the
+linear scaling in the software.}
+For a self-calibrating scale,
+an important question is if a known calibration
+weight $x_{CAL}$ is placed on the scale and produces an
+A/D converter count $y_{CAL} = H(x_{CAL})$, how much can be inferred
+about the underlying $r_I$ of the transducer?  It can be shown
+that the implication relationship in
+(\ref{eq:errselfcal01}) and (\ref{eq:errselfcal02}) applies.
+This self-calibration uncertainty should not be neglected
+in error analyses.  Note in (\ref{eq:errselfcal02})
+that the self-calibration
+uncertainty in $r_I$ decreases with increasing
+$x_{CAL}$, which is consistent with intuition.
+
+\begin{eqnarray}
+   \label{eq:errselfcal01}
+   &
+   y_{CAL} = H(x_{CAL}) = \lfloor r_I x_{CAL} \rfloor
+   &
+   \\
+   & \displaystyle{\Downarrow} &  \nonumber
+   \\
+   \label{eq:errselfcal02}
+   &
+   r_I \in
+      \left[
+         {
+         \displaystyle
+            {
+            \frac{y_{CAL}}{x_{CAL}}, \frac{y_{CAL}}{x_{CAL}} + \frac{1}{x_{CAL}}
+            }
+         }
+      \right)
+   &
+\end{eqnarray}
+
+The second additional practical application
+(for the equations) is the special case of
+$\lxtermdifffuncsymbol{}_L = \lxtermdifffuncsymbol{}_U = 0$,
+which is useful in devising
+a tabulated linear scaling for
+piecewise linear functions when
+the linear segments must join neatly, or when the required
+accuracy of a linear scaling is not known
+precisely in advance and a reasonable
+default tabulated scaling strategy must be chosen.
+Theorem \ref{thm:fullplaceability}
+supplies a choice of $q$ and a result
+about $h_{MAX}$ which is useful in such cases.
+
+\begin{theorem}
+\label{thm:fullplaceability}
+Given a rational linear scaling of
+the form (\ref{eq:eq0009}) with an $m$-bit
+domain and an $n$-bit range,
+choosing $q=m$ and
+$h_{MAX} = 2^{m+n} - 1$
+(i.e. choosing a data width of
+$m+n$ bits for $h$) will allow
+an $h$ to be chosen
+so that $L(x') = y'$ for any
+$x' \in [1, x_{MAX} = 2^m - 1]_\intset{}, \; y' \in [0, y_{MAX} = 2^n - 1]_\intset{}$.
+\end{theorem}
+
+\begin{proof}
+At $x' = x_{MAX}$, in order to be able
+to choose $y'$, it is required that
+$x_{MAX}/2^q \leq 1$, and $q = m$ is
+the smallest integral choice of $q$ that will
+satisfy this constraint.
+With $q=m$,
+$L(1) = y_{MAX}$ requires
+$h_{MAX}/2^m \geq y_{MAX}$, and
+$h_{MAX} = 2^{m+n}-1$ (a bit-width
+of at least $m+n$ for $h$) is required.
+\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (6) IMPLEMENTATION CONSIDERATIONS AND TECHNIQUES                                                     %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementation Techniques}
+\label{sec:imptechniques}
+
+Practical microprocessors fall into the
+following categories, ranked from
+least capable to most capable.
+
+\begin{generalenum}
+
+\item Processors with shift and addition instructions.
+
+\item Processors with shift, addition, and multiplication instructions.\footnote{To
+      date, the authors have not encountered a processor with division instructions but no
+      multiplication instructions.}
+
+\item Processors with shift, addition, multiplication, and division instructions.
+
+\end{generalenum}
+
+Shift instructions,
+addition instructions,
+and multiplication instructions
+are always \emph{scaleable},
+meaning that operands of arbitrary
+size can be shifted, added, or multiplied by the
+repeated use of instructions which
+inherently accept smaller operands.
+Division instructions, however, are not scaleable.  No general
+method exists to use processor division instructions to divide
+operands of arbitrary size.
+
+For multiplication, certain values of $h$ can lead
+to especially economical implementations.  Multiplication by
+an $h$ which
+is an integral power of two can be performed using
+shift instructions.  Multiplication by an $h$
+whose bit pattern is very sparsely populated with
+1's can also lead to an economical implementation.
+For example, multiplication by $h=33_{10}=100001_2$
+can be performed using five left shifts and an addition.
+For division, a value of $k$ which is an integral power
+will lead to a very economical implementation.
+
+The following steps are recommended to economize
+an $(hx+z)/k$
+linear scaling for implementation.
+
+\begin{generalenum}
+
+\item If the processor does not have a division instruction to
+      directly support the integer division by $k$,
+      use an $(hx+z)/2^q$ scaling rather than an $(hx+z)/k$ scaling (due
+      to the high cost of division in software).
+
+\item If the bit pattern of $h$ is sparsely populated with 1's, evaluate
+      implementation of the multiplication via
+      repeated left-shifting and addition.
+
+\end{generalenum}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (7) DESIGN EXAMPLES                                                                                  %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Design Examples}
+\label{sec:designexamples}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (7)(B) CONVERSION FROM MPH TO KPH                                                                    %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{example}
+\label{ex:convmphkphatend}
+(CONVERSION FROM MPH TO KPH)  Devise an economical and
+accurate linear scaling algorithm
+from integral MPH to integral KPH which operates over a domain
+of $[0, 255]_{\intset{}}$ MPH (one unsigned byte) and delivers an
+unsigned byte in $[0,255]_{\intset{}}$ KPH, and
+bound the error introduced by the scaling,
+assuming that the input speed is quantized (already contains error).
+The error between actual speed (before input
+quantization) and the output of the algorithm
+must never be negative---i.e. the output of the algorithm must
+never \emph{under}state the speed.  In the event that
+the result is too large for one byte, the result
+should be 255.  Implement the algorithm on a TMS370
+CPU core, which is characterized by an 8$\times$8=16
+unsigned multiplication instruction and a 16$\times$8=8
+division instruction.
+\end{example}
+
+\emph{Solution:}
+One mile is 1.6093 kilometers, thus $r_I = 1.6093$.
+Efficient implementation using the instruction
+set of the TMS370 is best done by a single multiplication
+instruction followed by a single division instruction, implying
+that $h_{MAX} = k_{MAX} = 255$.  Applying
+Theorem \ref{thm:thmconstrainednumerator}
+yields $N'=159$, so it is only necessary to
+examine $F_{159}$ for the
+two enclosing rational numbers
+which meet the constraints on numerator and denominator.\footnote{Theorem \ref{thm:thmconstrainednumerator}
+must be applied with caution, as it only guarantees that the
+\emph{two enclosing} rational numbers are in $F_{159}$.  Table \ref{tbl:fareymphtokph01}
+is included to show the construction of $F_{159}$---it should be noted that
+without further analysis there is no guarantee that there are not
+rational numbers which meet the constraints to the left of 243/151
+with $k>159$.}
+Building $F_{159}$ near 1.6093
+yields Table \ref{tbl:fareymphtokph01}.\footnote{Table
+\ref{tbl:fareymphtokph01} can be built using spreadsheet
+software to construct $F_{159}$ starting with
+the rational numbers
+1/1 and 160/159 and using
+(\ref{eq:eq0051}) and
+(\ref{eq:eq0052}) to build increasing Farey
+terms until $r_I$ is enclosed.}
+
+\begin{table}
+\caption{$F_{159}$ Near 1.6093 (Example \ref{ex:convmphkphatend})}
+\label{tbl:fareymphtokph01}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+$h$       & $k$         &         $h/k$   &     Error    \\
+\hline
+\hline
+      214 &         133 &    1.60902256   &  -0.00027744 \\
+\hline
+      177 &         110 &    1.60909091   &  -0.00020909 \\
+\hline
+      140 &          87 &    1.60919540   &  -0.00010460 \\
+\hline
+      243 &         151 &    1.60927152   &  -0.00002848 \\
+\hline
+      103 &          64 &    1.60937500   &  +0.00007500 \\
+\hline
+      169 &         105 &    1.60952381   &  +0.00022381 \\
+\hline
+      235 &         146 &    1.60958904   &  +0.00028904 \\
+\hline
+      227 &         141 &    1.60992908   &  +0.00062903 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+From Table \ref{tbl:fareymphtokph01},
+the two rational numbers which enclose
+1.6093 are 243/151 and 103/64.
+Choosing $r_A = 243/151$\footnote{From
+Table \ref{tbl:fareymphtokph01},
+103/64 also appears to be
+an attractive rational number,
+because the division by 64 can be accomplished
+by shifting $hx+z$ right by 5 bits.
+However, with the TMS370, each shift of a
+16-bit operand requires two \texttt{RRC}
+instructions, for a total of 10 instructions
+at 8 clock cycles each, or 80 clock cycles
+(more than the \texttt{DIV}
+instruction).  Therefore, 243/151 is the
+more attractive rational number.}
+and using
+$x_{MAX}=256$\footnote{A value of 256 rather
+than 255 must be used for $x_{MAX}$ because
+it is assumed that
+$x \in [0,256)$.} with
+$z = 395$ by (\ref{eq:eqkminusfzterm01})
+leads to the assembly-language shown
+in Fig. \ref{fig:tms370c8code243151}.
+
+\begin{figure}
+\caption{TMS370 Solution To Example \ref{ex:convmphkphatend} Using The Rational
+         Number 243/151}
+\label{fig:tms370c8code243151}
+\begin{verbatim}
+
+  MOV input, A   ;12 cycles, load far input
+                 ;into A
+  MPY #243, A    ;45 cycles, multiply by 243,
+                 ;result in (MSB:LSB)=(A:B)
+  ADD #139, B    ;6 cycles, 139 = 395 mod 256
+  ADC #1, A      ;6 cycles, 1 = 395 div 256
+  MOV #151, R02  ;8 cycles, set up for divide
+  DIV R02, A     ;Max 63 cycles, divide,
+                 ;quotient in A, carry set if
+                 ;overflow
+  JNC NOOVERFLOW ;5 cycles if jump not taken
+                 ;7 cycles if jump taken
+                 ;Jump if div without overflow
+  MOV #255, A    ;6 cycles, replace div result
+                 ;if too large and won't fit in
+                 ;one byte.  DIV instruction
+                 ;set C on overflow
+NOOVERFLOW:      ;Label, no code generated
+  MOV A, output  ;10 cycles, move result to
+                 ;far output var
+
+(Total:  Max. 161 clocks, 53.7us with 12 Mhz
+crystal.)
+\end{verbatim}
+\end{figure}
+
+From the problem statement, the input to the algorithm
+is assumed to be quantized (it already contains error),
+so (\ref{eq:eq0035b}) applies.  Evaluating
+(\ref{eq:eq0035b}) with $r_A = 243/151$, $z=395$, $r_I = 1.6093$
+and $x_{MAX}=256$ yields $K(x)-F(x) \in (0.0060, 2.6159]$ KPH
+over the domain [0,256).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (7)(F) BATHROOM SCALE                                                                                %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{example}
+\label{ex:bathroomscale}
+(BATHROOM SCALE)
+A manufacturer wishes to build a family of
+electronic bathroom scales using linear transducers
+which convert weight to voltage.  The voltage
+from a transducer is measured using a 10-bit
+A/D converter and a custom combinational logic integrated
+circuit which will multiply the integer
+$x \in [0, 2^{10}-1]_{\intset{}}$ from the A/D
+converter by a programmable calibration
+constant $h$, neglect a number $q$ of
+least significant bits of the product
+$hx$, and display the non-neglected
+bits as a weight, in integral pounds, for the user.
+In the event that the A/D converter is saturated
+($x=2^{10}-1=1,023$), an overflow indicator will
+be displayed.  The transducers to be used
+always produce exactly zero volts with no
+weight applied, but vary from 0.25 lbs. per A/D
+count to 0.35 lbs. per A/D count in their
+transfer characteristic.  Market research has
+shown that users strongly dislike bathroom
+scales which overstate their weight; but simultaneously
+prefer that their weight not be understated by more
+than 2 lbs.  In the design of the custom
+integrated circuit for the family of bathroom scales, what
+value of $q$ should be chosen?  How accurate will
+each bathroom scale be?
+How many bits must be reserved for $h$, and
+what strategy should be
+used to choose
+$h$ based on the transfer characterisic
+$r_I$ of each transducer?
+\end{example}
+
+\emph{Solution:}
+From the problem statement,
+$r_I \in [0.25, 0.35]$,
+$r_{IMAX} = 0.35$,
+$x_{MAX} = 1,023$\footnote{From the
+problem statement, $x=1,023$ will
+generate an overflow display, so we need
+not consider $x \in [1,023, \; 1,024)$.}, and it is
+required that
+$L(x)-F(x) \in [-2,0]$.  It is also
+required that $r_A \leq r_I$
+(as in Eqs. \ref{eq:dbpora03}, \ref{eq:dbpora05}); otherwise
+it is possible that
+$\exists x \in [0,x_{MAX}]$, $L(x) > F(x)$, which
+contradicts the product requirements.
+
+With $x_{MAX} = 1,023$,
+$\varepsilon_{SPAN} = 2$, and $r_{IMAX} = 0.35$,
+(\ref{eq:dbpora03ca}) yields $q=11$ as the
+minimum choice for $q$ to meet accuracy
+requirements.
+
+With $x_{MAX} = 1,023$,
+$z=0$,
+$q=11$,
+$2^q = 2,048$,
+and $r_{IMAX} = 0.35$,
+(\ref{eq:dbpora03baa})
+predicts that
+$L(x)-F(x) \in (-1.84,0]$.
+
+With
+$q=11$,
+$2^q = 2,048$, and
+$r_{IMAX} = 0.35$,
+(\ref{eq:dbpora03d})
+yields $h_{MAX} = 716$ and
+10 bits must be reserved
+in the custom integrated circuit
+for the calibration factor $h$.
+For each $r_I$ to be tabulated,
+$h$ should be chosen by (\ref{eq:dbpora03}):
+$h=\lfloor r_I 2^q \rfloor = \lfloor 2,048 r_I \rfloor$.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (8) CONCLUSION                                                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Conclusion}
+
+The techniques presented in this paper
+demonstrate how linear scaling
+functions of the form $y = r_I x$
+($r_I \in \realsetnonneg{}$,
+not necessarily $\in \ratsetnonneg$) can be
+implemented on inexpensive 4-bit and
+8-bit microcontrollers by
+approximating $r_I$ with a rational
+scaling factor $r_A = h/k$
+($h \in \intsetnonneg{}$,
+$k \in \intsetpos{}$).
+Several methods for choosing $h$ and $k$
+and several implementation techniques were
+presented.
+
+A detailed analysis of approximation error
+due to the inability to choose $r_A = r_I$ and
+due to the quantization inherent
+in digital systems and integer
+arithmetic was provided. It was shown that
+the approximation error
+can be bounded when it is known that the
+approximation will be used only over a domain of
+$[0, x_{MAX}]$, $x_{MAX} \in \intsetpos{}$.
+It was also shown that
+by introducing an integral parameter
+$z$,
+the error function could
+be adjusted to be
+never negative, never positive, or centered about zero.
+
+For cases where $r_I$ is known
+at design time, three algorithms were presented
+that allow $h$ and $k$ to be chosen
+subject to the constraints
+$h \leq h_{MAX}$ and $k \leq k_{MAX}$
+so as to place $r_A = h/k$ as close as
+possible to $r_I$.  For cases where $r_I$ is not
+precisely known at design time,
+methods were presented for designing
+tabulated scalings and bounding the approximation
+error introduced.
+
+Important results from number theory were presented which
+show that although the worst-case error in placing
+$r_A$ decreases as $1/N$, the typical error decreases
+as $1/N^2$.
+
+Techniques which allow linear approximations to be
+performed economically on microcontrollers of varying capability
+were also presented.  It was shown how the form of $r_A=h/k$
+could be modified to improve software efficiency, enable use of only
+scaleable (non-division) instructions, or facilitate
+tabulation of scaling
+factors.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (9) ACKNOWLEDGEMENTS                                                                                 %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Need to retain e-mail addresses to contact all people who have contributed
+%to thank.
+%Greg Bachelis (greg@math.wayne.edu)
+%Robert Berman (rberman@math.wayne.edu)
+%Feng Lin (flin@ece.eng.wayne.edu)
+%Nick Sahinidis (nikos@uiuc.edu)
+%Adam Van Tuyl, (vantuyl@mast.queensu.ca)
+%Carl Schweiger (carl@titan.princeton.edu)
+%Ken Tindell (ktindell@ssx5.com)
+%Steve Vestal (vestal@htc.honeywell.com)
+%Bob Whitinger (bob@whitinger.net, bob.whitinger@sea.siemens.com)
+%David B. Stewart (dstewart@eng.umd.edu)
+%Johan Bengtsson (johanb@docs.uu.se)
+%Michael J. Burke (mburke@visteon.com)
+%Mark Endicott (mendicot@visteon.com)
+%David Eppstein (eppstein@ics.uci.edu)
+%Cliff Stallings (cliff@eng.wayne.edu)
+%Robert Kakos (robert@enterprise.eng.wayne.edu)
+%Klaus-Peter Zauner (kjz@cs.wayne.edu)
+%Karsten Tinnefeld (tinnefeld@ls2.cs.uni-dortmund.de)
+%Paulette Groen (pgroen@visteon.com)
+%Paula Smith (psmith77@visteon.com)
+%Mircea Munteanu (mmuntean@visteon.com)
+%Adam Gibson (adam.g@virgin.net)
+%Virgil (vmhjr@frii.com)
+%Bob Crosby (b-crosby@ti.com)
+%Una Smith (una.smith@yale.edu)
+%Andrea Blome (ablome@mail.cfigroup.com)
+%Axel Franke (Axel.Franke@physics.umu.se)
+%Yu-Tzu Tsai (ytsai@computer.org)
+%William J. Hagen (w.hagen@ieee.org)
+%
+%
+%
+%Need also to include Adam's Web site on my Web page,
+%http://archives.math.utk.edu/articles/atuyl/confrac/
+%
+%Need also to include David Eppstein's Web site
+%http://www.ics.uci.edu/~eppstein/
+%
+%
+\section{Acknowledgements}
+
+We would like to gratefully acknowledge the assistance
+of Greg Bachelis, Robert Berman, Feng
+Lin, Nick Sahinidis, Adam Van Tuyl,
+Carl Schweiger, Ken Tindell, Steve Vestal,
+Bob Whitinger, and David B. Stewart
+in finding the areas of
+mathematics relevant to the rational number selection
+problem.  We would also like to
+thank Johan Bengtsson, Michael J. Burke,
+Mark Endicott, David Eppstein, Mircea Munteanu,
+Adam Gibson, and Virgil (of the \texttt{sci.math.num-analysis} newsgroup)
+for insight into this problem; Cliff Stallings and
+Robert Kakos for support from Wayne State
+University's College Of Engineering; Paulette Groen and
+Paula Smith for support from Visteon;
+Yu-Tzu Tsai and William J. Hagen for support
+from the IEEE; Bob Crosby for support
+from Texas Instruments; Klaus-Peter Zauner, Andrea Blome,
+Una Smith, Karsten Tinnefeld, and
+Axel Franke for other tool
+and logistical support; and the management
+team at Visteon for allowing us to pursue this
+effort in the workplace.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (13) VARIABLES AND MATHEMATICAL NOTATION                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Definitions, Acronyms, Abbreviations, Variables And Mathematical Notation}
+
+\begin{glossaryenum}
+
+\item \mbox{\boldmath $ \lfloor \cdot \rfloor $}
+
+      Used to denote the \emph{floor($\cdot$)} function.  The
+      \emph{floor($\cdot$)}
+      function is the largest integer not larger than the
+      argument.
+
+\item \mbox{\boldmath $\lceil \cdot \rceil$ }
+
+      Used to denote the \emph{ceiling($\cdot$)} function.
+      The \emph{ceiling($\cdot$)} function
+      is the smallest integer not smaller than the
+      argument.
+
+\item \mbox {\boldmath $a/b$}
+
+      An arbitrary rational number.
+
+\item \textbf{coprime}
+
+      Two integers that share no prime factors are \emph{coprime}.
+      \emph{Example:}
+      6 and 7 are coprime, whereas 6 and 8 are not.
+
+\item \mbox {\boldmath $ F_N $}
+
+      The Farey series of order $N$.  The Farey series is the
+      ordered set of all reduced rational numbers with a
+      denominator not larger than $N$.
+
+\item \textbf{greatest common divisor (g.c.d.)}
+      The greatest common divisor of two integers is the largest
+      integer which divides both integers without a remainder.
+      \emph{Example:} the g.c.d. of 30 and 42 is 6.
+
+\item \mbox{\boldmath $H/K$}, \mbox{\boldmath $h/k$},
+      \mbox{\boldmath $h'/k'$}, \mbox{\boldmath $h''/k''$},
+      \mbox{\boldmath $h_i/k_i$}
+
+      Terms in a Farey series of order $N$.
+
+\item \textbf{irreducible}
+
+      A rational number $p/q$ where $p$ and $q$ are coprime
+      is said to be \emph{irreducible}.
+      Equivalently, it may be stated that $p$ and $q$ share no prime factors
+      or that the greatest common divisor of
+      $p$ and $q$ is 1.
+
+\item \textbf{KPH}
+
+      Kilometers per hour.
+
+\item \textbf{MPH}
+
+      Miles per hour.
+
+\item \mbox{\boldmath $\intsetpos$}
+
+      The set of positive integers (natural numbers).
+
+\item \mbox{\boldmath $\ratset$}
+
+      The set of rational numbers.
+
+\item \mbox{\boldmath $\ratsetnonneg$}
+
+      The set of non-negative rational numbers.
+
+\item \mbox{\boldmath $r_A$}
+
+      The rational number $h/k$ used to approximate
+      an arbitrary real number $r_I$.
+
+\item \mbox{\boldmath $r_I$}
+
+      The real number, which may or may not be rational,
+      which is to be approximated by a rational number
+      $r_A = h/k$.
+
+\item \mbox{\boldmath $\realset$}
+
+      The set of real numbers.
+
+\item \mbox{\boldmath $\realsetnonneg$}
+
+      The set of non-negative real numbers.
+
+\item \textbf{reduced}
+
+      See \emph{irreducible}.
+
+\item \mbox{\boldmath $s_k = p_k/q_k$}
+
+      The $k$th convergent of a continued fraction.
+
+\item \mbox{\boldmath $x_{MAX}$}
+
+      The largest element of the domain for which the
+      behavior of an approximation must be guaranteed.
+      In this paper, most derivations assume
+      that $x \in [0, x_{MAX}]$, $x_{MAX} \in \intsetpos{}$.
+
+\item \mbox{\boldmath $\intset$}
+
+      The set of integers.
+
+\item \mbox{\boldmath $\intsetnonneg$}
+
+      The set of non-negative integers.
+
+
+\end{glossaryenum}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (10) CONTACT INFORMATION                                                                             %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Contact}
+%
+%Additional supplemental materials (such as Excel
+%spreadsheets which generate Farey terms automatically)
+%are downloadable from http://www.daveashley.com.
+%E-mail addresses and home pages (where applicable)
+%for authors are supplied below.
+%David T. Ashley:
+%	daveashley@daveashley.com
+%	http://www.daveashley.com/
+%Joseph P. DeVoe
+%	jdevoe@visteon.com
+%Cory Pratt
+%	cpratt2@visteon.com
+%Karl Perttunen
+%	kperttun@visteon.com
+%Anatoly Zhigljavsky
+%	zhigljavskyaa@cardiff.ac.uk
+%	http:\-//\-www.\-cf.\-ac.\-uk/\-uwcc/\-maths/\-zhig\-ljav\-skyaa/
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (11) REFERENCES                                                                                      %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\nocite{*}
+\bibliographystyle{IEEE_PQ}
+\begin{thebibliography}{1}
+
+\bibitem{HardyAndWrightClassic}
+G.H. Hardy, E.M. Wright,
+\newblock{\em An Introduction To The Theory Of Numbers}, ISBN 0-19-853171-0.
+
+\bibitem{Harman}
+G. Harman (1998) Metric number theory, Oxford University Press.
+
+\bibitem{KargaevZ}
+ P.  Kargaev, A. Zhigljavsky (1966)
+Approximation of real numbers by rationals: some metric theorems,
+{\it Journal of Number Theory,} 61,  209-225.
+
+\bibitem{KargaevZ1}
+ P.  Kargaev, A. Zhigljavsky (1967)
+Asymptotic distribution of the distance function to the Farey points
+{\it Journal of Number Theory,} 65,  130-149.
+
+\bibitem{KhinchinClassic}
+A. Ya. Khinchin,
+\newblock{\em Continued Fractions}, University Of
+Chicago Press, 1964; Library Of Congress Catalog Card
+Number 64-15819.
+
+\bibitem{LeVeque}
+William J. LeVeque,
+\newblock{\em Fundamentals Of Number Theory},
+Dover Publications, 1977,
+ISBN 0-486-68906-9.
+
+\bibitem{OldsClassic}
+C. D. Olds,
+\newblock{\em Continued Fractions},
+Randam House, 1963,
+Library Of Congress Catalog Card Number 61-12185.
+
+\bibitem{OreClassic}
+Oystein Ore,
+\newblock{\em Number Theory And Its History},
+ISBN 0-486-65620-9.
+
+\bibitem{SchroederClassic}
+M. R. Schroeder,
+\newblock{\em Number Theory In Science And Communication},
+ISBN 3-540-62006-0.
+
+\end{thebibliography}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% (12) BIOGRAPHY                                                                                       %
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%The biography section applies only to the IEEE paper.  Since the splitting
+%program is record-oriented but LaTeX is free-form, each line of the biographies
+%must be preceded by the _IEEE_ tag.
+\begin{biography}{David T. Ashley}
+ (biography not yet included in document).
+\vspace{2.7cm}
+\end{biography}
+\begin{biography}{Joseph P. DeVoe}
+ (biography not yet included in document).
+\vspace{2.7cm}
+\end{biography}
+\begin{biography}{Cory Pratt}
+ (biography not yet included in document).
+\vspace{2.7cm}
+\end{biography}
+\begin{biography}{Karl Perttunen}
+ (biography not yet included in document).
+\vspace{2.7cm}
+\end{biography}
+\begin{biography}{Anatoly Zhigljavsky}
+ (biography not yet included in document).
+\vspace{2.7cm}
+\end{biography}
+
+\begin{figure*}
+\caption{Version Control Information (For Reference Only---Will
+Be Removed Before Submission Of Paper)}
+\vspace{3.0mm}
+\begin{small}
+\texttt{\LaTeX{} compile date:  \today{}.}
+\begin{verbatim}
+PVCS version control information:
+$Header: /cvsroot/esrg/sfesrg/esrgdstb/common/suppmatls/papers_articles/embedded_control/uc_math/rat_app/ieee_rap_2000.txt,v 1.1 2002/04/24 07:23:58 dtashley Exp $.
+\end{verbatim}
+\end{small}
+\end{figure*}
+
+\end{document}
+
+
+%% $Log: ieee_rap_2000.txt,v $
+%% Revision 1.1  2002/04/24 07:23:58  dtashley
+%% Initial checkin.
+%%
+%%
+%%    Rev 1.62   25 May 2000 14:05:22   dashley1
+%% TSE markers removed, as being considered
+%% by another journal.
+%%
+%%    Rev 1.61   22 May 2000 11:27:40   dashley1
+%% TMS370C8 changed to TMS370 as per
+%% Bob Crosby's review.
+%%
+%%    Rev 1.60   19 May 2000 13:41:02   dashley1
+%% Typo corrected.  966, not 9,666.
+%%
+%%    Rev 1.59   16 May 2000 09:20:02   dashley1
+%% References to daveashley.com removed for
+%% now.
+%%
+%%    Rev 1.58   02 May 2000 15:55:22   dashley1
+%% Add'l info added.
+%%
+%%    Rev 1.57   02 May 2000 15:54:10   dashley1
+%% Stephany Gervasi's contact info added.
+%%
+%%    Rev 1.56   20 Apr 2000 10:50:52   dashley1
+%% Newsgroup name corrected.
+%%
+%%    Rev 1.55   20 Apr 2000 09:55:40   dashley1
+%% Virgil added to acknowledgments, but must
+%% check newsgroup name.
+%%
+%%    Rev 1.54   20 Apr 2000 09:25:08   dashley1
+%% At home edits and trims.
+%%
+%%    Rev 1.53   18 Apr 2000 15:07:26   dashley1
+%% Minor typo (missing ")") corrected.
+%%
+%%    Rev 1.52   18 Apr 2000 10:42:40   dashley1
+%% Minor typo (an extra "the") corrected.
+%%
+%%    Rev 1.51   17 Apr 2000 16:10:14   dashley1
+%% Minor correction.
+%%
+%%    Rev 1.50   17 Apr 2000 16:03:10   dashley1
+%% Numerous minor corrections made from
+%% proofreading.
+%%
+%%    Rev 1.49   17 Apr 2000 13:39:24   dashley1
+%% Adam Gibson added to acknowledgements.
+%%
+%%    Rev 1.48   17 Apr 2000 10:14:38   dashley1
+%% At home edits, integration of Karl's conclusion.
+%%
+%%    Rev 1.47   13 Apr 2000 10:16:30   dashley1
+%% Link for pubs changed.
+%%
+%%    Rev 1.46   12 Apr 2000 14:04:54   dashley1
+%% Karsten Tinnefeld added to
+%% acknowledgements.
+%%
+%%    Rev 1.45   12 Apr 2000 10:14:36   dashley1
+%% Edits to placement of r_A section,
+%% additional acknowledgements.
+%%
+%%    Rev 1.44   11 Apr 2000 21:06:24   dashley1
+%% Partial evening edits--working on getting
+%% Section V finished.
+%%
+%%    Rev 1.43   11 Apr 2000 10:34:04   dashley1
+%% Addition of VC information.
+%%
+%%    Rev 1.42   11 Apr 2000 10:14:56   dashley1
+%% Minor edits to captions and last example.
+%%
+%%    Rev 1.41   11 Apr 2000 09:52:56   dashley1
+%% At-home edits.
+%%
+%%    Rev 1.40   10 Apr 2000 10:27:34   dashley1
+%% At-home edits.
+%%
+%%    Rev 1.39   07 Apr 2000 10:39:32   dashley1
+%% Home edits.
+%%
+%%    Rev 1.38   06 Apr 2000 10:59:02   dashley1
+%% Edits at home.  Technical changes,
+%% changes in acknowledgements.
+%%
+%%    Rev 1.37   05 Apr 2000 15:28:50   dashley1
+%% Acknowlegements section enhanced and
+%% slightly rearranged, conversation with
+%% Bill Hagen about copyright issues captured
+%% as comments in file so won't forget
+%% resolution of those issues.
+%%
+%%    Rev 1.36   31 Mar 2000 12:00:48   dashley1
+%% Additional acknowledgements and
+%% hyperref notes added.
+%%
+%%    Rev 1.35   28 Mar 2000 18:10:20   dashley1
+%% Integer factorization mistake corrected.
+%%
+%%    Rev 1.34   28 Mar 2000 10:30:38   dashley1
+%% Safety check-in, plus 138 vs. 139 error
+%% discovered by Karl.
+%%
+%%    Rev 1.33   13 Mar 2000 10:59:56   dashley1
+%% Safety check-in.
+%%
+%%    Rev 1.32   09 Mar 2000 10:51:14   dashley1
+%% Getting closer to finishing last section.
+%%
+%%    Rev 1.31   06 Mar 2000 11:51:38   dashley1
+%% Incremental changes.
+%%
+%%    Rev 1.30   01 Mar 2000 11:47:04   dashley1
+%% Safety check-in.
+%%
+%%    Rev 1.29   13 Feb 2000 10:49:38   dashley1
+%% "I" changed to "Z" for set of integers, Dr.
+%% Zhigljavsky's section moved as per his
+%% recommendation, other changes.
+%%
+%%    Rev 1.28   12 Jan 2000 20:51:08   dashley1
+%% Dr. Zhigljavsky's changes integrated.
+%%
+%%    Rev 1.27   10 Jan 2000 17:07:20   dashley1
+%% Minor note added about set notations.
+%%
+%%    Rev 1.26   10 Jan 2000 16:50:56   dashley1
+%% Dr. Z's e-mail included as far as how to
+%% select the right nomenclature for sets of numbers,
+%% and Mircea added to acknowledgements.
+%%
+%%    Rev 1.25   07 Jan 2000 19:17:56   dashley1
+%% Pasted e-mail in from Dr. Zhigljavsky, preparing
+%% to take home.
+%%
+%%    Rev 1.24   03 Jan 2000 12:24:56   dashley1
+%% Typo, plus example 7 corrected.
+%%
+%%    Rev 1.23   02 Jan 2000 15:45:00   dashley1
+%% Edits, reintegration of version from home.
+%%
+%%    Rev 1.22   31 Dec 1999 19:07:58   dashley1
+%% "load" changed to "algorithm".
+%%
+%%    Rev 1.21   31 Dec 1999 16:25:06   dashley1
+%% Corrections, moving archives to PVCS,
+%% Punch Web Groups archives now obsolete.
+%%
+%%    Rev 1.20   31 Dec 1999 15:30:30   dashley1
+%%
+%%
+%%    Rev 1.18   24 Oct 1999 13:01:38   dashley1
+%% David Eppstein added to acknowledgements.
+%%
+%%    Rev 1.17   20 Oct 1999 13:22:18   dashley1
+%% Mark Endicott (who provided us with several
+%% initial suggestions and much insight) added
+%% to acknowledgements.
+%%
+%%    Rev 1.16   19 Oct 1999 11:49:40   cpratt2
+%% Short explanation of "z".  Replaced redundant
+%% paragraphs following (8) and (9) with meaningful
+%% text.
+%%
+%%    Rev 1.15   19 Oct 1999 10:47:18   dashley1
+%% Equation and format changes.
+%%
+%%    Rev 1.14   18 Oct 1999 12:07:58   dashley1
+%% Spelling of Greg Bachelis' name corrected.
+%%
+%%    Rev 1.13   18 Oct 1999 12:04:54   dashley1
+%% Paulette Groen and Paula Smith added to
+%% acknowledgements.
+%%
+%%    Rev 1.12   18 Oct 1999 10:29:02   dashley1
+%% Enhancements in several areas.
+%%
+%%    Rev 1.11   15 Oct 1999 09:21:04   dashley1
+%% Many enhancements including removing all
+%% hard-coded cross-references and adding biography
+%% information.
+%%
+%%    Rev 1.10   14 Oct 1999 15:40:18   dashley1
+%% Bibliography straightened out, other changes.
+%%
+%%    Rev 1.9   14 Oct 1999 12:33:40   dashley1
+%% All equations and tables straightened out,
+%% references and glossary to go.
+%%
+%%    Rev 1.8   14 Oct 1999 11:11:38   dashley1
+%% Many tables and equations corrected.
+%%
+%%    Rev 1.7   13 Oct 1999 19:34:14   dashley1
+%% More equations completed.
+%%
+%%    Rev 1.6   13 Oct 1999 18:44:34   dashley1
+%% Added comments as per outline, some progress
+%% in incorporating missing equations.
+%%
+%%    Rev 1.5   11 Oct 1999 10:13:14   dashley1
+%% Comment delimiter situation straightened out.
+%%
+%%    Rev 1.4   11 Oct 1999 10:10:00   dashley1
+%% Safety check-in after weekend work.
+%%
+%%    Rev 1.3   07 Oct 1999 10:04:48   dashley1
+%%
+%%
+%%    Rev 1.2   06 Oct 1999 18:47:28   dashley1
+%% Evening safety check-in.
+%%
+%%    Rev 1.1   06 Oct 1999 14:48:30   dashley1
+%% Safety check-in, conversion up through equation
+%% 21 or so.
+%%
+%%    Rev 1.0   06 Oct 1999 09:45:48   dashley1
+%% Initial revision.
+%%
+%% End of pq_paper.tex
+

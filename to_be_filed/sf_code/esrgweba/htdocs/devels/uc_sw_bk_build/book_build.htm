@@ -1,0 +1,43 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Procedure To Build The ESRG Microcontroller Software Book &quot;A
+Practitioner's Guide ...&quot; For Release Or Other Purposes</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">Procedure To Build The ESRG Microcontroller
+Software Book &quot;<i>A Practitioner's Guide ...</i>&quot; For Release Or Other Purposes</font></b></p>
+<hr>
+<p>The book build process is somewhat unusual in the following ways:</p>
+<ul>
+  <li>The &quot;main&quot; <a href="../../glossary/glossary.htm#latex" target="_blank">.tex</a>
+    files are generated on-the-fly by a <a href="../../glossary/glossary.htm#tcl_tk" target="_blank">Tcl/Tk</a>
+    script.&nbsp; This approach is used because it allows the single-volume
+    version of the book and the multi-volume version of the book to be built
+    from the same <a href="../../glossary/glossary.htm#latex" target="_blank">LaTeX</a>
+    source code without redundancy of information (much information is stored in
+    the Tcl script itself).</li>
+  <li>The build itself is also orchestrated by the Tcl/Tk script.&nbsp; The
+    script calls the LaTeX compiler as well as other utilities.&nbsp;
+    (Unfortunately, at this time, the script assumes that the version of LaTeX
+    is 4allTex and it won't work without modification with other versions of
+    LaTeX.)</li>
+</ul>
+<p>The main <i>.tex</i> file for the single-volume work is named <i>svf.tex</i>.</p>
+<p>The book build process does present a problem&nbsp;for those using a version
+of LaTeX other than 4allTeX.</p>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/devels/uc_sw_bk_build/book_build.htm,v 1.2 2003/05/01 07:25:32 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

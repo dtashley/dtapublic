@@ -1,0 +1,345 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_baf0/c_baf0.tex,v 1.13 2010/04/16 19:05:26 dashley Exp $
+
+\chapter{Bounded Arithmetic Functions}
+
+\label{cbaf0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  iov0
+\label{cbaf0:siov0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\emph{UCU\_SINT8} Functions}
+%Section tag:  scf0
+\label{cbaf0:sscf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBaS8AbsDiffBoundedRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBaS8AbsDiffBoundedRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbaf0:sscf0:sfss1}
+
+\index{UcuBaS8AbsDiffBoundedRxx()@\emph{UcuBaS8AbsDiffBoundedRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_SINT8 UcuBaS8AbsDiffBoundedRxx(UCU_SINT8 x1, UCU_SINT8 x2)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $|x_1-x_2|$, clipped into $[0, 127]$.
+\item The mapping performed by this function can also be expressed as:
+
+      \begin{equation}
+      \label{eq:cbaf0:sscf0:sfss1:01}
+      f(x_1, x_2) = min(|x_1 - x_2|, 127) .
+      \end{equation}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x1}}, \emph{\textbf{x2}}\\
+      The arguments whose bounded absolute value is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $min(|x_1 - x_2|, 127)$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{S8}:        operates on UCU\_SINT8 operands.
+      \emph{Abs}:       absolute value.
+      \emph{Bounded}:   bounded.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBaS8DiffBoundedRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBaS8DiffBoundedRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbaf0:sscf0:sfss0}
+
+\index{UcuBaS8DiffBoundedRxx()@\emph{UcuBaS8DiffBoundedRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_SINT8 UcuBaS8DiffBoundedRxx(UCU_SINT8 x1, UCU_SINT8 x2)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $x_1-x_2$, clipped into $[-128, 127]$.
+\item The mapping performed by this function can also be expressed as:
+
+      \begin{equation}
+      \label{eq:cbaf0:sscf0:sfss0:01}
+      f(x_1, x_2) = min(max(x_1 - x_2, -128), 127) .
+      \end{equation}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x1}}, \emph{\textbf{x2}}\\
+      The arguments whose bounded difference is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $min(max(x_1 - x_2, -128), 127)$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{S8}:        operates on UCU\_SINT8 operands.
+      \emph{Diff}:      difference.
+      \emph{Bounded}:   bounded.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\emph{UCU\_SINT16} Functions}
+\label{cbaf0:sscf1}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBaS16AbsDiffBoundedRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBaS16AbsDiffBoundedRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbaf0:sscf1:sfss1}
+
+\index{UcuBaS16AbsDiffBoundedRxx()@\emph{UcuBaS16AbsDiffBoundedRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_SINT16 UcuBaS16AbsDiffBoundedRxx(UCU_SINT16 x1, UCU_SINT16 x2)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $|x_1-x_2|$, clipped into $[0, 32767]$.
+\item The mapping performed by this function can also be expressed as:
+
+      \begin{equation}
+      \label{eq:cbaf0:sscf1:sfss1:01}
+      f(x_1, x_2) = min(|x_1 - x_2|, 32767) .
+      \end{equation}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x1}}, \emph{\textbf{x2}}\\
+      The arguments whose bounded absolute value is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $min(|x_1 - x_2|, 32767)$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{S16}:       operates on UCU\_SINT16 operands.
+      \emph{Abs}:       absolute value.
+      \emph{Bounded}:   bounded.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBaS16DiffBoundedRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBaS16DiffBoundedRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbaf0:sscf1:sfss0}
+
+\index{UcuBaS16DiffBoundedRxx()@\emph{UcuBaS16DiffBoundedRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_SINT16 UcuBaS16DiffBoundedRxx(UCU_SINT16 x1, UCU_SINT16 x2)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $x_1-x_2$, clipped into $[-32768, 32767]$.
+\item The mapping performed by this function can also be expressed as:
+
+      \begin{equation}
+      \label{eq:cbaf0:sscf1:sfss0:01}
+      f(x_1, x_2) = min(max(x_1 - x_2, -32768), 32767) .
+      \end{equation}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x1}}, \emph{\textbf{x2}}\\
+      The arguments whose bounded difference is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $min(max(x_1 - x_2, -32768), 32767)$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{S16}:       operates on UCU\_SINT16 operands.
+      \emph{Diff}:      difference.
+      \emph{Bounded}:   bounded.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_baf0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_baf0/c_baf0.tex,v $
+$Revision: 1.13 $
+$Author: dashley $
+$Date: 2010/04/16 19:05:26 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_baf0.tex,v $
+%Revision 1.13  2010/04/16 19:05:26  dashley
+%Unimplemented absolute function removed.
+%
+%Revision 1.12  2010/04/15 17:57:33  dashley
+%Exponent error corrected.
+%
+%Revision 1.11  2010/04/15 17:54:10  dashley
+%Addition of UcuBaS32AbsBoundedRxx() function.
+%
+%Revision 1.10  2010/03/21 05:10:39  dashley
+%Status updated.
+%
+%Revision 1.9  2010/03/18 16:40:45  dashley
+%Edits.
+%
+%Revision 1.8  2010/03/18 14:05:13  dashley
+%Edits.
+%
+%Revision 1.7  2010/03/18 13:15:48  dashley
+%Function implementation status updated.
+%
+%Revision 1.6  2010/03/17 23:54:27  dashley
+%Addition of functions.
+%
+%Revision 1.5  2010/02/18 17:05:57  dashley
+%Edits.
+%
+%Revision 1.4  2010/01/29 01:44:44  dashley
+%Addition of UcuAtU16CmpDiffAbsGtRxx() function.
+%
+%Revision 1.3  2010/01/28 21:56:55  dashley
+%Addition of the UcuBaS8DiffBoundedRxx() function.
+%
+%Revision 1.2  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.1  2007/10/08 18:02:27  dtashley
+%Initial checkin.
+%
+%End of $RCSfile: c_baf0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

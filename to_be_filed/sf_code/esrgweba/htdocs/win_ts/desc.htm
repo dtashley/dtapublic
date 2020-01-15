@@ -1,0 +1,99 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>ESRG Windows® Tool Set Description</title>
+<base target="main">
+</head>
+
+<body background="../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">ESRG Windows® Tool Set Description</font></b></p>
+<hr>
+<p>The ESRG Windows® tool set consists of a single <a href="../glossary/glossary.htm#installshield_express"> InstallShield <i> Express®</i>
+</a>
+installation executable.&nbsp; The installation includes:</p>
+
+<ul>
+  <li><i>EsrgConsole</i> and <i>EsrgScripter</i>, graphical and console-mode
+    (respectively) versions of Tcl/Tk with extensions for embedded software
+    development.</li>
+  <li>Other graphical utilities useful in embedded software development.</li>
+  <li>Other console-mode utilities useful in embedded software development.</li>
+  <li>The ESRG book (a work in progress) entitled &quot;<i>A Practitioner's
+    Guide To The Design And Development Of Small Microcontroller Software</i>&quot;,
+    as a .PDF file.&nbsp; The book contains much useful material, but more
+    importantly documents the tool set.</li>
+  <li>Technical papers and other technical resources to which we were able to
+    obtain the copyright or permission to distribute them.</li>
+  <li>A list of URLs useful in embedded software development.</li>
+</ul>
+<p>These platforms are supported (the tool set may or may not install on other
+Windows® platforms):</p>
+<ul>
+  <li>Windows 98®.</li>
+  <li>Windows 2000®.</li>
+  <li>Windows XP®.</li>
+</ul>
+<p>The Windows® tool set is designed with these goals in mind:</p>
+<ul>
+  <li><b><i>The installation (and uninstallation) should be very conservative and
+    not interfere with any other software</i>.</b>&nbsp; (The installation at
+    present is nothing more than a simple file copy with some links set up on
+    the desktop and in the <i>START</i> menu.&nbsp; It will not interfere with
+    other software and can be [improperly] uninstalled even by deleting the
+    directories involved.)</li>
+  <li><b><i>Different versions of the tool set should be able to coexist</i>.</b>&nbsp;
+    (This requirement comes about because it is common in embedded software
+    developments to &quot;freeze&quot; the set of tools used to build a
+    product.&nbsp; All versions of the tool set can be installed concurrently
+    and will run separately without interfering with each other.)</li>
+  <li><b><i>All executables should be standalone (no .DLL or other dependencies),
+    and it should be possible to move the executables to other locations or
+    other computers</i>.</b>&nbsp; (Embedded software developers
+    often copy utilities from machine to machine or change their location.&nbsp;
+    Additionally, the license allows this with no restrictions.)</li>
+</ul>
+<p>The following screen snapshots illustrate the type of functionality found in
+the Windows® tool set.</p>
+<p>The installation is a normal <i> InstallShield Express</i> installation.</p>
+<p align="center"><img border="0" src="ss01.gif"></p>
+<p align="center"><img border="0" src="ss02.gif"></p>
+<p align="center"><img border="0" src="ss03.gif"></p>
+<p>The installation is essentially only a file copy.&nbsp; It also installs
+shortcuts in the <i>Start</i> menu and on the desktop, as shown below.</p>
+<p align="center"><img border="0" src="ss04.gif"></p>
+<p>The utilities that are installed fall into a few different categories.&nbsp;
+The first category is scripting tools, such as <i>EsrgConsole</i>.&nbsp; <i>EsrgConsole</i>
+has two essential applications:</p>
+<ul>
+  <li>It can be used as a scripting tool for embedded product builds.</li>
+  <li>It can be used as a standalone workbench to perform operations or
+    calculate results useful in embedded system development.</li>
+</ul>
+<p>The use of <i>EsrgConsole</i> as a graphical scripting tool is not
+illustrated on this web page, but the snapshot below shows <i>EsrgConsole</i>
+being used to find the best rational approximation to <font face="Symbol">p</font>&nbsp;
+with numerator and denominator not exceeding 16 bits.</p>
+<p align="center"><img border="0" src="ss05.gif"></p>
+<p>The second category of utility in the Windows® tool set is graphical (GUI) utilities.&nbsp; For example, a graphical CRC-32/MD-5 utility is provided
+(screen snapshot below).</p>
+<p align="center"><img border="0" src="ss06.gif"></p>
+<p>The third category of utility in the Windows® tool set is console-mode (DOS
+box) utilities.&nbsp; These are not illustrated with screen snapshots.&nbsp;
+These are helpful utilities to signature files, calculate large integer and
+number theory results, etc.&nbsp; The console-mode utilities do not have
+shortcuts installed in the <i>Start</i> menu or on the desktop, but they are
+documented in <a href="../bk_prac_guide/desc.htm">the book</a> (which is also
+included as a .PDF file in the ESRG Windows® Tool Set).</p>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/win_ts/desc.htm,v 1.5 2003/04/27 08:11:08 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

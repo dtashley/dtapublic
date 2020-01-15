@@ -1,0 +1,888 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_tbg0/c_tbg0.tex,v 1.12 2010/04/05 15:13:50 dashley Exp $
+
+\chapter{Technical Background}        
+\label{ctbg0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%Section tag:  int0
+\label{ctbg0:sint0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Interrupt Compatibility Issues}
+%Section tag:  ici0
+\label{ctbg0:sici0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linear Software Timers}
+%Section tag:  lst0
+\label{ctbg0:slst0}
+
+Several of the block memory functions described in
+Chapter \ref{cbmf0} are designed primarily to 
+implement what we call here a 
+\index{software timer}\index{linear software timer}\emph{software timer} (although these functions
+may have other uses).
+
+We define a \index{software timer}\index{linear software timer}software timer as an unsigned integer
+of any length convenient to the machine that:
+
+\begin{itemize}
+\item Is decremented or incremented at a constant rate,\footnote{It is also
+      possible to decrement (or increment) software timers at a non-constant rate to
+      approximate equations of the form $x(k+1) = \overline{\alpha} x(k)$, 
+      $\overline{\alpha} < 1$ (or related
+      equations), but we don't discuss schemes of this type here.  The advantage
+      of such a scheme would be to extend the maximum time period of the timer
+      while still keeping good precision at low values of time.  We would call
+      such software timers \index{non-linear software timer}\index{software timer}%
+      \emph{non-linear} software timers to differentiate them
+      from the timers described here.}
+      but not
+      below or above the minimum or maximum value of an unsigned
+      integer.
+\item Is set and tested by one process (the application) but 
+      is decremented or incremented by another process (typically
+      system software).
+\end{itemize}
+
+Typically, linear software timers are grouped together as arrays of 
+unsigned integers that are decremented or incremented at the same rate (hence the
+efficiency of the block manipulation described in Chapter \ref{cbmf0}).
+Most commonly, the rates at which groups of timers may be decremented or
+incremented are provided in binary decades (but 1-2-5 decades are also
+not uncommon).
+
+Linear software timers are the most efficient known way to manipulate time
+in stateful logic where the logic is implemented as code (rather than data).
+The efficiency comes about because:
+
+\begin{itemize}
+\item The timers are decremented and incremented centrally using
+      block memory operations (saves FLASH bulk
+      and CPU cycles).
+\item The arrangement of timers in binary decades or 1-2-5 decades
+      allows the usage of smaller data types (at the expense of precision)
+      than would be possible if time were manipulated only in terms of one
+      base quantum.
+\item The test for an expired timer ($t=0$) often compiles well because
+      tests against zero are less expensive than tests against other constants
+      in CPU instruction sets.
+\end{itemize}
+
+In most of the discussion which follows, we confine the discussion to
+the case of software timers that are decremented, but not below zero.
+(Software timers that are incremented are less common and have different
+applications.)
+
+The arrangement of software timers in most applications is in terms of
+a base quantum, which we denote $\sigma$\@.  $\sigma$=1 millisecond is
+a common choice.
+
+In a binary decade arrangement, the quantum used to decrement the
+different arrays is $\sigma 2^q$, where $q$ is the ``tier'' of the array of
+software timers.  If $\sigma$=1 millisecond, ``Tier 0'' software timers
+are decremented every millisecond, ``Tier 1'' software timers are decremented
+every two milliseconds, ``Tier 2'' software timers are decremented
+every four milliseconds, and so on.
+
+Note that if a software timer (at tier $q$) is set to a value $n$
+and then tested periodically to determine if it has reached zero, the
+actual amount of time $t$ that may have elapsed is given by\footnote{In
+order to obtain (\ref{eq:ctbg0:slst0:01}), we make the assumption that
+the process that tests the software timer runs at least as often as the
+software timer is decremented.  There are scheduling scenarios that add
+yet more to the error, and these are not developed here.}
+
+\begin{equation}
+\label{eq:ctbg0:slst0:01}
+(n - 1) \sigma 2^q 
+<
+t
+\leq
+n \sigma 2^q .
+\end{equation}
+
+\noindent{}(\ref{eq:ctbg0:slst0:01}) comes about because it is possible
+that the timer was set to $n$ just before it was decremented.
+
+We propose to choose
+
+\begin{equation}
+\label{eq:ctbg0:slst0:02}
+n = \left\lfloor {\frac{\alpha}{\sigma 2^q}} \right\rfloor .
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\rule{\textwidth}{2pt}
+
+TODO:
+
+\begin{enumerate}
+\item Break into subsections.
+\item Develop scheduling assumptions that lead to (\ref{eq:ctbg0:slst0:01}) and friends.
+\item Show relationship with timed automata.
+\item Show state-space and complexity reduction advantages.
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Square Root Extraction (Integer)}
+%Section tag:  sre0
+\label{ctbg0:ssre0}
+
+This section presents information about the extraction of
+square roots over an integer domain and integer range.  Usually, the function
+of interest is
+
+\begin{equation}
+\label{eq:ctbg0:ssre0:01}
+f(x) = \left\lfloor \sqrt{x} \right\rfloor .
+\end{equation}
+
+Other functions of interest can generally be implemented in terms
+of (\ref{eq:ctbg0:ssre0:01}).
+
+If a square root with information after the radix point is desired, the argument $x$ can be premultiplied
+by the square of the reciprocal of the precision after the radix point.  For example,
+a good approximation to $10 \sqrt{x}$ is
+
+\begin{equation}
+\label{eq:ctbg0:ssre0:02}
+10 \sqrt{x} \approx g(x) = \left\lfloor 10 \sqrt{x} \right\rfloor
+                         = \left\lfloor \sqrt{100 x} \right\rfloor ,
+\end{equation}
+
+\noindent{}which can be implemented in terms of (\ref{eq:ctbg0:ssre0:01})\@.
+(\ref{eq:ctbg0:ssre0:02}) provides a result that is human-friendly (i.e. 453 is
+interpreted as 45.3), but the radix point of the result is not positioned between
+any two bits.  A more typical approach might be to premultiply by an even
+power of two so as to place the radix point of the result between two bits.
+For example,
+
+\begin{equation}
+\label{eq:ctbg0:ssre0:02b}
+2^8 \sqrt{x}       \approx \left\lfloor 2^8 \sqrt{x} \right\rfloor
+                         = \left\lfloor \sqrt{2^{16} x} \right\rfloor 
+\end{equation}
+
+\noindent{}will calculate the square root of an integer
+with eight bits after the radix point.
+
+Similarly, if rounding to the nearest integer is desired, note that\footnote{To
+prove (\ref{eq:ctbg0:ssre0:03}), consider four cases.  \emph{Case 1:} If the fractional part of
+$\sqrt{x}$ is 0, then $\lfloor \sqrt{4x} \rfloor = \lfloor 2 \sqrt{x} \rfloor$
+will be an integer, the result will be exact, and (\ref{eq:ctbg0:ssre0:03}) holds.
+\emph{Case 2:} If the fractional part of
+$\sqrt{x}$ is less than 0.5, then $\lfloor \sqrt{4x} \rfloor = \lfloor 2 \sqrt{x} \rfloor$
+will be an even integer, the square root will be rounded down, and (\ref{eq:ctbg0:ssre0:03}) holds.
+\emph{Case 3:} If the fractional part of
+$\sqrt{x}$ is equal to 0.5, then $\lfloor \sqrt{4x} \rfloor = \lfloor 2 \sqrt{x} \rfloor$
+will be an odd integer, the square root will be rounded up, and (\ref{eq:ctbg0:ssre0:03}) holds.
+\emph{Case 4:} If the fractional part of
+$\sqrt{x}$ is greater than 0.5, then $\lfloor \sqrt{4x} \rfloor = \lfloor 2 \sqrt{x} \rfloor$
+will be an odd integer, the square root will be rounded up, and (\ref{eq:ctbg0:ssre0:03}) holds.}
+
+\begin{equation}
+\label{eq:ctbg0:ssre0:03}
+h(x) = \left\lfloor \sqrt{x} + 0.5 \right\rfloor
+     = \left\lfloor \frac{\left\lfloor \sqrt{4 x} \right\rfloor + 1}{2} \right\rfloor ,
+\end{equation}
+
+\noindent{}which can also be easily implemented in terms of (\ref{eq:ctbg0:ssre0:01}).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Summation of Odd Integers}
+\label{ctbg0:ssre0:ssoi0}
+
+Consider the square of a non-negative integer $n$, $n^2$.  The distance from
+$n^2$ to the square of the next larger integer is
+
+\begin{equation}
+\label{eq:ctbg0:ssre0:ssoi0:01}
+(n+1)^2 - n^2 = 2n + 1 .
+\end{equation}
+
+$2n+1, n \in \mathbb{Z}^+$ is the set of odd non-negative integers.
+It follows directly that the set of squared integers can be formed by
+successively adding odd integers, i.e.
+
+\begin{eqnarray}
+\nonumber 1^2 =   1   & = & 1 \\
+          2^2 =   4   & = & 1 + 3 \\
+\nonumber 3^2 =   9   & = & 1 + 3 + 5 \\
+\nonumber 4^2 =  16   & = & 1 + 3 + 5 + 7 \\
+\nonumber             & \ldots{} &
+\end{eqnarray}
+
+One possible integer square root algorithm would involve summing consecutive
+odd integers until the argument is exceeded.
+This algorithm is not developed further because it would be impractical to
+calculate the square root of any integers except small integers using this
+method.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bit-By-Bit Bisection}
+\label{ctbg0:ssre0:sbis0}
+
+Square roots of an integer can be found using bit-by-bit bisection.
+In this method, starting with the most significant bit of the result, each bit
+is assumed `1' and a trial square is calculated.  If the trial square is no
+larger than the argument, that bit of the result is `1'.  However, if the trial
+square is larger than the argument, that bit of the result is `0'.
+
+\begin{tiny}
+\begin{verbatim}
+Essentially, it is bit-by-bit trial squaring.  "Bisection" because 
+each bit of the square root cuts the interval (in which the square root
+might lie) in half.
+ 
+Two of the posters in comp.arch.embedded indicated that "bisection" can be
+economized further by using the identity:
+ 
+(n + 2^k)^2 = n^2 + n*2^(k+1) + 2^(2*k)
+ 
+The "n^2" term is significant because it means that if you have the
+previous trial square and you are considering setting bit "k", you can
+compute the next trial square from the previous square using only shifting
+and adding.
+ 
+If you carry this to the extreme, because you initially assume no bits
+are set, you start with n = n**2 = 0, and the first trial square does
+not involve multiplication.  So you can implement the entire square
+algorithm without multiplying, even once.
+ 
+Anyway, applying all possible optimizations, one gets this:
+ 
+http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/
+cosmic/modx0/atu24sqrtfrxn/devel/alg_eval01.c?revision=1.7&view=markup
+ 
+or this in the 32-bit case:
+ 
+unsigned int sqrt32(unsigned long arg)
+   {
+   unsigned long two_2k_mask;
+   unsigned long trial_square;
+   unsigned long trial_square_prev;
+   unsigned long square_root_ls_ip1;
+
+   two_2k_mask = 0x40000000UL;
+    trial_square      = 0;
+   trial_square_prev = 0;
+   square_root_ls_ip1 = 0;
+
+   while(1)
+      {
+      trial_square =    (trial_square_prev) 
+              + (square_root_ls_ip1)
+              + (two_2k_mask);
+
+      square_root_ls_ip1 >>= 1; 
+
+      if (arg >= trial_square)
+        {
+        square_root_ls_ip1 |= two_2k_mask;
+        trial_square_prev  =  trial_square; 
+         }
+
+      if (two_2k_mask == 1)
+         break;
+
+      two_2k_mask  >>= 2;
+      }
+   
+   return(square_root_ls_ip1);
+   }
+
+If you look at the loop, there really isn't much there.  There will be
+16 iterations.  The test against "1" to exit the loop can be implemented
+as a single byte test (because a single "1" is being right-shifted, "1"
+as the value of the least significant byte means that the other three
+bytes are zero).
+ 
+Temporary storage requirements are about 4 times the size of the input
+argument.  So, for a 32-bit argument, that would be 16 bytes.
+\end{verbatim}
+\end{tiny}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The Babylonian Method}
+\label{ctbg0:ssre0:sbab0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Unprocessed Newsgroup Posts}
+\label{ctbg0:ssre0:sunp0}
+
+Have to process these newsgroup posts:
+
+\begin{tiny}
+\begin{verbatim}
+I have the need in a microcontroller application to calculate floor(sqrt(x)) 
+where x is approximately in the range of 2^32 - 2^64.
+
+What are the algorithms I should look at?
+
+These small microcontrollers are characterized by having a 8-bit times 8-bit 
+to give 16-bit result integer unsigned multiply instruction, and a similar 
+16/8 division instruction to give a quotient and a remainder. 
+Mulitplications of larger integers have to be done by multiplying the bytes 
+and adding.
+
+I'm aware of these algorithms:
+
+a)Adding consecutive odd integers and counting how many you have to add, 
+i.e. 1 + 3 = 4, 4 + 5 = 9, 9 + 7 = 16, 16 + 9 = 25, etc.
+
+b)Trial squaring, testing setting each bit to "1", i.e.
+
+http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic/modxx/atu8sqrtfrxx/src/atu8sqrtfrxx.c?revision=1.3&view=markup
+
+c)Another method that seems to work (don't know the name of it), here is 
+source code:
+
+http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic/modxx/atu16sqrtx10frxx/src/atu16sqrtx10frxx.c?revision=1.3&view=markup
+
+What other options should I investigate?
+
+================================================================================
+Here is some C code for integer square roots using many different 
+algorithms:
+http://cap.connx.com/chess-engines/new-approach/jsqrt0.ZIP
+
+Worth a look:
+http://www.azillionmonkeys.com/qed/sqroot.html
+
+Consider also:
+http://www.google.com/#hl=en&source=hp&q=fast+integer+square+root&rlz=
+1W1GGLD_en&aq=0&aqi=g2&oq=fast+integer+sq&fp=a048890d3c90c6fc
+================================================================================
+> I have the need in a microcontroller application to calculate 
+> floor(sqrt(x)) where x is approximately in the range of 2^32 - 2^64.
+
+x = y^2 - (2^16)^2
+
+> What are the algorithms I should look at?
+
+Google is your friend  :>  There are many sqrt algorithms with
+different tradeoffs (speed/size).
+
+I would, instead, ask that you might want to examine what *else*
+you know about "x".  I.e., you've already constrained the range
+(why?  does that give you any other information that can be
+exploited?); are there any other characteristics about how
+"x" is synthesized that you can exploit to divide and conquer?
+
+E.g. if x = y * z, then knowing sqrt(y) and/or sqrt(z) simplifies
+your problem.
+
+> These small microcontrollers are characterized by having a 8-bit times 
+> 8-bit to give 16-bit result integer unsigned multiply instruction, and a 
+> similar 16/8 division instruction to give a quotient and a remainder. 
+> Mulitplications of larger integers have to be done by multiplying the 
+> bytes and adding.
+> 
+> I'm aware of these algorithms:
+> 
+> a)Adding consecutive odd integers and counting how many you have to add, 
+> i.e. 1 + 3 = 4, 4 + 5 = 9, 9 + 7 = 16, 16 + 9 = 25, etc.
+> 
+> b)Trial squaring, testing setting each bit to "1", i.e.
+> 
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic/modxx/atu8sqrtfrxx/src/atu8sqrtfrxx.c?revision=1.3&view=markup 
+> 
+> c)Another method that seems to work (don't know the name of it), here is 
+> source code:
+> 
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic/modxx/atu16sqrtx10frxx/src/atu16sqrtx10frxx.c?revision=1.3&view=markup 
+> 
+> What other options should I investigate?
+================================================================================
+> Hi,
+>
+> I have the need in a microcontroller application to calculate floor(sqrt(x))
+> where x is approximately in the range of 2^32 - 2^64.
+>
+> What are the algorithms I should look at?
+>
+> These small microcontrollers are characterized by having a 8-bit times 8-bit
+> to give 16-bit result integer unsigned multiply instruction, and a similar
+> 16/8 division instruction to give a quotient and a remainder.
+> Mulitplications of larger integers have to be done by multiplying the bytes
+> and adding.
+>
+> I'm aware of these algorithms:
+>
+> a)Adding consecutive odd integers and counting how many you have to add,
+> i.e. 1 + 3 = 4, 4 + 5 = 9, 9 + 7 = 16, 16 + 9 = 25, etc.
+>
+> b)Trial squaring, testing setting each bit to "1", i.e.
+>
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic...
+>
+> c)Another method that seems to work (don't know the name of it), here is
+> source code:
+>
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic...
+>
+> What other options should I investigate?
+>
+> Thanks, Datesfat
+
+The one I have been using last 15-20 years is probably your B, at
+least sounds
+like what I made up back then - successive approximation for each bit
+of the result.
+If multiplication is fast on the core you will be using it it is hard
+to beat.
+
+Dimiter
+================================================================================
+> Hi,
+>
+> I have the need in a microcontroller application to calculate 
+> floor(sqrt(x))
+> where x is approximately in the range of 2^32 - 2^64.
+>
+> What are the algorithms I should look at?
+>
+> These small microcontrollers are characterized by having a 8-bit times 
+> 8-bit
+> to give 16-bit result integer unsigned multiply instruction, and a similar
+> 16/8 division instruction to give a quotient and a remainder.
+> Mulitplications of larger integers have to be done by multiplying the 
+> bytes
+> and adding.
+>
+> I'm aware of these algorithms:
+>
+> a)Adding consecutive odd integers and counting how many you have to add,
+> i.e. 1 + 3 = 4, 4 + 5 = 9, 9 + 7 = 16, 16 + 9 = 25, etc.
+>
+> b)Trial squaring, testing setting each bit to "1", i.e.
+>
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic...
+>
+> c)Another method that seems to work (don't know the name of it), here is
+> source code:
+>
+> http://www.uculib.com/vvcuculib01/viewvc.cgi/uculib01/src/stm8/cosmic...
+>
+> What other options should I investigate?
+>
+> Thanks, Datesfat
+>
+>The one I have been using last 15-20 years is probably your B, at
+>least sounds
+>like what I made up back then - successive approximation for each bit
+>of the result.
+>If multiplication is fast on the core you will be using it it is hard
+>to beat.
+
+Thanks for the insight.
+
+For small operands, I agree with your analysis.
+
+However, for larger operands, the Babylonian method:
+
+http://en.wikipedia.org/wiki/Methods_of_computing_square_roots#Babylonian_method
+
+looks very promising.
+
+The issue is that for the cost of one division (the /2 and addition is 
+virtually free) you get far more than one bit of additional information 
+about the square root.
+
+For larger operands, I don't believe that (b) will be the right answer any 
+longer.
+
+But I'm not sure yet ...
+================================================================================
+> a)Adding consecutive odd integers and counting how many you have to add, 
+> i.e. 1 + 3 = 4, 4 + 5 = 9, 9 + 7 = 16, 16 + 9 = 25, etc.
+
+That quite certainly can't work for the input range you're targeting. 
+You would be looking at up to four billion iterations if x was 2^64
+
+> b)Trial squaring, testing setting each bit to "1", i.e.
+
+A whole lot better already.  It becomes even better if you update the 
+square of your current result differentially, applying the binomial 
+formula.  As you update the result-to-be ('res' in the following), by 
+adding a 1-bit at position 'k':
+
+  x --> x + 2^k
+
+it's square, which eventually should be equal to the input number, 
+updates too:
+
+x^2 --> x^2 + 2*(2^k)*x + (2^k)^2
+               = x^2 + x<<(k+1) + 1<<(2*k)
+
+That's two additions and a bit of shifting.  Even an 8-bit CPU should be 
+able to manage that in reasonable time.  Basically you go looking for a 
+bit position 'k' such that the current difference between x^2 and the 
+target value is still larger than or equal to (x<<(k+1)+1<<(2*k)).
+
+This is actually a special case of an algorithm people used to be taught 
+in higher schools.  Just like we all (hopefully) learned to do long 
+multiplication and long division in elementary school, there used to be 
+an algorithm for long square-roots.  I've seen it in a textbook used to 
+teach metal workers' apprentices from the 1940s.  It's a little daunting 
+in decimal numbers on paper, but boils down to the above when performed 
+in binary: you figure out one digit per iteration by looking at the 
+difference between the target figure and square of the result-to-be. 
+It's also somewhat similar to long division in that way.
+
+> What other options should I investigate?
+
+One traditional trick for sqrt(), and some other inverse functions, too, 
+  is to treat it as a root-finding problem for the function
+
+f(x) := x^2 - y
+
+The x that solves f(x)=0 is sqrt(y).  You can solve that using the 
+Newton-Raphson iteration algorithm, a.k.a. the tangent method:
+
+x' = x - f(x)/f'(x)
+   = x - (x^2 - y) / (2 * x)
+   = x - x/2 - y/(2*x)
+   = x/2 - (y/2)/x
+
+This requires long division, but pays off by converging on the solution 
+real fast, once you've come anywhere near it.
+
+This algorithm and the bit-by-bit one above are somewhat related.  The 
+search for the right bit position, 'k', is effectively a simplified 
+version of the division (y/2)/x.
+================================================================================
+> I have the need in a microcontroller application to calculate floor(sqrt(x)) 
+> where x is approximately in the range of 2^32 - 2^64.
+> 
+> What are the algorithms I should look at?
+
+Newton-Raphson or bisection, depending upon how slow division is. N-R is
+asymptotically faster (the number of correct digits doubles at each step),
+but each step requires a division.
+
+Bisection is essentially your option b), but it can be computed much more
+efficiently than the algorithm given. You don't need arbitrary multiplies,
+only shifts, as:
+
+(a+2^k)^2 = a^2 + 2.a.2^k + (2^k)^2
+          = a^2 + a.2^(k+1) + 2^2k
+
+IOW:
+
+uint32_t isqrt(uint64_t x)
+{
+    uint64_t a = 0;
+    uint64_t a2 = 0;
+    int k;
+
+    for (k = 31; k >= 0; k--) {
+
+uint64_t t = a2 + (a << (k+1)) + ((uint64_t)1 << (k + k));
+if (x > t) {
+    a += 1 << k;
+    a2 = t;
+}
+    }
+
+    return a;
+}
+
+Depending upon the CPU, it may be faster to calculate the a.2^(k+1) and
+2^2k terms incrementally.
+================================================================================
+Wiki
+
+http://en.wikipedia.org/wiki/Methods_of_computing_square_roots\\end{verbatim}
+================================================================================
+Noticed your post on sci.math. I am surprised no one mentioned this one
+from Joe Leherbauer that only uses shifts and adds. I cannot find the
+original usenet message but a copy is here:
+
+http://groups.google.com/group/comp.lang.c/browse\_thread/thread/14ed11f99b6ac8ab/d4297a8de3ead321?hl=en\&ie=UTF-8\&q=\%22joe+Leherbauer\%22
+
+I clipped the message:
+
+<----------------------clipped from message---------------------------->
+The function below is probably the fastest you can get with integer
+operations only.  It executes in constant time of 16 loop iterations
+assuming a long is 32 bits, i.e. it's O(log(n)).
+As a by-product it also produces the square root remainder.
+More formally, it computes s and r, such that:
+
+s = floor(sqrt(n))
+r = n - s * s
+
+I have to admit that I did not invent this.
+It is from an anonymous Usenet source.
+
+unsigned long
+i\_sqrt (unsigned long n, unsigned long * rem)
+{
+ unsigned long r, s, t;
+
+ r = 0;
+ t = (~0UL >> 2) + 1;   /* largest power of 4 supported by data type */
+ do
+   {
+     s = r + t;
+     if ( n >= s )
+       {
+         n -= s;
+         r = s + t;
+       }
+     r >>= 1;
+   }
+ while ( (t >>= 2) != 0 );
+ *rem = n;
+
+ return r;
+
+}
+
+---
+Joe Leherbauer             Leherbauer at telering dot at
+                          Registered Linux User \# 215803
+================================================================================
+\end{tiny}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section[\emph{UcuAtS32S16v2CpDiva2FRxx(\protect\mbox{\protect$\cdot$})} Function Calculation Method]
+        {\emph{UcuAtS32S16v2CpDiva2FRxx(\protect\mbox{\protect\boldmath $\cdot$})} Function Calculation Method}
+\label{ctbg0:svec2}
+
+\index{UcuAtS32S16v2CpDiva2FRxx()@\emph{UcuAtS32S16v2CpDiva2FRxx($\cdot$)}}%
+The nominal calculation performed by the
+\emph{UcuAtS32S16v2CpDiva2FRxx($\cdot$)} function is
+
+\begin{equation}
+\label{eq:ctbg0:svec2:01}
+g(a_x, a_y, b_x, b_y)
+=
+\left\lfloor \frac{\vec{a} \times \vec{b}}{| \vec{b} | \hat{k}} \right\rfloor
+=
+\left\lfloor \frac{a_x b_y - a_y b_x}{\sqrt{b_x^2 + b_y^2}} \right\rfloor ,
+\end{equation}
+
+\noindent{}where the floor function of a negative argument rounds towards zero.
+
+Clearly, (\ref{eq:ctbg0:svec2:01}) isn't a convenient method of calcuation for an
+inexpensive microcontroller, as the result
+of the square root calculation might need to include a fractional part.
+
+(\ref{eq:ctbg0:svec2:01}) can be modified by squaring then taking the square root,
+making adjustments for the loss of sign information caused by squaring:
+
+\begin{equation}
+\label{eq:ctbg0:svec2:02}
+\left\lfloor \frac{a_x b_y - a_y b_x}{\sqrt{b_x^2 + b_y^2}} \right\rfloor
+=
+\left\lfloor \sqrt{\frac{(a_x b_y - a_y b_x)^2}{b_x^2 + b_y^2}} \right\rfloor sgn (a_x b_y - a_y b_x).
+\end{equation}
+
+Note in (\ref{eq:ctbg0:svec2:02})
+the the remainder of the division can be discarded, i.e.
+
+\begin{equation}
+\label{eq:ctbg0:svec2:03}
+\left\lfloor \sqrt{\frac{(a_x b_y - a_y b_x)^2}{b_x^2 + b_y^2}} \right\rfloor
+=
+\left\lfloor \sqrt{\left\lfloor\frac{(a_x b_y - a_y b_x)^2}{b_x^2 + b_y^2}\right\rfloor} \right\rfloor .
+\end{equation}
+
+\noindent{}(\ref{eq:ctbg0:svec2:03}) is valid because only the square root of an integer can be 
+an integer, so flooring the input to a square root calculation whose output is floored
+will not have an effect.
+
+The size of the integer to be squared in (\ref{eq:ctbg0:svec2:03}) must be established.
+$a_x b_y - a_y b_x$ may have a magnitude as large as $2^{31}-2^{15}$, so 31 bits are required (for an unsigned representation).
+In practice, 32 bits (4 bytes) will be used for storage.
+
+The term $(a_x b_y - a_y b_x)^2$ may be as large as $(2^{31}-2^{15})^2 = 2^{62}-2^{47}+2^{30}$, so 62 bits are required.
+In practice, 64 bits (8 bytes) will be used for storage.
+
+The most difficult question to answer is the upper bound on the result of the
+division.  One would suspect from the form of (\ref{eq:ctbg0:svec2:03})
+that there is an upper bound less than $2^{62}-2^{47}+2^{30}$, as the
+numerator and denominator both increase with increasing $b_x$ or $b_y$.
+If an upper bound smaller than $2^{62}-2^{47}+2^{30}$ exists, it would make
+both the division and the square root extraction more efficient.
+
+An upper bound on the result of the division in (\ref{eq:ctbg0:svec2:03})
+need not be overly tight.  The upper bound is only to assist in devising
+efficient calculation.
+
+The maximum magnitude of $a_x b_y - a_y b_x$ can only occur when a negative
+number is subtracted from a positive, or a positive number is subtracted from
+a negative.  The most positive number that can be formed as the product
+of two UCU\_SINT16's is $2^{15}2^{15} = 2^{30}$.  The most negative number that can be formed
+is $-2^{15}(2^{15}-1) = -2^{30}+2^{15}$.  The maximum magnitude of
+$a_x b_y - a_y b_x$ is thus $2^{30} - (-2^{30}+2^{15}) = 2^{31} - 2^{15}$.
+
+To simplify the algebra (in exchange for a looser bound),
+one can assume that both positive and negative
+UCU\_SINT16's may reach a magnitude of $2^{15}$.  Assuming
+that $a_x = a_y = 2^{15}$, the maximum value of
+(\ref{eq:ctbg0:svec2:03}) is
+
+\begin{eqnarray}
+\nonumber
+& 
+  \displaystyle{
+  \sqrt{\frac{(2^{15} b_x + 2^{15} b_y)^2}{b_x^2 + b_y^2}}
+  =
+  \sqrt{\frac{2^{30}(b_x^2 + 2 b_x b_y + b_y^2)}{b_x^2 + b_y^2}}
+  }
+& \\
+\label{eq:ctbg0:svec2:04}
+& 
+  \displaystyle{
+  = \sqrt{2^{30} \frac{b_x^2 + b_y^2}{b_x^2 + b_y^2} + 2^{31} \frac{b_x b_y}{b_x^2 + b_y^2}}
+  }
+& \\
+\nonumber
+& 
+  \displaystyle{
+  = \sqrt{2^{30} + 2^{31} \frac{b_x b_y}{b_x^2 + b_y^2}}
+  }
+&
+\end{eqnarray}
+
+(\ref{eq:ctbg0:svec2:04}) implies that the maximum value of (\ref{eq:ctbg0:svec2:03})
+depends on the maximum of the function
+
+\begin{equation}
+\label{eq:ctbg0:svec2:05}
+f(b_x, b_y) = \frac{b_x b_y}{b_x^2 + b_y^2} , \;\; b_x, b_y \in \mathbb{Z}^+ .
+\end{equation}
+
+Several helpful posters\footnote{Thanks to Ray Vickson, Gerry Myerson, Rob Johnson, and ``Scattered''.} 
+on \texttt{sci.math} provided proofs that
+(\ref{eq:ctbg0:svec2:05}) could not exceed 1/2.  The proof that I found easiest to understand 
+was provided by Gerry Myerson.  Consider the function
+
+\begin{equation}
+\label{eq:ctbg0:svec2:06}
+h(b_x, b_y)
+= 
+\frac{1}{2} - f(b_x, b_y)
+= 
+\frac{1}{2} \left( \frac{b_x^2 - 2 b_x b_y + b_y^2}{b_x^2 + b_y^2} \right)
+= 
+\frac{1}{2} \left( \frac{(b_x - b_y)^2}{b_x^2 + b_y^2} \right).
+\end{equation}
+
+$h(b_x, b_y)$ is non-negative over the domain of interest, proving that $f(b_x, b_y)$ cannot exceed $1/2$.
+
+Substituting the maximum value of 1/2 into (\ref{eq:ctbg0:svec2:04})
+leads to
+
+\begin{equation}
+\label{eq:ctbg0:svec2:07}
+\frac{(a_x b_y - a_y b_x)^2}{b_x^2 + b_y^2} 
+\leq 
+2^{30} + 2^{31} \left( \frac{1}{2} \right)
+=
+2^{30} + 2^{30}
+=
+2^{31} .
+\end{equation}
+
+\noindent{}(\ref{eq:ctbg0:svec2:07})
+establishes that the result of the division may not exceed 32 bits.  This is
+an important result, as the dividend of the division is 64 bits, requiring
+64 rounds in the general case to obtain a quotient.  Knowledge that the
+quotient may not exceed 32 bits will approximately halve the division time, as
+only 32 iterations rather than 64 need to be performed.
+
+The square root extraction will involve a 32-bit input (the quotient from the
+division) and a 16-bit result.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_tbg0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_tbg0/c_tbg0.tex,v $
+$Revision: 1.12 $
+$Author: dashley $
+$Date: 2010/04/05 15:13:50 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_tbg0.tex,v $
+%Revision 1.12  2010/04/05 15:13:50  dashley
+%Edits.
+%
+%Revision 1.11  2010/04/05 12:17:12  dashley
+%Edits.
+%
+%Revision 1.10  2010/04/01 21:07:34  dashley
+%Edits.
+%
+%Revision 1.9  2010/04/01 20:21:50  dashley
+%Edits.
+%
+%Revision 1.8  2010/03/03 16:30:35  dashley
+%Edits.
+%
+%Revision 1.7  2010/03/03 00:19:21  dashley
+%Edits.
+%
+%Revision 1.6  2010/02/05 03:04:01  dashley
+%Additional square root information added.
+%
+%Revision 1.5  2010/02/05 02:58:12  dashley
+%Newsgroup post text added.
+%
+%Revision 1.4  2010/01/28 21:18:33  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.3  2007/10/08 18:16:34  dtashley
+%Edits.
+%
+%Revision 1.2  2007/10/07 18:11:22  dtashley
+%Edits.
+%
+%Revision 1.1  2007/10/07 01:22:01  dtashley
+%Initial checkin.
+%
+%End of $RCSfile: c_tbg0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

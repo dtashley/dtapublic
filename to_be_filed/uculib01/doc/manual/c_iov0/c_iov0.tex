@@ -1,0 +1,539 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_iov0/c_iov0.tex,v 1.29 2010/06/11 15:42:50 dashley Exp $
+
+\chapter{Introduction and Overview}
+
+\label{ciov0}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{License}
+\label{ciov0:slic0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \emph{\productbasenameshort{}}}
+%Section tag:  pov0
+\label{ciov0:spov0}
+
+The \emph{\productbasenamelong{} Version \productversion{}}
+(or more compactly, 
+\emph{\productbasenameshort{}-\productversion{}})
+is an
+open-source utility library for inexpensive 8-bit, 16-bit, and 32-bit 
+microcontrollers and microprocessors.
+
+The functions provided in \emph{\productbasenameshort{}} fall into these categories
+(with some classification ambiguity and overlap).
+
+\begin{itemize}
+\item Arithmetic.
+\item Bounded arithmetic.
+\item Fixed-point arithmetic.
+\item Large-operand and extended-precision arithmetic.
+\item Block memory operations.
+\item Bit-mapped set functions.
+\item Searching.
+\item Sorting.
+\item Array manipulation.
+\item Linear filters.
+\item Non-linear filters.
+\item Vertical counters.
+\item Control system components.
+\item CRC, checksums, and non-cryptographic hashes.
+\item Cryptographic hashes.
+\item Ciphers.
+\item Miscellaneous functions.
+\item Utility functions.
+\item Speed-enhanced development tool replacement functions.
+\end{itemize}
+
+\emph{\productbasenameshort{}-\productversion{}}
+is packaged as two libraries, each with
+a different purpose:
+
+\begin{itemize}
+\item The \index{general library}``general library'' contains functions not normally provided
+      with development tools.  The general library is described by
+      every chapter in this document except Chapter \ref{csef0}.
+\item The \index{replacement library}``replacement library'' (not yet implemented
+      for any platform) contains
+      speed-enhanced replacements
+      for functions packaged with development tools, in those cases
+      where some optimization could be performed or where an alternate
+      and faster algorithm is known.  The replacement library is covered by 
+      Chapter \ref{csef0}.  Functions in the replacement library
+      generally are designed to boost speed at the expense of program
+      memory and/or RAM\@.  Use of the replacement library is optional.  
+      The replacement library may not exist for all platforms.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Supported CPU Cores and CPU Core Variants}
+%Section tag:  lcv0
+\label{ciov0:sscv0}
+
+The CPU core and the development tool chain are closely tied together in terms
+of the usability of a library.  A library compiled for a different CPU core
+usually won't function, but a library compiled using a different set of
+development tools may also not function (due to differences in object file formats,
+differences in calling conventions, etc.).  For this reason,
+the CPU core and development tool chain are bundled together (see Table \ref{tbl:ciov0:sscv0:01})
+and sometimes referred to only as
+``CPU core''.
+
+\begin{table}
+\caption{Supported CPU Cores and Development Tool Chains}
+\label{tbl:ciov0:sscv0:01}
+\begin{center}
+\begin{tabular}{|c|l|l|l|}
+\hline
+Integer & CPU Core          & Development            & Remarks                               \\
+Code    &                   & Tool Chain             &                                       \\
+\hline
+\hline
+   1    & ST STM8           & Cosmic                 & ST Microelectronics STM8 with         \\
+        &                   &                        & Cosmic Software development tools.    \\
+\hline
+   2    & Freescale CPU08   & Cosmic                 & Freescale CPU08 with                  \\
+        &                   &                        & Cosmic Software development tools.    \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:ciov0:sscv0:01} lists the CPU cores and development
+tool chain combinations supported by
+\emph{\productbasenameshort{}-\productversion{}}\@.  The
+integer codes listed in Table \ref{tbl:ciov0:sscv0:01}
+is the code returned by the
+\index{UcuMfLibVerCpuRxx()@\emph{UcuMfLibVerCpuRxx($\cdot$)}}\emph{UcuMfLibVerCpuRxx($\cdot$)}
+function (\S{}\ref{cmsc0:slvc0}, p. \pageref{cmsc0:slvc0}).
+
+\begin{table}
+\caption{CPU Core Variants for ST STM8 / Cosmic}
+\label{tbl:ciov0:sscv0:02}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+Variant           & Description                                                              \\
+Integer           &                                                                          \\
+Code              &                                                                          \\
+\hline
+\hline
+1                 & Base variant.                                                            \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Within the STM8/Cosmic CPU core / development tool combination, 
+Table \ref{tbl:ciov0:sscv0:02} provides the CPU core variant codes.
+(\emph{Note:}
+at the present time, only functions for the STM8 using the Cosmic tool chain
+are implemented.)
+
+\begin{table}
+\caption{CPU Core Variants for Freescale CPU08 / Cosmic}
+\label{tbl:ciov0:sscv0:03}
+\begin{center}
+\begin{tabular}{|c|l|}
+\hline
+Variant           & Description                                                              \\
+Integer           &                                                                          \\
+Code              &                                                                          \\
+\hline
+\hline
+1                 & Base variant.                                                            \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Within the CPU08 / Cosmic CPU core / development tool combination, 
+Table \ref{tbl:ciov0:sscv0:03} provides the CPU core variant codes.
+(\emph{Note:}  at the present time, no functions for the CPU08 are
+implemented.)
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Library Conventions}
+%Section tag:  lcv0
+\label{ciov0:slcv0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Library Versioning}
+%Section tag:  lvn0
+\label{ciov0:slcv0:slvn0}
+
+\index{versioning (library)}Version numbers of the library are of the
+form \emph{j.m-} (example: \emph{2.5c}) where:
+
+\begin{itemize}
+\item \emph{j} is the major version number, a non-negative integer.
+      This version number is returned by the
+      \index{UcuMfLibVerMajRxx()@\emph{UcuMfLibVerMajRxx($\cdot$)}}\emph{UcuMfLibVerMajRxx($\cdot$)}
+      function (\S{}\ref{cmsc0:slvf0}, p. \pageref{cmsc0:slvf0}).
+\item \emph{m} is the minor version number, a non-negative integer.
+      This version number is returned by the
+      \index{UcuMfLibVerMinMicRxx()@\emph{UcuMfLibVerMinMicRxx($\cdot$)}}\emph{UcuMfLibVerMinMicRxx($\cdot$)}
+      function (\S{}\ref{cmsc0:slvm0}, p. \pageref{cmsc0:slvm0}).
+\item \emph{-} is the micro version number, a non-negative integer.  The micro version number
+      is represented as a letter in documentation (for example, the `c' in `2.5c').
+      This version number is returned by the
+      \index{UcuMfLibVerMinMicRxx()@\emph{UcuMfLibVerMinMicRxx($\cdot$)}}\emph{UcuMfLibVerMinMicRxx($\cdot$)}
+      function (\S{}\ref{cmsc0:slvm0}, p. \pageref{cmsc0:slvm0}) as an 8-bit integer.
+      When represented as an integer, the correspondence is that the letter `a' is represented by 0,
+      the letter `b' by 1, etc.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Library Binary File Naming Conventions}
+%Section tag:  lpn0
+\label{ciov0:slcv0:slpn0}
+
+
+\index{naming conventions (library)}%
+A typical binary library file name is ``\emph{libucu\_g\_2\_5c\_1\_1.sm8}''.
+In order, the binary library file name contains the following components:
+
+\begin{itemize}
+\item The characters \emph{libucu\_} (a constant string
+      to identify the library).
+\item \emph{g\_} or \emph{r\_} to indicate whether the library
+      is the `general' or the `replacement' library.
+\item The version number of the library followed by an underscore
+      (example: `\emph{2\_5c\_}').
+\item The CPU core integer identifier, followed by an underscore.  (This integer
+      is selected from Table \ref{tbl:ciov0:sscv0:01}.)
+\item The CPU core variant integer identifier.  (This integer is selected from the table 
+      of variants specific to the CPU core:  for example, Table \ref{tbl:ciov0:sscv0:02} or
+      Table \ref{tbl:ciov0:sscv0:03}.)
+\item A period followed by a filename extension traditional for the
+      development tools and that CPU core and CPU core variant.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Function Naming Conventions}
+%Section tag:  fnc0
+\label{ciov0:slcv0:sfnc0}
+
+A typical function name within the general library is
+`\emph{UcuLfU16FiltAFiltRxx}'.  Function names within the general library
+usually consist of the following components, with some components optional:
+
+\begin{itemize}
+\item The character string `\emph{Ucu}'.
+\item Two characters representing the function family (selected from 
+      Table \ref{tbl:ciov0:slcv0:sfnc0:03}).
+\item The fundamental data type on which the function operates and/or returns.  (\emph{U16} means
+      a 16-bit unsigned integer, \emph{U16a} means an array of unsigned integers, etc.)
+\item A name for the function, indicating what it does.
+\item Qualifiers for the function.  These may include input argument sizes, in the case that
+      there are variants of the function that accept different input argument sizes.  These
+      may also include different levels of sophistication in handling invalid or sentinel
+      values of inputs.
+\item The interrupt compatibility code (Table \ref{tbl:ciov0:slcv0:sfnc0:01}), capitalized.
+\item The interrupt mask modification code (Table \ref{tbl:ciov0:slcv0:sfnc0:02}), in lower case.
+\item The shared data modification code (Table \ref{tbl:ciov0:slcv0:sfnc0:02b}), in lower case.
+\end{itemize}
+
+\begin{table}
+\caption{Function Family Code}
+\label{tbl:ciov0:slcv0:sfnc0:03}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Function       & Meaning                                                                     \\
+Family         &                                                                             \\
+Code           &                                                                             \\
+\hline
+\hline
+\texttt{At}    & Arithmetic function (Chapter \ref{cafn0}).                                  \\
+\hline
+\texttt{Ba}    & Bounded arithmetic function (Chapter \ref{cbaf0}).                          \\
+\hline
+\texttt{Fp}    & Fixed-Point arithmetic function (Chapter \ref{cfpa0}).                      \\
+\hline
+\texttt{Lo}    & Large-operand/extended precision function (Chapter \ref{claf0}).            \\
+\hline
+\texttt{Bm}    & Block memory function (Chapter \ref{cbmf0}).                                \\
+\hline
+\texttt{Bt}    & Bit-mapped set function (Chapter \ref{cbsf0}).                              \\
+\hline
+\texttt{Se}    & Search function (Chapter \ref{csea0}).                                      \\
+\hline
+\texttt{So}    & Sort function (Chapter \ref{csol0}).                                        \\
+\hline
+\texttt{Am}    & Array manipulation function (Chapter \ref{cami0}).                          \\
+\hline
+\texttt{Lf}    & Linear filter function (Chapter \ref{clfi0}).                               \\
+\hline
+\texttt{Nf}    & Non-linear filter function (Chapter \ref{cnfi0}).                           \\
+\hline
+\texttt{Vc}    & Vertical counter function (Chapter \ref{cvco0}).                            \\
+\hline
+\texttt{Cs}    & Control system component function (Chapter \ref{ccso0}).                    \\
+\hline
+\texttt{Cc}    & CRC/checksum/non-cryptographic hash function                                \\
+               & (Chapter \ref{ccrc0}).                                                      \\
+\hline
+\texttt{Ch}    & Cryptographic hash function (Chapter \ref{ccrh0}).                          \\
+\hline
+\texttt{Ci}    & Cipher function (Chapter \ref{ccip0}).                                      \\
+\hline
+\texttt{Mi}    & Miscellaneous function (Chapter \ref{cmsc0}).                               \\
+\hline
+\texttt{Ut}    & Utility function (Chapter \ref{cnef0}).                                     \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Interrupt Compatibility Codes}
+\label{tbl:ciov0:slcv0:sfnc0:01}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Interrupt     & Meaning                                                        \\
+Compatibility &                                                                \\
+Code          &                                                                \\
+\hline
+\hline
+\texttt{n}    & \textbf{non-ISR Usage Only}                                    \\
+              & The function may be called from non-interrupt service          \\
+              & only, and may not be called from an interrupt service          \\
+              & routine.                                                       \\
+              &                                                                \\
+              & (This code gives no information about whether the data         \\
+              & operated on by a function may be shared with an                \\
+              & ISR, and the function documentation must be consulted          \\
+              & to determine this.)                                            \\
+\hline
+\texttt{i}    & \textbf{ISR Usage Only}                                        \\
+              & The function may be called from interrupt service only,        \\
+              & and may not be called from non-interrupt service.              \\
+\hline
+\texttt{r}    & \textbf{Re-Entrant}                                            \\
+              & The function may be called from both non-interrupt service     \\
+              & and interrupt service.                                         \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Interrupt Mask Modification Code}
+\label{tbl:ciov0:slcv0:sfnc0:02}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Interrupt     & Meaning                                                          \\
+Compatibility &                                                                  \\
+Code          &                                                                  \\
+\hline
+\hline
+\texttt{x}    & \textbf{Not Modified}                                            \\
+              & The global interrupt mask is not modified.  This often           \\
+              & means that the function may be called with interrupts            \\
+              & either disabled or enabled (consult the function                 \\
+              & documentation and \S{}\ref{ctbg0:sici0}).                        \\
+\hline
+\texttt{c}    & \textbf{Classic Critical Sections}                               \\
+              & \emph{Classic} critical sections (DI/EI) are used.  (See         \\
+              & \S{}\ref{ctbg0:sici0}.)                                          \\
+\hline
+\texttt{r}    & \textbf{Restorative}                                             \\
+              & The global interrupt mask is saved and restored.  This           \\
+              & often means that the function can be safely called with          \\
+              & interrupts disabled or enabled and/or that the function          \\
+              & may be part of a larger critical section that (at the            \\
+              & very beginning and end) uses the classis DI/EI protocol.         \\
+              & (Consult the function documentation and \S{}\ref{ctbg0:sici0}.)  \\
+\hline
+\texttt{u}    & \textbf{Universally Restorative}                                 \\
+              & Either ``x'' or ``r'' applies, but the documentation can't       \\
+              & commit because it may vary from processor to processor           \\
+              & (depending on the processor's instruction set).  This            \\
+              & often means that the function can be safely called with          \\
+              & interrupts disabled or enabled and/or that the function          \\
+              & may be part of a larger critical section that (at the            \\
+              & very beginning and end) uses the classis DI/EI protocol.         \\
+              & (Consult the function documentation and \S{}\ref{ctbg0:sici0}.)  \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}
+\caption{Shared Data Mutual Exclusion Code}
+\label{tbl:ciov0:slcv0:sfnc0:02b}
+\begin{center}
+\begin{tabular}{|l|l|}
+\hline
+Interrupt     & Meaning                                                          \\
+Compatibility &                                                                  \\
+Code          &                                                                  \\
+\hline
+\hline
+\texttt{n}    & \textbf{No Protection}                                           \\
+              & Accessed data is not protected against concurrent access         \\
+              & by another thread.                                               \\
+\hline
+\texttt{c}    & \textbf{Component Protection}                                    \\
+              & Individual array elements are protected, but the array           \\
+              & as a whole is not.                                               \\
+\hline
+\texttt{f}    & \textbf{Full Protection}                                         \\
+              & The full data structure is protected.                            \\
+\hline
+\texttt{x}    & \textbf{Not Applicable}                                          \\
+              & There is no shared data to protect.                              \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Library Revision History}
+\label{ciov0:slrh0}
+
+\noindent\textbf{0.1e} (June 11, 2010)
+\begin{itemize}
+\item Addition of \emph{UcuMfCpuCcrSetRxx($\cdot$)} function.
+\end{itemize}
+
+\noindent\textbf{0.1d} (May 18, 2010)
+\begin{itemize}
+\item Addition of \emph{UcuBaS8AbsBoundedRxx($\cdot$)} function.
+\item Addition of \emph{UcuBaS16AbsBoundedRxx($\cdot$)} function.
+\item Addition of \emph{UcuBaS16DiffBoundedRxx($\cdot$)} function.
+\item Addition of \emph{UcuBtU32RotLeftNInPlaceRxx($\cdot$)} function.
+\end{itemize}
+
+\noindent\textbf{0.1c} (March, 2010)
+\begin{itemize}
+\item Initial release.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_iov0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_iov0/c_iov0.tex,v $
+$Revision: 1.29 $
+$Author: dashley $
+$Date: 2010/06/11 15:42:50 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_iov0.tex,v $
+%Revision 1.29  2010/06/11 15:42:50  dashley
+%Version number bump to 0.1e.
+%
+%Revision 1.28  2010/05/18 22:25:12  dashley
+%Release date for version 0.1d added.
+%
+%Revision 1.27  2010/05/12 22:24:57  dashley
+%Addition of UcuBtU32RotLeftNInPlaceRxx() function.
+%
+%Revision 1.26  2010/05/12 21:21:02  dashley
+%Unimplemented functions removed.
+%
+%Revision 1.25  2010/04/16 19:33:37  dashley
+%Addition of UcuAtS32NegationRxx() function.
+%
+%Revision 1.24  2010/04/16 19:19:40  dashley
+%Unused absolute value function removed from documentation.
+%
+%Revision 1.23  2010/04/15 19:34:39  dashley
+%Addition of UcuAtU32S16v2MagSquaredRxx() function.
+%
+%Revision 1.22  2010/04/15 17:54:10  dashley
+%Addition of UcuBaS32AbsBoundedRxx() function.
+%
+%Revision 1.21  2010/04/15 17:34:52  dashley
+%Addition of UcuAtS32IsNegRxx() function.
+%
+%Revision 1.20  2010/04/15 17:09:38  dashley
+%Addition of UcuLoU32U64U32DivQFRxn() function.
+%
+%Revision 1.19  2010/04/15 15:56:41  dashley
+%Addition of UcuU64U32SquareInPlaceRxn() function.
+%
+%Revision 1.18  2010/04/15 14:56:28  dashley
+%Addition of UcuAtU32SqrtFRxx() function.
+%
+%Revision 1.17  2010/03/18 00:01:10  dashley
+%Functions added.
+%
+%Revision 1.16  2010/03/16 21:57:45  dashley
+%Addition of license section.
+%
+%Revision 1.15  2010/03/16 21:56:02  dashley
+%Edits and corrections.
+%
+%Revision 1.14  2010/01/31 02:00:29  dashley
+%Minor change in two-character naming code for bit-mapped set functions.
+%
+%Revision 1.13  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.12  2010/01/27 21:52:15  dashley
+%Edits.
+%
+%Revision 1.11  2010/01/26 22:05:21  dashley
+%Edits.
+%
+%Revision 1.10  2010/01/26 21:56:25  dashley
+%Edits.
+%
+%Revision 1.9  2010/01/26 16:16:18  dashley
+%Edits.
+%
+%Revision 1.8  2007/10/10 18:28:33  dtashley
+%Addition of UcuBmMemclrSmNu() function.
+%
+%Revision 1.7  2007/10/10 17:42:27  dtashley
+%Edits.
+%
+%Revision 1.6  2007/10/08 19:51:59  dtashley
+%Edits toward getting function documentation looking good.
+%
+%Revision 1.5  2007/10/08 18:16:33  dtashley
+%Edits.
+%End of $RCSfile: c_iov0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

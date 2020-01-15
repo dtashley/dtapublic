@@ -1,0 +1,27 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgpcpj/_dircnts.txt,v 1.2 2002/01/26 09:40:11 dtashley Exp $
+
+SUBDIRECTORY
+   /esrgpcpj
+
+CONTENTS
+   This subdirectory contains software projects developed by the
+   ESRG which are designed to run on a "large" computer (i.e.
+   a personal computer or larger).  This may include some embedded
+   system software components when the software components are 
+   portable and can be used on desktop computers as well.
+
+   Please see the "_license.txt" file for licensing information.
+
+MNEMONIC
+   "esrg" is short for "Embedded Systems Research Group".  "pc"
+   is short for "personal computer".  "pj" is short for "projects".
+
+#**************************************************************************
+# $Log: _dircnts.txt,v $
+# Revision 1.2  2002/01/26 09:40:11  dtashley
+# Minor formatting change (line removal).
+#
+# Revision 1.1.1.1  2002/01/26 09:37:24  dtashley
+# Initial creation/checkin.
+#**************************************************************************
+# End of _dircnts.txt.

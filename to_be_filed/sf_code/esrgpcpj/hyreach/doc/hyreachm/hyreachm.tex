@@ -1,0 +1,162 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/hyreachm.tex,v 1.16 2002/01/30 00:51:04 dtashley Exp $
+%
+%Standard packages included.
+\documentclass[letterpaper,11pt,twoside,titlepage]{article}
+\pagestyle{headings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{makeidx}
+\usepackage{graphicx}
+%
+
+%Standard preamable.
+\makeindex
+%
+%User-defined environments.
+\input{general/newenvs}
+
+\begin{document}
+
+%The name of the tool is still in a state of flux.  Let's make this
+%a command.
+\newcommand{\swname}{HyReach}
+
+%The version of the software may change.  Let's localize that.
+\newcommand{\swversion}{1.0}
+
+%The order and number of authors may change.  Let's assume for now
+%that there will be only two authors.  I do not know who should be
+%listed first.  Swapping the strings below should change everything
+%in the document.
+\newcommand{\authors}{David T. Ashley and Feng Lin}
+\newcommand{\authorone}{David T. Ashley}
+\newcommand{\authortwo}{Feng Lin}
+
+\title{\swname{} User's Manual}
+\author{David T. Ashley and Feng Lin}
+\date{2001-09-25}
+
+%Make the title page of the document.
+\input{general/tpage}
+\clearpage
+
+\raggedbottom
+\tableofcontents
+\clearpage
+
+\listoffigures
+%\pagebreak
+
+\listoftables
+
+%SOSP0: Overview, Scope, And Purpose
+\clearpage{}
+\input{s_osp0/s_osp0}
+
+%SINV0: Invocation Of The Software
+\clearpage{}
+\input{s_inv0/s_inv0}
+
+%SMFS0: Modeling Framework Supported
+\clearpage{}
+\input{s_mfs0/s_mfs0}
+
+%SIFF0: Input File Format
+\clearpage{}
+\input{s_iff0/s_iff0}
+
+%SRAE0: Reachability Algorithm Employed
+\clearpage{}
+\input{s_rae0/s_rae0}
+
+%SSYM0: System Modeling
+\clearpage{}
+\input{s_sym0/s_sym0}
+
+%SIOP0: Internal Operation Of The Software
+\clearpage{}
+\input{s_iop0/s_iop0}
+
+%SPBD0: Performance Benchmark Data
+\clearpage{}
+\input{s_pbd0/s_pbd0}
+
+%SECO0: Warning And Error Codes
+\clearpage{}
+\input{s_eco0/s_eco0}
+
+%SACK0: Acknowledgements
+\clearpage{}
+\input{s_ack0/s_ack0}
+
+%SGLO0: Glossary Of Terms
+\clearpage
+\input{s_glo0/s_glo0}
+
+%SGLO0: Glossary Of Symbols And Mathematical Notation
+\clearpage
+\input{s_glm0/s_glm0}
+
+%SBIB0: Bibliography
+\clearpage
+\input{s_bib0/s_bib0}
+
+%SIDX0: Index
+\clearpage
+\input{s_idx0/s_idx0}
+
+\end{document}
+
+%$Log: hyreachm.tex,v $
+%Revision 1.16  2002/01/30 00:51:04  dtashley
+%Nightly safety checkin.
+%
+%Revision 1.15  2002/01/29 17:04:00  dtashley
+%Version control info added, and minor edits.
+%
+%Revision 1.14  2001/10/31 04:31:37  dtashley
+%Nightly safety checkin.
+%
+%Revision 1.13  2001/10/25 05:32:40  dtashley
+%Evening safety checkin after edits.
+%
+%Revision 1.12  2001/10/12 22:32:30  dtashley
+%Substantial edits.
+%
+%Revision 1.11  2001/10/10 02:09:07  dtashley
+%Edits.
+%
+%Revision 1.10  2001/10/04 17:09:21  dtashley
+%Test commit to check merging behavior.
+%
+%Revision 1.9  2001/10/04 07:09:41  dtashley
+%Small trial change.
+%
+%Revision 1.8  2001/10/03 03:18:03  dtashley
+%Superfluous comments removed.
+%
+%Revision 1.7  2001/10/03 03:15:19  dtashley
+%Nightly checkin.
+%
+%Revision 1.6  2001/10/02 21:05:59  flin
+%*** empty log message ***
+%
+%Revision 1.5  2001/10/02 18:40:48  dtashley
+%This is a demonstration change.
+%
+%Revision 1.4  2001/10/01 06:08:09  dtashley
+%Basic hacks in place for a workable document.
+%
+%Revision 1.3  2001/09/26 04:51:13  dtashley
+%Edits.
+%
+%Revision 1.2  2001/09/26 02:31:14  dtashley
+%Initial checkin, and some edits of main TEX file.
+%
+%Revision 1.1  2001/09/25 22:51:49  dtashley
+%Initial checkin.
+%
+%End of HYREACHM.TEX.

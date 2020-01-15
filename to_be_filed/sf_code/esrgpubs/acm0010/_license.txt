@@ -1,0 +1,29 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgpubs/acm0010/_license.txt,v 1.2 2002/01/26 09:00:24 dtashley Exp $
+
+SUBDIRECTORY
+   /dtaipubs/acm0010
+
+LICENSE
+   Because the article contained in this subdirectory (see the
+   "_dircnts.txt" file) was withdrawn before being accepted for
+   publication, the copyright was not transferred to the ACM.
+   The copyright still belongs to the five authors, David T.
+   Ashley, Joseph P. DeVoe, Karl Perttunen, Cory Pratt, and
+   Anatoly Zhigljavsky.
+
+   We (the five authors) hereby grant permission to reproduce and
+   use this paper (both LaTeX source code and .PDF or PostScript
+   output) and the associated software (both source code
+   and executables) in any way whatsoever for any purpose whatsoever
+   with no restrictions.  We would hope that we are cited fairly
+   in any derivative works, but this is not required.
+
+#**************************************************************************
+# $Log: _license.txt,v $
+# Revision 1.2  2002/01/26 09:00:24  dtashley
+# Minor formatting change (line removal).
+#
+# Revision 1.1  2002/01/26 08:58:21  dtashley
+# Initial checkin.
+#**************************************************************************
+# End of _license.txt.

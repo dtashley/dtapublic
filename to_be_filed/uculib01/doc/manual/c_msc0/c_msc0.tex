@@ -1,0 +1,658 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_msc0/c_msc0.tex,v 1.11 2010/06/11 15:38:58 dashley Exp $
+
+\chapter{Miscellaneous Functions}        
+\label{cmsc0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  iov0
+\label{cmsc0:siov0}
+
+This chapter documents functions that couldn't be easily classified elsewhere.
+
+\begin{itemize}
+\item \S{}\ref{cmsc0:slfv0} (p. \pageref{cmsc0:slfv0}) documents functions that
+      make available library version information. 
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Library Version Functions}
+%Section tag:  lvf0
+\label{cmsc0:slfv0}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfLibVerMajRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfLibVerMajRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lvf0
+\label{cmsc0:slvf0}
+
+\index{UcuMfLibVerMajRxx()@\emph{UcuMfLibVerMajRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuMfLibVerMajRxx(void)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Returns the major version number of the library.  (For example,
+if the library is version 2.5c, the integer returned would be 2.)
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The major version number of the library.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to guard against project build accidents
+      where an unintended version of the library is linked in.  A typical
+      approach is that the software will not function if an unexpected version
+      of the library is present.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Lib}: library.  \emph{Ver}: version.  \emph{Maj}: major.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfLibVerMinMicRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfLibVerMinMicRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lvm0
+\label{cmsc0:slvm0}
+
+\index{UcuMfLibVerMinMicRxx()@\emph{UcuMfLibVerMinMicRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuMfLibVerMinMicRxx(void)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Returns the minor version number and micro version number of the library;
+with the minor version number packed in the most significant byte of the
+result and the micro version number packed in the least significant byte
+of the result.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The minor version number and micro version number, packed as
+      described in the synopsis.
+\item The minor and micro version numbers are described more fully
+      in \S\ref{ciov0:slcv0:slvn0}, p. \pageref{ciov0:slcv0:slvn0}.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{DETAILED DESCRIPTION}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Returns the minor version number and micro version number of the library;
+      with the minor version number packed in the most significant byte of the
+      result and the micro version number packed in the least significant byte
+      of the result.
+\item The minor and micro version numbers are described more fully
+      in \S\ref{ciov0:slcv0:slvn0}, p. \pageref{ciov0:slcv0:slvn0}.
+\item As an example,
+      if the library is version 2.5c, the integer returned would be $5 \times 2^{8} + 2$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to guard against project build accidents
+      where an unintended version of the library is linked in.  A typical
+      approach is that the software will not function if an unexpected version
+      of the library is present.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Lib}: library.  \emph{Ver}: version.  \emph{Min}: minor.
+      \emph{Mic}: micro.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfLibVerCpuRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfLibVerCpuRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lvc0
+\label{cmsc0:slvc0}
+
+\index{UcuMfLibVerCpuRxx()@\emph{UcuMfLibVerCpuRxx($\cdot$)}}
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuMfLibVerCpuRxx(void)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Returns the CPU core / development tool chain identifier and the CPU core variant identifier,
+      with the CPU core / development tool chain identifier in the most
+      significant byte and the CPU core variant identifier in the least significant byte.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The CPU core / development tool chain identifier and the CPU core variant identifier, packed
+      as described in the synopsis.  The CPU core / development tool chain identifiers
+      that can be returned are listed in
+      Table \ref{tbl:ciov0:sscv0:01}, p. \pageref{tbl:ciov0:sscv0:01}.
+
+      Within the STM8/Cosmic combination, the CPU core variant codes are
+      listed in 
+      Table \ref{tbl:ciov0:sscv0:02}, p. \pageref{tbl:ciov0:sscv0:02}.
+
+      Within the CPU08/Cosmic combination, the CPU core variant codes are
+      listed in 
+      Table \ref{tbl:ciov0:sscv0:03}, p. \pageref{tbl:ciov0:sscv0:03}.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to guard against project build accidents
+      where an unintended version of the library is linked in.  A typical
+      approach is that the software will not function if an unexpected version
+      of the library is present.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Lib}: library.  \emph{Ver}: version.  \emph{Cpu}: CPU.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfLibVerCmpRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfLibVerCmpRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lcp0
+\label{cmsc0:slcp0}
+
+\index{UcuMfLibVerCmpRxx()@\emph{UcuMfLibVerCmpRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_BOOLEAN UcuMfLibVerCpuRxx(
+                             UCU_UINT16 in_majorversion,
+                             UCU_UINT8  in_minorversion,
+                             UCU_UINT8  in_microversion,
+                             UCU_UINT8  in_cpucore,
+                             UCU_UINT8  in_cpucorevariant
+                             )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Compares the passed version information against the actual version
+of the library and returns UCU\_TRUE if the passed information matches
+the actual library version or UCU\_FALSE otherwise.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{in\_majorversion}}\\
+      The major version number used to compare against the actual version
+      number.  A value of $2^{16}-1$ will cause the major version number
+      to be ignored in the comparison.
+\item \emph{\textbf{in\_minorversion}}\\
+      The minor version number used to compare against the actual version
+      number.  A value of $2^{8}-1$ will cause the minor version number
+      to be ignored in the comparison.
+\item \emph{\textbf{in\_microversion}}\\
+      The micro version number used to compare against the actual version
+      number.  A value of $2^{8}-1$ will cause the micro version number
+      to be ignored in the comparison.
+\item \emph{\textbf{in\_cpucore}}\\
+      The CPU core identifier used to compare against the actual CPU core
+      identifier for which the library was compiled.
+      A value of $2^{8}-1$ will cause the CPU core identifier
+      to be ignored in the comparison.
+\item \emph{\textbf{in\_cpucorevariant}}\\
+      The CPU core variant identifier used to compare against the actual CPU core
+      variant identifier for which the library was compiled.
+      A value of $2^{8}-1$ will cause the CPU core variant identifier
+      to be ignored in the comparison.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item UCU\_TRUE if the version information of the library matches
+      the information provided, or UCU\_FALSE otherwise.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If all of the inputs are set to the ``ignore'' values,
+      the function will return UCU\_TRUE.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is most often used near reset to ensure that the
+      version of \emph{\productname{}} linked into the software is
+      the expected version.  A typical approach would be that the
+      embedded software does not function if the library linked in is
+      not the expected version for the expected CPU.
+\item Figure \ref{fig:cmsc0:slcp0:00} (p. \pageref{fig:cmsc0:slcp0:00})
+      shows a typical usage of the function.  The code snippet 
+      shown in the figure checks both that the \texttt{UCULIB.H} file
+      is consistent with the library, and that library is the expected
+      version built for the expected CPU.
+\end{list}
+\vspace{2.8ex}
+
+\begin{figure}
+\begin{small}
+\begin{verbatim}
+//Halt the compilation if the UCULIB .H file isn't the expected
+//version.
+#if (UCU_LIBVER_MAJOR != 0) || (UCU_LIBVER_MINOR != 1) || \
+    (UCU_LIBVER_MICRO != 0) ||                            \
+    (UCU_LIBVER_CPUCORE != UCU_CPUCORE_STM8) ||           \
+    (UCU_LIBVER_CPUCOREVAR != UCU_CPUCOREVAR_STM8_BASE)
+   //The UCULIB .H file isn't the right version.  Error out.
+   #error "UCULIB .H file is unexpected version."
+#endif
+
+//If the .H file doesn't match the actual library, this
+//should prevent operation of the product.
+if (! UcuMfLibVerCmpRxx(UCU_LIBVER_MAJOR, 
+                        UCU_LIBVER_MINOR, 
+                        UCU_LIBVER_MICRO, 
+                        UCU_LIBVER_CPUCORE, 
+                        UCU_LIBVER_CPUCOREVAR))
+   {
+   while(1)
+      ;
+   }
+\end{verbatim}
+\end{small}
+\caption{Typical Usage of the \emph{UcuMfLibVerCmpRxx($\cdot$)} Function}
+\label{fig:cmsc0:slcp0:00}
+\end{figure}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Lib}: library.  \emph{Ver}: version.  \emph{Cmp}: compare.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{CPU Register Manipulation Functions}
+\label{cmsc0:scpu0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfCpuCcrGetRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfCpuCcrGetRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cmsc0:scpu0:sccg0}
+
+\index{UcuMfCpuCcrGetRxx()@\emph{UcuMfCpuCcrGetRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_CPU_CCR UcuMfCpuCcrGetRxx(void)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Returns the value of the CPU condition code register.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The value of the CPU condition code register.
+\item Because this is a function and a function call is involved,
+      certain bits or bitfields in the condition code register may not
+      be meaningful in a higher-level language program.  However, some
+      bits or bitfields may be meaningful, especially those involving
+      the interrupt mask.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to test the interrupt mask bits.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Cpu}: CPU.  \emph{Ccr}: condition code register.  \emph{Get}: get.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfCpuCcrSetRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfCpuCcrSetRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cmsc0:scpu0:sccs0}
+
+\index{UcuMfCpuCcrSetRxx()@\emph{UcuMfCpuCcrSetRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuMfCpuCcrSetRxx(UCU_CPU_CCR in_ccr)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Atomically sets the CPU condition code register to the value specified.
+\item \emph{Atomic} in this sense means that the new condition code register
+      value is set in an atomic instruction or atomic sequence of instructions.  This
+      is particularly important for the interrupt mask bits (to ensure that an
+      interrupt may not occur with these bits set to values that are not the original
+      values and not the \emph{in\_ccr} value.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{in\_ccr}}\\
+      The value to which the CPU condition code register should be atomically set.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to atomically set the interrupt mask bits.
+\item Because the compiler generally assumes that CCR bits are not preserved
+      across a function call, there is no advantage to providing this function
+      in a form that modifies only the interrupt mask bits (the modifications
+      to the other bits will be discarded).
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Cpu}: CPU.  \emph{Ccr}: condition code register.  \emph{Set}: set.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuMfCpuSptrPcGetRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuMfCpuSptrPcGetRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cmsc0:scpu0:sspg0}
+
+\index{UcuMfCpuSptrPcGetRxx()@\emph{UcuMfCpuSptrPcGetRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_CPU_SPTR_PC UcuMfCpuSptrPcGetRxx(void)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Returns the value of the program counter stack pointer at the time 
+the function is called.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The value of the program counter stack pointer at the time the
+      function is called.
+\item In order to calculate the value of the program counter stack pointer
+      at the time the function is called,
+      the stack pointer is adjusted by the number of bytes required
+      to call the function.  This offset can vary with the processor and
+      memory model.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TYPICAL USAGE}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function is typically used to assist in debugging 
+      programs, or to test whether a called function corrupts the stack pointer.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Cpu}:  CPU.  
+      \emph{Sptr}: stack pointer.  
+      \emph{Pc}:   program counter.  
+      \emph{Get}:  get.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_msc0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_msc0/c_msc0.tex,v $
+$Revision: 1.11 $
+$Author: dashley $
+$Date: 2010/06/11 15:38:58 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_msc0.tex,v $
+%Revision 1.11  2010/06/11 15:38:58  dashley
+%Addition of UcuMfCpuCcrSetRxx() function.
+%
+%Revision 1.10  2010/02/14 02:37:44  dashley
+%Function names changed.
+%
+%Revision 1.9  2010/02/14 02:20:54  dashley
+%Two functions added.
+%
+%Revision 1.8  2010/02/04 17:51:12  dashley
+%Exception case explanation added.
+%
+%Revision 1.7  2010/02/04 16:16:23  dashley
+%Documentation updates.
+%
+%Revision 1.6  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.5  2010/01/27 21:52:15  dashley
+%Edits.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%End of $RCSfile: c_msc0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

@@ -1,0 +1,17 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgdstb/_license.txt,v 1.2 2002/01/26 09:28:02 dtashley Exp $
+
+SUBDIRECTORY
+   /esrgdstb
+
+LICENSE
+   No license information is yet available.
+
+#**************************************************************************
+# $Log: _license.txt,v $
+# Revision 1.2  2002/01/26 09:28:02  dtashley
+# Minor formatting change (line removal).
+#
+# Revision 1.1.1.1  2002/01/26 09:26:11  dtashley
+# Initial creation/checkin.
+#**************************************************************************
+# End of _license.txt.

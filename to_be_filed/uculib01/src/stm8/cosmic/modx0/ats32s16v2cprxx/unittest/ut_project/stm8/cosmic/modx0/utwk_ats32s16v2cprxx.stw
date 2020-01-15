@@ -1,0 +1,12 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=utpj_ats32s16v2cprxx.stp
+Dependencies=
+[Options]
+ActiveProject=utpj_ats32s16v2cprxx
+ActiveConfig=Release
+AddSortedElements=1

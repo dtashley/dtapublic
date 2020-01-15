@@ -1,0 +1,255 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_laf0/c_laf0.tex,v 1.7 2010/05/12 18:56:18 dashley Exp $
+
+\chapter[Large-Operand and Extended-Precision Arithmetic Functions]
+        {Large-Operand and Extended-Precision Arithmetic Functions}
+
+\chaptermark{Large-Operand and Extended-Precision}
+
+\label{claf0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+\label{claf0:siov0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unsigned Integer Division Functions}
+\label{claf0:suid0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuLoU32U64U32DivQFRxn(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuLoU32U64U32DivQFRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{claf0:suid0:sdsf0}
+%
+%\index{UcuLoU32U64U32DivQFRxn()@\emph{UcuLoU32U64U32DivQFRxn($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuLoU32U64U32DivQFRxn( 
+%                                 UCU_UINT32  *out_quotient, 
+%                           const UCU_UNION64 *in_dividend,
+%                           const UCU_UINT32  *in_divisor
+%                           )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Calculates
+%
+%      \begin{equation}
+%      *out\_quotient = \left\lfloor \frac{*in\_dividend}{*in\_divisor} \right\rfloor
+%      \end{equation}
+%
+%      using a 32-iteration classic shift/compare/subtract division
+%      algorithm where it is known in advance that the quotient will not exceed 32 bits.\footnote{The
+%      general case of division of a 64-bit unsigned integer dividend by a 32-bit unsigned integer
+%      divisor may produce up to a 64-bit unsigned integer quotient.  This function is not a 
+%      general division function and should only be used when it is known that the quotient
+%      cannot exceed 32 bits.}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{in\_dividend}}\\
+%      Pointer to a buffer containing the 64-bit unsigned integer dividend.
+%      The buffer is not modified by the function.
+%
+%      This pointer may not be NULL or otherwise invalid.
+%
+%      This buffer may not be coincident with the \emph{*in\_quotient} or
+%      \emph{*in\_divisor} buffers.  
+%\item \emph{\textbf{in\_divisor}}\\
+%      Pointer to a buffer containing the 32-bit unsigned integer divisor.
+%      The buffer is not modified by the function.
+%
+%      This pointer may not be NULL or otherwise invalid.
+%
+%      This buffer may not be coincident with the \emph{*in\_quotient} or
+%      \emph{*in\_dividend} buffers.  
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{out\_quotient}}\\
+%      Pointer to a buffer that will be assigned with the quotient.
+%
+%      This pointer may not be NULL or otherwise invalid.
+%
+%      This buffer may not be coincident with the \emph{*in\_dividend} or
+%      \emph{*in\_divisor} buffers.  
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\item This function does not ensure atomic access to the buffers pointed to, so
+%      it is not thread-safe when processes in different threads use this
+%      function to access the \emph{same} buffer(s).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{U32}:     produces a UCU\_UINT32 result.
+%      \emph{U64}:     accepts an unsigned 64-bit argument as input.
+%      \emph{U32}:     accepts a UCU\_UINT32 argument as input.
+%      \emph{Div}:     division.
+%      \emph{Q}:       produces only a quotient (no remainder).
+%      \emph{F}:       the quotient is rounded down, consistent with the traditional 
+%                      \emph{floor($\cdot$)} function.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unsigned Integer Squaring Functions}
+\label{claf0:ssqf0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuLoU64U32SquareInPlaceRxn(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuLoU64U32SquareInPlaceRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{claf0:ssqf0:susf0}
+%
+%\index{UcuLoU64U32SquareInPlaceRxn()@\emph{UcuLoU64U32SquareInPlaceRxn($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%void UcuLoU64U32SquareInPlaceRxn( UCU_UNION64 *in_u64 )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Calculates the square of a 32-bit unsigned integer, yielding a
+%64-bit unsigned integer result.  The squaring is done ``in place'', meaning that the
+%32-bit integer to be squared is placed right-aligned into
+%a 64-bit buffer, and when the function returns, the same buffer contains the
+%result.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{in\_u64}}\\
+%      Pointer to a buffer containing the unsigned 32-bit integer whose square is to be calculated.
+%      The integer should be right-aligned (placed in the least significant
+%      bit positions of the buffer).
+%
+%      The 32 most significant bit positions of the buffer are ignored and
+%      overwritten, and will not affect the calculation result.  These
+%      bit positions do not need to be assigned prior to the function call.
+%
+%      This pointer may not be NULL or otherwise invalid.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The buffer pointed to by \emph{in\_u64}
+%      will contain the unsigned 64-bit integer square of the unsigned 32-bit integer
+%      provided in the rightmost position in the buffer before the function call.
+%
+%      The original unsigned 32-bit integer provided is overwritten by the result.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\item This function does not ensure atomic access to \emph{*in\_u64}, so
+%      it is not thread-safe when processes in different threads use this
+%      function to access the \emph{same} buffer.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{U64}:     produces an unsigned 64-bit result.
+%      \emph{U32}:     accepts a UCU\_UINT32 as input.
+%      \emph{Square}:  calculates the square.
+%      \emph{InPlace}: calculates ``in place'' (uses the same input and output buffer).
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_laf0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_laf0/c_laf0.tex,v $
+$Revision: 1.7 $
+$Author: dashley $
+$Date: 2010/05/12 18:56:18 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_laf0.tex,v $
+%Revision 1.7  2010/05/12 18:56:18  dashley
+%Removal of UcuLoU64U32SquareInPlaceRxn() function.
+%
+%Revision 1.6  2010/05/12 18:41:46  dashley
+%Removal of UcuLoU32U64U32DivQFRxn() function.
+%
+%Revision 1.5  2010/04/15 17:09:38  dashley
+%Addition of UcuLoU32U64U32DivQFRxn() function.
+%
+%Revision 1.4  2010/04/15 15:56:41  dashley
+%Addition of UcuU64U32SquareInPlaceRxn() function.
+%
+%Revision 1.3  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.2  2010/01/24 05:37:27  dashley
+%Addition and reorganization of content.
+%
+%Revision 1.1  2007/10/08 18:07:42  dtashley
+%Initial checkin.
+%
+%End of $RCSfile: c_laf0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

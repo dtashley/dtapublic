@@ -1,0 +1,12 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=atpj_stm8_cosmic_modsl0.stp
+Dependencies=
+[Options]
+ActiveProject=atpj_stm8_cosmic_modsl0
+ActiveConfig=Release
+AddSortedElements=1

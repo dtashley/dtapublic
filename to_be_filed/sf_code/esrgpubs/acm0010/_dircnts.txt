@@ -1,0 +1,43 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgpubs/acm0010/_dircnts.txt,v 1.2 2002/01/26 09:00:24 dtashley Exp $
+
+SUBDIRECTORY
+   /dtaipubs/acm0010
+
+CONTENTS
+   This subdirectory contains a rational approximation paper and
+   supporting demonstration software that was submitted to the
+   journal "ACM Transactions On Mathematical Software" around
+   October of 2000.  The authors were David T. Ashley, Joseph P.
+   DeVoe, Karl Perttunen, Cory Pratt, and Anatoly Zhigljavsky.
+
+   After spending one year in review, the reviews were second-rate
+   One of the two reviews was reasonable, but it was clear in the
+   second review that the reviewer did not understand the paper.
+   One [silly] comment was to ask why the system proposed was better
+   than mediant rounding.  That was a purely idiotic comment, because
+   mediant rounding is a system of representation, but the topic
+   of the paper was simply how to choose a rational number.
+
+   After much human drama, because of the long review delay, it
+   was decided to instead publish a shorter version in "Embedded
+   Systems Programming" magazine.
+
+   There are two subdirectories, "paper" (for the paper) and
+   "c_imp" (for the demonstration software).
+
+   Please see the "_license.txt" file for licensing information.
+
+MNEMONIC
+   "acm" is short for "Association For Computing Machinery", and
+   represents part of the title of the journal to which this paper
+   was submitted, and "0010" is a date code for October, 2000.
+
+#**************************************************************************
+# $Log: _dircnts.txt,v $
+# Revision 1.2  2002/01/26 09:00:24  dtashley
+# Minor formatting change (line removal).
+#
+# Revision 1.1  2002/01/26 08:58:21  dtashley
+# Initial checkin.
+#**************************************************************************
+# End of _dircnts.txt.

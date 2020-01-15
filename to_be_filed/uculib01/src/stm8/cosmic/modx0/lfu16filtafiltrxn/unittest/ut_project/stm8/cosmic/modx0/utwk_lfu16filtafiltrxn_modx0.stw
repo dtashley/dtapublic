@@ -1,0 +1,12 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=utpj_lfu16filtafiltrxn_modx0.stp
+Dependencies=
+[Options]
+ActiveProject=utpj_lfu16filtafiltrxn_modx0
+ActiveConfig=Release
+AddSortedElements=1

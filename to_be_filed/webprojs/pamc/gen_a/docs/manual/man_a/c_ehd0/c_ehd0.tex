@@ -1,0 +1,90 @@
+%$Header: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_ehd0/c_ehd0.tex,v 1.2 2007/06/11 23:08:34 dashley Exp $
+
+\chapter{The Employee Hours Database}
+
+\label{cehd0}
+
+\beginchapterquote{``TBD''}
+                  {TBD}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%Section tag:  INT0
+\label{cehd0:sint0}
+
+Notes from discussions:
+
+\begin{itemize}
+\item Required (and minimum) granularity should be 0.25 hours.
+\item Want to have the functionality of daily notes.  For each amount of time
+      spend on each project for each day, employee may want to add notes (about
+      what was worked on, what was accomplished, whatever).
+\item Need the following reports:
+      \begin{itemize}
+      \item Date range.
+      \item User(s).
+      \item Project(s).
+      \item Year-to-date (year-to-date totals are important for the user).
+      \end{itemize}
+      In the current system, can't do it by project or multiple users.
+\item Should send e-mails when hours due and not complete.
+\item Incomplete hours should show up in to-do list.  (Idea for this list:
+      \emph{may} complete vs. \emph{should} complete vs. \emph{must}
+      complete---perhaps one of those is optional.)
+\item Locking:  The idea was floated that a user should have up to
+      a week after time card submission to change data.  DTA response:
+      bad idea---leads to possibility that data will be changed after it
+      has moved upstream.  Proposed ideas:
+      \begin{itemize}
+      \item Time card makes a state change on user command.  It can't be
+            used or contribute to reports until it has been officially submitted
+            by the employee.  However, system should be able to record it until then.
+      \item There is basic error checking that will block submission (or at least
+            require a separate step) if the time card seems erroneous.
+      \item Once a time card has been submitted/accepted, it will not be
+            changeable any longer by the employee.  It will require administrator/supervisor
+            approval to be unlocked again.
+      \end{itemize} 
+\item No access by one employee to another's data, except:
+      \begin{itemize}
+      \item Administrators.
+      \item Those above the employee in the chain of command.  (Note:  this implies that
+            the application know the chain of command.  Chain of command should also
+            probably include weak reporting or matrix reporting relationships.  Cycles
+            should be prevented.)
+      \end{itemize}
+\item YV has details about how project numbers are assigned.
+\item Unclear whether daily submissions or weekly or both should be supported, and how.
+      Some employees prefer daily, some weekly.  Will need to cache hours until weekly,
+      perhaps.  Need to think further about supporting users who like day-by-day vs.
+      weekly.      
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_ehd0.tex,v $
+$Source: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_ehd0/c_ehd0.tex,v $
+$Revision: 1.2 $
+$Author: dashley $
+$Date: 2007/06/11 23:08:34 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_ehd0.tex,v $
+%Revision 1.2  2007/06/11 23:08:34  dashley
+%Edits.
+%
+%Revision 1.1  2007/06/11 22:40:21  dashley
+%Initial checkin.
+%
+%End of $RCSfile: c_ehd0.tex,v $.

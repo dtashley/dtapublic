@@ -1,0 +1,50 @@
+#!/bin/bash
+#--------------------------------------------------------------------------------
+#$Source: /cvsroot/esrg/sfesrg/esrgweba/scripts/get_all_src_anon.txt,v $
+#$Revision: 1.5 $
+#$Date: 2003/04/26 01:06:02 $
+#$Author: dtashley $
+#--------------------------------------------------------------------------------
+#This script is an example script to show how to get all ESRG materials
+#via anonymous CVS access.  This script will run unmodified on a *nix
+#machine, but can also easily be made into a DOS/Windows batch file.
+#
+#On Unix machines, it is perfectly acceptable to place the materials
+#anywhere in the directory tree.  On DOS/Windows machines, however,
+#everything MUST be placed off "C:\".  If this bash script is
+#converted to a batch file, "cd c:\" should be the first command.
+#--------------------------------------------------------------------------------
+#
+#For a DOS/Windows machine, "cd c:\" should go here.
+#cd c:\
+#
+#Grab tips from CVS.  Note that all of the following CVS commands can be
+#combined into one just by listing all the module names on a single command.
+#However, for reasons of line length, this is not done in the set of commands
+#below.
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgdocs
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgdstb
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgnxpj
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgpcpj
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgphpa
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgpubs
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgubka
+cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgweba
+#
+#--------------------------------------------------------------------------------
+#$Log: get_all_src_anon.txt,v $
+#Revision 1.5  2003/04/26 01:06:02  dtashley
+#Comment added.
+#
+#Revision 1.4  2003/04/26 01:04:16  dtashley
+#Keyword change for shorter line length.
+#
+#Revision 1.3  2003/04/26 00:59:09  dtashley
+#Mistakes corrected.
+#
+#Revision 1.2  2003/04/25 02:37:35  dtashley
+#Extra line in log section removed.
+#
+#Revision 1.1  2003/04/25 02:36:57  dtashley
+#Initial checkin.
+#--------------------------------------------------------------------------------

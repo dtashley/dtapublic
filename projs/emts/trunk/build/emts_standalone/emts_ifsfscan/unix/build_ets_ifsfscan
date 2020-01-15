@@ -1,0 +1,46 @@
+#!/bin/bash
+#-------------------------------------------------------------------------------------------------
+#$Header: svn://localhost/dtapublic/projs/emts/trunk/build/emts_standalone/emts_ifsfscan/unix/build_ets_ifsfscan 323 2020-01-09 02:01:34Z dashley $
+#{}
+#-------------------------------------------------------------------------------------------------
+#This file is part of "Embedded Tool Set" (EMTS), a tool set designed to facilitate embedded
+#system software and hardware development.
+#-------------------------------------------------------------------------------------------------
+#This file and any program in which it is compiled/used is provided under the MIT License,
+#reproduced below.
+#-------------------------------------------------------------------------------------------------
+#Permission is hereby granted, free of charge, to any person obtaining a copy of
+#this software and associated documentation files(the "Software"), to deal in the
+#Software without restriction, including without limitation the rights to use,
+#copy, modify, merge, publish, distribute, sublicense, and / or sell copies of the
+#Software, and to permit persons to whom the Software is furnished to do so,
+#subject to the following conditions:
+#
+#The above copyright notice and this permission notice shall be included in all
+#copies or substantial portions of the Software.
+#
+#THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+#IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+#FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.IN NO EVENT SHALL THE
+#AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+#LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+#OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+#SOFTWARE.
+#-------------------------------------------------------------------------------------------------
+g++ -I ../../../../src/lib_c/c_emts/  -D K_EMTS_PF=K_EMTS_PF_LINUX -D K_EMTS_WSZ_OS=\(32\)       \
+    -D K_EMTS_PROC_AL=K_EMTS_PROC_AL_X86_64 -D K_EMTS_WSZ_M=\(32\) -D K_EMTS_SZ_INT_LL=\(64\)    \
+    -D K_EMTS_SZ_INT_L=\(64\) -D K_EMTS_SZ_INT=\(32\) -D K_EMTS_SZ_INT_S=\(16\)                  \
+    -D K_EMTS_MIR=K_EMTS_MIR_2SCOMP -D K_EMTS_MFPU=K_EMTS_MFPU_YES                               \
+    -D K_EMTS_PROJTYPE=K_EMTS_PROJTYPE_APP -D K_EMTS_LINKTYPE=K_EMTS_LINKTYPE_STATIC             \
+    -D K_EMTS_PROJTYPE=K_EMTS_PROJTYPE_APP -D K_EMTS_LINKTYPE=K_EMTS_LINKTYPE_STATIC             \
+    -D K_EMTS_DEBUGLVL=K_EMTS_DEBUGLVL_RELEASE                                                   \
+    -D K_EMTS_DEBUGLOGLVL=K_EMTS_DEBUGLOGLVL_NONE                                                \
+    -D K_EMTS_ASSERTLVL=K_EMTS_ASSERTLVL_NONE                                                    \
+    -D K_EMTS_PROGTYPE=K_EMTS_PROGTYPE_CONSOLE -D K_EMTS_SCREENSIZE=K_EMTS_SCREENSIZE_ADAPTIVE   \
+    -D K_EMTS_THREADS=K_EMTS_THREADS_1 -D K_EMTS_CMODE=K_EMTS_CMODE_ASCII                        \
+    -D K_EMTS_MALLOCSTRAT=K_EMTS_MALLOCSTRAT_OM_FATAL                                            \
+    -o emts_ifsfscan                                                                             \
+    ../win/emts_ifsfscan.cpp
+#-------------------------------------------------------------------------------------------------
+#End of build_ets_ifsfscan.
+#-------------------------------------------------------------------------------------------------

@@ -1,0 +1,17 @@
+--------------------------------------------------------------------------------
+$Header: /home/dashley/cvsrep/uculib01/uculib01/src/stm8/cosmic/modx/lfu16filtafiltrxn/devel/testcasegen_01.txt,v 1.2 2010/02/25 15:37:49 dashley Exp $
+--------------------------------------------------------------------------------
+Please see the corresponding directory for this function under "modx0" for the
+actual program to generate test vectors.  The test vectors are the same across
+memory models, so the program is not duplicated in the version control
+archives.
+--------------------------------------------------------------------------------
+$Log: testcasegen_01.txt,v $
+Revision 1.2  2010/02/25 15:37:49  dashley
+Extra line removed.
+
+Revision 1.1  2010/02/25 15:37:33  dashley
+Initial checkin.
+--------------------------------------------------------------------------------
+End of $RCSfile: testcasegen_01.txt,v $
+--------------------------------------------------------------------------------

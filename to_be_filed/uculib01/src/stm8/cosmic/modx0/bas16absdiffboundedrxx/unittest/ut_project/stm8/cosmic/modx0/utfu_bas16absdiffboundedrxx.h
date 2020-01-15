@@ -1,0 +1,47 @@
+//-------------------------------------------------------------------------------
+//$Header: /home/dashley/cvsrep/uculib01/uculib01/src/stm8/cosmic/modx0/bas16absdiffboundedrxx/unittest/ut_project/stm8/cosmic/modx0/utfu_bas16absdiffboundedrxx.h,v 1.1 2010/03/20 23:26:50 dashley Exp $
+//-------------------------------------------------------------------------------
+//Copyright (c)2010 David T. Ashley
+//
+//Permission is hereby granted, free of charge, to any person obtaining a copy
+//of this software source code and associated documentation files (the
+//"Software"), to deal in the Software without restriction, including without
+//limitation the rights to use, copy, modify, merge, publish, distribute,
+//sublicense, and/or sell copies of the Software, and to permit persons to whom
+//the Software is furnished to do so, subject to the following conditions:
+//
+//The above copyright notice and this permission notice shall be included in
+//all copies or substantial portions of the Software.
+//
+//THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+//THE SOFTWARE.
+//-------------------------------------------------------------------------------
+#ifndef UTFU_BAS16ABSDIFFBOUNDEDRXX_H
+#define UTFU_BAS16ABSDIFFBOUNDEDRXX_H
+
+#ifdef MODULE_UTFU_BAS16ABSDIFFBOUNDEDRXX
+   #define DECMOD_UTFU_BAS16ABSDIFFBOUNDEDRXX
+#else
+   #define DECMOD_UTFU_BAS16ABSDIFFBOUNDEDRXX extern
+#endif
+
+DECMOD_UTFU_BAS16ABSDIFFBOUNDEDRXX UCU_UINT32  UtsnBaS16AbsDiffBoundedRxx(void);
+DECMOD_UTFU_BAS16ABSDIFFBOUNDEDRXX void        UtspBaS16AbsDiffBoundedRxx(UCU_UINT32 test_no, void (*start_pointer)(void), void (*end_pointer)(void));
+DECMOD_UTFU_BAS16ABSDIFFBOUNDEDRXX UCU_BOOLEAN UtfuBaS16AbsDiffBoundedRxx(void);
+
+#endif
+
+//-------------------------------------------------------------------------------
+//$Log: utfu_bas16absdiffboundedrxx.h,v $
+//Revision 1.1  2010/03/20 23:26:50  dashley
+//Initial checkin.
+//
+//-------------------------------------------------------------------------------
+//End of $RCSfile: utfu_bas16absdiffboundedrxx.h,v $
+//-------------------------------------------------------------------------------
+

@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>MD5 And CRC-32 Calculation Utilities For Windows (Similar To Unix
+&quot;md5sum -b&quot;)</title>
+<base target="main">
+<bgsound src="../../gensounds/carlin_pa/dad_drink_more.wav" loop="0">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="5">MD5 And CRC-32 Calculation Utilities For Windows (Similar To Unix
+&quot;<i>md5sum
+-b</i>&quot;)</font></b></p>
+<hr>
+
+One of the most common requests I receive is for a utility to calculate the MD5
+message digest of a file on a Windows system.&nbsp; (Unix has a command to do
+this, <i>md5sum</i>.)&nbsp; Usually the need for such a utility arises in
+verifying a download (an ISO CD image, for example).
+<p>Both the graphical and console-mode utilities supplied on this page are also
+included in the <i>ESRG Tool Set</i> download, but it is far quicker and easier
+to just grab one or both utilities here.</p>
+<p>Both utilities were created using Microsoft Visual C++ 6.0, and have no
+external dependencies (no .DLL dependencies, for example).&nbsp; They should run
+on any Windows 95 or later system.</p>
+<p>Both utilities calculate the MD5 message digest only in &quot;binary&quot;
+mode (i.e. &quot;<i>md5sum -b</i>&quot; in Unix).&nbsp; This is the mode which
+is used in calculating the MD5 message digest accompanying downloads.</p>
+<p>The graphical version of the utility presents a graphical interface</p>
+<p align="center"><img border="0" src="g_util_01.gif" width="533" height="136"></p>
+<p>and one may then either select files using drag'n'drop or the <i>File</i>
+manu.&nbsp; The utility will then calculate the MD5 message digest and CRC-32 of
+the file(s) selected.&nbsp; The results may be copied and pasted for printing,
+archiving, or other purposes.&nbsp;</p>
+<p align="center"><img border="0" src="g_util_02.gif" width="533" height="136"></p>
+<p>The console mode version of the utility, which is named md5.exe, operates
+similarly, except it only calculates the MD5 (no CRC-32), and it will only
+process one file at a time.&nbsp; There is also a separate CRC-32 utility
+available.</p>
+<p align="center"><img border="0" src="g_util_03.gif" width="620" height="131"></p>
+<p>These standalone utilities can be downloaded from the links in the table
+below.</p>
+<table border="2" width="100%">
+  <tr>
+    <td width="21%"><b>Download Link</b></td>
+    <td width="35%"><b>Description</b></td>
+    <td width="44%"><b>File Size And MD5</b></td>
+  </tr>
+  <tr>
+    <td width="21%"><a href="gfsw.exe">gfsw.exe</a></td>
+    <td width="35%">Windows graphical MD5 and CRC-32 utility.</td>
+    <td width="44%">Size:<br>
+      <font face="Courier" size="2">65,536</font><br>
+      MD-5<br>
+      <font face="Courier" size="2">0c726ad4d87684a58d765540547b1f45</font></td>
+  </tr>
+  <tr>
+    <td width="21%"><a href="md5.exe">md5.exe</a></td>
+    <td width="35%">Windows console-mode MD5 utility.</td>
+    <td width="44%">Size:<br>
+      <font face="Courier" size="2">53,248</font><br>
+	MD-5:<br>
+      <font face="Courier" size="2">b6ced14d5488702906a3323b79aa42df</font></td>
+  </tr>
+  <tr>
+    <td width="21%"><a href="crc32.exe">crc32.exe</a></td>
+    <td width="35%">Windows console-mode CRC-32 utility.</td>
+    <td width="44%">Size:<br>
+      <font face="Courier" size="2">49,152</font><br>
+	MD-5:<br>
+      <font face="Courier" size="2">c9e98639ad3a3ade45cf21234fb6e1e0</font></td>
+  </tr>
+</table>
+<p><b><u>Other notes:</u></b></p>
+<ul>
+  <li>In terms of speed, the utilities seem to be about 95% as fast (i.e. almost
+    identical speed) as the Cygwin <i>md5sum</i> utility.</li>
+  <li>The source code of these utilities is packaged with the <i>ESRG Tool Set</i>
+    source code.</li>
+  <li>The MD5 message digest is covered in <a href="../../docs/rfc1321.txt">RFC
+    1321</a>.</li>
+</ul>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">Sound
+credit:&nbsp; George Carlin, <i>Parental Advisory</i>.<br>This page
+maintained by <a href="mailto:dtashley@users.sourceforge.net"> David T. Ashley</a>.<br>
+$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/winutils/md5sum/index.html,v 1.2 2003/05/15 15:47:41 dtashley Exp $</font></p>
+<hr noshade size="5">
+</body>
+</html>

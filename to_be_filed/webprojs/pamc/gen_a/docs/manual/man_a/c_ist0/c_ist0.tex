@@ -1,0 +1,651 @@
+%$Header: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_ist0/c_ist0.tex,v 1.9 2009/11/04 16:50:19 dashley Exp $
+
+\chapter{Installation of \emph{\productbasename{}-\productversion{}}}
+
+\label{cist0}
+
+\beginchapterquote{``A distributed system is one in which the failure of
+                     a computer you didn't even know existed can render 
+                     your own computer unusable.''}
+                  {Les Lamport, as quoted in newsgroup post by Richard Heylen}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction}
+%Section tag:  INT0
+\label{cist0:sint0}
+
+This chapter provides instructions for installing
+\emph{\productbasename{}-\productversion{}}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{System Requirements}
+%Section tag:  srq0
+\label{cist0:ssrq0}
+
+\index{system requirements}In order to install 
+\emph{\productbasename{}-\productversion{}}, the
+server must meet the following requirements:
+
+\begin{itemize}
+\item Virtually any\footnote{\emph{Any} because  
+      \emph{\productbasename{}-\productversion{}} is a very ordinary
+      database application and does not make use of any special
+      features of the operating system or \emph{MySQL}.}
+      version of a *nix (\emph{Linux}, \emph{FreeBSD}, 
+      \emph{Solaris}, etc.).
+\item \index{apache@\emph{apache}}\emph{apache}, any modern version.
+\item \index{PHP@\emph{PHP}}\emph{PHP}, version 4.X or above.
+\item \index{MySQL@\emph{MySQL}}\emph{MySQL}, version 4.X or above.
+\item Any sane processor and processor speed.
+\item Any sane amount of RAM.
+\item Adequate system permissions to inject e-mail from \emph{PHP} via \emph{PHP}'s
+      \index{mail()@\emph{mail($\cdot{}$)}}\emph{mail($\cdot{}$)} function.
+\item Adequate system permissions to set up a directory, with 
+      read/write/create permissions
+      for the UID/GID of the \emph{apache} server, to contain the file repository.
+      The file repository must not be directly in the logical web space served
+      directly by \emph{apache}.
+\item Adequate system permissions to set up a \emph{cron} job that runs
+      at least once every several minutes and runs under the same UID/GID as the
+      \emph{Apache} server.\footnote{Because this \emph{cron} job performs
+      some CPU-intensive tasks (such as verifying file signatures of files in the
+      file repository), it would violate
+      the terms of most shared hosting services.  A dedicated server is
+      almost certainly required; and if not that then a server that is not
+      too heavily loaded.}
+\item Adequate system permissions to set up a location for the PHP library
+      that is accessible to the \emph{apache} UID/GID but not in the
+      logical web space served directly by \emph{apache}.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation Checklist}
+%Section tag:  ICK0
+\label{cist0:sick0}
+
+This section provides an enumerated overview of the steps required to
+install \emph{\productbasename{}-\productversion{}}.  The steps are explained
+in detail in the indicated sections.
+
+\begin{enumerate}
+\item Selection of unpack directory, web root directory, 
+      PHP library directory, and file repository directory  
+      (\S{}\ref{cist0:sdse0}).
+\item Unpacking of \emph{\productbasename{}-\productversion{}} 
+      \emph{tar.gz} file  (\S{}\ref{cist0:sutz0}).
+\item Customization of \emph{PHP} include path (\S{}\ref{cist0:scpi0}).
+\item Creation of site hash key (\S{}\ref{cist0:scsh0}).
+\item Creation of \emph{MySQL} database (\S{}\ref{cist0:scmd0}).
+\item Setup of \emph{apache} to serve web content (\S{}\ref{cist0:ssap0}).
+\item Copying of web content files (\S{}\ref{cist0:swcf0}).
+\item Copying of \emph{PHP} library files (\S{}\ref{cist0:scph0}).
+\item Initialization of database (\S{}\ref{cist0:sdiz0}).
+\item Initial testing (\S{}\ref{cist0:sits0}).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Directory Selection}
+%Section tag:  dse0
+\label{cist0:sdse0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Unpacking of \emph{tar.gz} File}
+%Section tag:  utz0
+\label{cist0:sutz0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Customizaton of \emph{PHP} Include Path}
+%Section tag:  cpi0
+\label{cist0:scpi0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creation of Site Hash Key}
+%Section tag:  csh0
+\label{cist0:scsh0}
+
+The site hash key is best created using the
+\index{hashkeygen@\emph{hashkeygen}} program.  The specific steps are:
+
+\begin{enumerate}
+\item Change directory to the directory containing the script using
+      the command ``\texttt{cd cd sw/standalone}'' or similar.
+\item Ensure that the file \emph{hashkeygen.php} has the
+      ``\texttt{x}'' bit set.  The command ``\texttt{chmod +x hashkeygen.php}''
+      will accomplish this in most circumstances.
+\item Run the program using the command ``\texttt{./hashkeygen.php}''.
+\end{enumerate}
+ 
+\begin{figure}
+\begin{footnotesize}
+\begin{verbatim}
+[dashley@pamc standalone]$ ./hashkeygen.php
+The key char set size is 89.
+To maintain a purely random distribution, the maximum value of a
+random character that can be used is 177.
+Target key length is 204 characters.
+Open of "/dev/random" was successful.  Will now generate hash key.  This may
+take up to several minutes, as the device may block.  Each character from
+"/dev/random" that can be used is denoted with a ".", and each character
+that cannot be used is denoted with a "/".
+.../../../.././/../././....///..../............/././../.....
+/////.//./////.....//./././.././/.../.../.../...//.../././/.
+/...../..../....../......../.............//...../../..././..
+///./....//......//.//....////../..../......../....//.../../
+/./././/..//./......./......///..././/......../..../.......
+Key generation complete.
+\end{verbatim}
+\end{footnotesize}
+\caption{Typical Output of \emph{hashkeygen}}
+\label{fig:cist0:scsh0:00}
+\end{figure}
+
+\begin{figure}
+\begin{scriptsize}
+\begin{verbatim}
+<?php
+//hashkey.inc -- Definition of hash key for PAMC.
+//--------------------------------------------------------------------------------
+//This file is automatically generated by the hashkeygen.php program.  Because
+//this is a data file that should, for security reasons, be different for each
+//deployment of the system, it is not kept under version control.  However, the
+//hashkeygen.php program that generated this file has this version control
+//information associated with it:
+//$Source: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_ist0/c_ist0.tex,v $
+//$Revision: 1.9 $
+//$Date: 2009/11/04 16:50:19 $
+//$Author: dashley $
+//$State: Exp $
+//--------------------------------------------------------------------------------
+$config_hard["hash"]["key"] =   "z)Jckkr?}6UC+GN8A{#VL{&DEdH=[Neu-X u4OONN+<7i)@t"
+                              . "BZ_0LoD]8.@aYBrr[D6c(RV(vg3JdDIe^gW1?I2}5-[Imj5h"
+                              . ">f{X]19R()i/)&;S1&A3^Wj_-Xjr!Vv(5VR]{ h9bFeWMXD "
+                              . "+3@6W+/ _I *4yZ7umMa[o)!!J 43,OJmJBDpaRkzdr.;a2x"
+                              . "%tXn&9a!QXa|";
+//--------------------------------------------------------------------------------
+?>
+\end{verbatim}
+\end{scriptsize}
+\caption{Typical Hash Key Generated by \emph{hashkeygen}}
+\label{fig:cist0:scsh0:01}
+\end{figure}
+
+Sample typical output of the \emph{hashkeygen} program is shown in
+Fig. \ref{fig:cist0:scsh0:00}.  A typical key
+generated is shown in 
+Fig. \ref{fig:cist0:scsh0:01}.
+
+Note that the \emph{hashkeygen} program writes its output to the file\\\\
+``\texttt{../phplib/hash/hashkey.inc}''.\\\\  Later in the installation,
+this file will be copied to the final location for the \emph{PHP} library.
+
+It is naturally important that each deployment of
+\emph{\productbasename{}-\productversion{}} have a hash key that is
+unknown to a potential attacker.  Although the \emph{hashkeygen} program is 
+the most effective way to generate a random hash key, the key can also
+be created or edited manually (although this is not recommended).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creation of \emph{MySQL} Database}
+%Section tag:  cmd0
+\label{cist0:scmd0}
+
+Setup of 
+\index{MySQL@\emph{MySQL}!Setup for \productbasename{}-\productversion{}@Setup for \emph{\productbasename{}-\productversion{}}}%
+\emph{MySQL} involves obtaining a database name,
+userid, and password.  (This is the only information
+required to set up \emph{\productbasename{}}---creation of
+database tables is handled by a script.)
+
+The steps to set up \emph{MySQL} depend on how the software 
+is hosted.
+
+\begin{itemize}
+\item If the software is hosted by a hosting company, the 
+      \emph{MySQL} database name, userid, and password will probably
+      be assigned by the hosting company.
+\item If the software is hosted on an owned or dedicated server,
+      the setup must be performed by the individual
+      installing \emph{\productbasename{}}.
+\end{itemize}
+
+If the software is hosted on an owned or dedicated server,
+the following steps should be used to set up \emph{MySQL}:
+
+\begin{enumerate}
+\item Choose a database name, userid, and password
+      for use with \emph{MySQL}.  In subsequent description, these
+      are denoted \emph{dbname}, \emph{userid},
+      and \emph{password}.
+\item Log into \emph{MySQL} as the root user.\footnote{Note that the
+      \emph{root} password for \emph{MySQL} is not the same
+      thing as the \emph{root} user password for \emph{Linux}.}
+      The command to do this is:
+
+      \texttt{mysql --user=root -p}
+\item Create the database.  The \emph{MySQL} command to do this is:
+
+      \texttt{create database \emph{dbname};}
+\item Grant the user \emph{userid} all privileges on database
+      \emph{dbname} using password \emph{password} when connecting
+      from \emph{localhost}.\footnote{The normal arrangement is that the
+      \emph{MySQL} daemon runs on the same server as \emph{Apache}, hence
+      the connection from \emph{localhost}.}  The command to do this is:
+
+      \texttt{grant all on \emph{dbname}.* to \emph{userid}@localhost\\identified by '\emph{password}';}
+\item Log out of \emph{MySQL} (Control-D).
+\item Test the permissions created by running
+
+      \texttt{mysql --user=\emph{userid} -p}
+
+      and entering the \emph{password} chosen.  Issue the command:
+
+      \texttt{use \emph{dbname};}
+
+      to verify permission to access \emph{dbname}.
+\item Log out of \emph{MySQL} (Control-D).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creation of Network Interface Aliases (Some Installations Only)}
+%Section tag:  cna0
+\label{cist0:scna0}
+
+For greater security, \emph{\productbasename{}-\productversion{}} may be 
+served via \emph{https} rather than \emph{http}.  Because
+each domain served by \emph{https} must have its own IP address, in some
+installations additional IP addresses will need to be bound to the same
+network interface.
+
+The procedure for assigning additional IP addresses to a network
+interface involves creating an additional file in the
+\texttt{/etc/sysconfig/network-scripts} directory.
+The most common scenario is to create a file with a \emph{:0} suffix.
+The files below illustrate adding the IP address 208.81.180.179 to
+an interface already bound to the IP address 208.81.180.178.
+
+\begin{small}
+\begin{verbatim}
+[dashley@pamc ~]$ cat /etc/sysconfig/network-scripts/ifcfg-eth0
+# Broadcom Corporation NetXtreme BCM5722 Gigabit Ethernet PCI Express
+DEVICE=eth0
+BOOTPROTO=none
+BROADCAST=208.81.180.255
+HWADDR=00:1e:c9:51:a6:b9
+IPADDR=208.81.180.178
+NETMASK=255.255.255.128
+NETWORK=208.81.180.128
+ONBOOT=yes
+GATEWAY=208.81.180.129
+TYPE=Ethernet
+[dashley@pamc ~]$ cat /etc/sysconfig/network-scripts/ifcfg-eth0:0
+# Broadcom Corporation NetXtreme BCM5722 Gigabit Ethernet PCI Express
+DEVICE=eth0:0
+BOOTPROTO=none
+BROADCAST=208.81.180.255
+HWADDR=00:1e:c9:51:a6:b9
+IPADDR=208.81.180.179
+NETMASK=255.255.255.128
+NETWORK=208.81.180.128
+ONBOOT=yes
+GATEWAY=208.81.180.129
+TYPE=Ethernet
+\end{verbatim}
+\end{small}
+
+Once the additional file is created, the \texttt{ifup} command can
+used to activate the interface without rebooting the system, i.e.
+\texttt{ifup eth0:0}.  When the system is rebooted, the interface will
+be activated automatically if \texttt{ONBOOT=yes} is specified.
+
+The network to which the server is connected must be configured to
+accept the additional IP addresses.  More information can be found
+in various \emph{Linux} networking tutorials on the Internet.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creation of Multiple Instances of \emph{apache}}
+%Section tag:  cmi0
+\label{cist0:scmi0}
+
+A single instance of \emph{apache}, running under a single UID/GID,
+can be configured to listen on multiple IP addresses and
+serve multiple domains via \emph{https}.  In some server deployments,
+this will work well.
+
+However, in some server deployments, it is desirable to serve multiple
+domains from the same server, and using a single instance
+of \emph{apache} may raise security issues if not
+all of the web scripts are under the control of the same individual
+or organization.  It would be possible for one author of web content
+to write a script that compromises private files of another author---files
+containing hash keys, cryptographic keys, or database passwords, for example.
+
+Running multiple instances of \emph{apache}, each running under a different
+UID/GID and listening on a different IP address or port, can alleviate
+security concerns.  For example, in some server deployments it would be
+possible to run \emph{\productbasename{}-\productversion{}} using a second
+instance of \emph{apache} and a separate UID/GID, thus securing it against
+attacks launched from the UID/GID of other instance(s).
+
+A naming schema should be chosen for the multiple 
+instances of \emph{apache}.  One naming schema would be to designate
+the IP addresses as \emph{a}, \emph{b}, etc. so that the
+instance of \emph{apache} listening on port 80 on the first interface
+would be named \emph{httpd80a}.
+
+The startup scripts in \texttt{/etc/rc.d/init.d} should be copied and modified
+so that there is one startup script per instance of \emph{apache},
+appropriately named to coincide with the naming schema chosen.
+The difference listing below indicates how to modify each startup
+script.  Note that some modifications (the first ones in the listing)
+are to comments and are unnecessary.
+
+\begin{small}
+\begin{verbatim}
+[dashley@pamc ~]$ diff /etc/rc.d/init.d/httpd /etc/rc.d/init.d/httpd80a
+3c3
+< # httpd        Startup script for the Apache HTTP Server
+---
+> # httpd80a     Startup script for the Apache HTTP Server
+8,11c8,11
+< # processname: httpd
+< # config: /etc/httpd/conf/httpd.conf
+< # config: /etc/sysconfig/httpd
+< # pidfile: /var/run/httpd.pid
+---
+> # processname: httpd80a
+> # config: /etc/httpd/conf/httpd80a.conf
+> # config: /etc/sysconfig/httpd80a
+> # pidfile: /var/run/httpd80a.pid
+16,17c16,17
+< if [ -f /etc/sysconfig/httpd ]; then
+<         . /etc/sysconfig/httpd
+---
+> if [ -f /etc/sysconfig/httpd80a ]; then
+>         . /etc/sysconfig/httpd80a
+33,36c33,36
+< httpd=${HTTPD-/usr/sbin/httpd}
+< prog=httpd
+< pidfile=${PIDFILE-/var/run/httpd.pid}
+< lockfile=${LOCKFILE-/var/lock/subsys/httpd}
+---
+> httpd=${HTTPD-/usr/sbin/httpd80a}
+> prog=httpd80a
+> pidfile=${PIDFILE-/var/run/httpd80a.pid}
+> lockfile=${LOCKFILE-/var/lock/subsys/httpd80a}
+41c41
+<       CONFFILE=/etc/httpd/conf/httpd.conf
+---
+>       CONFFILE=/etc/httpd/conf/httpd80a.conf
+\end{verbatim}
+\end{small}
+
+The executable files in \texttt{/sbin} should 
+be copied so that \texttt{httpd}, \texttt{httpd.worker}, and
+\texttt{httpd.event} each have appropriately named copies corresponding
+to the naming schema chosen.  The listing below shows the files
+in a typical server.
+
+\begin{small}
+\begin{verbatim}
+[dashley@pamc ~]$ ls -al /usr/sbin/http*
+-rwxr-xr-x 1 root root 315284 Jul 15 09:04 /usr/sbin/httpd
+-rwxr-xr-x 1 root root 315284 Oct  4 01:29 /usr/sbin/httpd443a
+-rwxr-xr-x 1 root root 327708 Oct  4 01:29 /usr/sbin/httpd443a.event
+-rwxr-xr-x 1 root root 327708 Oct  4 01:30 /usr/sbin/httpd443a.worker
+-rwxr-xr-x 1 root root 315284 Nov  1 23:20 /usr/sbin/httpd443b
+-rwxr-xr-x 1 root root 327708 Nov  1 23:20 /usr/sbin/httpd443b.event
+-rwxr-xr-x 1 root root 327708 Nov  1 23:20 /usr/sbin/httpd443b.worker
+-rwxr-xr-x 1 root root 315284 Oct  4 01:29 /usr/sbin/httpd80a
+-rwxr-xr-x 1 root root 327708 Oct  4 01:29 /usr/sbin/httpd80a.event
+-rwxr-xr-x 1 root root 327708 Oct  4 01:30 /usr/sbin/httpd80a.worker
+-rwxr-xr-x 1 root root 315284 Nov  1 23:19 /usr/sbin/httpd80b
+-rwxr-xr-x 1 root root 327708 Nov  1 23:20 /usr/sbin/httpd80b.event
+-rwxr-xr-x 1 root root 327708 Nov  1 23:20 /usr/sbin/httpd80b.worker
+-rwxr-xr-x 1 root root 327708 Jul 15 09:04 /usr/sbin/httpd.event
+-rwxr-xr-x 1 root root 327708 Jul 15 09:04 /usr/sbin/httpd.worker
+\end{verbatim}
+\end{small}
+
+The runlevel links can then be modified.  Need to add information about this.
+
+\emph{Dave Ashley note:}
+When attempting to use four instances of \emph{apache} to listen on two
+IP addresses, ran into an issue with port binding to 0:0:0:0.  Need to
+resolve this issue definitively.  For now, am using two instances of
+\emph{apache}, one listening on two IP addresses on port 80, and the other
+listening on two IP addresses on port 443.  I should be able, however, to use
+four instances.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Generation of an SSL Certificate for \emph{apache}}
+%Section tag:  gsl0
+\label{cist0:sgsl0}
+
+An SSL certificate allows a browser (when using \emph{https}) to verify that
+the site connected to is the actual site rather the result of intercepted
+transmission.
+
+An SSL certificate is required to serve \emph{\productbasename{}-\productversion{}}
+via \emph{https}.
+
+There are two types of SSL certificates that may used:
+
+\begin{itemize}
+\item \textbf{A purchased certificate (\S\ref{cist0:sgsl0:spsl0})\@.}
+      A purchased certificate typically costs around \$30 (for a 1-year
+      certificate), but is traceable to a certification authority already
+      accepted by browsers and so introduces no complexity in configuring
+      a browser to accept the certificate.
+\item \textbf{A self-signed certificate (\S\ref{cist0:sgsl0:sgss0})\@.}
+      A self-signed certificate is free, but introduces complexity in
+      configuring a browser to accept the certificate without nags or
+      perhaps to accept the certificate at all.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Purchase of an SSL Certificate}
+%Subsection tag:  psl0
+\label{cist0:sgsl0:spsl0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Generating a Self-Signed SSL Certificate}
+%Subsection tag:  gss0
+\label{cist0:sgsl0:sgss0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Setup of \emph{apache} to Serve Web Content}
+%Section tag:  sap0
+\label{cist0:ssap0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Installation of the \emph{cc\_kt1\_auth\_php} Program}
+%Section tag:  ipg0
+\label{cist0:sipg0}
+
+The \emph{cc\_kt1\_auth\_php} program is called from \emph{PHP} scripts to
+authenticate the \emph{CryptoCard} KT-1 token.
+
+The \emph{cc\_kt1\_auth\_php} program operates in the following way:
+
+\begin{itemize}
+\item A \emph{PHP} script invokes the \emph{cc\_kt1\_auth\_php} program,
+      opening two pipes\footnote{Pipes (more precisely, anonymous pipes) are used because a pipe provides
+      secure communication between processes.  Passing sensitive information
+      (such as token keys) as a command-line parameter is not secure, as
+      command-line parameters are world-visible on a \emph{Linux} system.}
+      to communicate bidirectionally with the program.
+\item The \emph{cc\_kt1\_auth\_php} accepts all of the data provided
+      by the \emph{PHP} script via a pipe.  The data includes
+      a token key, token state, and other parameters.
+\item The \emph{cc\_kt1\_auth\_php} calls a library provided by 
+      \emph{CryptoCard} to predict what a token should display.
+\item The \emph{cc\_kt1\_auth\_php} returns this information to 
+      the \emph{PHP} script via a pipe.
+\item The \emph{cc\_kt1\_auth\_php} terminates.
+\item The \emph{PHP} script uses the information provided by the
+      \emph{cc\_kt1\_auth\_php} program to authenticate a token.
+\end{itemize}
+
+The \emph{cc\_kt1\_auth\_php} can be installed using the following steps:
+
+\begin{enumerate}
+\item Obtain the \emph{AuthEngine SDK} product from \emph{CryptoCard}.
+\item Install the shared libraries (\texttt{libAuthentication.so}
+      \texttt{libAuthentication.a}) in the recommended location for
+      the target system,\footnote{On a standard \emph{Linux} system,
+      the appropriate location is \texttt{/usr/lib}.}
+      and set ownership and permissions appropriately.
+\item Place the program file (\texttt{cc\_kt1\_auth\_php.c}) and
+      the header file from \emph{CryptoCard} (\texttt{Authentication.h})
+      in a directory for compilation.
+\item Compile the program using the instructions contained in the source
+      code.  The source code also contains a description of steps to
+      take if \texttt{libcrypto.so.4} is missing.
+\item Copy the executable to a location suitable for the target system and
+      set ownership and permissions appropriately (this is described
+      in the source code).
+\end{enumerate}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Copying of \emph{PHP} Web Content Files}
+%Section tag:  wcf0
+\label{cist0:swcf0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Copying of \emph{PHP} Library Files}
+%Section tag:  CPH0
+\label{cist0:scph0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Database Initialization}
+%Section tag:  DIZ0
+\label{cist0:sdiz0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Initial Testing}
+%Section tag:  ITS0
+\label{cist0:sits0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_ist0.tex,v $
+$Source: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_ist0/c_ist0.tex,v $
+$Revision: 1.9 $
+$Author: dashley $
+$Date: 2009/11/04 16:50:19 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_ist0.tex,v $
+%Revision 1.9  2009/11/04 16:50:19  dashley
+%Edits.
+%
+%Revision 1.8  2009/11/02 04:53:28  dashley
+%Edits.
+%
+%Revision 1.7  2009/11/02 02:00:04  dashley
+%Edits.
+%
+%Revision 1.6  2007/06/24 21:19:24  dashley
+%Minor extra word (that won't work) for MySQL command removed.
+%
+%Revision 1.5  2007/06/12 02:47:17  dashley
+%Edits.
+%
+%Revision 1.4  2007/06/10 18:03:20  dashley
+%Edits.
+%
+%Revision 1.3  2007/06/06 02:23:58  dashley
+%Edits.
+%
+%Revision 1.2  2007/06/04 03:26:55  dashley
+%Edits.
+%
+%Revision 1.1  2007/06/04 00:12:03  dashley
+%Initial checkin.
+%
+%End of $RCSfile: c_ist0.tex,v $.

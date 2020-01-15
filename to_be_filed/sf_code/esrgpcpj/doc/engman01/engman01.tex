@@ -1,0 +1,152 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/doc/engman01/engman01.tex,v 1.5 2002/06/26 01:01:49 dtashley Exp $
+%
+\documentclass[letterpaper,10pt,titlepage]{custbook}
+\pagestyle{headings}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{makeidx}
+\usepackage{graphicx}
+%
+
+%Standard preamable.
+\makeindex
+%
+%User-defined environments.
+\input{general/newenvs}
+
+\begin{document}
+
+%The name of the tool set is still in a state of flux.  Let's make this
+%a command.
+\newcommand{\tsname}{ESRG Tool Set}
+
+%The version of the tool set may change.  Let's localize that.
+\newcommand{\tsversion}{1.06}
+
+%The title of the companion book.
+\newcommand{\compbooktitlelong}{A Practitioner's Guide To The Design And Development Of Small
+                               Embedded Software}
+
+%The command to be used to set text slightly inward, like when putting
+%a long e-mail address on its own line.
+\newcommand{\longthingindent}{\hspace*{14mm}}
+
+%The order and number of authors may change.  Let's assume for now
+%that there will be only two authors.  I do not know who should be
+%listed first.  Swapping the strings below should change everything
+%in the document.
+\newcommand{\authors}{David T. Ashley}
+\newcommand{\authorone}{David T. Ashley}
+
+\title{No Title Defined}
+\author{No Authors Defined}
+\date{No Date Defined}
+
+%Make the title page of the document.
+\input{general/tpage}
+\clearpage
+
+%After this, we want a ragged bottom.  When a document has little material
+%(and hence not enough to move text around), this works better.
+\raggedbottom
+
+%Everything here is front matter.
+\frontmatter{}
+
+%Table of contents
+\tableofcontents
+\clearpage
+
+%List of figures
+\listoffigures
+\clearpage
+
+%List of tables
+\listoftables
+
+%Preface
+\input{c_prf0/c_prf0}
+
+%Acknowledgements
+\input{c_ack0/c_ack0}
+
+%Everything here is the main matter.
+\mainmatter
+
+%COSP0: Introduction, Overview, Scope, And Purpose
+\cleardoublepage{}
+\input{c_osp0/c_osp0}
+
+%CRSI0: Required Software Installations
+\cleardoublepage{}
+\input{c_rsi0/c_rsi0}
+
+%CCVS0: Using CVS To Obtain Source Code And To Collaborate Electronically
+\cleardoublepage{}
+\input{c_cvs0/c_cvs0}
+
+%CBEW0: Building Tool Set Executables On A Microsoft Windows Platform
+\cleardoublepage{}
+\input{c_bew0/c_bew0}
+
+%CBEX0: Building Tool Set Executables On A *Nix Platform
+\cleardoublepage{}
+\input{c_bex0/c_bex0}
+
+%CBCB0: Building The Companion Book On A Microsoft Windows Platform
+\cleardoublepage{}
+\input{c_bcb0/c_bcb0}
+
+%CBCB0: Building The InstallShield Express Installation Executable On
+%       A Microsoft Windows Platform
+\cleardoublepage{}
+\input{c_bis0/c_bis0}
+
+%CSUP0: Obtaining Support And Collaborating Electronically
+\cleardoublepage{}
+\input{c_sup0/c_sup0}
+
+%CGLO0: Glossary Of Terms
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Glossary Of Terms}
+\input{c_glo0/c_glo0}
+
+%CGLO0: Glossary Of Symbols And Mathematical Notation
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Glossary Of Symbols And Mathematical Notation}
+\input{c_glm0/c_glm0}
+
+%CBIB0: Bibliography
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\input{c_bib0/c_bib0}
+
+%CIDX0: Index
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\input{c_idx0/c_idx0}
+
+\end{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: engman01.tex,v $
+%Revision 1.5  2002/06/26 01:01:49  dtashley
+%Edits, safety checkin.
+%
+%Revision 1.4  2002/06/25 02:44:15  dtashley
+%Edits.
+%
+%Revision 1.3  2002/06/24 20:49:14  dtashley
+%Edits.
+%
+%Revision 1.2  2002/06/24 18:17:17  dtashley
+%Formatting of log area corrected.
+%
+%Revision 1.1  2002/06/24 18:16:34  dtashley
+%Initial checkin.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%End of ENGMAN01.TEX.

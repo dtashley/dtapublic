@@ -1,0 +1,558 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_bsf0/c_bsf0.tex,v 1.9 2010/05/13 14:11:43 dashley Exp $
+
+\chapter{Bit-Mapped Set Functions}        
+\label{cbsf0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+\label{cbsf0:siov0}
+
+This chapter describes functions and data tables that operate on data
+as collections of bits.
+
+\begin{itemize}
+\item \S{}\ref{cbsf0:sctb0} (p. \pageref{cbsf0:sctb0})
+      describes constant lookup tables that are stored
+      in FLASH or ROM memory.  The primary purpose of these tables is
+      to support the functions described by this chapter, but the tables
+      are available publicly as well.
+\item \S{}\ref{cbsf0:sbcf0} (p. \pageref{cbsf0:sbcf0})
+      describes functions that calculate
+      bit cardinality (number of bits set or cleared).
+\item \S{}\ref{cbsf0:srof0} (p. \pageref{cbsf0:srof0})
+      describes functions that rotate
+      arrays of bits.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Constant Lookup Tables}
+\label{cbsf0:sctb0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU8ByteCardNibpLut[\protect\mbox{\protect$\cdot$}]}]
+           {\emph{UcuBtU8ByteCardNibpLut[\protect\mbox{\protect\boldmath $\cdot$}]}}
+\label{cbsf0:sctb0:suec0}
+
+\index{UcuBtU8ByteCardNibpLut[]@\emph{UcuBtU8ByteCardNibpLut[$\cdot$]}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+const UCU_UINT8 UcuBtU8ByteCardNibpLut[128]
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Contains the number of `1' bits (also called the bit cardinality of the byte)
+      in each of the 256 possible bytes, packed
+      into nibbles.  If the byte value $b$ is $\leq$127, the 
+      bit cardinality is in the lower nibble of array element
+      [$b$].  If the byte value $b$ is $\geq$128, the 
+      bit cardinality is in the upper nibble of array
+      element [$b-128$].
+\item For example, the value of element [11] is \$43.  This indicates that that
+      the number 11 (= \$0B = \%00001011) contains three `1' bits and that the number
+      139 (= 128+11 = \$8B = \%10001011) contains four `1' bits.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TABLE NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U8}: each element is of type UCU\_UINT8.
+      \emph{ByteCard}: cardinality of a byte.
+      \emph{Nibp}: nibble packed.
+      \emph{Lut}: lookup table.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU32RmaskLut[\protect\mbox{\protect$\cdot$}]}]
+           {\emph{UcuBtU32RmaskLut[\protect\mbox{\protect\boldmath $\cdot$}]}}
+\label{cbsf0:sctb0:srml0}
+
+\index{UcuBtU32RmaskLut[]@\emph{UcuBtU32RmaskLut[$\cdot$]}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+const UCU_UINT32 UcuBtU32RmaskLut[33]
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Array element [$b$] contains a UCU\_UINT32 integer with the
+      rightmost $b$ bits set to `1' and the others `0'.
+\item For example, the value of element [5] is \%00000000 00000000 00000000 00011111.
+\item Element [0] contains 0, and element [32] contains $2^{32}-1$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TABLE NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U32}: each element is of type UCU\_UINT32.
+      \emph{Rmask}: right mask.
+      \emph{Lut}: lookup table.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU32BitByIndexLut[\protect\mbox{\protect$\cdot$}]}]
+           {\emph{UcuBtU32BitByIndexLut[\protect\mbox{\protect\boldmath $\cdot$}]}}
+\label{cbsf0:sctb0:sbbi0}
+
+\index{UcuBtU32BitByIndexLut[]@\emph{UcuBtU32BitByIndexLut[$\cdot$]}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+const UCU_UINT32 UcuBtU32BitByIndexLut[32]
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Array element [$b$] contains a UCU\_UINT32 integer with
+      bit $b$ bit set to `1' and the others `0'.  (Bits are numbered starting
+      with 0 from the right.)
+\item For example, the value of element [5] is \%00000000 00000000 00000000 00100000.
+\item Element [0] contains 1, and element [31] contains $2^{31}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{TABLE NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U32}: each element is of type UCU\_UINT32.
+      \emph{BitByIndex}: indexing into the table by $b$ provides bit number $b$.
+      \emph{Lut}: lookup table.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Bit Cardinality Functions}
+\label{cbsf0:sbcf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU8BitCardRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBtU8BitCardRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbsf0:sbcf0:sbce0}
+
+\index{UcuBtU8BitCardRxx()@\emph{UcuBtU8BitCardRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuBtU8BitCardRxx(UCU_UINT8 arg)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the number of bits set in a UCU\_UINT8.  The return value cannot
+      exceed 8.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{arg}}\\
+      The UCU\_UINT8 for which the bit cardinality is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  The number of bits set in $arg$.  The return value will not exceed 8.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U8}: operates on unsigned UCU\_UINT8 operands.
+      \emph{BitCard}: bit cardinality.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU16BitCardRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBtU16BitCardRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbsf0:sbcf0:sbcs0}
+
+\index{UcuBtU16BitCardRxx()@\emph{UcuBtU16BitCardRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuBtU16BitCardRxx(UCU_UINT16 arg)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the number of bits set in a UCU\_UINT16.  The return value cannot
+      exceed 16.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{arg}}\\
+      The UCU\_UINT16 for which the bit cardinality is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  The number of bits set in $arg$.  The return value will not exceed 16.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}: operates on unsigned UCU\_UINT16 operands.
+      \emph{BitCard}: bit cardinality.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU32BitCardRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBtU32BitCardRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbsf0:sbcf0:sbct0}
+
+\index{UcuBtU32BitCardRxx()@\emph{UcuBtU32BitCardRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuBtU32BitCardRxx(UCU_UINT32 arg)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the number of bits set in a UCU\_UINT32.  The return value cannot
+      exceed 32.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{arg}}\\
+      The UCU\_UINT32 for which the bit cardinality is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  The number of bits set in $arg$.  The return value will not exceed 32.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U32}: operates on unsigned UCU\_UINT32 operands.
+      \emph{BitCard}: bit cardinality.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU32BitCardRnRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBtU32BitCardRnRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbsf0:sbcf0:sbcr0}
+
+\index{UcuBtU32BitCardRnRxx()@\emph{UcuBtU32BitCardRnRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuBtU32BitCardRnRxx(UCU_UINT32 arg, UCU_UINT8 n)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the number of bits set among the rightmost
+      $n$ bits in a $arg$.  The return value cannot
+      exceed 32.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{arg}}\\
+      The UCU\_UINT32 for which the bit cardinality 
+      of the rightmost $n$ bits is to be calculated.
+\item \emph{\textbf{n}}\\
+      The number of bits at the right for which to
+      calculate the cardinality.  A value of 0 will 
+      result in 0 returned from this function.  A
+      value of 32 will result in behavior idential to the
+      \emph{UcuBtU32BitCardRxx($\cdot$)} function.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  The number of bits set in $arg$ among the
+       rightmost $n$ bits.  The return value will not exceed 32.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item A value of $n$ greater than 32 will result in $n$ being treated
+      as 32.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U32}: operates on unsigned UCU\_UINT32 operands.
+      \emph{BitCard}: bit cardinality.
+      \emph{Rn}: a number of bits at the right.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rotation Functions}
+\label{cbsf0:srof0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuBtU32RotLeftNInPlaceRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuBtU32RotLeftNInPlaceRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cbsf0:srof0:srle0}
+
+\index{UcuBtU32RotLeftNInPlaceRxn()@\emph{UcuBtU32RotLeftNInPlaceRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuBtU32RotLeftNInPlaceRxn(UCU_UINT32 *tgt, UCU_UINT8 n)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Rolls the target UCU\_UINT32 left by $n$ bits.  (By ``roll'' we mean
+      that each bit shifted
+      out of position 31 is copied into position 0.)
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{tgt}}\\
+      A pointer to the target UCU\_UINT32.  This pointer may not be
+      NULL or otherwise invalid.  This function provides no guarantees
+      about the order in which the bytes of the target will be accessed,
+      how many times they will be accessed, or (if $n \bmod 32 = 0$) that
+      they will be accessed at all.  The only guarantee provided is that
+      at function exit the correct value will be stored in the target location.
+\item \emph{\textbf{n}}\\
+      The number of bits to roll the target left.
+      All UCU\_UINT8 input values including 0
+      are permitted and treated correctly.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  \emph{*tgt} will have been rolled left $n$ bits.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software and
+      is thread-safe,
+      so long as the UCU\_UINT32 data items pointed
+      to by \emph{*tgt} are unique.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U32}:     operates on unsigned UCU\_UINT32 operands.
+      \emph{Rot}:     rotate.
+      \emph{Left}:    left.
+      \emph{N}:       by $n$ bits.
+      \emph{InPlace}: operates on the operand in place (rather than returning the
+                      modified operand).
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_bsf0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_bsf0/c_bsf0.tex,v $
+$Revision: 1.9 $
+$Author: dashley $
+$Date: 2010/05/13 14:11:43 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_bsf0.tex,v $
+%Revision 1.9  2010/05/13 14:11:43  dashley
+%Renaming of function UcuBtU32RotLeftNInPlaceRxx() to
+%UcuBtU32RotLeftNInPlaceRxn().
+%
+%Revision 1.8  2010/05/12 22:24:57  dashley
+%Addition of UcuBtU32RotLeftNInPlaceRxx() function.
+%
+%Revision 1.7  2010/02/11 16:57:28  dashley
+%Addition of three functions.
+%
+%Revision 1.6  2010/02/10 20:04:37  dashley
+%Edits.
+%
+%Revision 1.5  2010/02/10 19:55:27  dashley
+%Edits.
+%
+%Revision 1.4  2010/02/10 16:46:56  dashley
+%Edits.
+%
+%Revision 1.3  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.2  2010/01/24 05:37:27  dashley
+%Addition and reorganization of content.
+%
+%Revision 1.1  2007/10/06 22:56:03  dtashley
+%initial checkin.
+%End of $RCSfile: c_bsf0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

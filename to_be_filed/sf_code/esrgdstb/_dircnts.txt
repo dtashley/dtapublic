@@ -1,0 +1,26 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgdstb/_dircnts.txt,v 1.2 2002/01/26 09:28:02 dtashley Exp $
+
+SUBDIRECTORY
+   /esrgdstb
+
+CONTENTS
+   This subdirectory contains files used by the ESRG in preparing 
+   distributions (i.e. packaged installations and distributions),
+   such as InstallShield Express project files, scripts, bitmaps,
+   etc.
+
+   Please see the "_license.txt" file for licensing information.
+
+MNEMONIC
+   "esrg" is short for "Embedded Systems Research Group".  "dstb"
+   is short for "distribution".
+
+#**************************************************************************
+# $Log: _dircnts.txt,v $
+# Revision 1.2  2002/01/26 09:28:02  dtashley
+# Minor formatting change (line removal).
+#
+# Revision 1.1.1.1  2002/01/26 09:26:11  dtashley
+# Initial creation/checkin.
+#**************************************************************************
+# End of _dircnts.txt.

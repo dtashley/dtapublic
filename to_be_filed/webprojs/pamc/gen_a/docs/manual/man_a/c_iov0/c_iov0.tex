@@ -1,0 +1,201 @@
+%$Header: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_iov0/c_iov0.tex,v 1.7 2008/02/14 16:44:47 dashley Exp $
+
+\chapter{Introduction and Overview}
+
+\label{ciov0}
+
+\beginchapterquote{``One way to prevent progress is by arguing that
+                     any first step is unfair to somebody.''}
+                  {Unknown}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Overview of \emph{\productbasename{}}}
+%Section tag:  pov0
+\label{ciov0:spov0}
+
+\emph{\productbasename{}} is a server-based and primarily web-based
+collaboration product to serve the enterprise that develops software.
+The \emph{\productbasename{}} 
+software (all of which runs on the server-side) will run only
+on *nix platforms.  The clients that use the software (web browsers)
+may be run on any platform; including \emph{Windows}, \emph{Linux}, and
+various embedded platforms such as intelligent cellphones and PDAs.
+
+The \emph{\productbasename{}} software may be used in two primary ways
+(not mutually exclusive):
+
+\begin{itemize}
+\item The product may be used as-is with no modifications.
+\item The existing authentication and database framework may be used
+      to speed development of custom database applications; either
+      supplanting or completely replacing existing database
+      functionality. 
+\end{itemize} 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Challenges in the Software Development Enterprise}
+%Section tag:  CEN0
+\label{ciov0:scen0}
+
+Software development is typically characterized by:
+
+\begin{itemize}
+\item Awesome complexity and hundreds or thousands of details.
+\item The need to resolve every detail correctly (this stems
+      directly from the nature of software and the requirement
+      for absolute correctness).
+\item The need to create or import workproducts and move them through
+      a defined process.
+\item The need to capture many different forms of data (for example,
+      scanned documents as 
+      \emph{.PDF}\index{PDF file@\emph{.PDF} file} files or 
+      images of product defects as 
+      \emph{.JPG}\index{JPG file@\emph{.JPG} file} files) and integrate
+      them into a defined process.
+\item The need to integrate individuals who are only peripherally part
+      of the enterprise (for example, customers and suppliers) into the
+      process.
+\item The need to work and access data securely from remote locations (for example,
+      from home, from coffee shops, from libraries, from cellphones and PDAs,
+      from customer sites, and from foreign countries and airport kiosks
+      while traveling).             
+\end{itemize}
+
+The complexity and need for correctness conflict directly
+with human limitations in the following ways:
+
+\begin{itemize}
+\item Humans cannot reliably manage large numbers of details without
+      the danger of neglecting some of the details.
+\item In the presence of large numbers of tasks to be
+      completed, humans often have difficulty identifying
+      the tasks that need to be completed and selecting
+      a task.
+\item When forced to switch between tasks, humans cannot 
+      efficiently save and restore context.  
+      Typically, resuming a task
+      involves a brief period of reviewing the status of
+      the task and planning how to proceed.      
+\end{itemize}
+
+Standard web database and 
+\index{two-factor authentication}two-factor authentication
+technology can address all of the needs cited above.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \emph{buy-versus-build} Decision}
+%Section tag:  BVB0
+\label{ciov0:sbvb0}
+
+\index{buy-versus-build}
+
+Many software development organizations are reluctant to develop collaboration
+tools in-house, citing the standard arguments against crafting solutions.
+
+For certain commodity items---such as software development tools, version control
+systems, and defect tracking systems---the \emph{buy} decision works well.
+
+However, for non-commodity items, it usually happens that the commercial tools
+available for purchase don't precisely fit enterprise processes and can't be
+modified or customized.  The enterprise is left with two choices:
+
+\begin{itemize}
+\item Purchase commercial tools that don't fit enterprise processes, forcing
+      the enterprise to misuse the tools or modify its processes to fit the
+      processes supported by the tools.
+\item Fail to purchase commercial tools and forego tool support.      
+\end{itemize}
+
+If, at every opportunity to make a buy-versus-build decision, the enterprise
+chooses \emph{buy}, the end result after several years will be persistent gaps
+in enterprise tool coverage.  Most organizations in fact end up with
+persistent gaps in tool coverage.
+
+\emph{\productbasename{}-\productversion{}} is essentially a ``catch-all''
+database framework designed to allow an organization to satisfy all unmet 
+database/collaboration needs in \emph{one} alternate framework.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Obtaining Assistance with \emph{\productbasename{}-\productversion{}}}
+%Section tag:  OAS0
+\label{ciov0:soas0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Records Retention Todos}
+%Section tag:  RRT0
+\label{ciov0:srrt0}
+
+Need to incorporate the following capability into the tool:
+
+\begin{itemize}
+\item \textbf{Legal Hold:}\\
+      Tool must be able to suspend deletion of some or all records
+      to support ``legal hold'' and similar notions.  This probably
+      means that in addition to suspending records retention deletions,
+      the database views have to disregard older records as if they have been
+      deleted (i.e. virtual non-existence).
+\item \textbf{Visible Record of Changes:}\\
+      The tool must not allow changes to be made that are ``silent'' where
+      the new data appears with no clear record that the data has been changed.
+      \emph{Bugzilla}, for example, shows changes via ``bug history''.  For all data,
+      there has to be a view of how, when, and by who it was modified.
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_iov0.tex,v $
+$Source: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/c_iov0/c_iov0.tex,v $
+$Revision: 1.7 $
+$Author: dashley $
+$Date: 2008/02/14 16:44:47 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_iov0.tex,v $
+%Revision 1.7  2008/02/14 16:44:47  dashley
+%Addition of records retention thoughts.
+%
+%Revision 1.6  2007/07/11 01:36:52  dashley
+%Edits.
+%
+%Revision 1.5  2007/06/05 00:42:10  dashley
+%Edits.
+%
+%Revision 1.4  2007/06/04 06:26:36  dashley
+%Edits.
+%
+%Revision 1.3  2007/06/04 03:26:55  dashley
+%Edits.
+%
+%Revision 1.2  2007/06/03 06:38:55  dashley
+%Edits.
+%
+%Revision 1.1  2007/06/03 04:57:26  dashley
+%Initial checkin.
+%
+%End of $RCSfile: c_iov0.tex,v $.

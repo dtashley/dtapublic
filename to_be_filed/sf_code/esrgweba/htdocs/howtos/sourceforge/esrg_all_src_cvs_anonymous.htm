@@ -1,0 +1,91 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>How To Obtain All ESRG Source Code And Materials Using Anonymous CVS
+Access</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">How To Obtain All ESRG Source Code And
+Materials Using Anonymous CVS Access</font></b></p>
+<hr>
+<p><a href="../../glossary/glossary.htm#cvs_vc" target="_blank">CVS</a> is the
+version control system most in favor with the open-source community.&nbsp; Using
+CVS, one can collaborate with other software developers in the development of
+source files and other documents.&nbsp; <a href="http://sourceforge.net" target="_blank">SourceForge</a>
+has cryptographic security in place for those wishing to collaborate in
+development (i.e. to change or add files using CVS), and getting set up to collaborate
+in this way is
+a complicated process.&nbsp; However, if you only wish to obtain the newest
+revisions or specific revisions of files (but do not wish to modify the CVS
+repository), the process is much simpler, and is described on this page.</p>
+<ol>
+  <li><b>Be sure that you wish to obtain the materials via CVS.</b>&nbsp;
+    Obtaining the materials via CVS has the disadvantage that the files you
+    obtain may not correspond to any released version of <i>The ESRG Tool Set</i>.&nbsp;
+    The differences between anonymous CVS access and using one of the source
+    distributions are described <a href="../esrg_src_howtos/anon_cvs_vs_targz.htm" target="_blank">here</a>.&nbsp;
+    If you wish to obtain material via anonymous CVS, it should be for one of
+    the following reasons:</li>
+    <ul>
+    <li>You require materials more recent than the latest source distribution. </li>
+    <li>You wish to obtain materials that are not packaged in any distribution
+      (the <a href="../../glossary/glossary.htm#installshield_express" target="_blank">InstallShield
+      Express</a> project file, for example). </li>
+    </ul>
+  <li><b>Obtain a list of all CVS modules.</b>&nbsp; &quot;module&quot; is a CVS
+    term for a top-level directory in the CVS repository.&nbsp; The easiest way
+    to obtain a list of all CVS modules is to view <a href="http://cvs.sourceforge.net/cgi-bin/viewcvs.cgi/esrg/" target="_blank">this
+    web page</a> and print it or write down all the folder names (except <i>CVSROOT</i>,
+    which can be ignored).&nbsp;</li>
+  <li><b>Obtain a CVS client.</b>&nbsp; For a Windows® system, the CVS
+    executable and brief instructions are <a href="../../arch_sw_etc/cvs_1_11/index.html" target="_blank">here</a>.&nbsp;
+    If you type &quot;<i>cvs</i>&quot; at a DOS command prompt and receive a
+    message from the CVS program, you have installed the client
+    successfully.&nbsp; The following screen snapshot shows a typical message
+    from a CVS client when only &quot;<i>cvs</i>&quot; is typed.
+    <p align="center"><img border="0" src="cvs_msg_no_cmd.gif" width="612" height="251"></p>
+  </li>
+  <li><b>Open a [DOS] shell.</b>&nbsp; On Windows® systems, this is normally
+    done from the <i>Start</i> menu, <i>Start</i> <font face="Wingdings 3">g</font>
+    <i>Programs</i> <font face="Wingdings 3">g</font> <i>Accessories</i> <font face="Wingdings 3">g</font>
+    <i>Command Prompt</i>.&nbsp; On *nix systems, the procedure to obtain a
+    shell varies.</li>
+  <li><b>Change directories to &quot;c:\&quot; (Window® systems only).</b>&nbsp;
+    On Windows® systems, the checkout must be performed from the root directory
+    of the C: drive.&nbsp; On *nix systems, any directory will do.</li>
+  <li><b>Issue the CVS checkout commands, specifying the modules gathered
+    earlier.</b>&nbsp; For example, as of April 2003, the following command
+    would be appropriate (the list of modules may have changed or grown since
+    then):<br>
+    <br>
+    <font face="Courier" size="2">cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg
+    checkout esrgdocs esrgdstb esrgnxpj esrgpcpj esrgpubs esrgubka esrgweba<br>
+    </font><br>
+    Also as of April, 2003, the total number quantity of data to be downloaded
+    is about 40 Mb (at least 4 hours over a typical modem connection).<br>
+    <br>
+    A CVS checkout has the advantage that if the checkout is interrupted (by a
+    dropped modem connection, for example), issuing the same command again will
+    effectively resume where the previous attempt left off.&nbsp; CVS recognizes
+    files which have already been checked out and skips them on subsequent
+    checkout attempts.<br>
+    <br>
+    It is also possible that you require only a subset of the modules listed
+    above.&nbsp; If this is the case, only list those modules you need on the
+    CVS command line.</li>
+</ol>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/howtos/sourceforge/esrg_all_src_cvs_anonymous.htm,v 1.5 2003/04/28 18:05:35 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

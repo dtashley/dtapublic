@@ -1,0 +1,195 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_iff0/s_iff0.tex,v 1.4 2002/01/29 17:04:00 dtashley Exp $
+%
+\section{Input File Format}
+\label{siff0}
+
+\swname{} accepts a model input file which specifies the model 
+to be verified for reachability properties.  This section of the
+document specifies the format of this file.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Overview And Essential Characteristics Of The Model Input File Format}
+%Subsection Tag: OEC0
+\label{siff0:soec0}
+
+The model input file is an ASCII text file with the following characteristics.
+
+\begin{enumerate}
+\item The file is a plain ASCII text file rather than a binary file.
+      This means the file can be prepared using an ordinary text editor, a 
+      \texttt{.BAT} file, a script, etc.
+\item The file is token- rather than record-oriented.  
+      This means the file has a relatively free aesthetic format and can be 
+      formatted to suit the tastes of the preparer.
+\item Keywords and variables are case-sensitive.  
+      \emph{Catsanddogs} is different than \emph{CatsAndDogs}.
+\end{enumerate}
+
+The remainder of the this section (Section \ref{siff0})
+describes the format, and finally concludes with an example.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Allowable Character Set}
+%Subsection Tag: ACS0
+\label{siff0:sacs0}
+
+The input file is processed as an ASCII text file (\textbf{not} UNICODE!).
+All characters (bytes) in the input file must have a binary value in the range
+of 1-127.  Any character outside of that range will cause a fatal error.
+
+Note that all of the traditional characters (letters, numbers, punctuation, 
+CR, LF, etc.) fall within the range.  0 is prohibited simply because the software
+uses it internally as an end-of-string marker.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Pre-Tokenization Processing}
+%Subsection Tag: PTP0
+\label{siff0:sptp0}
+
+\swname{} breaks the input file into an ordered list of tokens.  These tokens
+drive an automaton which processes them.  Chaos (or, more specifically, error
+messages) result when the ordered list of tokens cannot properly excite
+the automaton.
+
+Some processing is performed before the ordered list of tokens is created.  This
+section describes all such processing.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Format And Removal Of Comments}
+%Subsubsection Tag: FRC0
+\label{siff0:sptp0:sfrc0}
+
+\swname{} honors C++-style comments.  \texttt{/*} and \texttt{*/} are
+accepted to begin and end comments, and \texttt{//} is accepted to
+create a comment which extends to the end of the line.
+
+Comments and string literals are processed in the same pass.
+This means that string literals which begin within or exist entirely within
+comments are not detected.  Similarly, string literals which occur within a comment
+are not detected, and one style of comment that occurs within the other style of
+comment is not detected.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Format And Processing Of String Literals}
+%Subsubsection Tag: FRS0
+\label{siff0:sptp0:sfrs0}
+
+As described in Section \ref{siff0:sptk0}, \swname{} forms tokens based
+exclusively on separating whitespace.  This means that without some
+escape mechanism, it would be impossible to create tokens which contain 
+whitespace.
+
+String literals are text which is enclosed in double quotes (\texttt{"}).
+For example, \texttt{"Now is the time."} is a string literal.
+
+String literals are processed in the same pass as comments.  This means that
+comments enclosed within a string literal will not be detected (see also the remarks
+in Section \ref{siff0:sptp0:sfrc0}).
+
+String literals may not span lines.
+
+Within a string literal, \texttt{$\backslash$"} may be used to include the double quote
+character as part of the literal.  This is the same escape mechanism
+traditionally used in programming languages.  No other escape sequences
+are honored.
+
+Within a string literal, any tab character is converted to a single space.  The
+reason this is done is that string literals are at this time only used to
+contain descriptions.  Any tab characters may create undesirable effects in the
+program output.
+
+Generally, \swname{} may format descriptions by breaking them at whitespace in
+order to fit them to the line width and indenting available.  This behavior
+may not be suppressed.
+
+Any number of successive string literals may be combined by using the special operator
+\texttt{+"} rather than \texttt{"} to start a string literal.  
+The operator \texttt{+"} causes the string literal currently being defined to
+be concatenated to the previous token.  The \texttt{+"} operator may be used
+to create long descriptions which span several lines.  Note that spaces are
+not automatically inserted, so these must be included.
+
+Note that the notion of the string literal is a parsing convenienience to allow
+the specification of tokens which contain spaces and which are longer than
+a comfortable single line of text.  The double-quote characters (\texttt{"})
+and special concatenation operators (\texttt{+"}) are discarded and not 
+included in the internal data representation.
+
+A token which contains no spaces can be enclosed in double-quotes with no 
+effect, although there is no practical reason to ever do this.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Formation Of Tokens}
+%Subsection Tag: PTK0
+\label{siff0:sptk0}
+
+\swname{} breaks the input file into an ordered list of tokens.  These tokens
+drive an automaton which processes them.  Chaos (or, more specifically, error
+messages) result when the ordered list of tokens cannot properly drive
+the automaton.
+
+String literals (Section \ref{siff0:sptp0:sfrs0}) are necessary only 
+when a token contains spaces
+or is longer than comfortably fits on a line of text.
+
+\swname{} will never identify a potential token based on a criterium other than
+surrounding whitespace.  For example, the classic example of token 
+recognition is the way that a C-language lexical analyzer would 
+parse a statement such as \texttt{c+++=3;}.  \swname{}'s lexical analysis strategy
+is simpler and would require that such a statement be written 
+\texttt{c ++ += 3 ;} (in other words, it is required that the user in
+some sense do the lexical analysis).
+
+We decline to specify the syntax of the \swname{} model input file
+\emph{precisely}.  In practice there should be no scenarios where a model file 
+can be interpreted ambiguously, and nearly no scenarios where any error messages
+are not straightforward to diagnose.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: s_iff0.tex,v $
+$Source: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_iff0/s_iff0.tex,v $
+$Revision: 1.4 $
+$Author: dtashley $
+$Date: 2002/01/29 17:04:00 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: s_iff0.tex,v $
+%Revision 1.4  2002/01/29 17:04:00  dtashley
+%Version control info added, and minor edits.
+%
+%Revision 1.3  2001/12/01 21:29:54  dtashley
+%Safety checkin after edits.
+%
+%Revision 1.2  2001/09/26 04:51:13  dtashley
+%Edits.
+%
+%Revision 1.1  2001/09/26 02:31:14  dtashley
+%Initial checkin, and some edits of main TEX file.
+%
+%End of S_IFF0.TEX.

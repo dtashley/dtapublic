@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Organization Of ESRG Product Source Code On *nix And Windows® Computers</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">Organization Of ESRG Product Source Code On
+*nix And Windows® Computers</font></b></p>
+<hr>
+<p>All product source code and other materials (if one wishes to rebuild
+products) <b>must have a canonical location and arrangement on the computer used
+to build the products</b>.&nbsp; This arrangement is described here.</p>
+<ul>
+  <li>On a *nix machine, where relative paths are the norm, all of the ESRG
+    materials may placed <i>anywhere</i> in the directory structure of the *nix
+    machine so long as they preserve the same directory hierarchy as the <a href="../../glossary/glossary.htm#cvs_vc" target="_blank"> CVS</a>
+    archives.&nbsp; This is generally achieved by checking out all CVS modules
+    from the same location (and usually at the same time).&nbsp; For example,
+    the following command:<br>
+    <br>
+    <font face="Courier" size="2">cvs -d :pserver:anonymous@cvs.sourceforge.net:/cvsroot/esrg checkout esrgdocs esrgdstb esrgnxpj esrgpcpj esrgphpa esrgpubs esrgubka esrgweba</font><br>
+    <br>
+    could be executed in any directory on a *nix system and would arrange all
+    the CVS modules correctly.&nbsp; (<i>Note:</i>&nbsp; the above command
+    assumes anonymous CVS access and also assumes the list of CVS modules that
+    are in existence as of April, 2003--the actual list may differ slightly by
+    the time you read this web page.)<br>
+  </li>
+  <li>On a Windows® machine, <b>the absolute path to each file must be exactly
+    the same on every machine used for development</b> (this is a more stringent
+    requirement than for *nix machines).&nbsp; The reason for the more stringent
+    requirement is that some Windows applications (such as <a href="../../glossary/glossary.htm#installshield_express" target="_blank">InstallShield
+    Express</a>) are not designed to handle relative paths.<br>
+    <br>
+    What this means in practice is that on a Windows® machine, all CVS
+    checkouts must be done while the current working directory is
+    &quot;C:\&quot; (for example, the example CVS command given above must be
+    executed from &quot;C:\&quot;).&nbsp; This ensures that each module occupies a directory
+    directly under &quot;C:\&quot;.&nbsp; (By the way, all of the ESRG CVS
+    modules were named starting with &quot;esrg&quot; so that their origin would
+    be clear and so that they would not collide with any existing directories on
+    a Windows® machine.)</li>
+</ul>
+<p>The requirements above can be phrased in an alternate and more compact way:</p>
+<ul>
+  <li>On both *nix and Windows® machines, all ESRG CVS modules must have the
+    same relative relationship (they must be siblings in a root directory), and</li>
+  <li>On a *nix machine, this root directory is arbitrary, but on a Windows®
+    machine, this root directory must be &quot;C:\&quot;.</li>
+</ul>
+<p>Particularly on Windows® machines, <i>absolute</i> paths are assumed.&nbsp;
+For example, the file <i>c:\esrgubka\svf.pdf</i> <b>must</b> exist when building
+the <i>InstallShield Express</i> distribution.</p>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/devels/org_src_all_pforms/org_src_all_pforms.htm,v 1.4 2003/04/27 21:01:27 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

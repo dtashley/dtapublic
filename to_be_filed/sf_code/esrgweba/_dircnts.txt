@@ -1,0 +1,26 @@
+# $Header: /cvsroot/esrg/sfesrg/esrgweba/_dircnts.txt,v 1.1.1.1 2003/04/24 06:36:06 dtashley Exp $
+
+SUBDIRECTORY
+   /esrgweba
+
+CONTENTS
+   This subdirectory contains an image of the files at the web
+   site ESRG.SOURCEFORGE.NET, including PHP scripts.  These files
+   are kept under version control for a variety of reasons, including
+   the necessity of managing PHP scripts (which are programs and
+   can benefit from version control).
+
+   Please see the "_license.txt" file for licensing information.
+
+MNEMONIC
+   "esrg" is short for "Embedded Systems Research Group".  "web"
+   is short for "web content".  "a" identifies the web content (in
+   case, over time, more than one web site is developed).
+
+#**************************************************************************
+# $Log: _dircnts.txt,v $
+# Revision 1.1.1.1  2003/04/24 06:36:06  dtashley
+# Initial import.
+#
+#**************************************************************************
+# End of _dircnts.txt.

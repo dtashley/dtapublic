@@ -1,0 +1,54 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Procedure To Compile All ESRG Windows® Tools Using Microsoft Visual C++</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">Procedure To Compile All ESRG Windows®
+Tools Using Microsoft Visual C++</font></b></p>
+<hr>
+<p>If you are at this page, you have obtained the Windows® tool set source code
+from either a source distribution or via anonymous CVS access.&nbsp; This page
+provides instructions for compiling the Windows® tool set from source code.</p>
+<ol>
+  <li>Be certain you have the full version of Microsoft Visual C++ 6.0 (the one
+    that retails for around $600).&nbsp; You cannot compile standalone
+    executables without this full version.&nbsp; Versions such as the
+    &quot;academic&quot; version will not allow the creation of standalone
+    executables that do not require external .DLLs.</li>
+  <li>Be certain you have arranged the source code on a Windows® computer so
+    that the CVS module <i>esrgpcpj</i> exists as a top-level directory of <i>C:</i>.&nbsp;
+    (If the directory <i>c:\esrgpcpj</i> exists, you probably have placed the
+    directory in the right place.)</li>
+  <li>
+    Open a DOS box and navigate to the directory <i>c:\esrgpcpj\batbuild</i>, as
+    illustrated in the screen snapshot below.
+    <p align="center"><img border="0" src="ss01.gif" width="396" height="131"></p>
+  </li>
+  <li>In this directory, there should be a file <i>releases.bat</i>.&nbsp;
+    Invoke this file by typing <i>releases</i>.</li>
+  <li>The build process should be automatic and should complete with no
+    errors.&nbsp; (During the process, console windows will be created for each
+    build and then disappear.)&nbsp; It is a good idea to watch the process to
+    be sure that no errors are encountered.</li>
+  <li>The build process will create both a &quot;<i>release</i>&quot; and a
+    &quot;<i>debug</i>&quot; executable for each program that is a component of
+    the Windows® tool set.&nbsp; For example, both versions of the program gfsw
+    will be built.&nbsp; The release version will be <i>c:\esrgpcpj\gfsw\Release\gfsw.exe</i>,
+    and the debug version will be <i>c:\esrgpcpj\gfsw\Debug\gfsw.exe</i>.</li>
+</ol>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/devels/compile_all_win_tools/compile_all_win_tools.htm,v 1.2 2003/04/30 05:32:46 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

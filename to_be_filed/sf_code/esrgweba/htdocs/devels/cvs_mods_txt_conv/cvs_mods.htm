@@ -1,0 +1,158 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>List Of CVS Modules, Their Contents, And Text File Naming Conventions</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">List Of CVS Modules, Their Contents, And Text File Naming
+Conventions</font></b></p>
+<hr>
+<p><a href="../../glossary/glossary.htm#cvs_vc" target="_blank">CVS</a> defines
+the concept of <i>module</i>, which is a top-level directory in a CVS
+repository.&nbsp; Although in the repository structure utilized by the ESRG tool
+set there is some interdependency between modules (for example, the <a href="../../glossary/glossary.htm#installshield_express" target="_blank">InstallShield
+Express</a> Windows® installation obtains files from several modules), for the
+most part modules are separate entities.</p>
+<p>On this web page, all CVS modules are enumerated and what they contain is
+explained.</p>
+<p>All but two of the ESRG tool set distribution files are built on a <a href="http://sourceforge.net">SourceForge</a>
+*nix machine, and some of those distribution files are designed to be
+decompressed and used on Windows® machines.&nbsp; In order to prepare text
+files that are Windows®-friendly, the <i>unix2dos</i> utility is used to
+convert line endings.&nbsp; In order to convert only text files, there must be
+an easy way to differentiate text files.&nbsp; The convention adopted is to make
+sure that every text file has a suffix (binary files may be without suffix), and
+to recognize text files by the suffix.&nbsp; Furthermore, it is observed that
+the suffixes which denote text files may vary from module to module, and so
+there may be different recognition criteria for each module.&nbsp; The table
+below lists the suffixes that cause a file to be recognized as a text file, on a
+per-module basis.</p>
+<div align="center">
+  <center>
+  <table border="2" width="95%">
+    <tr>
+      <td width="22%"><b><u>Module</u></b></td>
+      <td width="52%"><b><u>Contents</u></b></td>
+      <td width="26%"><b><u>Text File Suffixes</u></b></td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgdocs</b></td>
+      <td width="52%">ESRG tool set documents.&nbsp; This module is presently
+        not populated.</td>
+      <td width="26%">
+        <p align="center">N/A, presently unpopulated.</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgdstb</b></td>
+      <td width="52%"><a href="../../glossary/glossary.htm#installshield_express" target="_blank">InstallShield Express</a> project files, graphics, licenses,
+        etc. for preparing both Windows® and *nix distributions of the ESRG
+        tool set.</td>
+      <td width="26%">
+        <p align="center">.htm<br>
+        .rtf<br>
+        .txt</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgdsts</b></td>
+      <td width="52%">Scripts and <i>.BAT</i> files which are used on a *nix or
+        Windows® platform to prepare ESRG
+        tool set file distributions.</td>
+      <td width="26%">
+        <p align="center">N/A, because at this time the files in this module are
+        never prepared for a Windows® machine.</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgnxpj</b></td>
+      <td width="52%">The *nix version of the ESRG tool set.</td>
+      <td width="26%">
+        <p align="center">N/A, because at this time the files in this module are
+        never prepared for a Windows® machine.</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgpcpj</b></td>
+      <td width="52%">Source code, MSVC++ project files, graphics, and build
+        .BAT files for compiled Windows® tools.</td>
+      <td width="26%">
+        <p align="center">.c<br>
+        .cpp<br>
+        .h<br>
+        .txt</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgphpa</b></td>
+      <td width="52%">The PHP script library of the ESRG tool set.</td>
+      <td width="26%">
+        <p align="center">.inc<br>
+        .php<br>
+        .txt</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgpubs</b></td>
+      <td width="52%">ESRG publications (papers, etc.).&nbsp; Typically this
+        module is checked out on a Windows® platform and some of the
+        publications are packaged into the Windows® installation executable by <a href="../../glossary/glossary.htm#installshield_express" target="_blank">InstallShield
+        Express</a>.</td>
+      <td width="26%">
+        <p align="center">.htm<br>
+        .html<br>
+        .tex<br>
+        .txt</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgubka</b></td>
+      <td width="52%">The source code, graphics, and build script for the book
+        in progress, &quot;<i>A Practitioner's Guide ...</i>&quot;.</td>
+      <td width="26%">
+        <p align="center">.cls<br>
+        .htm<br>
+        .html<br>
+        .sty<br>
+        .tcl<br>
+        .tex<br>
+        .txt</td>
+    </tr>
+    <tr>
+      <td width="22%"><b>esrgweba</b></td>
+      <td width="52%">The entire web content of the ESRG tool set <a href="http://sourceforge.net">SourceForge</a>
+        site.</td>
+      <td width="26%">
+        <p align="center">.c<br>
+        .cpp<br>
+        .h<br>
+        .htm<br>
+        .html<br>
+        .inc<br>
+        .php<br>
+        .txt</td>
+    </tr>
+  </table>
+  </center>
+</div>
+<p><b><u>Additional Notes:</u></b></p>
+<ol>
+  <li>The most reliable way to determine whether a file is text or binary is to
+    check the CVS keyword expansion mode, which should in all cases be
+    indicative (any mode other than &quot;<i>b</i>&quot; would indicate a text
+    file).&nbsp; If there prove to be difficulties with the current approach,
+    then this more powerful approach will be used.</li>
+  <li>Even if it is indicated above that files in a module are not intended to
+    be used on a Windows® platform, this refers only to the distribution
+    intent, not to the possibility of using the files.&nbsp; <i>Any</i>
+    text or binary file under CVS can be checked out to a Windows®
+    system.</li>
+</ol>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/devels/cvs_mods_txt_conv/cvs_mods.htm,v 1.2 2003/04/27 21:01:26 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

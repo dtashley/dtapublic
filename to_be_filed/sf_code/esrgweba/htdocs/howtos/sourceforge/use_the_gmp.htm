@@ -1,0 +1,214 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>How To Use The GMP And Perform Large Integer Or High-Precision Arithmetic
+On SourceForge Web Sites</title>
+<base target="main">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">How To Use The <a href="http://www.swox.com/gmp"> GMP</a> And Perform Large Integer
+Or High-Precision Arithmetic On <a href="http://www.sourceforge.net"> SourceForge</a> Web Sites</font></b></p>
+<hr>
+<p><b>04/15/03:</b>&nbsp; I (Dave Ashley) have several number theory CGI pages
+here at <a href="http://www.sourceforge.net">SourceForge</a>.&nbsp; These pages
+do things like calculate the GCD of two integers, find best rational
+approximations, etc.; and they do need arbitrarily large integer capability to
+be useful.&nbsp; It was quite difficult to obtain large integer capability for
+these pages.&nbsp; Here are the steps I went through, and the eventual solution
+(in the hopes that it helps others).</p>
+<ul>
+  <li>I had used the <i>bcmath</i> library with PHP before (it is built into the
+    version of PHP I have on my Linux box at home).&nbsp; Unfortunately, I
+    discovered immediately that the version of PHP used by <i>SourceForge</i>
+    does not have <i>bcmath</i> built in.</li>
+  <li>I tried writing arbitrary integer functions using PHP.&nbsp; These proved
+    to be painfully inefficient.&nbsp; I abandoned the effort when early
+    observations indicated that these probably would not allow calculation of a
+    couple hundred rounds of <a href="../../phpcgibin/euclid_gcd.php">Euclid's
+    GCD algorithm</a> in a practical time (not too long for a user to wait, and
+    within the CPU time limits for a PHP script).</li>
+  <li>I tried writing a separate program in 'C' to do the calculations using the
+    <a href="http://www.swox.com/gmp">GMP library</a>, and tried calling this
+    program from the PHP script using the <i>exec()</i> function.&nbsp; This
+    worked famously at home, but did not work at <i>SourceForge</i>.&nbsp; The
+    behavior at <i>SourceForge</i> was a mystery because using a shell I could
+    invoke the program successfully, but PHP could not invoke it.</li>
+  <li>I completed a <i>SourceForge</i> support ticket.&nbsp; The response to the
+    ticket indicated that:
+    <ul>
+      <li>The GMP is installed on the shell servers but not the web servers,
+        which is why I could run the compiled external program from a shell but
+        not from PHP.</li>
+      <li>The solution is to compile the GMP library, place it in the <i>SourceForge</i>
+        web space, and link to it.</li>
+    </ul>
+  </li>
+  <li>After much experimentation, I discovered that I could not figure out how
+    to place another copy of the GMP library in the web space at SourceForge and
+    link to it.&nbsp; As best I could glean, there are security implications to
+    replacing libraries (perhaps one could trick a program into dynamically
+    linking with the a trojan library), and so dynamically linked libraries
+    could only exist in certain locations (all paths which belong to <i>root</i>).</li>
+  <li>However, I also discovered that I could statically link my program with
+    the GMP (which gives a much larger executable), and place that much larger
+    executable on <i>SourceForge</i> and run it.&nbsp; The executable went from
+    about 20K to 500K when static linking was specified.</li>
+</ul>
+<p>All that being said, here are the specific steps I took to use the GMP from
+PHP:</p>
+<ul>
+  <li>Be sure that the GMP is installed on your system (the one you are using
+    for compiling).&nbsp; You need both the library and the development
+    files.&nbsp; Here is what shows on my system at home:<br>
+    <br>
+    <font face="Courier">[apache@khinchin apache]$ rpm -q -a | grep gmp<br>
+    gmp-4.0.1-3<br>
+    gmp-devel-4.0.1-3</font><br>
+    <br>
+    Note that both GMP and GMP-devel are installed.<br>
+    <br>
+    On a <a href="http://www.redhat.com">RedHat</a> system, you can use <font face="Courier">rpm</font>
+    to install the packages.&nbsp; On other systems, you may need to install
+    differently or compile and install them from source.</li>
+  <li>Because static linking bloats the executable, the sanest approach (and the
+    one I use) is to write <i>one</i> executable and have it do all the number
+    crunching for all of your PHP scripts.&nbsp; (By writing one executable, the
+    GMP library is present in only one place--that one executable.)&nbsp; The
+    executable I wrote accepts a subfunction code, which is essentially an
+    indication of which PHP script is calling it.&nbsp; Thus, my single
+    executable does GCD calculation, best rational approximations, Miller-Rabin
+    testing, etc., depending on the command-line parameters (which are
+    controlled by the calling PHP script).<br>
+    <br>
+    For example, when the GCD PHP script calls the executable, it uses the
+    subfunction code &quot;gcd&quot; and gets output like this (when finding the
+    GCD of 27 and 150):<br>
+    <br>
+    <font face="Courier" size="2">[apache@khinchin phpcgibin]$ ./arith_large_cgi gcd 27 150<br>
+    S<br>
+    27<br>
+    150<br>
+    1<br>
+    150<br>
+    27<br>
+    5<br>
+    15<br>
+    2<br>
+    27<br>
+    15<br>
+    1<br>
+    12<br>
+    3<br>
+    15<br>
+    12<br>
+    1<br>
+    3<br>
+    4<br>
+    12<br>
+    3<br>
+    4<br>
+    0<br>
+    3<br>
+    S<br>
+    </font><br>
+    On the other hand, when doing Miller-Rabin testing to see if a certain
+    number is prime (101, for example), the single executable is called like
+    this and produces this output:<br>
+    <br>
+    <font face="Courier" size="2">[apache@khinchin phpcgibin]$ ./arith_large_cgi gmp_prob_prime
+    101 25<br>
+    S<br>
+    101<br>
+    25<br>
+    2<br>
+    S<br>
+    </font><br>
+    In the first example above, the numbers which are emitted by the program are
+    data from successive rounds of Euclid's GCD algorithm (which the PHP script
+    formats and displays).&nbsp; In the second case, the output is,
+    respectively, the number whose primality is to be determined (an echo back),
+    the number of rounds of Miller-Rabin testing (again, and echo-back), and
+    finally a code to indicate the testing results (0 = a compsite number, 1 =
+    probably a prime number, and 2 = definitely a prime number).&nbsp; The
+    output of the program is meant to be interpreted by the calling PHP script
+    (i.e. it is not human-friendly).<br>
+    <br>
+    Also note that the first and last lines of the output are
+    &quot;S&quot;.&nbsp; This prevents the calling PHP script from assuming all
+    output is present if the program coredumps or somehow terminates.&nbsp; The
+    calling PHP script checks the number of lines and also checks for the
+    starting and ending &quot;S&quot; characters.</li>
+  <li>Accomplishing static linking is a little bit tricky.&nbsp; Here are the
+    conditions that need to be met:
+    <ul>
+      <li>The static GMP library has to be on the system you use for compilation
+        (it is by default).&nbsp; If it is not present, you may need to compile
+        and install the GMP from source code.</li>
+      <li>When calling the <i>gcc</i> compiler,&nbsp; the <font face="Courier">-static</font>
+        switch can be anywhere, but the <b><font face="Courier">-lgmp</font>
+        switch must be near the end of the command line, after the modules that
+        reference the GMP</b>.&nbsp; This is because <i>gcc</i> links from left
+        to right.&nbsp; For example, my program is built like this:<br>
+        <br>
+        <font face="Courier">gcc -static -o arith_large_cgi arith_large_cgi.c auxfuncs.c subfunc_gcd.c subfunc_gmp_prob_prime.c -lgmp</font><br>
+        <br>
+        Notice that the <font face="Courier">-lgmp</font> switch is at the end
+        of the command line.</li>
+    </ul>
+  </li>
+  <li>The executable can be placed in the same directory as the PHP scripts (it
+    will always find it there).</li>
+  <li>The PHP <i>exec()</i> function is well-documented.&nbsp; You can give it a
+    variable in which it will store the output of the called program in an
+    array.&nbsp; For example, from one of my PHP scripts, here is the code which
+    calls <i>exec()</i> and also checks the output for sanity.<br>
+    <br>
+    <font face="Courier" size="2">   //We can now run the external program to do the calculation.<br>
+   $cgi_command_string = "./arith_large_cgi gcd " . $N1 . " " . $N2;<br>
+    <br>
+    exec($cgi_command_string, $cgi_result);<br>
+    $cgi_result_nelem = count($cgi_result);<br>
+    <br>
+   //We need to perform some sanity checks on the CGI output to be sure it<br>
+   //is what we want.  If it seems wrong, we need to generate an error message<br>
+   //and not try to display the output.<br>
+   $cgi_output_is_sane = 1;<br>
+   if ($cgi_result_nelem == 0)<br>
+    &nbsp;&nbsp; $cgi_output_is_sane = 0;<br>
+   if ($cgi_result_nelem > 0)<br>
+    &nbsp;&nbsp; {<br>
+    &nbsp;&nbsp; if (($cgi_result_nelem % 5) != 0)<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $cgi_output_is_sane = 0;<br>
+    &nbsp;&nbsp; if ($cgi_result[0] != "S")<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $cgi_output_is_sane = 0;<br>
+    &nbsp;&nbsp; if ($cgi_result[$cgi_result_nelem - 1] != "S")<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; $cgi_output_is_sane = 0;<br>
+    &nbsp;&nbsp; }<br>
+    <br>
+   if (!$cgi_output_is_sane)<br>
+    &nbsp;&nbsp; {<br>
+    &nbsp;&nbsp; do_err_msg("An unspecified error occurred when ...<br>
+    </font><br>
+    Notice how the snippet above checks the output of the program for sanity.</li>
+  <li>Finally, you must have the execute permission for <i>other</i> (the web
+    server is <i>other</i>) set in your compiled executable, or else PHP cannot
+    run the compiled program.&nbsp; You can change these permissions with the <i>chmod</i>
+    command.</li>
+</ul>
+<p align="left">Please drop <a href="mailto:dtashley@users.sourceforge.net">me</a>
+an e-mail if I should change or enhance this documentation or if there is a
+better way to do something.</p>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/howtos/sourceforge/use_the_gmp.htm,v 1.2 2003/04/27 21:01:30 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

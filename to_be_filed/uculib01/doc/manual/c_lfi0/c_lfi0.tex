@@ -1,0 +1,508 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_lfi0/c_lfi0.tex,v 1.10 2010/02/24 19:37:49 dashley Exp $
+
+\chapter{Linear Filter Functions}
+
+\label{clfi0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  iov0
+\label{clfi0:siov0}
+
+This chapter describes functions that approximate linear filters.
+Here, \emph{linear} filter means a filter which satisfies
+additive and homogeneity properties.
+
+In order to satisfy the additive property, given two input signals $x_1(k)$ and $x_2(k)$, $\forall k>0$:
+
+\begin{equation}
+\label{eq:clfi0:siov0:01}
+y(x_1(k) + x_2(k)) = y(x_1(k)) + y(x_2(k)).
+\end{equation}
+
+\noindent{}In order to satisfy the homogeneity property,
+
+\begin{equation}
+\label{eq:clfi0:siov0:02}
+y(\alpha x_1(k)) = \alpha y(x_1(k)).
+\end{equation}
+
+\noindent{}A filter that does not satisfy both
+(\ref{eq:clfi0:siov0:01}) and (\ref{eq:clfi0:siov0:02}) is by 
+definition a non-linear filter (see Chapter
+\ref{cnfi0}, p. \pageref{cnfi0}).
+
+It is hard to find appropriate names for linear filters (especially if
+filters differ from each other only in precision of arithmetic or the
+size and range of input arguments), so for now the filters
+are simply named using letters of the alphabet (\emph{Linear Filter A}, for 
+example).
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Linear Filter A}
+%Section tag:  lfa0
+\label{clfi0:slfa0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Design}
+%Subsection tag:  dsn0
+\label{clfi0:slfa0:dsn0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{General Design}
+
+\emph{Linear Filter A} approximates the
+discrete time difference equation
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:01}
+y_{k} = \frac{2^{16}-h}{2^{16}}x_k + \frac{h}{2^{16}}y_{k-1},
+\end{equation}
+
+\noindent{}where $x_k$ is the input and $y_k$ is the output
+of the filter at discrete time $k$.
+$h$ specifies the ``stiffness'' of the filter---a 
+larger value of $h$ causes the filter to attenuate high frequencies more
+aggressively.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Design Equivalence}
+
+In technical discussions, a filter of the design
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:01a}
+y_{k} = y_{k-1} + \frac{x_k - y_{k-1}}{c}
+\end{equation}
+
+\noindent{}was discussed, where $c$ specifies the
+stiffness of the filter.
+
+(\ref{eq:clfi0:slfa0:dsn0:01a}) can be rearranged to
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:01b}
+y_{k} = 
+x_k \left( \frac{1}{c} \right)
++ y_{k-1} \left( {1-\frac{1}{c}} \right).
+\end{equation}
+
+\noindent{}It can be seen by comparing 
+(\ref{eq:clfi0:slfa0:dsn0:01}) with 
+(\ref{eq:clfi0:slfa0:dsn0:01b}) that the substitution 
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:01c}
+c = \frac{1}{1-h/2^{16}}
+\end{equation}
+
+\noindent{}equates (\ref{eq:clfi0:slfa0:dsn0:01}) with 
+(\ref{eq:clfi0:slfa0:dsn0:01b}), i.e. the filter described  by 
+(\ref{eq:clfi0:slfa0:dsn0:01}) and the filter 
+described by (\ref{eq:clfi0:slfa0:dsn0:01b}) are 
+mathematically equivalent.
+
+(\ref{eq:clfi0:slfa0:dsn0:01c}) can also be solved for $h$:
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:01d}
+h = 2^{16}\left( 1 - \frac{1}{c} \right).
+\end{equation}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Time Constant}
+
+The filter time constant $\tau$ can be expressed as
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:02}
+\tau = \frac{h \Delta t}{2^{16} - h} ,
+\end{equation}
+
+\noindent{}where $\Delta t$ is the discrete time interval.%
+\footnote{(\ref{eq:clfi0:slfa0:dsn0:02}) comes from the
+\emph{Discrete-time realization} section of the Wikipedia 
+entry on low-pass filters \cite{bibref:w:wikipedialowpassfilter}---at this
+time I do not
+know how it is derived.}
+
+Alternatively, (\ref{eq:clfi0:slfa0:dsn0:02}) may be solved for $h$:
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:03}
+h = \frac{2^{16} \tau}{\Delta t + \tau} .
+\end{equation}
+
+For example, at 100Hz ($\Delta t$=0.01 seconds) with a desired time constant
+of 100ms ($\tau$=0.1 seconds), the required value of $h$ is:
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:04}
+h = \frac{(65536) (0.1)}{0.01 + 0.1} =  59578 .
+\end{equation}
+
+\begin{table}
+\caption{Values of $h$ for Common Choices of $\Delta t$ and $\tau$}
+\label{tbl:clfi0:slfa0:dsn0:01}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+               & \small{$f$=100Hz}       & \small{$f$=400Hz}         & \small{$f$=1000Hz}             \\
+\small{$\tau$} & \small{$\Delta t$=0.01} & \small{$\Delta t$=0.0025} & \small{$\Delta t$=0.001}       \\
+\hline
+\hline
+\small{0.01}   & \small{32,768}          & \small{52,429}            & \small{59,578}                 \\
+\hline
+\small{0.05}   & \small{54,613}          & \small{62,415}            & \small{64,251}                 \\
+\hline
+\small{0.1}    & \small{59,578}          & \small{63,938}            & \small{64,887}                 \\
+\hline
+\small{0.2}    & \small{62,415}          & \small{64,727}            & \small{65,210}                 \\
+\hline
+\small{0.3}    & \small{63,422}          & \small{64,994}            & \small{65,318}                 \\
+\hline
+\small{0.4}    & \small{63,938}          & \small{65,129}            & \small{65,373}                 \\
+\hline
+\small{0.5}    & \small{64,251}          & \small{65,210}            & \small{65,405}                 \\
+\hline
+\small{1.0}    & \small{64,887}          & \small{65,373}            & \small{65,470}                 \\
+\hline
+\end{tabular}
+\end{center}
+\end{table}
+
+Table \ref{tbl:clfi0:slfa0:dsn0:01} provides the correct values of $h$ for common
+choices of $\Delta t$ and $\tau$.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Numeric Implementation}
+
+The software uses large integers to implement the filter.  The filter state
+($y_k$) is implemented as a 48-bit fixed-point integer with the radix point after the first 
+16 bits.  An upper-case ``y'' ($Y_k$ rather than $y_k$) is used to denote the 
+48-bit integer corresponding to $y_k$.
+
+The implementation of the filter can be described by the following steps:
+
+\begin{enumerate}
+\item $Y_k$ is calculated:
+      \begin{equation}
+      \label{eq:clfi0:slfa0:dsn0:05}
+      Y_k = \left\lfloor \frac{2^{32}(2^{16}-h)x_k + h Y_{k-1}}{2^{16}} \right\rfloor .
+      \end{equation}
+\item $y_k$ is calculated from $Y_k$:
+      \begin{equation}
+      \label{eq:clfi0:slfa0:dsn0:06}
+      y_k = \left\lfloor \frac{Y_k + 2^{31}}{2^{32}} \right\rfloor .
+      \end{equation}
+\end{enumerate}
+
+The steps are implemented differently than directly suggested by
+(\ref{eq:clfi0:slfa0:dsn0:05}) and (\ref{eq:clfi0:slfa0:dsn0:06}).  For example, 
+the division by $2^{16}$ and the floor function
+in (\ref{eq:clfi0:slfa0:dsn0:05}) are implemented by discarding the last two bytes of
+an integer multiplication.  As a second example, the 
+addition of $2^{31}$ and the floor function in (\ref{eq:clfi0:slfa0:dsn0:06}) are implemented
+by testing bit 31 of $Y_k$ and conditionally incrementing $y_k$ rather than by adding.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Overflow}
+
+It needs to be verified that the filter cannot state $Y_k$ cannot overflow
+(exceed $2^{48}-1$).
+In order overflow to occur, the numerator of
+(\ref{eq:clfi0:slfa0:dsn0:05}) would have to reach $2^{64}$\@.  Guaranteeing that the
+filter cannot overflow is equivalent to guaranteeing that $\forall h$,
+$\forall x_k$, $\forall Y_{k-1}$:
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:10}
+2^{32}(2^{16}-h)x_k + h Y_{k-1} < 2^{64} .
+\end{equation}
+
+We can substitute the worst cases of $x_k = 2^{16}-1$ and $Y_{k-1} = 2^{48}-1$ into
+(\ref{eq:clfi0:slfa0:dsn0:10}):
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:11}
+2^{48}(2^{16}-1) + (2^{32}-1)h < 2^{64} .
+\end{equation}
+
+The worst case of $h=2^{16}-1$ can be substituted into
+(\ref{eq:clfi0:slfa0:dsn0:11}) to yield:
+
+\begin{equation}
+\label{eq:clfi0:slfa0:dsn0:12}
+2^{64} - 2^{32} - 2^{16} + 1 < 2^{64} .
+\end{equation}
+
+By inspection, (\ref{eq:clfi0:slfa0:dsn0:12}) is met, so filter overflow is not
+possible.
+
+In addition to the analysis above, as part of the unit test plan, 
+the filter was tested extensively to be
+sure it could not roll over beyond $Y_k = 2^{48}-1$\@.  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\paragraph{Convergence}
+
+By \emph{convergence} of the filter I mean that, given enough time with
+a constant $x_k$, $y_k$ will reach the same value.
+
+Convergence wasn't formally analyzed (it should be), but there are three
+clues that the filter will probably always converge.
+
+\begin{enumerate}
+\item In unit testing with typical values of $h$, the filter always converged.
+\item In unit testing, one test performed (not in the test plan) was to set
+      the initial value of the filter to 65534, the input to $x_k=65535$, and 
+      $h=65535$.  The filter output did reach 65535.  The fact that the filter
+      will close a gap of $\Delta x_k = 1$ with $h=65535$ implies that the filter will probably
+      always converge.
+\item In unit testing, a second test performed (not in the test plan) was to
+      set the initial value of the filter to 65000, $h=65535$,
+      $x_k = 65535$ and to measure the number of discrete time
+      quanta required to reach $65535 - (65535-65000)/e = 65338.18$ (i.e.
+      to measure the time constant).
+
+      The number of time quanta required can be predicted from
+      (\ref{eq:clfi0:slfa0:dsn0:02}) by removing the $\Delta t$ term:
+
+      \begin{equation}
+      \label{eq:clfi0:slfa0:dsn0:20}
+      n = \frac{h}{2^{16} - h} = \frac{65535}{65536-65535} = 65535.
+      \end{equation}
+
+      In testing, this was the exact number of quanta required.  This suggests
+      that the precision of the filter (32 bits after the radix point) is
+      adequate even with the largest valid $h$.
+\end{enumerate}
+
+Convergence should still be formally analyzed.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuLfU16FiltAInitRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuLfU16FiltAInitRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lcp0
+\label{clfi0:slai0}
+
+\index{UcuLfU16FiltAInitRxn()@\emph{UcuLfU16FiltAInitRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuLfU16FiltAInitRxn(UCU_UNION48 *in_fs,
+                          UCU_UINT16   in_x_k_initial)
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Initializes the state \texttt{in\_fs} of a Linear Filter A
+      to the passed value \texttt{in\_x\_k\_initial}.  This consists of
+      setting the most significant two bytes of the state to \texttt{in\_x\_k\_initial}
+      and the least significant four bytes to zero.
+\item This function is typically used to either:
+      \begin{itemize}
+      \item Set the filter state to be the same as the input value (for example,
+            at software startup).
+      \item Eliminate filtering lag on a one-time basis and cause the filter output to track a step jump
+            in the filter input (for example, when the software makes a major mode change
+            or wishes to produce a step jump in output).
+      \end{itemize}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{in\_fs}}\\
+      The filter state.
+\item \emph{\textbf{in\_x\_k\_initial}}\\
+      The value to initialize the filter state to.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT CONSIDERATIONS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function can be used from both ISR and non-ISR software.
+\item This function does not ensure atomic access to \texttt{in\_fs}, so it is
+      not thread-safe when processes in different threads use this function
+      to access the \emph{same} filter state.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}:    the data type to be filtered is UCU\_UINT16.
+      \emph{FiltA}:  Linear Filter A.
+      \emph{Init}:   initialize.
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuLfU16FiltAFiltRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuLfU16FiltAFiltRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  lcp0
+\label{clfi0:slaf0}
+
+\index{UcuLfU16FiltAFiltRxn()@\emph{UcuLfU16FiltAFiltRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuLfU16FiltAFiltRxn(
+                               UCU_UNION48 *in_fs, 
+                               UCU_UINT16   in_x_k, 
+                               UCU_UINT16   in_h
+                               )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Filters the data input \texttt{in\_x\_k} using the specified
+      time constant specifier \texttt{in\_h} and filter state
+      \texttt{in\_fs}, and returns the filtered value.
+      The filtering applied is defined by 
+      (\ref{eq:clfi0:slfa0:dsn0:05}) and (\ref{eq:clfi0:slfa0:dsn0:06}).
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{in\_fs}}\\
+      The filter state.
+\item \emph{\textbf{in\_x\_k}}\\
+      The input value to be filtered (i.e. $x_k$).
+\item \emph{\textbf{in\_h}}\\
+      The time constant of the filter as defined by (\ref{eq:clfi0:slfa0:dsn0:03}).
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The filtered value, as defined by 
+      (\ref{eq:clfi0:slfa0:dsn0:05}) and (\ref{eq:clfi0:slfa0:dsn0:06}).
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{USAGE NOTES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The filter state is a fixed-point number, and this function
+      implements a simple difference equation.  It is safe to modify
+      $h$ on the fly without unexpected effects (although this would be very 
+      rare, as most applications would always apply the same time constant to
+      a given filter state).  There is no state retained beyond the filter state block
+      and no requirement
+      that $h$ be the same value on every function call involving the same filter
+      state block.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT CONSIDERATIONS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function can be used from both ISR and non-ISR software.
+\item This function does not ensure atomic access to \texttt{in\_fs}, so it is
+      not thread-safe when processes in different threads use this function
+      to access the \emph{same} filter state.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}:    the data type to be filtered is UCU\_UINT16.
+      \emph{FiltA}:  Linear Filter A.
+      \emph{Filt}:   filter.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_lfi0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_lfi0/c_lfi0.tex,v $
+$Revision: 1.10 $
+$Author: dashley $
+$Date: 2010/02/24 19:37:49 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_lfi0.tex,v $
+%Revision 1.10  2010/02/24 19:37:49  dashley
+%Linear Filter A documentation corrected and enhanced.
+%
+%Revision 1.9  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.8  2010/01/28 02:45:46  dashley
+%Information about Linear Filter A completed.
+%
+%Revision 1.7  2010/01/27 16:08:53  dashley
+%Formatting difficulties corrected.
+%
+%Revision 1.6  2010/01/27 16:04:16  dashley
+%Formatting difficulty corrections.
+%
+%Revision 1.5  2010/01/27 00:26:33  dashley
+%Name change of Linear Filter A functions.
+%
+%Revision 1.4  2010/01/26 21:49:44  dashley
+%Edits.
+%
+%Revision 1.3  2010/01/26 21:10:26  dashley
+%Linear Filter A design section completed.
+%
+%Revision 1.2  2010/01/24 05:40:22  dashley
+%Minor title changes.
+%
+%Revision 1.1  2010/01/24 05:38:26  dashley
+%Initial checkin.
+%End of $RCSfile: c_lfi0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

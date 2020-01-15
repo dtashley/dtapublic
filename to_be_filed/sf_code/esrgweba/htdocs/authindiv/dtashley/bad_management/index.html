@@ -1,0 +1,212 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Dave's Observations And Thoughts About Bad Management In Embedded
+Software Development</title>
+<base target="main">
+<bgsound src="../../../gensounds/austin_powers/beat_drevil.wav" loop="0">
+</head>
+
+<body background="../../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="5">Dave's Observations And Thoughts About Bad
+Management In Embedded Software Development</font></b></p>
+<hr>
+<p><b><u>Bookmarks</u></b></p>
+
+<ul>
+  <li><a href="#intro" target="_self">Introduction</a></li>
+  <li><a href="#what_achieve" target="_self">What Is One Trying To Achieve In A Software
+    Development?</a></li>
+  <li><a href="#perfdil_immat_man" target="_self">Performance Dilution By Technically Immature
+    Management</a></li>
+  <li><a href="#coevolution" target="_self">Co-Evolution</a></li>
+  <li><a href="#light_bulb_analogy" target="_self">The Light Bulb Analogy</a></li>
+  <li><a href="#emotional_manipulation" target="_self">Emotional Manipulation Of Employees</a></li>
+  <li><a href="#recognize_but_resist" target="_self">Recognizing Problems But Resisting
+    Solutions</a></li>
+</ul>
+<hr>
+<p><b><u><a name="intro"></a>Introduction</u></b></p>
+
+<p>I (Dave Ashley) have become really cautious about which recruiters I deal
+with, which employment interviews I consent to, and which job offers I accept.&nbsp;
+Understandably, my caution comes from experience.</p>
+
+<p>Generally speaking, the management in the auto industry involved with the
+development of small embedded systems is the <i>worst</i>
+management I've seen anywhere.&nbsp; The general components of the poor
+management performance and low-quality work environments are discussed at some length in
+the following sections.</p>
+
+<p>Some might claim I have a <i>bad attitude</i>.&nbsp; Nothing could be further
+from the truth.&nbsp; In most cases the key issue is an elusive quality that
+I'll call <i>technical maturity</i>.&nbsp; Some people (specifically, the bad
+supervisors and managers I've had the dishonor of working with) go their entire careers and never grasp
+the essential nature of the technical and management problems they confront on a
+daily basis.&nbsp; That <i>failure to technically mature</i> does not make these
+individuals <i>morally</i>  defective--it just makes them <i> technically</i>
+defective.&nbsp; My desire to distance myself from such individuals doesn't come
+from anti-social tendencies; but rather from the self-preservation
+instinct.</p>
+
+<p>I'm very much reminded of a quote from one of the Superman movies where Lex
+Luthor (Gene Hackman) <font size="6">(</font><img border="0" src="lex_luthor.jpg" align="absmiddle" hspace="5" vspace="5" width="53" height="73"><font size="6">)</font>
+delivers a line something like, &quot;<i>Otis, why is it that some people can
+read the list of ingredients on a chewing gum wrapper and unlock the secrets of
+the universe while others can read `War and Peace' and come away thinking it is
+a simple adventure novel?</i>&quot;.&nbsp; How true, Lex, how true!&nbsp; Some
+people don't get it and won't <i> ever</i> get it.</p>
+
+<p>Much of the remainder of this page is devoted to observations about
+management that has failed to technically mature.</p>
+
+<hr>
+<p><b><u><a name="what_achieve"></a>What Is One Trying To Achieve In Software
+Development?</u></b></p>
+<p>Before slamming bad management for failing to <i>get it</i>, one should state
+what it is that needs to be gotten.&nbsp; What is one trying to achieve in
+software development?</p>
+
+<p>On the administrative side, the bare minimum that one is trying to achieve is
+<i><b>administrative neatness</b></i>.&nbsp; In modern software development, neatness
+is <i>not</i> neatly-labeled file folders and <i>Microsoft Word</i>®
+documents with attractive cover pages and attractive headers and
+footers.&nbsp; <i>Neatness</i> is a <b> comprehensive information management plan</b>
+that:</p>
+
+<ul>
+  <li><b>Minimizes reliance on paper.</b>&nbsp; Treeware <i>is</i> necessary
+    sometimes.&nbsp; Personally, I've found that when I'm reviewing something
+    complex I <i>must</i> have it on paper.&nbsp; However, web-based databases
+    and paperless technologies are now the norm.</li>
+  <li><b>Addresses the needs and usage scenarios of everyone who participates in
+    the software development.</b>&nbsp; Everyone who participates in software
+    development or testing needs electronic resources to store their work
+    products.</li>
+  <li><b>Minimizes redundancy of information.</b>&nbsp; Although it is
+    impossible to eliminate information redundancy entirely, one must make a
+    best attempt.&nbsp; The <i>first</i> level of attempt is to have a <i>policy</i>
+    for where all product development information is stored: this prevents
+    unnecessary redundancy because all employees know where each type of
+    information should be stored.&nbsp; The <i>second</i> level of attempt is to
+    complement any policy weaknesses with tools that maintain information
+    consistency automatically.&nbsp; Unfortunately, most software development
+    organizations do not even make it to the first level of attempt.</li>
+</ul>
+
+<p>On the human resources side, the bare minimum one is trying to achieve
+is to <i><b>create the most rewarding experience for the top 10% of technical
+contributors</b></i>.&nbsp; Not all engineers or employees contribute
+equally.&nbsp; The 10% of engineers/employees that contribute the most
+technically to product development tend to have unstable personalities (these
+are the people you want to keep away from customers, for example).&nbsp; These
+individuals tend to strive for technical excellence, and don't tolerate
+environments that dilute their productivity.&nbsp; So, it makes sense for an
+employer to try to create an environment free of performance obstacles so as to
+be able to retain these individuals.</p>
+<p>I'm not claiming that an employer needs to <i>identify</i> the top 10% of
+technical contributors in order to be effective at retaining these
+people.&nbsp;&nbsp;All that is necessary is to create an environment where those
+who wish to perform can do so.</p>
+<p>It may be difficult to for the reader to envision a scenario that creates a
+low-quality experience for a solid technical contributor.&nbsp; A concrete
+example is that &quot;coding standards&quot; example, which I present next in
+the section <a href="#perfdil_immat_man" target="_self">Performance Dilution By Technically
+Immature Management</a>.</p>
+<hr>
+<p><b><u><a name="perfdil_immat_man"></a>Performance Dilution By Technically
+Immature Management</u></b></p>
+<p>One phenomenon that drives away gifted engineers is <i>performance dilution
+by technically immature management</i>.&nbsp; The nature of the phenomenon is
+that management often doesn't understand the work or the nature of the work well
+enough to make sound decisions; and some of the decisions (or failures to make
+decisions) invariably lower the quality of life for engineers.&nbsp; The most
+gifted engineers tend to have the strongest desire to contribute to the
+company's productivity, and so these decisions tend to frustrate the most gifted
+engineers into leaving the company.&nbsp; The net effect is to place an upper
+limit on the caliber of employees the company can retain.</p>
+<p>The phenomenon of differentially frustrating employees is also mentioned by
+Colin Powell in his awesome presentation, <i>A Leadership Primer</i> (available <a href="powellonleadership.zip">here</a>
+as a .ZIP'd PowerPoint presentation).&nbsp; The bottom line is that the most
+productive employees are most sensitive to obstacles to their
+productivity.&nbsp; The graphic below is from Powell's presentation.</p>
+<p align="center"><img border="0" src="powell_01.gif" width="720" height="540"></p>
+<p>One example from my own career is the issue of <i>coding standards</i>.&nbsp;
+At one point in my career with a large company, I was given responsibility for
+products that were politely called <i>legacy products</i>.&nbsp; <i>Legacy
+products</i> was a euphemism for products that had been poorly-designed and
+modified too many times.</p>
+<p>Each file that I opened in these legacy products contained inconsistent
+indentation and a mixture of space and tab characters (something that is
+prohibited by most coding standards).&nbsp; Because 'C' functions in embedded
+work can be quite lengthy, the net result is that I had to&nbsp;replace all tabs
+with spaces and then manually indent about 10,000 lines of code.&nbsp; It was an
+unpleasant experience.</p>
+<p>During the experience, I discussed with my boss the need for coding standards
+that prohibit tab characters in source files.&nbsp; He was unenthusiastic about
+coding standards in general, and nothing ever got done.&nbsp; The net result was
+sure to be that more source files with inconsistent indentation were coming my
+way.</p>
+<p>The general trend with bad management is:</p>
+<ul>
+  <li>Engineers will suggest process, technical, or administrative improvements
+    to management.&nbsp; (Often, these suggestions come directly from situations
+    in the work place that are lowering the quality of life for engineers.)</li>
+  <li>The management will not be technically mature enough to understand the
+    merit of the suggestions and/or will be insensitive to the way in which the
+    current situation lowers the quality of work life for engineers.</li>
+  <li>The suggestions will not be implemented at all, or in a best case some of
+    the suggestions will be implemented (but always the suggestions--usually the
+    least strategically important ones--that are consistent with the technical
+    maturity of the management).</li>
+  <li>The most gifted engineers (who are usually more sensitive to the
+    frustration) leave the company.</li>
+</ul>
+
+<hr>
+<p><b><u><a name="coevolution"></a>Co-Evolution</u></b></p>
+<p>One question I often ask myself is &quot;<i>How did things get so bad in
+small embedded work?</i>&quot;.</p>
+<p>I'm convinced that the answer lies in evolution and co-evolution.&nbsp; From
+time to time, one may watch a nature special where in some dark cave with a
+closed ecosystem, a species of blind fish has evolved.&nbsp; Blind fish can
+exist in such an environment because they do not need to see.</p>
+<p>Similarly, I'm convinced that the poor management skills abundant in small
+embedded work come from the environment.&nbsp; Every project is small enough
+that one can just keep throwing people at it and somehow the work will get done,
+even without a design.&nbsp; Skill <i>is not</i> necessary.&nbsp; A large pool
+of young energetic engineers who are easily deceived and manipulated <i>is</i>
+necessary.</p>
+<p>In projects of higher complexity, the same approach would fail miserably.</p>
+<p><b>Q:</b>&nbsp; Why are the supervisors and managers of small embedded
+software products so bad?</p>
+<p><b>A:</b>&nbsp; Because they <i>can</i> be (the complexity of the product
+allows it).&nbsp;</p>
+<hr>
+<p><b><u><a name="light_bulb_analogy"></a>The Light Bulb Analogy</u></b></p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<hr>
+<p><b><u><a name="emotional_manipulation"></a>Emotional Manipulation Of
+Employees</u></b></p>
+<p>&nbsp;</p>
+<hr>
+<p><b><u><a name="recognize_but_resist"></a>Recognizing Problems But Resisting
+Solutions</u></b></p>
+<p>&nbsp;</p>
+
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">Sound
+credit:&nbsp; The <i>Austin Powers</i> series of films starring Mike Meyers.<br>
+This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/authindiv/dtashley/bad_management/index.html,v 1.7 2003/05/10 00:28:43 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

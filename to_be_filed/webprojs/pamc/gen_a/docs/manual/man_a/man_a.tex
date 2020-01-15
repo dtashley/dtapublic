@@ -1,0 +1,175 @@
+%$Header: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/man_a.tex,v 1.13 2007/07/11 14:31:40 dashley Exp $
+%-----------------------------------------------------------------------------------
+\documentclass[letterpaper,10pt,titlepage]{custbook}
+%
+\pagestyle{headings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{makeidx}
+%
+%Define certain conspicuous global constants.
+\newcommand{\productbasename}{PAMC}
+\newcommand{\productversion}{0.1}
+\newcommand{\productname}{\productbasename{}-\productversion}
+%
+%Embarrassingly, I've forgotten why "makeindex" is necessary ...
+\makeindex
+%
+%Shared mathematical definitions
+\input{comps/workmdef}
+%
+%Hyphenation exceptions
+\input{comps/workhxcp}
+%
+%New environments, etc.
+\input{comps/worknenv}
+%
+\begin{document}
+%
+%Index "see" definitions
+\input{comps/workidxs}
+%
+%Title page(s)
+\input{comps/workttla}
+%
+%
+\vspace{-0.45in}
+%
+%Version control information for this file.
+\noindent\begin{minipage}{\textwidth}
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: man_a.tex,v $
+$Source: /home/dashley/cvsrep/e3ft_gpl01/e3ft_gpl01/webprojs/pamc/gen_a/docs/manual/man_a/man_a.tex,v $
+$Revision: 1.13 $
+$Author: dashley $
+$Date: 2007/07/11 14:31:40 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{minipage}
+%
+%Declare this as frontmatter, the front portion before the meat
+%of the book.
+\frontmatter{}
+%
+%Preface
+\input{comps/workprfa}
+%
+%Acknowledgements
+\input{comps/workacks}
+%
+%Table of contents
+\tableofcontents
+%
+%List of tables
+\listoftables
+%
+%List of figures
+\listoffigures
+%
+%List of procedures and checklists
+\listofprocchklsts
+%
+%Everything after this is the main matter, the "meat"
+%of the book.
+\mainmatter{}
+%
+% Part: General Information
+\part{General Information}
+
+% Chapter: Introduction and Overview
+\input{c_iov0/c_iov0}
+
+% Part: Technical Information
+\part{Technical Information}
+
+% Chapter: Technical Background
+\input{c_tbg0/c_tbg0}
+
+% Chapter: Software Component Descriptions and Designs
+\input{c_sco0/c_sco0}
+
+% Part: Installation and Maintenance
+\part{Installation and Maintenance}
+
+% Chapter: Installation
+\input{c_ist0/c_ist0}
+
+% Chapter: Maintenance
+\input{c_mai0/c_mai0}
+
+% Part: User Information
+\part{User Information}
+
+% Chapter: PAMC Core Functionality
+\input{c_cfn0/c_cfn0}
+
+% Chapter: The Employee Hours Database Application
+\input{c_ehd0/c_ehd0}
+
+% Chapter: The Software Release Vault Application
+\input{c_srv0/c_srv0}
+
+% Part: Procedures and Checklists
+\part{Procedures and Checklists}
+
+% Chapter: Procedures and Checklists
+\input{c_ppc0/c_ppc0}
+
+% Part: Appendices, Bibliography, and Index 
+\part{Appendices, Bibliography, and Index}
+
+%Mark the start of appendices.  This causes numbering to be with letters
+%instead of numbers.
+\appendix
+
+%Glossary of Terms
+\input{c_glo0/c_glo0}
+%
+%Glossary of Mathematical Notation
+\input{c_glo1/c_glo1}
+%
+%Glossary of GET, POST, and Cookie Parameters
+\input{c_glo4/c_glo4}
+%
+%Glossary of Global Variables, User-Persistent Named State, 
+%and Session-Temporary Named State
+\input{c_glo2/c_glo2}
+%
+%Glossary of User Permission Attributes
+\input{c_glo3/c_glo3}
+%
+%Bibliography
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\input{comps/workbibl}
+%
+%Index Must Be Formed At This Directory Level
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+%
+\end{document}
+%
+%$Log: man_a.tex,v $
+%Revision 1.13  2007/07/11 14:31:40  dashley
+%Edits.
+%
+%Revision 1.12  2007/07/11 01:36:52  dashley
+%Edits.
+%
+%Revision 1.11  2007/06/11 23:08:34  dashley
+%Edits.
+%
+%Revision 1.10  2007/06/06 01:46:46  dashley
+%Addition of chapters.
+%
+%End of $RCSfile: man_a.tex,v $.

@@ -1,0 +1,12 @@
+;	STMicroelectronics Workspace file
+
+[Version]
+Keyword=ST7Workspace-V0.7
+
+[Project0]
+Filename=utpj_btu32rotleftninplacerxn.stp
+Dependencies=
+[Options]
+ActiveProject=utpj_btu32rotleftninplacerxn
+ActiveConfig=Debug
+AddSortedElements=1

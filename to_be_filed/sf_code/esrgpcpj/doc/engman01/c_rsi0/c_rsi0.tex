@@ -1,0 +1,156 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/doc/engman01/c_rsi0/c_rsi0.tex,v 1.2 2002/07/29 16:53:09 dtashley Exp $
+%
+\chapter{Required Software Installations}
+\label{crsi0}
+
+The build process for Windows executables, Linux executables, 
+Windows InstallShield Express installation executables, 
+and \LaTeX{} documents requires many pieces of software.
+Some of this software is free, and some is commercial
+(and quite expensive).  In this chapter we describe 
+all software required \emph{The \tsname{}} and all supporting
+documentation on both Windows and *Nix platforms.  Note that
+depending on what is being built, not all software may
+be required.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Windows Software}
+\label{crsi0:swso0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Adobe Acrobat Version 4.0}
+\label{crsi0:swso0:saaf0}
+
+\index{Adobe!Acrobat}\index{Adobe!Acrobat Distiller}
+\emph{Adobe Acrobat}, which costs abour \$250, contains a program
+called \emph{Acrobat Distiller}.
+Acrobat Distiller 
+is the best application
+we've found for 
+creating \index{.PDF file@\texttt{.PDF} file}\texttt{.PDF} files from
+\LaTeX{} source code.  The most successful
+conversion approach seems to be 
+to create an output file for a PostScript printer,
+then to use Acrobat Distiller to convert it to 
+\texttt{.PDF}.
+
+To the best of our knowledge, it is not possible to purchase
+Acrobat Distiller separate from Adobe Acrobat---Adobe
+Acrobat must be purchased in order to obtain Acrobat Distiller.
+
+When Adobe Acrobat is installed, all of the installation defaults
+should be accepted.  \index{Tcl/Tk@\emph{Tcl/Tk}}Tcl/Tk 
+scripts and \index{.BAT file@\texttt{.BAT} file} \texttt{.BAT}
+files used in building \emph{The \tsname{}} rely on the 
+executables being in the default locations.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{\tsname{} Version \tsversion{}}
+\label{crsi0:swso0:sets0}
+
+%Note:  must hard code in the index entry below:  reason is processing
+%       order of MAKEINDEX and LATEX.  As it is below, a global name 
+%       change will get correct 
+
+\index{ESRG Tool Set@\emph{\tsname{}}}
+The \index{Tcl/Tk@\emph{Tcl/Tk}}Tcl/Tk interpreter 
+(\index{EsrgConsole@\emph{EsrgConsole}}\emph{EsrgConsole}, 
+the statically linked version
+of \index{Wish@\emph{Wish}}\emph{Wish}, with extensions)
+from \emph{The \tsname{}} is necessary to build
+\emph{The \tsname{}} on Windows platforms.  Thus, \emph{The \tsname{}}
+is necessary to build \emph{The \tsname{}}.  
+
+At the present time, EsrgConsole is used only in the production
+of the companion book.  However, in future revisions of
+the tool set, the build complexity may become great enough that
+it is used in the production of the Windows executables.
+
+When installing \emph{The \tsname{}}, it is not necessary to
+install the entire tool set---only the statically linked
+Tcl/Tk interpreter (EsrgConsole) is required.  Copying the executable
+from one computer to another will usually be adequate.  It is also not
+necessary that the executable go in a certain place, since starting
+the script interpreter is always a manual step in the build process.
+No specific version of EsrgConsole relative to the version of the
+tool set being built is \emph{actually} required; but
+because it is not a good idea to allow freedom in the build process,
+we canonically require that the version of EsrgConsole used for builds
+should be the last stable release before the version being built.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{InstallShield Express Version 3.03}
+\label{crsi0:swso0:sise0}
+
+\index{InstallShield Express@\emph{InstallShield Express}}
+\emph{InstallShield Express}, which costs about
+\$200, is the program used to create
+the installation executable for Windows platforms.
+
+Version 3.00 of the program contained some serious bugs, which were
+corrected in subsequent maintenance releases.  At the time of this
+writing, Version 3.03 is the most modern maintenance release.
+
+When installing InstallShield Express, if the installation media
+(typically a CD) are for a version earlier than version 3.03, it is
+recommended to download maintenance release 3.03 from 
+Installshield's web site and to install the maintenance release
+without first installing from the installation media (note that the
+maintenance release will require the serial number from the installation
+media).  The reason for this recommendation is that the maintenance release
+is standalone and just writes over earlier versions, anyway.
+When installing InstallShield Express, it is not required that
+installation defaults be accepted.  The generation of
+Windows installation executables is at this time a manual process,
+and no \index{Tcl/Tk@\emph{Tcl/Tk}}Tcl/Tk 
+scripts or \index{.BAT file@\texttt{.BAT} file} \texttt{.BAT}
+files rely on the location of the InstallShield Express executables.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{*Nix Software}
+\label{crsi0:snix0}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_rsi0.tex,v $
+$Source: /cvsroot/esrg/sfesrg/esrgpcpj/doc/engman01/c_rsi0/c_rsi0.tex,v $
+$Revision: 1.2 $
+$Author: dtashley $
+$Date: 2002/07/29 16:53:09 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_rsi0.tex,v $
+%Revision 1.2  2002/07/29 16:53:09  dtashley
+%Safety checkins before being moved to WSU server Kalman.
+%
+%Revision 1.1  2002/06/25 02:24:21  dtashley
+%Initial checkin.
+%
+%End of C_RSI0.TEX.

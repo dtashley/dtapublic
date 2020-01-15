@@ -1,0 +1,295 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title>Information For Authors And Collaborators</title>
+<base target="main">
+<bgsound src="../../gensounds/as_good_as_it_gets/bettrman.wav" loop="0">
+</head>
+
+<body background="../../bkgnds/bk10.gif">
+
+<p align="center"><b><font size="4">Information For Authors And Collaborators</font></b></p>
+<hr>
+<p>This document contains information for authors and other individuals
+collaborating on the book, a work in progress, tentatively entitled &quot;<i>A
+Practitioner's Guide To The Design And Development Of Small Microcontroller
+Software</i>&quot;.</p>
+<hr>
+<p><b><u>Bookmarks (To This Page)</u></b></p>
+<ul>
+  <li><a href="#lic_copyright_info" target="_self">License And Copyright
+    Information</a></li>
+  <li><a href="#typo_latex_conventions" target="_self">Typographic, LaTeX, Etc.
+    Conventions</a>
+    <ul>
+      <li><a href="#choice_wp_sw" target="_self">Choice Of Word-Processing
+        Software</a></li>
+      <li><a href="#nom_scopes" target="_self">Nomenclature Of Scopes</a></li>
+      <li><a href="#num_vol_org" target="_self">Number Of Volumes And
+        Organization</a></li>
+      <li><a href="#mech_xref" target="_self">Mechanisms For Cross-Referencing
+        Across Documents</a></li>
+      <li><a href="#nam_use_conv" target="_self">Naming And Usage Conventions</a></li>
+      <li><a href="#sub_tree_struct" target="_self">Subdirectory Tree Structure</a></li>
+    </ul>
+  </li>
+</ul>
+<hr>
+<p><b><u><a name="lic_copyright_info"></a>License And Copyright Information</u></b></p>
+<p>The license for the book is still under construction.&nbsp; The goal is to
+phrase the license so that anyone may print or distribute the book, including
+for profit, so long as the work is correctly attributed and the copyright is not
+transferred.</p>
+<hr>
+<p align="center"><b><u><a name="typo_latex_conventions"></a><font size="4">Typographic,
+LaTeX, Etc. Conventions</font></u></b></p>
+<p><b><u><a name="choice_wp_sw"></a>Choice Of Word-Processing Software</u></b></p>
+<p>LaTeX was chosen as the word-processing software for this work, for the
+following reasons:</p>
+<ul>
+  <li> Its proven ability to handle very large documents (before beginning
+this work,&nbsp; LaTeX was tested to 10,000 pages).</li>
+  <li> The heavy mathematical content of much of the subject matter and LaTeX's proven ability to handle complex mathematical equations and typesetting.</li>
+  <li>LaTeX's proven ability to handle high-resolution grayscale drawings.</li>
+  <li> The ease of translation to .PDF
+format for distribution on the Web.</li>
+  <li> The scientific bent of most of our potential authors and
+contributors---meaning that they would mostly already be LaTeX users.</li>
+  <li> The cross-platform nature of LaTeX (it exists on Unix and Linux as
+well as Windows platforms).</li>
+</ul>
+<p><b><u><a name="nom_scopes"></a>Nomenclature Of Scopes</u></b></p>
+<p>There are four scopes discussed in this document:</p>
+<ul>
+  <li> By <i>work</i>, we mean the entire collection of volumes
+and supporting materials that comprise this effort.</li>
+  <li> By <i>volume</i>, we mean a single bindable unit, compiled as a unit by
+    LaTeX, consisting of a collection of
+chapters plus title page, introductory information, table of contents, index,
+etc.&nbsp; (By <i>bindable</i> we mean that the unit can stand alone as something bound by a printer.&nbsp;
+    To stand
+alone, it must have a title page, a table of contents, a bibliography, and an
+    index.)</li>
+  <li> By <i>chapter</i>, we mean a single chapter or appendix
+of a volume.&nbsp; As this work is laid out, the chapter is the atomic unit which
+receives its own subdirectory and is designed so that it can be easily shifted
+between volumes if necessary.</li>
+  <li> By <i>subsection</i>, we mean sub-units of a chapter.&nbsp; The
+way that a chapter is broken into smaller units is at the chapter author's
+    discretion (although we do provide recommendations).&nbsp; To simplify collaboration, each chapter is laid out in its own
+subdirectory.&nbsp; Authors are free to arrange a chapter's subdirectory
+    hierarchy in any
+convenient way.&nbsp; Some authors will prefer a monolithic layout, with all necessary
+files in the chapter's subdirectory.&nbsp; Others will prefer to further organize
+chapters using child subdirectories in the chapter's subdirectory.&nbsp; Any
+organization is acceptable, so long as all chapter contents are contained in the
+chapter's subdirectory and its children.</li>
+</ul>
+<p><b><u><a name="num_vol_org"></a>Number Of Volumes And Organization</u></b></p>
+<p>All volumes of this work are generated using <i>Wish</i> or an
+equivalent.&nbsp; (<i>Wish</i> is the Tk shell of the Tcl/Tk scripting
+language).&nbsp; Wish is used because of the
+complexity of the LaTeX compilations--some files must be generated on the
+fly, and there are other build complexities that require scripting
+automation.&nbsp; The maximum number of pages that can be bound in a book is on the order of
+several hundred, and this work could easily exceed that length.&nbsp; For this reason,
+the work is designed so that it can be split into volumes.&nbsp; It is logistically
+easier to plan for the possibility of multiple volumes from the beginning,
+rather than needing to split an existing single-volume work into multiple
+volumes without an advance plan.</p>
+<p>At the present time, the Wish script compiles a single-volume work, as well
+as all volumes of a multi-volume work, re-using the same chapters as input to
+both the single-volume work and the multi-volume work.&nbsp; The number of volumes and
+the way that chapters are assigned to volumes is controlled by arrays of strings
+in the Wish script.&nbsp; The process is nearly fully automatic.</p>
+<p>However, the preface, which gives an overview of volumes and chapters, has to
+be manually maintained to match the Wish script.&nbsp; This is a minor inconvenience,
+and would be very difficult to automate.</p>
+<p>At the present time, in the multi-volume work, each volume has a separate
+index.&nbsp; A future improvement planned is to enhance the Wish script to combine the
+indices of all volumes.&nbsp; The plan is to combine index entries so that the volume
+tag is included with each page number cited in the index.&nbsp; This will give a full
+index of all volumes.&nbsp; For the single-volume work, this limitation does not
+exist, as the index is all-inclusive.</p>
+<p>Only the single-volume work will be published on the Web.&nbsp; Readers can print
+page ranges, so the length will not be an inconvenience.</p>
+<p>The number and titles of volumes and the assignment of chapters to volumes is
+not known precisely at this time.&nbsp; This information will settle later as the work
+is presented to a publisher.&nbsp; However, the most important attribute of the work
+is that it is designed in advance to be split into multiple volumes.</p>
+<p>If the conventions outlined in this appendix are followed, the possible split
+into multiple volumes should be straightforward and nearly fully automatic
+(except for the preface).</p>
+<p><b><u><a name="mech_xref"></a>Mechanisms For Cross-Referencing Across
+Documents</u></b></p>
+<p>David Carlisle's <i>xr</i> package is used to cross-reference across documents.&nbsp;
+In practice, this creates a
+global <font face="Courier">\label</font> and <font face="Courier">\ref</font> namespace
+which spans <i>all</i> volumes, so care must be given to naming conventions to
+keep order and prevent naming collisions.</p>
+<p>The use of the <i>xr</i> package is straightforward:</p>
+<ul>
+  <li><font face="Courier">\usepackage{xr}</font> must be specified in the preamble
+of each compiled LaTeX volume.</li>
+  <li><font face="Courier">\externaldocument{&lt;name&gt;}</font> must appear in
+the preamble once for each foreign volume whose symbols are to be imported.</li>
+</ul>
+<p>The use of <i>xr</i> does require that the entire set of cross-referenced
+volumes be compiled at least twice in a round-robin fashion to resolve all
+foreign dependencies.</p>
+<p>The Wish script automatically generates the &quot;main&quot; LaTeX file for the
+single-volume work and for each volume of the multi-volume work.&nbsp; The insertion
+of the <font face="Courier">\usepackage{xr}</font> and <font face="Courier">\externaldocument{&lt;name&gt;}</font>
+commands is automatic, and is done on the basis of arrays of strings embedded in
+the Wish script.</p>
+<p><b><u><a name="nam_use_conv"></a>Naming And Usage Conventions</u></b></p>
+<p>Naming and usage conventions apply at the <i>work</i> level, at the <i>volume</i>
+level, at the <i>chapter</i> level, and optionally at the <i>section</i> level.</p>
+<p>Naming conventions at the work level are enumerated below.</p>
+<ul>
+  <li> Commands, environments, etc. which exist at the <i>work</i> level (are
+intended for use everywhere in the work) begin with the string <font face="Courier">\vwork</font>.&nbsp;
+    An example of such a string would be <font face="Courier">\vworkrealsetnonneg</font>, which is the notation used throughout the work for
+the set of non-negative real numbers.</li>
+  <li> Files which contain definitions common to the work and shared sections
+common to the work (such as the title page, for example) have a file name
+beginning with &quot;<font face="Courier">work</font>&quot;.</li>
+  <li> All file names and paths in the work which might be accessed by LaTeX
+(including path components) must meet the following conventions.&nbsp; (The reason for these restrictions is that
+    LaTeX and some programs which
+accompany LaTeX are very old and won't operate if the conventions above are
+not followed.)
+    <ul>
+      <li> No file name or path component may contain a space character or
+characters other than underscores, letters, digits, and a single &quot;.&quot;.</li>
+      <li> No directory name may contain an extension, or have a name beyond 8
+characters.</li>
+      <li> All file names must meet the DOS &quot;8.3&quot; restriction.</li>
+      <li> All file names must be &quot;typed&quot; (they must have an
+        extension, such as .txt, .tex, etc.).</li>
+    </ul>
+  </li>
+  <li> At present, there are no cross-references associated with the <i>work</i>
+    scope
+(all cross-references are associated with smaller units).&nbsp; However, if such
+cross-references are eventually needed, labels should begin with &quot;<font face="Courier">vwork</font>&quot;.</li>
+  <li> The entire work is stored in a single subdirectory and its children
+(this is necessary to easily burn a CD or to easily compress or copy the entire
+work).&nbsp; On PC platforms, this subdirectory is assumed to be <font face="Courier">\esrgubka</font>.</li>
+</ul>
+<p>Naming and usage conventions at the <i>volume</i> level are
+enumerated below.</p>
+<ul>
+  <li> Each volume is assigned a 4-character tag, which normally [at the
+present time] always ends in a digit. (For example, the volume entitled <i>Concepts</i> has the 4-character tag
+    <i>CON0</i>.&nbsp; The 4-character tag is the
+basis for all of the volume-based naming conventions.</li>
+  <li> The Wish script creates a <font face="Courier">.TEX</font> file for each volume, as
+dictated by the arrays of strings embedded in the script.&nbsp; This is the main
+    <font face="Courier">.TEX</font>
+file which is compiled by LaTeX.&nbsp; The Wish script populates each main <font face="Courier">.TEX</font>
+file with the necessary <font face="Courier">\input</font> statements to include the
+chapters and appendices.&nbsp; Each main <font face="Courier">.TEX</font> file is named in accordance
+with the 4-character volume tag.&nbsp; For example, the <i>Concepts</i> volume main
+    <font face="Courier">.TEX</font>
+file is named <font face="Courier">CON0.TEX</font>.</li>
+  <li>No volumes should be directly <i>cited</i> or alluded to except
+in the preface.&nbsp; (They should be cited or alluded to using the commands
+    described below.)&nbsp; This restriction is necessary to ensure that all chapters
+compile both as part of a single-volume work and as part of a multiple-volume
+    work and that chapters can be freely moved between volumes.</li>
+  <li> To eliminate redundant information, the association between chapters
+and volumes (i.e. which chapters are in which volumes) and the numbers and titles of
+volumes are specified only in the Wish script.&nbsp; The Wish script, in turn,
+populates the main <font face="Courier">.TEX</font> files with this information in the form of
+    LaTeX
+commands.<br>
+    <br>
+    For each volume, an information block like the one below is created.<br>
+    <br>
+    <font face="Courier"> %%%% MFR0: Volume 2: Mathematical Frameworks
+And Results %%%%<br>
+    \newcommand\vmfrzeroarabic{2} \newcommand\vmfrzeroroman{II}<br>
+    \newcommand\vmfrzerotitle{Mathematical
+Frameworks And Results}<br>
+    \newcommand\vmfrzerocitecomma{MFR0, }<br>
+    \newcommand\vmfrzerocitehyphen{MFR0-}</font><br>
+    <br>
+    In the preface, the automatically-generated LaTeX commands of the form
+shown above should be used rather than embedding actual volume numbers or titles
+in the preface.&nbsp; This way, changes in the Wish script definitions automatically
+propagate to all references.</li>
+</ul>
+<p>Naming and usage conventions at the <i> chapter</i> level are enumerated below.</p>
+<ul>
+  <li> Chapters, like volumes, have 4-letter tags which are used as the basis
+for naming subdirectories, files, and LaTeX commands generated automatically
+by the Wish script.&nbsp; For example, the 4-letter tag of the chapter on
+    continued fractions is <i>CFR0</i>.</li>
+  <li> Each chapter occupies its own subdirectory, which has a name formed by
+prepending the 4-letter chapter tag with &quot;<i>c_</i>&quot;.&nbsp; For example, the
+subdirectory containing the chapter on continued fractions is
+    &quot;C_CFR0&quot;.&nbsp; It is
+at the chapter author's discretion whether to create child subdirectories.
+However, all materials for each chapter must be fully contained in a single
+subdirectory and its children.</li>
+  <li> Within each chapter's subdirectory, the chapter's main <font face="Courier">.TEX</font>
+file is named in the same way as the subdirectory, with the <font face="Courier">.TEX</font>
+suffix.&nbsp; For example, the main <font face="Courier">.TEX</font> file of the
+    continued fractions chapter is
+named &quot;C_CFR0.TEX&quot;.</li>
+  <li> Like volumes, chapters have corresponding LaTeX commands which are
+generated automatically by the Wish script.&nbsp; An example is supplied below.<br>
+    <br>
+    <font face="Courier" size="2"> %%%% Chapter CPRI0: Integers, Prime Numbers,
+And Related Topics %%%%<br>
+    \newcommand\cprizerovolarabic{2}<br>
+    \newcommand\cprizerovolroman{II}<br>
+    \newcommand\cprizerovoltitle{Mathematical Frameworks And Results} \newcommand\cprizeroshorttitle{Integers,
+Primes, And Related Topics}<br>
+    \newcommand\cprizerotitle{Integers, Prime Numbers,
+And Related Topics}<br>
+    \newcommand\cprizerolongtitle{Integers, Prime Numbers, And
+Related Topics}<br>
+    \newcommand\cprizeroxrefhyphen{MFR0-}<br>
+    \newcommand\cprizeroxrefcomma{MFR0,
+}<br>
+    \newcommand\cprizeromcclass{Chapter}<br>
+    \newcommand\cprizeroucclass{CHAPTER}<br>
+    \newcommand\cprizerolcclass{chapter}<br>
+    <br>
+    </font>These automatically-generated \LaTeX{} commands should be used to refer to
+chapters, rather than embedding chapter names or other information.</li>
+  <li> When a chapter refers to something in the same chapter, it can simply
+use the <font face="Courier">\ref{}</font> command to directly refer to its own
+equations, figures, etc.&nbsp; Any internal reference of this sort will necessarily be in the same
+volume.</li>
+  <li><p> When a chapter refers to something in another chapter, more caution
+must be used, because the chapter may be in another volume.&nbsp; For this reason, the
+automatically-generated commands include a &quot;xrefhyphen&quot; and &quot;xrefcomma&quot;
+    form which should be used to cite other chapters.&nbsp; For example, if another
+chapter cites an equation in the &quot;PRI0&quot; chapter, it should use the
+    form:</p>
+    <p><font face="Courier">\cprizeroxrefhyphen\ref{eq: ...}</font></p>
+<p>The Wish script automatically generates an empty string for
+chapters in the same volume as the citing chapter, or else a string such as
+&quot;MFR0, &quot; for foreign chapters.&nbsp; This results in the correct cross-reference
+styles.&nbsp; Authors are encouraged to consult existing chapters for recommended
+cross-referencing styles.</p>
+  </li>
+</ul>
+<p><b><u><a name="sub_tree_struct"></a>Subdirectory Tree Structure</u></b></p>
+<p>Need to add a figure here to illustrate the subdirectory structure.</p>
+<hr>
+<p align="center" style="margin-top: -2; margin-bottom: -1"><font size="1">This
+web page is maintained by <a href="mailto:dtashley@users.sourceforge.net">David
+T. Ashley</a>.<br>Sound credit:&nbsp; <i>As Good As It Gets</i>.<br>
+$Header: /cvsroot/esrg/sfesrg/esrgweba/htdocs/devels/uc_sw_bk_auth_collab/auth_info.htm,v 1.4 2003/05/15 08:12:53 dtashley Exp $</font></p>
+<hr noshade size="5">
+
+</body>
+
+</html>

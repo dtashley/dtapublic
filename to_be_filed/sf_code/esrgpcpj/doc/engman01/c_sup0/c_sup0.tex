@@ -1,0 +1,191 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/doc/engman01/c_sup0/c_sup0.tex,v 1.2 2002/06/26 01:01:49 dtashley Exp $
+%
+\chapter[Support And Collaboration]
+        {Obtaining Support And Collaborating Electronically}
+\label{csup0}
+
+This chapter outlines support options; specifically:
+
+\begin{itemize}
+\item How to obtain support if \emph{The \tsname{}} does not
+      behave as expected.
+\item How to obtain support if there is difficulty building the
+      tool set from source code.
+\item How to obtain support in collaboration (in contributing to 
+      the book, or in extending the tool set).
+\item How to report tool bugs or errors/omissions in documentation.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Mailing List Support And Collaboration}
+\label{csup0:smls0}
+
+\index{mailing lists}\index{discussion lists}
+The foremost support option is to join one of the mailing lists
+listed in Table \ref{tbl:csup0:smls0:01}.
+
+\begin{table}
+\begin{center}
+\begin{tabular}{|l|l|l|}
+\hline
+Mailing List         & Scope                    & Subscription, Moderation, \\
+Base Name            &                          & And Archive Availability  \\
+                     &                          & Policy                    \\
+\hline
+\hline
+\texttt{esrgmgmt}    & Used by the management   & Subscription by invitation\\
+                     & of the ESRG to discuss   & only.  Posts unmoderated  \\
+                     & research and policy      & but must come from sub-   \\
+                     &                          & scribed members.  Archives\\
+                     &                          & available to subscribed   \\
+                     &                          & members only.             \\
+\hline
+\texttt{esrgtsbug}   & Discussion of tool set   & Unmoderated subscription. \\
+                     & bugs and suspected bugs. & Unmoderated posts.        \\
+                     & research and policy      & Archives available to     \\
+                     & issues.                  & subscribed members only.  \\
+\hline
+\texttt{esrgtsdev}   & Discussion of tool set   & Unmoderated subscription. \\
+                     & software development.    & Unmoderated posts.        \\
+                     &                          & Archives available to     \\
+                     &                          & subscribed members only.  \\
+\hline
+\texttt{esrgtslic}   & Discussion of tool set   & Unmoderated subscription. \\
+                     & license questions and    & Unmoderated posts.        \\
+                     & issues.                  & Archives available to     \\
+                     &                          & subscribed members only.  \\
+\hline
+\texttt{esrgtsusr}   & Discussion of tool set   & Unmoderated subscription. \\
+                     & issues that arise through& Unmoderated posts.        \\
+                     & using the tool set, i.e. & Archives available to     \\
+                     & ordinary support         & subscribed members only.  \\
+                     & questions.               &                           \\
+\hline
+\hline
+\texttt{esrgubka}    & Discussion of all issues & Unmoderated subscription. \\
+                     & related to the authorship& Unmoderated posts.        \\
+                     & and production of the    & Archives available to     \\
+                     & companion book.          & subscribed members only.  \\
+\hline
+\hline
+\texttt{esrgucsw}    & Discussion of [primarily & Unmoderated subscription. \\
+                     & research and best        & Unmoderated posts.        \\
+                     & practice] issues in      & Archives available to     \\
+                     & microcontroller software & subscribed members only.  \\
+                     & development.             &                           \\
+\hline
+\end{tabular}
+\end{center}
+\caption{Support And Collaboration Mailing Lists Maintained By The ESRG}
+\label{tbl:csup0:smls0:01}
+\end{table}
+
+To join one of the mailing lists listed in 
+Table \ref{tbl:csup0:smls0:01}, it is only necessary to 
+send an e-mail to the \index{mailing lists!subscribing}
+list manager \index{ezmlm-idx@\texttt{ezmlm-idx}}(\texttt{ezmlm-idx}).
+The request to subscribe must be sent to the e-mail address \\
+\longthingindent\texttt{list-}\emph{basename}\texttt{-subscribe@esrg.org},   \\
+where \emph{basename} is the base name supplied in 
+Table \ref{tbl:csup0:smls0:01}.  For example, to join the
+\texttt{esrgtsusr} mailing list, an e-mail must be sent to \\
+\longthingindent \texttt{list-esrgtsusr-subscribe@esrg.org}. \\
+The 
+\texttt{ezmlm-idx} list manager will
+respond with a confirmation e-mail which must be replied to, and then
+the subscription will be complete.  After subscription, the subscribed
+e-mail address will receive all postings to the list.
+
+\index{mailing lists!posting}To post to a 
+list (after subscription), send an e-mail to \\
+\longthingindent\texttt{list-}\emph{basename}\texttt{@esrg.org}, \\
+where 
+\emph{basename} is the base name supplied in 
+Table \ref{tbl:csup0:smls0:01}.  For example, to post to the
+\texttt{esrgtsusr} mailing list, an e-mail must be sent to \\
+\longthingindent\texttt{list-esrgtsusr@esrg.org}.  \\
+All lists allow attachments.
+
+\index{mailing lists!unsubscribing}To unsubscribe 
+from a list, send an e-mail to \\ 
+\longthingindent\texttt{list-}\emph{basename}\texttt{-unsubscribe@esrg.org}, \\
+where 
+\emph{basename} is the base name supplied in 
+Table \ref{tbl:csup0:smls0:01}.  For example, to unsubscribe from the
+\texttt{esrgtsusr} mailing list, an e-mail must be sent to \\
+\longthingindent\texttt{list-esrgtsusr-unsubscribe@esrg.org}.
+
+The \texttt{ezmlm-idx} list manager will also allow past messages
+to be automatically retrieved, and has other useful features.  
+To automatically obtain a list of
+all commands that can be issued to the 
+\texttt{ezmlm-idx} list manager, an e-mail can be sent to \\
+\longthingindent\texttt{list-}\emph{basename}\texttt{-help@esrg.org}, \\
+where 
+\emph{basename} is the base name supplied in 
+Table \ref{tbl:csup0:smls0:01}.
+For example, to obtain help for the
+\texttt{esrgtsusr} mailing list, an e-mail can be sent to \\
+\longthingindent\texttt{list-esrgtsusr-help@esrg.org}. \\
+The \texttt{ezmlm-idx} list manager will reply with
+a help message.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Contacting Individuals Within The ESRG}
+\label{csup0:scin0}
+
+Directly contacting individuals within the ESRG is not recommended.
+There are several reasons for this:
+
+\begin{itemize}
+\item A post to one of the mailing lists is more likely to put the 
+      problem or question in the hands of the person who is best able
+      to answer it.
+\item E-mails sent to individuals are not automatically archived.
+\item Answers to e-mails sent to individuals do not receive the
+      benefits of peer review.
+\item E-mail sent to individuals may result in an inordinate
+      support load on some individuals.
+\end{itemize}
+
+For this reason, please do not send e-mails with questions 
+or requests for support directly
+to individuals within the ESRG.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_sup0.tex,v $
+$Source: /cvsroot/esrg/sfesrg/esrgpcpj/doc/engman01/c_sup0/c_sup0.tex,v $
+$Revision: 1.2 $
+$Author: dtashley $
+$Date: 2002/06/26 01:01:49 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_sup0.tex,v $
+%Revision 1.2  2002/06/26 01:01:49  dtashley
+%Edits, safety checkin.
+%
+%Revision 1.1  2002/06/25 02:42:44  dtashley
+%Initial checkin.
+%
+%End of C_SUP0.TEX.

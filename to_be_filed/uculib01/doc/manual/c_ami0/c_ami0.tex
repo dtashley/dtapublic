@@ -1,0 +1,608 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_ami0/c_ami0.tex,v 1.12 2010/02/24 14:50:36 dashley Exp $
+
+\chapter{Array Manipulation Functions}
+
+\label{cami0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  ami0
+\label{cami0:siov0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Array Element Decrement Not Below Zero Functions}
+%Section tag:  adz0
+\label{cami0:sdez0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU8aDnbzU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU8aDnbzU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  dez0
+\label{cami0:sadx0:sdez0}
+
+\index{UcuAmU8aDnbzU16nRxn()@\emph{UcuAmU8aDnbzU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU8aDnbzU16nRxn(
+                        UCU_UINT8  *a,
+                        UCU_UINT16  n
+                        )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Decrements each element of an array of UCU\_UINT8, but not below zero.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{a}}\\
+      Pointer to the first element of the array.  This pointer will only
+      be dereferenced if $n>0$.
+\item \emph{\textbf{n}}\\
+      The number of elements to be decremented.
+
+      If $n=0$, \texttt{a} will not be
+      dereferenced and no elements of the array will be modified.
+
+      If $n>0$, \texttt{a}
+      will be dereferenced and must be a valid pointer.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be called from non-ISR or ISR software.
+\item This function does not protect array accesses in any way, and so
+      is not safe to use to operate on data shared with another thread.
+      At least two types of multi-threaded shared data defects may occur if
+      this function is used on data shared between threads:
+      \begin{itemize}
+      \item Race conditions may occur when accessing a single array element.
+            The test and decrement are not guaranteed to be atomic, and
+            the decrement is not guaranteed to be atomic.
+      \item The operation performed on the entire array is not guaranteed
+            to be atomics.
+      \end{itemize}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U8a}:   operates on an array of UCU\_UINT8.
+      \emph{Dnbz}:  decrement, but not below zero.
+      \emph{U16n}:  the number of elements to operate on is specified
+                    as a UCU\_UINT16.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU16aDnbzU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU16aDnbzU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cami0:sadx0:sdez1}
+
+\index{UcuAmU16aDnbzU16nRxn()@\emph{UcuAmU16aDnbzU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU16aDnbzU16nRxn(
+                         UCU_UINT16 *in_arg,
+                         UCU_UINT16  in_nelem
+                         )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The \emph{UcuAmU16aDnbzU16nRxn($\cdot$)} function is identical in every
+      respect to the \emph{UcuAmU8aDnbzU16nRxn($\cdot$)} function
+      (\S{}\ref{cami0:sadx0:sdez0}, p. \pageref{cami0:sadx0:sdez0})
+      except that each element of the array is 16 bits
+      rather than 8.
+\end{list}
+\vspace{2.8ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU32aDnbzU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU32aDnbzU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  dez2
+\label{cami0:sadx0:sdez2}
+
+\index{UcuAmU32aDnbzU16nRxn()@\emph{UcuAmU32aDnbzU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU32aDnbzU16nRxn(
+                         UCU_UINT32 *in_arg,
+                         UCU_UINT16  in_nelem
+                         )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The \emph{UcuAmU32aDnbzU16nRxn($\cdot$)} function is identical in every
+      respect to the \emph{UcuAmU8aDnbzU16nRxn($\cdot$)} function
+      (\S{}\ref{cami0:sadx0:sdez0}, p. \pageref{cami0:sadx0:sdez0})
+      except that each element of the array is 32 bits
+      rather than 8.
+\end{list}
+\vspace{2.8ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Right Shift Functions}
+%Section tag:  rsf0
+\label{cami0:srsf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU8aRs1U16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU8aRs1U16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  rsh0
+\label{cami0:srsf0:srsh0}
+
+\index{UcuAmU8aRs1U16nRxn()@\emph{UcuAmU8aRs1U16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU8aRs1U16nRxn(
+                       UCU_UINT8  *in_arr, 
+                       UCU_UINT16  in_nelem, 
+                       UCU_UINT8   in_pushval
+                       )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Shifts an array of unsigned bytes one position to the right
+      (towards larger-numbered array subscripts) and places
+      a supplied byte into the leftmost (element [0]) position.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{in\_arr}}\\
+      Pointer to the first element of the array to be shifted.  This pointer will be
+      dereferenced only if $in\_nelem > 0$.
+\item \emph{\textbf{in\_nelem}}\\
+      The total number of elements in the array.  This is frequently
+      calculated as \texttt{sizeof(arr) / sizeof(arr[0])}.  (Note that this is
+      the \emph{number of elements} in the array, not the size of the array.)
+\item \emph{\textbf{in\_pushval}}\\
+      The value to be assigned to array element [0].
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item None.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be called from non-ISR or ISR software.
+\item This function does not protect array accesses in any way, and so
+      is not safe to use to operate on data shared with another thread.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U8a}:   operates on an array of UCU\_UINT8.
+      \emph{Rs1}:   right shift by one position.
+      \emph{U16n}:  the number of elements in the array is specified
+                    as a UCU\_UINT16.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU16aRs1U16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU16aRs1U16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  rsh1
+\label{cami0:srsf0:srsh1}
+
+\index{UcuAmU16aRs1U16nRxn()@\emph{UcuAmU16aRs1U16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU16aRs1U16nRxn(
+                        UCU_UINT16 *in_arr, 
+                        UCU_UINT16  in_nelem, 
+                        UCU_UINT8   in_pushval
+                       )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The \emph{UcuAmU16aRs1U16nRxn($\cdot$)} function is identical in every
+      respect to the \emph{UcuAmU8aRs1U16nRxn($\cdot$)} function
+      (\S{}\ref{cami0:srsf0:srsh0}, p. \pageref{cami0:srsf0:srsh0})
+      except that each element of the array is 16 bits
+      rather than 8.
+\end{list}
+\vspace{2.8ex}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Average Functions}
+%Section tag:  afn0
+\label{cami0:safn0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU16aAvgFU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU16aAvgFU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Section tag:  avg0
+\label{cami0:safn0:savg0}
+
+\index{UcuAmU16aAvgFU16nRxn()@\emph{UcuAmU16aAvgFU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAmU16aAvgFU16nRxn(
+                               const UCU_UINT16 *a,
+                                     UCU_UINT16  n
+                               )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the floor of the average of the array elements,
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i}{n}}\right\rfloor}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{a}}\\
+      Pointer to the first element of the array to be averaged.  If $n=0$, 
+      this pointer is not dereferenced.
+\item \emph{\textbf{n}}\\
+      The total number of elements in the array.  This is frequently
+      calculated as \texttt{sizeof(a) / sizeof(a[0])}.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The floor of the average of the array elements, 
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i}{n}}\right\rfloor}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $n = 0$, 0 is returned.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be called from non-ISR or ISR software.
+\item This function does not protect array accesses in any way, and so
+      is not safe to use to operate on data written by another thread.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16a}:   operates on an array of UCU\_UINT16.
+      \emph{Avg}:    average.
+      \emph{F}:      result is floor'd.
+      \emph{U16n}:   the number of elements in the array is specified
+                     as a UCU\_UINT16.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU16aAvgFDmmU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU16aAvgFDmmU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cami0:safn0:savg1}
+
+\index{UcuAmU16aAvgFDmmU16nRxn()@\emph{UcuAmU16aAvgFDmmU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAmU16aAvgFDmmU16nRxn(
+                                  const UCU_UINT16 *a,
+                                        UCU_UINT16  n
+                                  )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the floor of the average of the array elements with the 
+      minimum and maximum array elements discarded,
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i - a_{min} - a_{max}}{n-2}}\right\rfloor}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{a}}\\
+      Pointer to the first element of the array to be averaged.  If $n=0$, this
+      pointer is not dereferenced.
+\item \emph{\textbf{n}}\\
+      The total number of elements in the array.  This is frequently
+      calculated as \texttt{sizeof(a) / sizeof(a[0])}.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item The floor of the average of the array elements with the
+      minimum and maximum array elements discarded,
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i - a_{min} - a_{max}}{n-2}}\right\rfloor}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $n = 0$, 0 is returned.
+\item If $n = 1$, the value of the single array element is returned.
+\item If $n = 2$, the floored average of the two array elements,
+      $\lfloor (a_1 + a_0)/2 \rfloor$, is returned.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be called from non-ISR or ISR software.
+\item This function does not protect array accesses in any way, and so
+      is not safe to use to operate on data shared with another thread.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16a}:   operates on an array of UCU\_UINT16.
+      \emph{Avg}:    average.
+      \emph{F}:      result is floor'd.
+      \emph{Dmm}:    \emph{d}iscard \emph{m}inimum and \emph{m}aximum elements.
+      \emph{U16n}:   the number of elements in the array is specified
+                     as a UCU\_UINT16.
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAmU16aAvgFDmmRmmU16nRxn(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAmU16aAvgFDmmRmmU16nRxn(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cami0:safn0:savg2}
+
+\index{UcuAmU16aAvgFDmmRmmU16nRxn()@\emph{UcuAmU16aAvgFDmmRmmU16nRxn($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+void UcuAmU16aAvgFDmmRmmU16nRxn(
+                               const UCU_UINT16 *a, 
+                                     UCU_UINT16  n, 
+                                     UCU_UINT16 *avg, 
+                                     UCU_UINT16 *a_min, 
+                                     UCU_UINT16 *a_max
+                               )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates the floor of the average of the array elements with the 
+      minimum and maximum array elements discarded,
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i - a_{min} - a_{max}}{n-2}}\right\rfloor}$.
+      The values of the minimum and maximum elements are also returned.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{a}}\\
+      Pointer to the first element of the array to be averaged.  If $n=0$, this
+      pointer is not dereferenced.
+\item \emph{\textbf{n}}\\
+      The total number of elements in the array.  This is frequently
+      calculated as \texttt{sizeof(a) / sizeof(a[0])}.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{*avg}}\\
+      The average of the array elements with the minimum and maximum
+      elements removed:
+      $\displaystyle{\left\lfloor{\frac{\sum_{i=0}^{n-1}a_i - a_{min} - a_{max}}{n-2}}\right\rfloor}$.
+\item \emph{\textbf{*a\_min}}\\
+      The value of the minimum element of the array that was removed from
+      the average via subtraction.  All cases with duplicate elements (for example, an
+      array with every element identical) are handled correctly so that this value represents the minimum
+      of the elements in the array.
+\item \emph{\textbf{*a\_max}}\\
+      The value of the maximum element of the array that was removed from
+      the average via subtraction.  All cases with duplicate elements (for example, an
+      array with every element identical) are handled correctly so that this value represents the maximum
+      of the elements in the array.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $n = 0$, 0 is returned for the average, the minimum element, and the maximum element.
+\item If $n = 1$, the value of the single array element is returned for the average, the minimum element, and
+      the maximum element.
+\item If $n = 2$, the floored average of the two array elements,
+      $\lfloor (a_1 + a_0)/2 \rfloor$, is returned as the average.  The smaller element is
+      returned as the minimum element, and the larger element is returned as the maximum element.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be called from non-ISR or ISR software.
+\item This function does not protect array accesses in any way, and so
+      is not safe to use to operate on data shared with another thread.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16a}:   operates on an array of UCU\_UINT16.
+      \emph{Avg}:    average.
+      \emph{F}:      result is floor'd.
+      \emph{Dmm}:    \emph{d}iscard \emph{m}inimum and \emph{m}aximum elements.
+      \emph{Rmm}:    \emph{r}eturn the \emph{m}inimum and \emph{m}aximum elements
+                     (that were discarded).
+      \emph{U16n}:   the number of elements in the array is specified
+                     as a UCU\_UINT16.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_ami0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_ami0/c_ami0.tex,v $
+$Revision: 1.12 $
+$Author: dashley $
+$Date: 2010/02/24 14:50:36 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_ami0.tex,v $
+%Revision 1.12  2010/02/24 14:50:36  dashley
+%Function documentation enhanced.
+%
+%Revision 1.11  2010/02/23 18:51:06  dashley
+%Edits.
+%
+%Revision 1.10  2010/02/23 15:51:49  dashley
+%Edits.
+%
+%Revision 1.9  2010/02/17 15:04:46  dashley
+%Function documentation enhanced.
+%
+%Revision 1.8  2010/01/29 20:37:46  dashley
+%Functions added.
+%
+%Revision 1.7  2010/01/29 06:59:20  dashley
+%Addition of UcuAmU16aAvgFU16nRxn() function.
+%
+%Revision 1.6  2010/01/29 03:06:11  dashley
+%Addition of UcuAmU16aRs1U16nRxn() function.
+%
+%Revision 1.5  2010/01/28 22:46:47  dashley
+%Addition of UcuAmU8aRs1U16nRxn() function.
+%
+%Revision 1.4  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.3  2010/01/28 21:00:29  dashley
+%Functions added.
+%
+%Revision 1.2  2010/01/28 19:13:55  dashley
+%Integration of UcuAmU8aDnbzU16nRxn().
+%
+%Revision 1.1  2010/01/24 05:11:56  dashley
+%Initial checkin.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

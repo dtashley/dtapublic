@@ -1,0 +1,241 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/man_20070828.tex,v 1.13 2010/06/11 15:42:50 dashley Exp $
+%-----------------------------------------------------------------------------------
+\documentclass[letterpaper,10pt,titlepage]{custbook}
+%
+\pagestyle{headings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{makeidx}
+%
+%Define certain conspicuous global constants.
+\newcommand{\productbasenamelong}{Microcontroller Utility Library}
+\newcommand{\productbasenameshort}{UCULIB}
+\newcommand{\productversion}{0.1e}
+\newcommand{\productname}{\productbasenameshort{}-\productversion}
+%
+%Embarrassingly, I've forgotten why "makeindex" is necessary ...
+\makeindex
+%
+%Shared mathematical definitions
+\input{comps/workmdef}
+%
+%Hyphenation exceptions
+\input{comps/workhxcp}
+%
+%New environments, etc.
+\input{comps/worknenv}
+%
+\begin{document}
+%
+%Index "see" definitions
+\input{comps/workidxs}
+%
+%Title page(s)
+\input{comps/workttla}
+%
+%
+\vspace{-0.45in}
+%
+%Version control information for this file.
+\noindent\begin{minipage}{\textwidth}
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: man_20070828.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/man_20070828.tex,v $
+$Revision: 1.13 $
+$Author: dashley $
+$Date: 2010/06/11 15:42:50 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{minipage}
+%
+%Declare this as frontmatter, the front portion before the meat
+%of the book.
+\frontmatter{}
+%
+%Preface
+\input{comps/workprfa}
+%
+%Acknowledgements
+\input{comps/workacks}
+%
+%Table of contents
+\tableofcontents
+%
+%List of tables
+\listoftables
+%
+%List of figures
+\listoffigures
+%
+%List of procedures and checklists
+%\listofprocchklsts
+%
+%Everything after this is the main matter, the "meat"
+%of the book.
+\mainmatter{}
+%
+% Part: General Information
+\part{General Information}
+
+% Chapter: Introduction and Overview
+\input{c_iov0/c_iov0}
+
+% Part: Library Documentation
+\part{Library Documentation}
+
+% Chapter: How to Use UCULIB
+\input{c_uuc0/c_uuc0}
+
+% Chapter: Arithmetic Functions
+\input{c_afn0/c_afn0}
+
+% Chapter: Bounded Arithmetic Functions
+\input{c_baf0/c_baf0}
+
+% Chapter: Fixed-Point Arithmetic Functions
+\input{c_fpa0/c_fpa0}
+
+% Chapter: Large-Operand and Extended-Precision Arithmetic Functions
+\input{c_laf0/c_laf0}
+
+% Chapter: Block Memory Functions
+\input{c_bmf0/c_bmf0}
+
+% Chapter: Bit Set Functions
+\input{c_bsf0/c_bsf0}
+
+% Chapter: Searching Functions
+\input{c_sea0/c_sea0}
+
+% Chapter: Sorting Functions
+\input{c_sol0/c_sol0}
+
+% Chapter: Array Manipulation Functions
+\input{c_ami0/c_ami0}
+
+% Chapter: Linear Filter Functions
+\input{c_lfi0/c_lfi0}
+
+% Chapter: Non-Linear Filter Functions
+\input{c_nfi0/c_nfi0}
+
+% Chapter: Vertical Counter Functions
+\input{c_vco0/c_vco0}
+
+% Chapter: Control System Components
+\input{c_cso0/c_cso0}
+
+% Chapter: CRC, Checksum, and Non-Cryptographic Hash Functions
+\input{c_crc0/c_crc0}
+
+% Chapter: Cryptographic Hash Functions
+\input{c_crh0/c_crh0}
+
+% Chapter: Cipher Functions
+\input{c_cip0/c_cip0}
+
+% Chapter: Miscellaneous Functions
+\input{c_msc0/c_msc0}
+
+% Chapter: Utility Functions
+\input{c_nef0/c_nef0}
+
+% Chapter: Speed-Enhanced Development Tool Replacement Functions
+\input{c_sef0/c_sef0}
+
+% Part: Technical Background
+\part{Technical Background}
+
+% Chapter: Technical Background
+\input{c_tbg0/c_tbg0}
+
+% Chapter: Rational Linear Approximation
+\input{c_rla1/c_rla1}
+
+% Part: Developer Information
+\part{Developer Information}
+
+% Chapter: UCULIB Build Procedures
+\input{c_bpc0/c_bpc0}
+
+% Part: Procedures and Checklists
+%\part{Procedures and Checklists}
+
+% Chapter: Procedures and Checklists
+%\input{c_pck0/c_pck0}
+
+% Part: Appendices, Bibliography, and Index 
+\part{Appendices, Bibliography, and Index}
+
+%Mark the start of appendices.  This causes numbering to be with letters
+%instead of numbers.
+\appendix
+
+%Glossary of Terms
+\input{c_glo0/c_glo0}
+%
+%Glossary of Mathematical Notation
+\input{c_glo1/c_glo1}
+%
+%Bibliography
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Bibliography}
+\input{comps/workbibl}
+%
+%Index Must Be Formed At This Directory Level
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
+%
+\end{document}
+%
+%$Log: man_20070828.tex,v $
+%Revision 1.13  2010/06/11 15:42:50  dashley
+%Version number bump to 0.1e.
+%
+%Revision 1.12  2010/03/16 21:56:02  dashley
+%Edits and corrections.
+%
+%Revision 1.11  2010/01/26 18:52:39  dashley
+%Edits.
+%
+%Revision 1.10  2010/01/24 05:56:25  dashley
+%Edits.
+%
+%Revision 1.9  2010/01/24 05:37:27  dashley
+%Addition and reorganization of content.
+%
+%Revision 1.8  2007/11/06 16:09:57  dtashley
+%Addition of two chapters.
+%
+%Revision 1.7  2007/10/08 18:16:33  dtashley
+%Edits.
+%
+%Revision 1.6  2007/10/07 04:59:50  dtashley
+%Edits.
+%
+%Revision 1.5  2007/10/06 23:54:50  dtashley
+%Edits.
+%
+%Revision 1.4  2007/10/06 22:54:43  dtashley
+%Edits.
+%
+%Revision 1.3  2007/09/27 22:54:33  dtashley
+%Edits.
+%
+%Revision 1.2  2007/08/30 14:45:39  dtashley
+%Edits.
+%
+%Revision 1.1  2007/08/30 14:21:59  dtashley
+%Initial checkin.
+%
+%End of $RCSfile: man_20070828.tex,v $.

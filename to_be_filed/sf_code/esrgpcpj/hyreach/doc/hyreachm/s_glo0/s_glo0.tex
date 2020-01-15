@@ -1,0 +1,78 @@
+%$Header: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_glo0/s_glo0.tex,v 1.4 2002/01/29 17:04:00 dtashley Exp $
+%
+\section{Glossary Of Terms}
+\label{sglo0}
+
+\begin{glossaryenum}
+\item \textbf{CHM}\index{CHM} \\
+      \emph{C}omposite \emph{h}ybrid \emph{m}achine.  A timed automaton which is
+      created by \swname{} by combining the state-spaces of all EHMs supplied as
+      input using a well-defined mathematical operation.  In general, each location
+      of a CHM corresponds to one location from each EHM.
+\item \textbf{configuration}\index{configuration} \\
+      See \emph{location}.
+\item \textbf{EHM}\index{EHM} \\
+      \emph{E}lementary \emph{h}ybrid \emph{m}achine.  A timed automaton supplied
+      as input to \swname{}.
+\item \textbf{location}\index{location} \\
+      The discrete component of an EHM's state.  The state of an EHM is divided into
+      two components:
+      \begin{itemize}
+      \item The discrete state, which is usually shown on a state transition diagram
+            as a circle or a rectangle.
+      \item The values of clocks which the EHM sets and tests.  These values are
+            conceptually continuous, but for machine representation reasons are
+            confined to integers.
+      \end{itemize}
+      The \emph{location} is the disctete state only.
+\item \textbf{on-the-fly}\index{on-the-fly} \\
+      Creating (dynamically allocating) the locations of a CHM as needed during 
+      verification, rather than in
+      advance.  For analyzing reachability, creating locations of a CHM before verification
+      begins has performance disadvantages for three reasons:
+      \begin{itemize}
+      \item A large number of CHM locations may not be reachable, and so are not used
+            during the verification.  Creating these locations is a wasted motion.
+      \item In the event that an illegal location is reachable, in most cases
+            creating all CHM locations
+            in advance will greatly slow down finding 
+            that the illegal location is reachable.  Because a model with illegal
+            states reachable usually requires correction, this will slow down the 
+            development cycle in which \swname{} is being used.
+      \item For models with a very large state space, not all symbolic information for 
+            all locations can be 
+            kept in memory at one time (and it is not necessary to do so).  For large
+            models, it is not
+            possible to create all locations in advance.
+      \end{itemize}
+\end{glossaryenum}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: s_glo0.tex,v $
+$Source: /cvsroot/esrg/sfesrg/esrgpcpj/hyreach/doc/hyreachm/s_glo0/s_glo0.tex,v $
+$Revision: 1.4 $
+$Author: dtashley $
+$Date: 2002/01/29 17:04:00 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: s_glo0.tex,v $
+%Revision 1.4  2002/01/29 17:04:00  dtashley
+%Version control info added, and minor edits.
+%
+%Revision 1.3  2001/10/31 04:31:37  dtashley
+%Nightly safety checkin.
+%
+%Revision 1.2  2001/10/01 06:08:09  dtashley
+%Basic hacks in place for a workable document.
+%
+%Revision 1.1  2001/09/26 02:31:14  dtashley
+%Initial checkin, and some edits of main TEX file.
+%
+%End of S_GLO0.TEX.

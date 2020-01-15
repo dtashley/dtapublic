@@ -1,0 +1,210 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_fpa0/c_fpa0.tex,v 1.4 2010/02/22 15:40:28 dashley Exp $
+
+\chapter{Fixed-Point Arithmetic Functions}
+
+\label{cfpa0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+\label{cfpa0:siov0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{UCU\_UINT16 [0, 1024] [0,1] Bounded Functions}
+\label{cfpa0:subf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuFpUm1024uProjIntoRU16aRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuFpUm1024uProjIntoRU16aRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  faa1
+\label{cfpa0:subf0:sfaa0}
+
+\index{UcuFpUm1024uProjIntoRU16aRxx()@\emph{UcuFpUm1024uProjIntoRU16aRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuFpUm1024uProjIntoRU16aRxx(
+                                       UCU_UINT16 x, 
+                                       UCU_UINT16 x_max, 
+                                       )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Linearly scales from $[0, x_{max}]$ to $[0, 1024]$, rounding the result
+      to the nearest integer with a downward bias.  The result calculated is
+      $\displaystyle{\left\lfloor \frac{1024 x + \left\lfloor \displaystyle{\frac{x_{max} - 1}{2}} \right\rfloor}{x_{max}} \right\rfloor}$,
+      with the provision that the function output will never exceed 1024.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The input to scale.
+\item \emph{\textbf{x\_max}}\\
+      The value of $x$ that should correspond to 1024.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\displaystyle{\left\lfloor \frac{1024 x + \left\lfloor \displaystyle{\frac{x_{max} - 1}{2}} \right\rfloor}{x_{max}} \right\rfloor}$,
+      with a maximum of 1024.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $x>x_{max}$, 1024 is returned.
+\item If $x_{max}=0$, 0 is returned.  (In this
+      case, it isn't possible to determine the intent of
+      the caller, so 0 is the safest return value.)
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Um1024u}: unsigned maximum-1024 unsigned.
+      \emph{Proj}:    projection.
+      \emph{Into}:    into.
+      \emph{R}:       result rounded to nearest integer.
+      \emph{U16a}:    the argument is UCU\_UINT16.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuFpUm1024uMulRRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuFpUm1024uMulRRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cfpa0:subf0:sfaa1}
+
+\index{UcuFpUm1024uMulRRxx()@\emph{UcuFpUm1024uMulRRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuFpUm1024uMulRRxx(
+                              UCU_UINT16 x_1, 
+                              UCU_UINT16 x_2, 
+                              )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $x_1 x_2$, treating $x_1$ and $x_2$ as fixed-point numbers with 1024 corresponding
+      to 1, and with $x_1$ and $x_2$ having a maximum of 1. The output is rounded to the nearest
+      integer with a slight downward bias.
+\item The precise function implemented is
+      \begin{equation}
+      \left\lfloor \frac{min(x_1, 1024) \; min(x_2, 1024) + 511}{1024} \right\rfloor.
+      \end{equation}
+\item The function output cannot exceed 1024.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x\_1}}, \emph{\textbf{x\_2}} \\
+      The inputs to multiply together.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\vspace{0.4ex}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item  $\displaystyle{\left\lfloor \frac{min(x_1, 1024) \; min(x_2, 1024) + 511}{1024} \right\rfloor}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item As indicated above, $x_1$ and $x_2$ are clipped at 1024 before being used
+      in the calculation.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Um1024u}: unsigned maximum-1024 unsigned.
+      \emph{Mul}:     multiplication.
+      \emph{R}:       result is rounded to nearest integer (with slight downward bias).
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_fpa0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_fpa0/c_fpa0.tex,v $
+$Revision: 1.4 $
+$Author: dashley $
+$Date: 2010/02/22 15:40:28 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_fpa0.tex,v $
+%Revision 1.4  2010/02/22 15:40:28  dashley
+%Function added.
+%
+%Revision 1.3  2010/02/22 00:16:02  dashley
+%Documentation added.
+%
+%Revision 1.2  2010/01/28 21:18:32  dashley
+%a)Chapter start quotes removed.
+%b)Aesthetic comment line added at the bottom of most files.
+%
+%Revision 1.1  2010/01/24 03:00:41  dashley
+%Initial checkin.
+%
+%End of $RCSfile: c_fpa0.tex,v $.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

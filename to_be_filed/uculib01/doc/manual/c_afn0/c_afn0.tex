@@ -1,0 +1,1319 @@
+%$Header: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_afn0/c_afn0.tex,v 1.37 2010/05/12 18:35:49 dashley Exp $
+
+\chapter{Arithmetic Functions}
+
+\label{cafn0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+%Section tag:  iov0
+\label{cafn0:siov0}
+
+This chapter documents functions that perform arithmetic.
+
+\begin{itemize}
+\item \S{}\ref{cafn0:sscx0} (p. \pageref{cafn0:sscx0}) documents
+      functions that compare UCU\_UINT16 data.
+\item \S{}\ref{cafn0:slsf0} (p. \pageref{cafn0:slsf0}) documents
+      functions that calculate or approximate functions of the form
+      $y=mx$, where $y$ is a UCU\_UINT16.
+\item \S{}\ref{cafn0:ssre0} (p. \pageref{cafn0:ssre0}) documents
+      functions that calculate or approximate square roots.
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{UCU\_UINT16 Comparison Functions}
+%Section tag:  scx0
+\label{cafn0:sscx0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16CmpDiffAbsGtRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16CmpDiffAbsGtRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  csx0
+\label{cafn0:sscx0:scsx0}
+
+\index{UcuAtU16CmpDiffAbsGtRxx()@\emph{UcuAtU16CmpDiffAbsGtRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_BOOLEAN UcuAtU16CmpDiffAbsGtRxx(
+                                   UCU_UINT16 x1,
+                                   UCU_UINT16 x2,
+                                   UCU_UINT16 d
+                                   )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Returns UCU\_TRUE if $|x_1-x_2|>d$, or UCU\_FALSE otherwise.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x1}}, \emph{\textbf{x2}}\\
+      The UCU\_UINT16 arguments to compare.
+\item \emph{\textbf{d}}\\
+      The comparison threshold.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item UCU\_TRUE if $|x_1-x_2|>d$, or UCU\_FALSE otherwise.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{DETAILED DESCRIPTION}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{UcuAtU16CmpDiffAbsGtRxx($\cdot$)} determines whether 
+      $x_1$ and $x_2$ are more than $d$ apart.
+\item The function is
+      typically used to detect change in a value (either negative or positive)
+      of a magnitude greater than $d$,
+      or to determine if two values are within $d$ of each other.
+\item \emph{UcuAtU16CmpDiffAbsGtRxx($\cdot$)} is symmetric with
+      respect to its arguments:  $f(x_1, x_2) \equiv f(x_2, x_1)$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}:  arguments and return type are UCU\_UINT16.
+      \emph{Cmp}: compare.
+      \emph{Diff}:  difference.
+      \emph{Abs}: absolute value.
+      \emph{Gt}:  greater than.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{UCU\_SINT32 Complement and Negation Functions}
+%\label{cafn0:scnf0}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtS32NegationRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtS32NegationRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:scnf0:sstf0}
+%
+%\index{UcuAtS32NegationRxx()@\emph{UcuAtS32NegationRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_SINT32 UcuAtS32NegationRxx( UCU_SINT32 x )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Returns the 1's complement of $x$, plus 1.  In most cases, this represents
+%      $-x$, but $-2^{31}$ (the most negative representable value) maps to
+%      $-2^{31}$ (this is a standard feature of the 2's complement representation of signed
+%      integers).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{x}} \\
+%      The UCU\_SINT32 integer to negate.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The 1's complement of $x$, plus 1
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{Negation}:  negates the argument.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{UCU\_UINT16 Linear Scaling Functions, Zero Y-Intercept}
+%Section tag:  lsf0
+\label{cafn0:slsf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16LscZyiFAxdAxrRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16LscZyiFAxdAxrRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  faa0
+\label{cafn0:slsf0:sfaa0}
+
+\index{UcuAtU16LscZyiFAxdAxrRxx()@\emph{UcuAtU16LscZyiFAxdAxrRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAtU16LscZyiFAxdAxrRxx(
+                                   UCU_UINT16 x, 
+                                   UCU_UINT16 x_max, 
+                                   UCU_UINT16 y_max
+                                   )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Linearly scales (or projects) from $[0, x_{max}]$ to $[0, y_{max}]$,
+      implementing the floor function (discarding any remainder resulting
+      from the division).  The value calculated is
+      $\displaystyle{\left\lfloor \frac{y_{max} x}{x_{max}} \right\rfloor}$,
+      with the provision that the function output will never
+      exceed $y_{max}$.
+
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The input to scale.
+\item \emph{\textbf{x\_max}}\\
+      The value of $x$ that should correspond to $y_{max}$.
+\item \emph{\textbf{y\_max}}\\
+      The maximum output value of the function.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\displaystyle{\left\lfloor \frac{y_{max} x}{x_{max}} \right\rfloor}$, with
+      a maximum of $y_{max}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $x>x_{max}$, $y_{max}$ is returned.
+\item If $x_{max}=0$ or $y_{max}=0$, 0 is returned.  (In either of these
+      cases, it isn't possible to determine the intent of the caller,
+      so 0 is the safest return value.)
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}: operates on and returns UCU\_UINT16.
+      \emph{Lsc}: linear scaling function.
+      \emph{Zyi}: zero $y$ intercept.
+      \emph{F}:   result floored (rather than rounded).
+      \emph{Axd}: arbitrary maxima of domain.
+      \emph{Axr}: arbitrary maxima of range.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16LscZyiRAxdAxrRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16LscZyiRAxdAxrRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  faa1
+\label{cafn0:slsf0:sfaa1}
+
+\index{UcuAtU16LscZyiRAxdAxrRxx()@\emph{UcuAtU16LscZyiRAxdAxrRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAtU16LscZyiRAxdAxrRxx(
+                                   UCU_UINT16 x, 
+                                   UCU_UINT16 x_max, 
+                                   UCU_UINT16 y_max
+                                   )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Linearly scales from $[0, x_{max}]$ to $[0, y_{max}]$, rounding the result
+      to the nearest integer with a downward bias.  The result calculated is
+      $\displaystyle{\left\lfloor \frac{y_{max} x + \left\lfloor \displaystyle{\frac{x_{max} - 1}{2}} \right\rfloor}{x_{max}} \right\rfloor}$,
+      with the provision that the function output will never exceed $y_{max}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The input to scale.
+\item \emph{\textbf{x\_max}}\\
+      The value of $x$ that should correspond to $y_{max}$.
+\item \emph{\textbf{y\_max}}\\
+      The maximum output value of the function.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item       $\displaystyle{\left\lfloor \frac{y_{max} x + \left\lfloor \displaystyle{\frac{x_{max} - 1}{2}} \right\rfloor}{x_{max}} \right\rfloor}$,
+            with a maximum of $y_{max}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $x>x_{max}$, $y_{max}$ is returned.
+\item If $x_{max}=0$ or $y_{max}=0$, 0 is returned.  (In either
+      of these cases, it isn't possible to determine the intent of
+      the caller, so 0 is the safest return value.)
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}: operates on UCU\_UINT16 operands.
+      \emph{Lsc}: linear scaling function.
+      \emph{Zyi}: zero $y$ intercept.
+      \emph{R}:   result rounded to nearest integer.
+      \emph{Axd}: arbitrary maxima of domain.
+      \emph{Axr}: arbitrary maxima of range.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Ratiometric Adjustment Functions}
+%Section tag:  sraf0
+\label{cafn0:sraf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16RatAdjRRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16RatAdjRRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  rat0
+\label{cafn0:sraf0:srat0}
+
+\index{UcuAtU16RatAdjRRxx()@\emph{UcuAtU16RatAdjRRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAtU16RatAdjRRxx(
+                             UCU_UINT16 arg, 
+                             UCU_UINT16 arg_max, 
+                             UCU_UINT16 adj_in, 
+                             UCU_UINT16 adj_nom
+                             )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Ratiometrically adjusts $arg$ according to the formula
+      $\displaystyle{\left\lfloor \frac{arg\;adj_{nom} + \left\lfloor \displaystyle{\frac{adj_{in} - 1}{2}} \right\rfloor}{adj_{in}} \right\rfloor}$,
+      with the result then clipped at $arg_{max}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{arg}}\\
+      The input to scale.
+\item \emph{\textbf{arg\_max}}\\
+      The maximum value of $arg$ that may be returned by the function.
+\item \emph{\textbf{adj\_in}}\\
+      The value of the adjustment parameter that should be used for calculation.
+\item \emph{\textbf{adj\_nom}}\\
+      The nominal value of the adjustment parameter that should leave $arg$ unchanged.  As
+      $adj_{in}$ increases, the value returned will decrease, and vice-versa.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item       $\displaystyle{\left\lfloor \frac{arg\;adj_{nom} + \left\lfloor \displaystyle{\frac{adj_{in} - 1}{2}} \right\rfloor}{adj_{in}} \right\rfloor}$,
+            with a maximum of $arg_{max}$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $adj_{in}=0$ and $arg=0$, 0 is returned.
+\item If $adj_{in}=0$ and $arg>0$, $arg_{max}$ is returned.
+\item If $adj_{nom}=0$, 0 is returned.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}: operates on UCU\_UINT16 operands.
+      \emph{RatAdj}: ratiometric adjustment.
+      \emph{R}:   result rounded to nearest integer.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Vector Functions, 2-Dimensional}
+\label{cafn0:svft0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtS32S16v2CpRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtS32S16v2CpRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:svft0:scpt1}
+%
+%\index{UcuAtS32S16v2CpRxx()@\emph{UcuAtS32S16v2CpRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_SINT32 UcuAtS32S16v2CpRxx(
+%                             UCU_SINT16 a_x, 
+%                             UCU_SINT16 a_y, 
+%                             UCU_SINT16 b_x, 
+%                             UCU_SINT16 b_y
+%                             )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Calculates the signed magnitude of the $\hat{k}$-component of the
+%      cross-product of $\vec{a}$ and $\vec{b}$:
+%
+%      \begin{equation}
+%      \label{eq:cafn0:svft0:scpt1:01}
+%      a_x b_y - a_y b_x .
+%      \end{equation}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{a\_x, a\_y, b\_x, b\_y}}\\
+%      The $x$ and $y$ components of the two vectors.  The correct cross-product
+%      will be returned over the entire domain of input arguments.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item $a_x b_y - a_y b_x$.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXCEPTION CASES}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{S32}:    returned value is a UCU\_SINT32.
+%      \emph{S16v2}:  operates on 2-dimensional vecotrs with UCU\_SINT16 components.
+%      \emph{Cp}:     cross-product.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{DETAILED DESCRIPTION / ADDITIONAL INFORMATION}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item The three-dimensional vector cross product is defined as
+%
+%      \begin{equation}
+%      \label{eq:cafn0:svft0:scpt1:02}
+%      \vec{a} \times \vec{b} = \left | 
+%      {
+%      \begin{array}{ccc}
+%      \hat{i}    &     \hat{j}    &  \hat{k}    \\
+%      a_x  &     a_y  &   a_z  \\
+%      b_x  &     b_y  &   b_z
+%      \end{array}
+%      }
+%      \right |.
+%      \end{equation}
+%\item In two dimensions ($a_z = b_z = 0$), the vector
+%      cross-product is defined as
+%
+%      \begin{equation}
+%      \label{eq:cafn0:svft0:scpt1:03}
+%      \vec{a} \times \vec{b} = \left | 
+%      {
+%      \begin{array}{ccc}
+%      \hat{i}    &     \hat{j}    &  \hat{k}    \\
+%      a_x  &     a_y  &   0  \\
+%      b_x  &     b_y  &   0
+%      \end{array}
+%      }
+%      \right | = \hat{k} (a_x b_y - a_y b_x) .
+%      \end{equation}
+%
+%      This function calculates the magnitude of the $\vec{k}$ component
+%      of a 3-dimensional vector cross-product when $a_z = b_z = 0$.
+%\item This function returns a maximum when $a_x = b_y = a_y = -2^{15}$
+%      and $b_x = 2^{15} - 1$, leading to a maximum of $2^{31} - 2^{15}$.
+%      Similarly, the minimum can be shown to be $-2^{31} + 2^{15}$\@.
+%      Thus, the calculated result is always exact and always fits in a UCU\_SINT32.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16v2CpDiva2FRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16v2CpDiva2FRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cafn0:svft0:scpt0}
+
+\index{UcuAtU16v2CpDiva2FRxx()@\emph{UcuAtU16v2CpDiva2FRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAtU16v2CpDiva2FRxx(
+                                UCU_UINT16 a_x, 
+                                UCU_UINT16 a_y, 
+                                UCU_UINT16 b_x, 
+                                UCU_UINT16 b_y
+                                )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates an approximation to
+
+      \begin{equation}
+      \label{eq:cafn0:svft0:scpt0:01}
+      \left\lfloor \frac{| \vec{a} \times \vec{b} |}{| \vec{b} |} \right\rfloor
+      = 
+      \left\lfloor \frac{| \vec{a} | | \vec{b} | \sin \theta}{| \vec{b} |} \right\rfloor ,
+      \end{equation}
+
+      where $\vec{a}$ and $\vec{b}$ are in a special form as described below.
+\item This function is a special purpose function and not especially portable.  In particular, the design
+      of the interface is awkward.  This function will eventually be replaced in the library.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUTS}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{a\_x, a\_y, b\_x, b\_y}}\\
+      The $x$ and $y$ components of the two vectors.  Each is in ``excess-4096'' format, so that a value of 0 represents -4096, a value of 4096
+      represents 0, and a value of 8192 represents 4096.
+
+      Each of these parameters are clipped into [32, 8160] by the function before any calculation
+      is performed, representing vector component values in [-4064, 4064].
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item   An approximation of 
+        $\left\lfloor \frac{| \vec{a} \times \vec{b} |}{| \vec{b} |}\right\rfloor
+        = 
+        \left\lfloor\frac{| \vec{a} | | \vec{b} | \sin \theta}{| \vec{b} |}\right\rfloor$.
+        The approximation is within several counts of the ideal value.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item If $\vec{b} = \vec{0}$, 0 is returned.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16v2}:  operates on 2-dimensional vecotrs with UCU\_UINT16 components.
+      \emph{Cp}:     cross-product.
+      \emph{Diva2}:  divided by the second argument (the second vector).
+      \emph{F}:      the result is floor'd.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtS32S16v2CpDiva2FRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtS32S16v2CpDiva2FRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:svft0:scpt2}
+%
+%\index{UcuAtS32S16v2CpDiva2FRxx()@\emph{UcuAtS32S16v2CpDiva2FRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_SINT32 UcuAtS32S16v2CpDiva2FRxx(
+%                                   UCU_SINT16 a_x, 
+%                                   UCU_SINT16 a_y, 
+%                                   UCU_SINT16 b_x, 
+%                                   UCU_SINT16 b_y
+%                                   )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Calculates
+%
+%      \begin{equation}
+%      \label{eq:cafn0:svft0:scpt2:01}
+%      \left\lfloor \frac{\vec{a} \times \vec{b}}{| \vec{b} | \hat{k}} \right\rfloor ,
+%      \end{equation}
+%
+%      where the floor function rounds negative values towards zero.  It should be noted that by definition
+%
+%      \begin{equation}
+%      \label{eq:cafn0:svft0:scpt2:02}
+%      \left\lfloor \left| \frac{\vec{a} \times \vec{b}}{| \vec{b} | \hat{k}} \right| \right\rfloor
+%      =
+%      \lfloor |\vec{a}| \sin \theta \rfloor ,
+%      \end{equation}
+%
+%      where $\theta$ is the angle between $\vec{a}$ and $\vec{b}$, $0 \leq \theta \leq \pi$,
+%      so that this function provides an excellent approximation to 
+%      $\lfloor |\vec{a}| \sin \theta \rfloor$.
+%\item For two vectors $\vec{a}$ and $\vec{b}$ that both begin at the origin,
+%      the absolute value of this function's return value is
+%      the floor of the shortest distance between the tip of $\vec{a}$ and the line coincident with
+%      $\vec{b}$.
+%\item The precise calculation method used by this function is described in
+%      \S{}\ref{ctbg0:svec2} (p. \pageref{ctbg0:svec2}).
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{a\_x, a\_y, b\_x, b\_y}}\\
+%      The $x$ and $y$ components of the two vectors.  All components are signed, and this function
+%      will return correct results over the entire input domain.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item $\displaystyle{\left\lfloor \frac{\vec{a} \times \vec{b}}{| \vec{b} | \hat{k}} \right\rfloor}$,
+%      where the floor function rounds negative values towards zero.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXCEPTION CASES}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{S32}:    the return value is UCU\_SINT32.
+%      \emph{S16v2}:  operates on 2-dimensional vectors with UCU\_SINT16 components.
+%      \emph{Cp}:     cross-product.
+%      \emph{Diva2}:  divided by the second argument (the second vector).
+%      \emph{F}:      the result is floor'd.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtU32S16v2MagSquaredRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtU32S16v2MagSquaredRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:svft0:svmf0}
+%
+%\index{UcuAtU32S16v2MagSquaredRxx()@\emph{UcuAtU32S16v2MagSquaredRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_UINT32 UcuAtU32S16v2MagSquaredRxx(
+%                                     UCU_SINT16 a_x, 
+%                                     UCU_SINT16 a_y
+%                                     )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item Calculates $a_x^2 + a_y^2$.
+%\item The maximum value of $a_x^2 + a_y^2$ is $2(2^{15})^2$ = $2^{31}$,
+%      so the return value of this function may exceed the maximum value
+%      of an UCU\_SINT32, hence the return type UCU\_UINT32 is necessary,
+%      and the result of this function may not be safely cast to
+%      UCU\_SINT32.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUTS}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{a\_x, a\_y}}\\
+%      The $x$ and $y$ components of a vector.  The components are signed, and this function
+%      will return correct results over the entire input domain.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item $a_x^2 + a_y^2$.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXCEPTION CASES}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item None.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{U32}:           the return value is UCU\_UINT32.
+%      \emph{S16v2}:         operates on 2-dimensional vectors with UCU\_SINT16 components.
+%      \emph{MagSquared}:    returns the vector magnitude squared.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Square Root Extraction Functions}
+%Section tag:  sre0
+\label{cafn0:ssre0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU8SqrtFRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU8SqrtFRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%Subsection tag:  lcp0
+\label{cafn0:ssre0:suee0}
+
+\index{UcuAtU8SqrtFRxx()@\emph{UcuAtU8SqrtFRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuAtU8SqrtFRxx( UCU_UINT8 x )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Calculates $\lfloor \sqrt{x} \rfloor$ using a 4-iteration
+trial squaring algorithm.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The unsigned 8-bit integer whose square root is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\lfloor \sqrt{x} \rfloor$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U8}:   operates on UCU\_UINT8 operands.
+      \emph{Sqrt}: square root.
+      \emph{F}:    result is floor'd.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16SqrtFRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16SqrtFRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cafn0:ssre0:suee1}
+
+\index{UcuAtU16SqrtFRxx()@\emph{UcuAtU16SqrtFRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuAtU16SqrtFRxx( UCU_UINT16 x )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Calculates $\lfloor \sqrt{x} \rfloor$ using an 8-iteration
+trial squaring algorithm.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The unsigned 16-bit integer whose square root is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\lfloor \sqrt{x} \rfloor$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}:   operates on UCU\_UINT16 operands.
+      \emph{Sqrt}:  square root.
+      \emph{F}:     result is floor'd.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtU16SqrtX10FRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtU16SqrtX10FRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cafn0:ssre0:suee2}
+
+\index{UcuAtU16SqrtX10FRxx()@\emph{UcuAtU16SqrtX10FRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT16 UcuAtU16SqrtX10FRxx( UCU_UINT16 val )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+Calculates an approximation to $10 \sqrt{x}$ using the Babylonian method.
+The value returned will be either $\lfloor 10 \sqrt{x} \rfloor$ 
+or $\lfloor 10 \sqrt{x} \rfloor + 1$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      The unsigned 16-bit integer whose square root is to be calculated.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\lfloor 10 \sqrt{x} \rfloor$ or $\lfloor 10 \sqrt{x} \rfloor + 1$.  There is
+      no rule as to which will be returned (i.e. the value returned does not
+      represent rounding).  The possibility of returning either value is tied
+      to the algorithm used.\footnote{This is a to-do item for this function.
+      It should be modified to return $\lfloor 10 \sqrt{x} \rfloor$ in
+      all cases.  Alternate algorithms should also be explored (for speed).}
+\item This function is known to return a maximum of 2,559,
+      corresponding to $x = 65535$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{U16}:   operates on UCU\_UINT16 operands.
+      \emph{Sqrt}:  square root.
+      \emph{X10}:   result is multiplied by 10.
+      \emph{F}:     result is floor'd.
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtU32SqrtFRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtU32SqrtFRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:ssre0:suee5}
+%
+%\index{UcuAtU32SqrtFRxx()@\emph{UcuAtU32SqrtFRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_UINT16 UcuAtU32SqrtFRxx( UCU_UINT32 x )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Calculates $\lfloor \sqrt{x} \rfloor$ using a 16-iteration
+%trial squaring algorithm.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{x}}\\
+%      The unsigned 32-bit integer whose square root is to be calculated.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item $\lfloor \sqrt{x} \rfloor$.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{U32}:   operates on UCU\_UINT32 operands.
+%      \emph{Sqrt}:  square root.
+%      \emph{F}:     result is floor'd.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\section{Sign Determination Functions}
+%\label{cafn0:ssdf0}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\subsection[\emph{UcuAtS32IsNegRxx(\protect\mbox{\protect$\cdot$})}]
+%           {\emph{UcuAtS32IsNegRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+%\label{cafn0:ssdf0:sisn0}
+%
+%\index{UcuAtS32IsNegRxx()@\emph{UcuAtS32IsNegRxx($\cdot$)}}%
+%
+%\noindent\textbf{PROTOTYPE}
+%\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%\begin{verbatim}
+%UCU_BOOLEAN UcuAtS32IsNegRxx( UCU_SINT32 x )
+%\end{verbatim}
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{SYNOPSIS}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item
+%Returns UCU\_TRUE if $x<0$ or UCU\_FALSE otherwise.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+%\item \emph{\textbf{x}}\\
+%      The signed 32-bit integer to be tested for negativity.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{OUTPUT}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item UCU\_TRUE if $x<0$ or UCU\_FALSE otherwise.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{INTERRUPT COMPATIBILITY}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item This function may be used from both non-ISR and ISR software.
+%\item This function is thread-safe.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{EXECUTION TIME}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item TBD.
+%\end{list}
+%\vspace{2.8ex}
+%
+%\noindent\textbf{FUNCTION NAME MNEMONIC}
+%\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+%\item \emph{S32}:   operates on UCU\_SINT32 operands.
+%      \emph{IsNeg}: tests if the argument \emph{is} \emph{neg}ative.
+%\end{list}
+%
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Trigonometric Functions}
+\label{cafn0:strf0}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection[\emph{UcuAtAtanIx100Odegx1RRxx(\protect\mbox{\protect$\cdot$})}]
+           {\emph{UcuAtAtanIx100Odegx1RRxx(\protect\mbox{\protect\boldmath $\cdot$})}}
+\label{cafn0:strf0:sata0}
+
+\index{UcuAtAtanIx100Odegx1RRxx()@\emph{UcuAtAtanIx100Odegx1RRxx($\cdot$)}}%
+
+\noindent\textbf{PROTOTYPE}
+\begin {list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item
+\begin{verbatim}
+UCU_UINT8 UcuAtAtanIx100Odegx1RRxx( UCU_UINT16 x )
+\end{verbatim}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{SYNOPSIS}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item Calculates $\tan{}^{-1}x$ to 1-degree precision in the first quadrant
+      only using a binary search on an internal 90-element lookup table.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.5in}\setlength{\itemindent}{-0.25in}\setlength{\topsep}{0.0in}\setlength{\partopsep}{0.0in}}
+\item \emph{\textbf{x}}\\
+      100 times the tangent whose arctangent is to be calculated.
+      For example, 0.58 would be supplied to this function
+      as $x=58$.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{OUTPUT}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item $\tan{}^{-1}x$, in the first quadrant, rounded approximately to the
+      nearest degree.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXCEPTION CASES}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function returns the expected value for all input arguments,
+      so there are no exception cases.
+      Input arguments from 11459 through $2^{16}-1$ will result
+      in a returned value of 90.\footnote{The tangent of 89.5 degrees is approximately 114.5887,
+      so an input argument of 11458 will result in a return value of 89, while an
+      input argument of 11459 will result in a return value of 90.}
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{INTERRUPT COMPATIBILITY}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item This function may be used from both non-ISR and ISR software.
+\item This function is thread-safe.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{EXECUTION TIME}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item TBD.
+\end{list}
+\vspace{2.8ex}
+
+\noindent\textbf{FUNCTION NAME MNEMONIC}
+\begin{list}{}{\setlength{\leftmargin}{0.25in}\setlength{\topsep}{0.0in}}
+\item \emph{Atan}:       arctangent.
+      \emph{Ix100}:      input $\times$ 100.
+      \emph{Odegx1}:     output in degrees $\times$ 1.
+      \emph{R}:          rounded (to nearest degree).
+\end{list}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\noindent\begin{figure}[!b]
+\noindent\rule[-0.25in]{\textwidth}{1pt}
+\begin{tiny}
+\begin{verbatim}
+$RCSfile: c_afn0.tex,v $
+$Source: /home/dashley/cvsrep/uculib01/uculib01/doc/manual/c_afn0/c_afn0.tex,v $
+$Revision: 1.37 $
+$Author: dashley $
+$Date: 2010/05/12 18:35:49 $
+\end{verbatim}
+\end{tiny}
+\noindent\rule[0.25in]{\textwidth}{1pt}
+\end{figure}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%$Log: c_afn0.tex,v $
+%Revision 1.37  2010/05/12 18:35:49  dashley
+%Removal of UcuAtS32S16v2CpDiva2FRxx() function.
+%
+%Revision 1.36  2010/05/12 18:29:49  dashley
+%Removal of UcuAtS32S16v2CpRxx() function.
+%
+%Revision 1.35  2010/05/12 17:20:51  dashley
+%Removal of UcuAtS32NegationRxx() function.
+%
+%Revision 1.34  2010/05/12 17:16:47  dashley
+%Removal of UcuAtU32S16v2MagSquaredRxx() function.
+%
+%Revision 1.33  2010/05/12 17:09:42  dashley
+%UcuAtS32IsNegRxx() function backed out.
+%
+%Revision 1.32  2010/05/12 17:04:17  dashley
+%UcuAtU32SqrtFRxx() function backed out.  This function is not yet
+%implemented.
+%
+%Revision 1.31  2010/04/16 19:35:41  dashley
+%Missing word added.
+%
+%Revision 1.30  2010/04/16 19:33:37  dashley
+%Addition of UcuAtS32NegationRxx() function.
+%
+%Revision 1.29  2010/04/15 20:21:07  dashley
+%Typo corrected.
+%
+%Revision 1.28  2010/04/15 19:34:39  dashley
+%Addition of UcuAtU32S16v2MagSquaredRxx() function.
+%
+%Revision 1.27  2010/04/15 17:34:52  dashley
+%Addition of UcuAtS32IsNegRxx() function.
+%
+%Revision 1.26  2010/04/15 14:56:28  dashley
+%Addition of UcuAtU32SqrtFRxx() function.
+%
+%Revision 1.25  2010/04/14 14:29:47  dashley
+%Incorrect equation labels changed.
+%
+%Revision 1.24  2010/04/05 15:13:50  dashley
+%Edits.
+%
+%Revision 1.23  2010/04/05 13:22:09  dashley
+%Function documentation updated.
+%
+%Revision 1.22  2010/04/01 20:21:50  dashley
+%Edits.
+%
+%Revision 1.21  2010/04/01 14:49:25  dashley
+%Addition of UcuAtS32S16v2CpRxx() function.
+%
+%Revision 1.20  2010/02/20 16:55:52  dashley
+%Function added.
+%
+%Revision 1.19  2010/02/19 17:12:55  dashley
+%Function added.
+%
+%Revision 1.18  2010/02/18 17:05:57  dashley
+%Edits.
+%
+%Revision 1.17  2010/02/17 19:07:34  dashley
+%Documentation added.
+%
+%Revision 1.16  2010/02/16 23:38:42  dashley
+%Description of Sqrtx10 function corrected.
+%
+%Revision 1.15  2010/02/15 20:33:56  dashley
+%Minor typo corrected.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
