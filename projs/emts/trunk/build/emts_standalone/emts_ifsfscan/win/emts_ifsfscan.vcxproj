@@ -84,7 +84,7 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <IncludePath>C:\svnsbx\dtapublic\projs\emts\trunk\src\lib_c\c_emts;$(IncludePath)</IncludePath>
+    <IncludePath>..\..\..\..\src\lib_c\c_emts;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
