@@ -1,0 +1,193 @@
+%   a)General Information
+%      Introduction and Overview
+%         Introduction and Overview
+%         License
+%         Companion Book
+%         Choice of Git
+%         Choice of LaTeX
+%         Organization of The EMTS
+%         Acknowledgments
+%   b)EMTS
+%   c)EMTSelib
+%   d)EMTSweb
+%   e)Software 
+\documentclass[letterpaper,10pt,titlepage]{custbook}
+%
+\pagestyle{headings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{makeidx}
+%
+%Define certain conspicuous global constants.
+\newcommand{\productbasenamelong}{Embedded Tool Set}
+\newcommand{\productbasenameshort}{EMTS}
+\newcommand{\productversion}{0.1.0}
+\newcommand{\productname}{\productbasenameshort{}-\productversion}
+%
+%Embarrassingly, I've forgotten why "makeindex" is necessary ...
+\makeindex
+%
+%Shared mathematical definitions
+\input{comps/workmdef}
+%
+%Hyphenation exceptions
+\input{comps/workhxcp}
+%
+%New environments, etc.
+\input{comps/worknenv}
+%
+\begin{document}
+%
+%Index "see" definitions
+\input{comps/workidxs}
+%
+%Title page(s)
+\input{comps/workttla}
+%
+%Declare this as frontmatter, the front portion before the meat
+%of the book.
+\frontmatter{}
+%
+%Preface
+\input{comps/workprfa}
+%
+%Acknowledgements
+\input{comps/workacks}
+%
+%Table of contents
+\tableofcontents
+%
+%List of tables
+\listoftables
+%
+%List of figures
+\listoffigures
+%
+%List of procedures and checklists
+%\listofprocchklsts
+%
+%Everything after this is the main matter, the "meat"
+%of the book.
+\mainmatter{}
+%
+% Part: General Information
+\part{General Information}
+
+% Chapter: Introduction and Overview
+\input{c_iov2/c_iov2}
+
+% Part: Library Documentation
+\part{Library Documentation}
+
+% Chapter: How to Use UCULIB
+%\input{c_uuc0/c_uuc0}
+
+% Chapter: Arithmetic Functions
+%\input{c_afn0/c_afn0}
+
+% Chapter: Bounded Arithmetic Functions
+%\input{c_baf0/c_baf0}
+
+% Chapter: Fixed-Point Arithmetic Functions
+%\input{c_fpa0/c_fpa0}
+
+% Chapter: Large-Operand and Extended-Precision Arithmetic Functions
+%\input{c_laf0/c_laf0}
+
+% Chapter: Block Memory Functions
+%\input{c_bmf0/c_bmf0}
+
+% Chapter: Bit Set Functions
+%\input{c_bsf0/c_bsf0}
+
+% Chapter: Searching Functions
+%\input{c_sea0/c_sea0}
+
+% Chapter: Sorting Functions
+%\input{c_sol0/c_sol0}
+
+% Chapter: Array Manipulation Functions
+%\input{c_ami0/c_ami0}
+
+% Chapter: Linear Filter Functions
+%\input{c_lfi0/c_lfi0}
+
+% Chapter: Non-Linear Filter Functions
+%\input{c_nfi0/c_nfi0}
+
+% Chapter: Vertical Counter Functions
+%\input{c_vco0/c_vco0}
+
+% Chapter: Control System Components
+%\input{c_cso0/c_cso0}
+
+% Chapter: CRC, Checksum, and Non-Cryptographic Hash Functions
+%\input{c_crc0/c_crc0}
+
+% Chapter: Cryptographic Hash Functions
+%\input{c_crh0/c_crh0}
+
+% Chapter: Cipher Functions
+%\input{c_cip0/c_cip0}
+
+% Chapter: Miscellaneous Functions
+%\input{c_msc0/c_msc0}
+
+% Chapter: Utility Functions
+%\input{c_nef0/c_nef0}
+
+% Chapter: Speed-Enhanced Development Tool Replacement Functions
+%\input{c_sef0/c_sef0}
+
+% Part: Technical Background
+%\part{Technical Background}
+
+% Chapter: Technical Background
+%\input{c_tbg0/c_tbg0}
+
+% Chapter: Rational Linear Approximation
+%\input{c_rla1/c_rla1}
+
+% Part: Developer Information
+%\part{Developer Information}
+
+% Chapter: UCULIB Build Procedures
+%\input{c_bpc0/c_bpc0}
+
+% Part: Procedures and Checklists
+%\part{Procedures and Checklists}
+
+% Chapter: Procedures and Checklists
+%\input{c_pck0/c_pck0}
+
+% Part: Appendices, Bibliography, and Index 
+\part{Appendices, Bibliography, and Index}
+
+%Mark the start of appendices.  This causes numbering to be with letters
+%instead of numbers.
+\appendix
+
+%Glossary of Terms
+%\input{c_glo0/c_glo0}
+%
+%Glossary of Mathematical Notation
+%\input{c_glo1/c_glo1}
+%
+%Bibliography
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Bibliography}
+%\input{comps/workbibl}
+%
+%Index Must Be Formed At This Directory Level
+%\cleardoublepage
+%\addcontentsline{toc}{chapter}{Index}
+%\printindex
+%
+\end{document}
+%
