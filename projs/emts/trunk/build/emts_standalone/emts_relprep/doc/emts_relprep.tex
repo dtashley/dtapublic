@@ -1,0 +1,211 @@
+\documentclass[letterpaper,10pt,titlepage]{article}
+%
+%\pagestyle{headings}
+%
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage[ansinew]{inputenc}
+\usepackage[OT1]{fontenc}
+\usepackage{graphicx}
+%
+\begin{document}
+\title{\emph{emts\_relprep} Release Preparation Tool}
+\author{\vspace{30mm}\\David T. Ashley\\\texttt{dashley@gmail.com}\\\vspace{1cm}}
+\date{\vspace*{38mm}\small{\LaTeX{} Compilation Date: \today{}}}
+\maketitle
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+\begin{abstract}
+This document describes the \emph{emts\_relprep} (mnemonic:  
+\emph{EMTS} \emph{rel}ease
+\emph{prep}aration) tool.
+
+\emph{emts\_relprep} performs many of the mundane tasks associated with
+a release of \emph{The EMTS Tool Set}.
+\end{abstract}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Introduction and Overview}
+\label{siov0}
+
+This document describes the \emph{emts\_relprep}\footnote{Mnemonic:  
+\emph{EMTS} \emph{rel}ease
+\emph{prep}aration.} tool used for performing many of the 
+mundane tasks associated with a release of \emph{The EMTS Tool Set}.
+The tool can also be used during development, as the tasks it performs
+are appropriate at times other than software release.
+
+In large part, the tool performs tasks that are helpful due to \emph{git}'s
+lack of keyword expansion capability.\footnote{As will be discussed later in
+the document, the tool uses a method for assigning successive revision numbers
+to files.}
+  
+When invoked, the tool uses a configuration file to determine what steps to
+perform and in what order.  The format of the configuration file is
+described in \S{}\ref{scff0}.
+
+The tool buffers an entire file into memory, then performs the requested
+operations on the memory buffer, then rewrites the potentially modified buffer
+to disk.  A consequence of this strategy is that each file on which operations
+are performed must be able to comfortably fit within the heap that can be
+allocated to a program.  Since a modern computer typically has 16 gigabytes or
+more of RAM and since a typical text file does not exceed a megabyte, problems
+should be rare; but they could conceptually exist with large text files.
+The program will terminate with a meaningful error message if heap is exhausted.
+
+At the time of this writing, the program builds only for \emph{Windows}, but
+this may change in the future.
+  
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Invocation and Command-Line Arguments}
+\label{sicl0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Keywords and Keyword Expansions}
+\label{skwe0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{How File Version Numbers Are Maintained}
+\label{shfv0}
+
+In order to synthetically (without the assistance of \emph{git}) maintain a
+file version number, the following approach is used:
+
+\begin{itemize}
+\item If the \emph{\$SHA512DigestLineExclusive:\$} keyword is present within the file
+      being operated on, AND
+\item The \emph{\$FileVersionSynthetic:\$} keyword is also present within the
+      file being operated on, AND
+\item The \emph{sha512digestlineexclusive\_update} and \\
+      \emph{fileversionsynthetic\_bump\_conditional} both appear as file
+      commands in the same file operation, with the former before the latter, THEN
+\item The \emph{\$FileVersionSynthetic:\$} keyword expansion will be incremented
+      whenever the target file changes and the program is run.
+\end{itemize}
+
+When the \emph{sha512digestlineexclusive\_update} command runs and must update
+\emph{\$SHA512DigestLineExclusive:\$} keyword expansion(s) because the file
+has changed, a flag is set.  This flag is later tested by the
+\emph{fileversionsynthetic\_bump\_conditional} command, and the
+\emph{\$FileVersionSynthetic:\$} keyword expansions are incremented by one
+only if the \emph{\$SHA512DigestLineExclusive:\$} changed (meaning that the
+file contents have changed).
+
+TODO:  Change the SHA-512 keyword to only include the keyword expansion itself,
+and to possibly include other areas of the same line.
+
+TODO:  Keywords need a parenthesized form with KEYWORD(i, j, k), where i
+is the number of lines down in the file to substitute, j is the starting column, and k is the
+space available.  This would allow a comment in the line above to modify a string a line (or 
+a few lines) below, without the baggage of having the keyword itself as part of the string.
+The k value would prevent overflowing a string literal.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Configuration File Contents and Format}
+\label{scff0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{General Formatting}
+\label{scff0:sgfm0}
+
+The configuration file is an ASCII text file.
+
+Comments begin with `\#', and then the rest of the line is ignored.
+
+Lines are continued with `\textbackslash{}'.  The `\textbackslash{}' need not be the last character of the line.
+Exception:  comments may not be continued in this way.
+
+The configuration file is buffered in its entirety before the program
+begins processing, so any modifications to the file won't take effect until the
+program is run again.
+
+All file paths are with the forward slash.  Double-dot may be used.  Single dot may not.
+
+File and path names may contains spaces and may be double-quoted.
+
+Wildcards may not be used.
+
+Unicode not supported.
+
+Format is \emph{command pars}.
+
+Commands are processed in order, once.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{How the Configuration File is Processed}
+\label{scff0:shcp0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{SRV} Command}
+\label{scff0:ssrv0}
+
+Sets the release version.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{CGPGUID} Command}
+\label{scff0:cgp0}
+
+Checks and optionally generates a project GUID.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{LDPGUID} Command}
+\label{scff0:lgp0}
+
+Loads a project GUID.  Sticky until the next such command.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{FMOD} Command}
+\label{scff0:sfmd0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{FCOPY} Command}
+\label{scff0:sfcp0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{FDEL} Command}
+\label{scff0:sfde0}
+
+TBD.  May accept wildcards here.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{DDEL} Command}
+\label{scff0:sdde0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{EXEC} Command}
+\label{scff0:sexc0}
+
+TBD.  Must support EXE's, batch files, and scripts.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example Configuration File Listing}
+\label{scff0:sexp0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
