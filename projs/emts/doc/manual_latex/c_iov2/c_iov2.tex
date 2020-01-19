@@ -1,0 +1,154 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Introduction and Overview}
+
+\label{ciov0}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Introduction and Overview}
+\label{ciov2:siov0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{License}\index{license}
+\label{ciov2:slic0}
+
+This document, all computer and paper files and records used to create and
+distribute this document, the software described by this document, and all computer
+and paper files and records used to create and distribute the software described by
+this document, are provided under \index{MIT license@\emph{The MIT License}}\emph{The MIT License},
+reproduced immediately below.\\
+
+\begin{small}
+\noindent{}\emph{Copyright \copyright 2020 David T. Ashley}\\\\
+\noindent{}\emph{Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software source code and associated documentation files (the
+``Software''), to deal in the Software without restriction, including without
+limitation the rights to use, copy, modify, merge, publish, distribute,
+sublicense, and/or sell copies of the Software, and to permit persons to whom
+the Software is furnished to do so, subject to the following conditions:}
+
+\begin{itemize}
+\item \emph{The above copyright notice and this permission notice shall be included in
+      all copies or substantial portions of the Software.}
+\item \emph{THE SOFTWARE IS PROVIDED ``AS IS'', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+      IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+      FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT\@. IN NO EVENT SHALL THE
+      AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+      LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+      OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+      THE SOFTWARE.}
+\end{itemize}
+\end{small}
+
+A substantial benefit of \emph{The MIT License} is that it does not require manufacturers
+of embedded system products to provide notice to customers that open-source
+software is incorporated into the product.\footnote{At least that is \emph{my} interpretation
+of the license.  The \emph{Open Source Initiative} website suggests that \emph{software} means
+the source code, and that binaries are a separate matter.  I'm willing to discuss
+this interpretation and to move to an even less restrictive license if there are
+concerns about a manufacturer's obligations.}  A typical consumer has no interest in the
+origin of the software in a product he purchases.  A typical manufacturer does not want
+the burden of providing notice.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Companion Book}\index{companion book}
+\label{ciov2:scbk0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Choice of \emph{\LaTeX{}}}
+\label{ciov2:sclt0}
+
+\LaTeX{} is an uncommon word processing tool.\footnote{The distribution I use is
+\index{MikTeX@\emph{MikTeX}}\emph{MikTeX}.}  Its key features are:
+
+\begin{itemize}
+   \item Text source files are prepared, and then compiled to graphical output (in this respect,
+         it resembles a programming language compiler).
+   \item Files containing figures are usually in individual files, separate from the source
+         files.  The source files reference the files containing the figures.
+   \item The references that have to be resolved as part of compilation (table of contents
+         entries, index entries, cross-references) are stored in auxiliary text files that are
+         generated and
+         used by the compilation process.  (Simple tools can be written
+         to use this information.)
+\end{itemize}
+
+\LaTeX{} was chosen for this document for these reasons:
+
+\begin{itemize}
+   \item \LaTeX{} source files (plain text) are very compatible with \emph{git}.
+         Difference reports are meaning and can be understood for review.
+   \item Figures are stored as separate \index{eps file@\emph{.eps} file}\emph{.eps} files.
+         These change infrequently and allow \emph{git} to deal with typical document changes
+         (changes to plain text files only) efficiently.  (This is unlike a typical
+         \index{Microsoft Word@\emph{Microsoft Word}}\emph{Microsoft Word} document, where
+         \emph{git} is forced to treat the document as binary and store a new copy of the entire
+         document when any minor change is made.)
+   \item By processing the auxiliary text files that are produced during 
+         \LaTeX{} compilation, this document and the companion book may contain section
+         and page references to each other.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Organization and Taxonomy of \emph{EMTS}}
+\label{ciov2:sote0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Tools, Tool Collections, Tool Aggregations, and Components}
+\label{ciov2:sote0:ssup0}
+
+As used in this document:
+
+\begin{itemize}
+   \item A \index{tool!definition}\emph{tool} is a software component
+         or software program that performs a task or a set of closely related tasks, and is
+         typically packaged as one executable or one script.
+         (For example, a tool that performs arithmetic on large integers might add, subtract, multiply,
+         divide large integers---tasks which are closely related.)
+   \item A \index{tool collection!definition}\emph{tool collection} is a set
+         of tools that are separate scripts or executables, but distributed together.
+   \item A \index{tool aggregation!definition}\emph{tool aggregation} is a single executable or
+         script that incorporates two or more tools, and where the functionality of the
+         incorporated tools is identified distinctly.
+   \item A \index{component!defined}\emph{component} is a software building block that
+         is used in the construction of other software. 
+\end{itemize}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Supported Platforms}
+\label{ciov2:sote0:ssup0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Acknowledgements}
+\label{ciov2:sack0}
+
+TBD.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+

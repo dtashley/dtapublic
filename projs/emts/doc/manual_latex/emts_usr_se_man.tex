@@ -24,14 +24,14 @@
 \usepackage{longtable}
 \usepackage{makeidx}
 %
+%Packages that must go in the document preamble.
+\makeindex
+%
 %Define certain conspicuous global constants.
 \newcommand{\productbasenamelong}{Embedded Tool Set}
 \newcommand{\productbasenameshort}{EMTS}
 \newcommand{\productversion}{0.1.0}
 \newcommand{\productname}{\productbasenameshort{}-\productversion}
-%
-%Embarrassingly, I've forgotten why "makeindex" is necessary ...
-\makeindex
 %
 %Shared mathematical definitions
 \input{comps/workmdef}
@@ -185,9 +185,9 @@
 %\input{comps/workbibl}
 %
 %Index Must Be Formed At This Directory Level
-%\cleardoublepage
-%\addcontentsline{toc}{chapter}{Index}
-%\printindex
+\cleardoublepage
+\addcontentsline{toc}{chapter}{Index}
+\printindex
 %
 \end{document}
 %
