@@ -37,21 +37,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static char *(ptrblk[2000000]);
-
-//Advance the block traverser in a psuedo-random fashion.
-static void advance_block_traverser(unsigned *arg)
-{
-   *arg = *arg + EMTS_BLK_TRAVERSER;
-   *arg = *arg % EMTS_HEAP_ALLOC_BLKSIZE;
-}
-
-//Advance the block number traverser in a psuedo-random fashion.
-static void advance_block_number_traverser(unsigned* arg)
-{
-   *arg = *arg + EMTS_BLK_NUM_TRAVERSER;
-   *arg = *arg % EMTS_HEAP_ALLOC_NBLKS;
-}
+static char *(ptrblk[EMTS_HEAP_ALLOC_NBLKS]);
 
 int main()
 {
@@ -112,8 +98,16 @@ int main()
       printf("   Iteration %u\n", repctr);
       for (uidx = 0; uidx < (EMTS_HEAP_ALLOC_NBLKS * EMTS_HEAP_ALLOC_BLKSIZE); uidx++)
       {
-         advance_block_number_traverser(&blkidx);
-         advance_block_traverser(&charidx);
+         //Handle the block number.
+         blkidx += (EMTS_BLK_NUM_TRAVERSER - EMTS_HEAP_ALLOC_NBLKS);
+         while (blkidx >= EMTS_HEAP_ALLOC_NBLKS)
+            blkidx -= EMTS_HEAP_ALLOC_NBLKS;
+
+         //Handle the offset within the block.
+         charidx += (EMTS_BLK_TRAVERSER - EMTS_HEAP_ALLOC_BLKSIZE);
+         while (charidx >= EMTS_HEAP_ALLOC_BLKSIZE)
+            charidx -= EMTS_HEAP_ALLOC_BLKSIZE;
+
          //printf("      Block index: %u  Char index: %u.\n", blkidx, charidx);
          ptrblk[blkidx][charidx] = (~(blkidx + charidx)) & 0xff;
       }

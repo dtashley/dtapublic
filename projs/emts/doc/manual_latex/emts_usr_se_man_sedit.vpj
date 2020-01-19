@@ -1,0 +1,86 @@
+<!DOCTYPE Project SYSTEM "http://www.slickedit.com/dtd/vse/10.0/vpj.dtd">
+<Project
+    Version="10.0"
+    VendorName="SlickEdit"
+    TemplateName="(Other)"
+    WorkingDir=".">
+    <Config
+        Name="Release"
+        OutputFile=""
+        CompilerConfigName="">
+        <Menu>
+            <Target
+                Name="Compile"
+                MenuCaption="&amp;Compile"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveCurrent"
+                RunFromDir="%rw">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Build"
+                MenuCaption="&amp;Build"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Rebuild"
+                MenuCaption="&amp;Rebuild"
+                CaptureOutputWith="ProcessBuffer"
+                SaveOption="SaveWorkspaceFiles"
+                RunFromDir="%rw">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Debug"
+                MenuCaption="&amp;Debug"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec/>
+            </Target>
+            <Target
+                Name="Execute"
+                MenuCaption="E&amp;xecute"
+                SaveOption="SaveNone"
+                RunFromDir="%rw">
+                <Exec CmdLine='".exe"'/>
+            </Target>
+        </Menu>
+    </Config>
+    <Files>
+        <Folder
+            Name="Master Document LaTeX File"
+            Filters="*.tex">
+            <F N="emts_usr_se_man.tex"/>
+        </Folder>
+        <Folder
+            Name="Preamble Files"
+            Filters="">
+            <F N="comps/workacks.tex"/>
+            <F N="comps/workhxcp.tex"/>
+            <F N="comps/workmdef.tex"/>
+            <F N="comps/worknenv.tex"/>
+            <F N="comps/workprfa.tex"/>
+            <F N="comps/workttla.tex"/>
+        </Folder>
+        <Folder
+            Name="Chapter Files"
+            Filters="">
+            <F N="c_cdi2/c_cdi2.tex"/>
+            <F N="c_cik2/c_cik2.tex"/>
+            <F N="c_cli2/c_cli2.tex"/>
+            <F N="c_frf2/c_frf2.tex"/>
+            <F N="c_iov2/c_iov2.tex"/>
+            <F N="c_spr2/c_spr2.tex"/>
+            <F N="c_tar2/c_tar2.tex"/>
+            <F N="c_trf2/c_trf2.tex"/>
+        </Folder>
+        <Folder
+            Name="Rebuild Batch Files"
+            Filters="">
+            <F N="recomp.bat"/>
+        </Folder>
+    </Files>
+</Project>
