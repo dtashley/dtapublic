@@ -95,8 +95,10 @@ int main()
       printf("   Iteration %u\n", repctr);
       for (uidx = 0; uidx < (EMTS_HEAP_ALLOC_NBLKS * EMTS_HEAP_ALLOC_BLKSIZE); uidx++)
       {
-         blkidx = uidx % EMTS_HEAP_ALLOC_NBLKS;
-         charidx = charidx % EMTS_HEAP_ALLOC_BLKSIZE;
+         charidx = uidx % EMTS_HEAP_ALLOC_BLKSIZE; //Block internal index advances most slowly.
+         blkidx = uidx / EMTS_HEAP_ALLOC_BLKSIZE;  //Block number advances more slowly.
+         //The arithmetic above should be solid.  (EMTS_HEAP_ALLOC_NBLKS * EMTS_HEAP_ALLOC_BLKSIZE - 1) / EMTS_HEAP_ALLOC_BLKSIZE
+         //should be EMTS_HEAP_ALLOC_NBLKS - 1.  If not, memory dereferencing bug.
          ptrblk[blkidx][charidx] = (blkidx + charidx) & 0xff;
       }
    }
