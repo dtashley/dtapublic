@@ -1,5 +1,3 @@
-%$Header: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_cil0/c_cil0.tex 277 2019-08-13 02:35:39Z dashley $
-
 \chapter[\ccilzeroshorttitle{}]{\ccilzerolongtitle{}}
 
 \label{ccil0}
@@ -60,7 +58,7 @@ addition, subtraction, multiplication, and division).  A section
 (Section \ref{ccil0:smim0}) is also included 
 on miscellaneous mappings involving integers which
 are not numerical in intent.
-Chapter %\cdtazeroxrefhyphen\cdtazerovolarabic{} 
+Chapter %\cdtazerovolarabic{} 
 TBD
 describes more complicated 
 integer algorithms and techniques (discrete-time operations
@@ -123,10 +121,10 @@ we provide some general principles and paradigms of thought.
 \label{ccil0:sppm0:smas0}
 
 In chapters
-\cfryzeroxrefhyphen{}\ref{cfry0},
-\ccfrzeroxrefhyphen{}\ref{ccfr0},
+\ref{cfry0},
+\ref{ccfr0},
 and 
-\cratzeroxrefhyphen{}\ref{crat0} 
+\ref{crat0} 
 we consider rational approximation,
 both in the form $h/k$ and $h/2^q$.  Both forms of rational approximation
 tend to be effective because we know that all modern processors possess
@@ -284,7 +282,8 @@ We might view a digital controller as an emulation of
 an analog controller.  We may want to cause the
 controller to have limits (i.e. rails) internally, for
 example to prevent excessive integrator ``windup''.  We discuss
-this further in Section \ref{ccil0:sode0}.
+this further in Section TBD.
+%\ref{ccil0:sode0}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1576,9 +1575,9 @@ By definition of $\hat{q}$ and $q$,
 \end{equation}
 
 When only nonnegative integers are involved, 
-(\cmtnzeroxrefhyphen\ref{eq:cmtn0:sfcf0:02}) 
+(\ref{eq:cmtn0:sfcf0:02}) 
 supplies an exact expression for the floor of a 
-ratio of integers.  Using (\cmtnzeroxrefhyphen\ref{eq:cmtn0:sfcf0:02}),
+ratio of integers.  Using (\ref{eq:cmtn0:sfcf0:02}),
 (\ref{eq:lem:ccil0:sidv0:sgdu0:02:01}) can be decomposed into
 
 \begin{equation}
@@ -1920,7 +1919,7 @@ Because $q, \hat{q} \in \vworkintset$, it is only necessary to prove that
 \end{equation}
 
 in order to prove that $\hat{q}-q \leq 1$.  Using
-(\cmtnzeroxrefhyphen\ref{eq:cmtn0:sfcf0:02}), 
+(\ref{eq:cmtn0:sfcf0:02}), 
 (\ref{eq:lem:ccil0:sidv0:sgdu0:03:07}) can be rewritten as
 
 \begin{equation}
@@ -1942,7 +1941,9 @@ of $u \bmod v$ is $v-1$, leading to
 < 1 .
 \end{equation}
 
-In order to maximize the left side of (\ref{}),
+In order to maximize the left side of (TBD%
+%\ref{}%
+),
 we must assume that $u$ is maximized, $v$ is minimized, 
 
 
@@ -2501,25 +2502,5 @@ Show that any $m$-bit two's complement integer $u_{[m-1:0]}$ except
 $-2^{m-1}$ can be negated by forming the one's complement, then adding one.
 \end{vworkexercisestatement}
 
+%End of file c_cil0.tex
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vfill
-\noindent\begin{figure}[!b]
-\noindent\rule[-0.25in]{\textwidth}{1pt}
-\begin{tiny}
-\begin{verbatim}
-$HeadURL: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_cil0/c_cil0.tex $
-$Revision: 277 $
-$Date: 2019-08-12 22:35:39 -0400 (Mon, 12 Aug 2019) $
-$Author: dashley $
-\end{verbatim}
-\end{tiny}
-\noindent\rule[0.25in]{\textwidth}{1pt}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%End of file C_CIL0.TEX

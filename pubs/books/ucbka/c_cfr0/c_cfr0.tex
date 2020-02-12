@@ -1,5 +1,3 @@
-%$Header: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_cfr0/c_cfr0.tex 275 2019-08-12 00:47:10Z dashley $
-
 \chapter{\ccfrzerolongtitle{}}
 
 \label{ccfr0}
@@ -1080,7 +1078,7 @@ This proof comes immediately from the form
 of (\ref{eq:ccfr0:scnv0:thm:crossproductminusone:00}).
 Without coprimality of $p_k$ and $q_k$, the difference
 of $\pm 1$ is impossible (see
-\cprizeroxrefcomma{}Lemma \ref{lem:cpri0:ppn0:000p}).
+Lemma \ref{lem:cpri0:ppn0:000p}).
 \end{vworktheoremproof}
 %\vworktheoremfooter{}
 
@@ -1797,7 +1795,7 @@ for locating best rational approximations.  These include:
 
 \item  Building the Farey series starting at an
        integer [$O(max(h_{MAX}, k_{MAX})^2)$]
-	   (see Algorithm \cfryzeroxrefhyphen{}\ref{alg:cfry0:sgfs0:02}).
+	   (see Algorithm \ref{alg:cfry0:sgfs0:02}).
 
 \item  Building the Farey series starting at a rational number with
        a large prime denominator [$O(max(h_{MAX}, k_{MAX}))$].
@@ -1935,7 +1933,7 @@ difference between $a/b$ and arbitrary $s_k$ is given by
 \end{equation}
 
 For two consecutive terms in $F_N$, $Kh-Hk=1$ 
-(\cfryzeroxrefcomma{}Theorem \ref{thm:cfry0:spfs:02}).
+Theorem \ref{thm:cfry0:spfs:02}).
 For a Farey neighbor $H/K$ to $s_k$ in $F_N$, 
 (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:03}) must hold.
 
@@ -2198,7 +2196,7 @@ convergent, $s_k$, i.e. for all $k$,
 \end{equation}
 
 Since the mediant of two fractions always lies between
-them (Lemma \cfryzeroxrefhyphen{}\ref{lem:cfry0:spfs:02c}), it
+them (Lemma \ref{lem:cfry0:spfs:02c}), it
 follows directly that 
 
 \begin{equation}
@@ -2545,7 +2543,7 @@ trivial modification as Algorithm
 	  using the reciprocals of the results of the algorithm.\footnote{The
 	  basis for taking the reciprocals of input and output and
 	  using $h_{MAX}$ rather than $k_{MAX}$ are explained
-	  in \cfryzeroxrefcomma{}Section \ref{cfry0:schk0}.}
+	  in Section \ref{cfry0:schk0}.}
 
 \end{alglvl0}
 \end{vworkalgorithmstatementpar}
@@ -2562,7 +2560,7 @@ that the two enclosing neighbors to $\sqrt{3}$ in
 $F_{200}$ are 265/153 and 97/56.  Note that the first of
 these neighbors, 265/153, violates the constraint on the
 numerator.
-As explained in Section \cfryzeroxrefhyphen{}\ref{cfry0:schk0},
+As explained in Section \ref{cfry0:schk0},
 because $\sqrt{3} > 100/200$, the constraint on the
 numerator is the dominant constraint, and the necessary
 approach is to find the neighbors of $1/\sqrt{3}$ in
@@ -2643,14 +2641,14 @@ is a left or right Farey neighbor in $F_N$ of $a/b$.  If $n$ is even,
 $s_{n-1} > s_n$, and the number specified by 
 (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:01}) will be the right Farey neighbor
 of $s_n$, and 
-(\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq03}) and 
-(\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq04}) 
+(\ref{eq:cfry0:sgfs0:thm:01:eq03}) and 
+(\ref{eq:cfry0:sgfs0:thm:01:eq04}) 
 can be used to find the left Farey neighbor.
 On the other hand if $n$ odd, $s_{n-1} < s_n$, (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:01})
 will be the left Farey neighbor of $s_n$, and 
-(\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
+(\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
 and 
-(\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq02}) 
+(\ref{eq:cfry0:sgfs0:thm:01:eq02}) 
 can be used to find the
 right Farey neighbor.  We summarize these observations as Algorithm
 \ref{alg:ccfr0:scba0:cffareyneighborfn}.
@@ -2676,14 +2674,14 @@ right Farey neighbor.  We summarize these observations as Algorithm
 \item  If $n$ is even, $s_{n-1} > s_n$, and the number specified by 
        (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:01}) will be 
 	   the right Farey neighbor of $s_n$.  Use 
-       (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq03}) and 
-       (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq04}) 
+       (\ref{eq:cfry0:sgfs0:thm:01:eq03}) and 
+       (\ref{eq:cfry0:sgfs0:thm:01:eq04}) 
        to find the left Farey neighbor.
        On the other hand if $n$ is odd, $s_{n-1} < s_n$, 
 	   (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:01})
        will be the left Farey neighbor of $s_n$.  Use
-       (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
-       and (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq02}) 
+       (\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
+       and (\ref{eq:cfry0:sgfs0:thm:01:eq02}) 
        to find the right Farey neighbor.
 
 \end{alglvl0}
@@ -2728,8 +2726,8 @@ Since the final convergent, $s_{3}$, is an odd-ordered convergent, $s_{k-1} < s_
 of 5/7.  Applying (\ref{eq:ccfr0:scba0:thm:cfenclosingneighbors:01}) with
 $N=1,000,000$, $k=3$, $k-1=2$, $p_k = 5$, $q_k = 7$, $p_{k-1}=2$, and $q_{k-1}=3$
 yields $\frac{714,282}{999,995}$ as the left Farey neighbor of 5/7 in $F_{1,000,000}$.
-Application of (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
-and (\cfryzeroxrefhyphen{}\ref{eq:cfry0:sgfs0:thm:01:eq02})  
+Application of (\ref{eq:cfry0:sgfs0:thm:01:eq01}) 
+and (\ref{eq:cfry0:sgfs0:thm:01:eq02})  
 yields $\frac{714,283}{999,996}$ as the right Farey neighbor.
 \end{vworkexampleparsection}
 %\vworkexamplefooter{}
@@ -2750,7 +2748,7 @@ yields $\frac{714,283}{999,996}$ as the right Farey neighbor.
 	  using the reciprocals of the results of the algorithm.\footnote{The
 	  basis for taking the reciprocals of input and output and
 	  using $h_{MAX}$ rather than $k_{MAX}$ are explained
-	  in \cfryzeroxrefcomma{}Section \ref{cfry0:schk0}.}
+	  in Section \ref{cfry0:schk0}.}
 \end{alglvl0}
 \end{vworkalgorithmstatementpar}
 \vworkalgorithmfooter{}
@@ -2802,7 +2800,7 @@ an infinite binary tree which contains all positive rational numbers.
 
 To construct the tree, one begins with the two fractions $\frac{0}{1}$
 and $\frac{1}{0}$, and forms the mediant (see Definition 
-\cfryzeroxrefhyphen{}\ref{def:cfry0:spfs:02})
+\ref{def:cfry0:spfs:02})
 of two adjacent fractions as many
 times as desired to generate additional fractions.
 Figure \ref{fig:ccfr0:ssbt0:sdpt0:00} illustrates the construction process.
@@ -3260,7 +3258,7 @@ when their partial quotients diverge.
 
 A third approach, which is 
 perhaps the most direct, is to apply 
-Algorithm \cfryzeroxrefhyphen{}\ref{alg:cfmindenominator} to determine
+Algorithm \ref{alg:cfmindenominator} to determine
 the rational number with the minimum denominator in the interval of uncertainty.
 We would thus know that we have enough information to determine uniquely the
 enclosing rational numbers in any Farey series up to one less than this 
@@ -3275,7 +3273,7 @@ be unambiguously determined?
 \begin{vworkexampleparsection}{Solution}
 Assume that the constant ``3.142'' was obtained by rounding of digits, rather than
 by truncation of digits:  thus $3.1415 \leq \pi \leq 3.1425$.  Applying
-Algorithm \cfryzeroxrefhyphen{}\ref{alg:cfmindenominator} yields 333/106
+Algorithm \ref{alg:cfmindenominator} yields 333/106
 as the rational number with the smallest denominator in the interval
 [3.1415, 3.1425].  Thus, no rational number with a smaller denominator exists
 in the interval, and the enclosing rational numbers of $\pi$ in the Farey series of
@@ -3295,7 +3293,7 @@ It may happen in practice that one desires more information about an
 irrational number than can be easily obtained.  As a practical example,
 a typical scientific calculator treats $\pi$ as 3.14159265359, implying that 
 $3.141592653585 \leq \pi \leq 3.141592653595$.  Application of 
-Algorithm \cfryzeroxrefhyphen{}\ref{alg:cfmindenominator} to this
+Algorithm \ref{alg:cfmindenominator} to this
 interval yields 1,146,408/364,913 as the rational number with the
 smallest denominator in this interval:  implying that we cannot determine the 
 enclosing rational approximations to $\pi$ even in $F_{2^{32}-1}$ using
@@ -3938,22 +3936,5 @@ golden ratio $(\sqrt{5}/2 + 1/2)$ is $[1;\overline{1}]$.
 
 \vworkexercisefooter{}
 
+%End of file c_cfr0.tex
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\noindent\begin{figure}[!b]
-\noindent\rule[-0.25in]{\textwidth}{1pt}
-\begin{tiny}
-\begin{verbatim}
-$HeadURL: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_cfr0/c_cfr0.tex $
-$Revision: 275 $
-$Date: 2019-08-11 20:47:10 -0400 (Sun, 11 Aug 2019) $
-$Author: dashley $
-\end{verbatim}
-\end{tiny}
-\noindent\rule[0.25in]{\textwidth}{1pt}
-\end{figure}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%End of file C_CFR0.TEX

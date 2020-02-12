@@ -1,5 +1,3 @@
-%$Header: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_rat0/c_rat0.tex 278 2019-08-14 23:10:36Z dashley $
-
 \chapter{Rational Linear Approximation}
 
 \label{crat0}
@@ -19,7 +17,7 @@
 
 In this chapter, we consider practical applications of
 rational approximation.
-Chapters \cfryzeroxrefhyphen\ref{cfry0} and \ccfrzeroxrefhyphen\ref{ccfr0}
+Chapters \ref{cfry0} and \ref{ccfr0}
 have presented algorithms for finding 
 the closest rational numbers to an arbitrary real number,
 subject to constraints on the numerator and denominator.
@@ -42,7 +40,7 @@ y = \left\lfloor
 shift the error introduced.  Note that (\ref{eq:crat0:sint0:01}) is
 very economical for microcontroller instruction sets, since only integer
 arithmetic is required.  We may choose $h/k$ from a Farey series (see
-Chapters \cfryzeroxrefhyphen\ref{cfry0} and \ccfrzeroxrefhyphen\ref{ccfr0}), or 
+Chapters \ref{cfry0} and \ref{ccfr0}), or 
 we may choose a ratio $h/2^q$ so that the division in (\ref{eq:crat0:sint0:01})
 can be implemented
 by a bitwise right shift.
@@ -117,7 +115,9 @@ be added to the product $hx$ in order to round or otherwise
 shift the result.
 
 If $x$ is assumed to be without error, the ideal function is
-given by (\ref{eq:crat0:srla0:smfu0:01}), whereas the function
+given by (TBD%
+%\ref{eq:crat0:srla0:smfu0:01}%
+), whereas the function
 that can be economically implemented is
 
 \begin{equation}
@@ -150,7 +150,7 @@ h(x) = \left\lfloor \frac{h \lfloor x \rfloor + z}{k} \right\rfloor
 \index{h/2q@$h/2^q$ rational linear approximation}
 \index{rational linear approximation!h/2q@$h/2^q$}
 The algorithms presented in
-Chapters \cfryzeroxrefhyphen\ref{cfry0} and \ccfrzeroxrefhyphen\ref{ccfr0}
+Chapters \ref{cfry0} and \ref{ccfr0}
 will always provide the rational number $h/k$ closest to
 an arbitrary real number $r_I$ subject to the constraints
 $h \leq h_{MAX}$ and $k \leq k_{MAX}$.
@@ -170,7 +170,7 @@ examined:
 \item \emph{$h/k$ rational linear approximation}, in which an arbitrary
       $h \leq h_{MAX}$ and an arbitrary $k \leq k_{MAX}$ are used,
 	  with $r_A = h/k$.  $h$ and $k$ can be chosen using the algorithms
-	  presented in Chapters \cfryzeroxrefhyphen\ref{cfry0} and \ccfrzeroxrefhyphen\ref{ccfr0}.
+	  presented in Chapters \ref{cfry0} and \ref{ccfr0}.
 	  Implementation of this technique would most often involve a single integer
 	  multiplication instruction to form the product $hx$, followed by an optional single
 	  addition instruction to form the sum $hx+z$, and then 
@@ -985,7 +985,7 @@ length $K_4/\gcd(K_2,K_4)$.
 If $K_3=K_4$, $K_1=0$, and 
 $\gcd(K_2, K_4)=1$\footnote{\label{footnote:lem:crat0:sfdv0:sprc0:04:01}If
 $\gcd(K_2, K_4) > 1$, then by Theorem
-\cprizeroxrefhyphen\ref{thm:cpri0:ppn0:00a} the largest 
+\ref{thm:cpri0:ppn0:00a} the largest 
 value that $n K_2 \bmod K_4$ can attain is 
 $K_4-\gcd(K_2, K_4)$ and the interval in
 (\ref{eq:lem:crat0:sfdv0:sprc0:04:01}) is correspondingly
@@ -1246,7 +1246,7 @@ base subroutine is in the set identified in
 For microcontroller work, it is considered
 a desirable property that software components be resilient
 to state upset 
-(see Section \chgrzeroxrefhyphen\ref{chgr0:sdda0:srob0}).
+(see Section \ref{chgr0:sdda0:srob0}).
 It can be observed that Algorithm \ref{alg:crat0:sfdv0:01a} will
 exhibit very anomalous behavior if \texttt{state} is upset to a very negative
 value.  One possible correction to this shortcoming is illustrated
@@ -1742,7 +1742,9 @@ Many machine instruction sets automatically set flags to indicate a negative
 result when the 
 subtraction of $K_2$ is performed, thus often allowing a conditional branch
 without an additional instruction.  Whether an instruction will be saved in
-the code of Figure \ref{fig:crat0:sfdv0:01c} depends on the sophistication
+the code of Figure TBD
+%\ref{fig:crat0:sfdv0:01c}
+depends on the sophistication
 of the `C' compiler, but of course if the algorithm were coded in
 assembly-language an instruction could be saved on most processors.
 
@@ -1791,7 +1793,9 @@ largest value of $n \in \vworkintset$ which still meets the criterion
 yields (\ref{eq:lem:crat0:sfdv0:sprx0:01:01}).  Note that 
 the derivation of (\ref{eq:lem:crat0:sfdv0:sprx0:01:01}) requires
 that the restrictions on $K_1$, $K_2$, and $K_3$ documented in
-Figure \ref{fig:crat0:sfdv0:01c} be met.
+Figure TBD
+%\ref{fig:crat0:sfdv0:01c}
+be met.
 \end{vworklemmaproof}
 
 \begin{vworklemmastatement}
@@ -1806,7 +1810,9 @@ base subroutine, and let
 $f_O$ be the frequency of invocation of 
 ``\texttt{A()}''.  Provided the constraints
 on $K_1$, $K_2$, and $K_3$ documented in
-Figure \ref{fig:crat0:sfdv0:01c} are met,
+Figure TBD
+%\ref{fig:crat0:sfdv0:01c} are met%
+,
 
 \begin{equation}
 \label{eq:lem:crat0:sfdv0:sprx0:02:01}
@@ -2012,7 +2018,9 @@ by John Larkin \cite{bibref:i:johnlarkin}
 via the
 \texttt{comp.arch.embedded} \cite{bibref:n:comparchembedded} 
 newsgroup.}
-(Figure \ref{fig:crat0:sfdv0:01d}) is a further
+(Figure TBD
+%\ref{fig:crat0:sfdv0:01d}%
+) is a further
 economization of Algorithms \ref{alg:crat0:sfdv0:01a}
 through \ref{alg:crat0:sfdv0:01c} that can be made by eliminating 
 the addition or subtraction of $K_4$ and test against $K_3$ 
@@ -2022,7 +2030,9 @@ arithmetic modulo $2^W$.  Thus, effectively, Algorithm \ref{alg:crat0:sfdv0:01d}
 is equivalent to Algorithm \ref{alg:crat0:sfdv0:01a} with
 $K_4 = K_3 = 2^W$.
 
-Figure \ref{fig:crat0:sfdv0:01d} shows both
+Figure TBD
+%\ref{fig:crat0:sfdv0:01d}
+shows both
 assembly-language (Texas Instruments TMS-370C8) and
 `C' implementations of the algorithm.  The assembly-language
 version uses the carry flag of the processor and thus
@@ -2142,7 +2152,9 @@ The proof is identical to the proof of Lemma
 \begin{vworklemmastatement}
 \label{lem:crat0:sfdv0:sprx1:04}
 For Algorithm \ref{alg:crat0:sfdv0:01d}
-(Figure \ref{fig:crat0:sfdv0:01d}), once steady
+(Figure TBD
+%\ref{fig:crat0:sfdv0:01d}%
+), once steady
 state has been achieved, the number of consecutive
 base subroutine invocations during which subroutine
 ``\texttt{A()}'' is executed is always in the set
@@ -2237,7 +2249,9 @@ value of $n \in \vworkintset$ which still meets the criterion
 yields (\ref{eq:lem:crat0:sfdv0:sprc2:01:01}).  Note that 
 the derivation of (\ref{eq:lem:crat0:sfdv0:sprc2:01:01}) requires
 that the restrictions on $K_1$ through $K_4$ documented in
-Figure \ref{fig:crat0:sfdv0:02a} be met.
+Figure TBD
+%\ref{fig:crat0:sfdv0:02a}
+be met.
 \end{vworklemmaproof}
 
 \begin{vworklemmastatement}
@@ -2275,7 +2289,9 @@ is given by
 \end{equation} 
 \end{vworklemmastatement}
 \begin{vworklemmaproof}
-As in Lemma \ref{} and without
+As in Lemma TBD
+%\ref{}
+and without
 loss of generality, we assume for analytic
 convenience that $K_1=0$ and $K_3=K_4$.  Note that
 $K_1$ and $K_3$ influence only the transient startup
@@ -2338,7 +2354,7 @@ the specific constants for testing and incrementation.
 In Figure \ref{fig:lem:crat0:sfdv0:sprc2:02:01}, as contrasted with
 Algorithm \ref{alg:crat0:sfdv0:01a}, ``$K_4 + K_2$'' takes the
 place of $K_4$.  $\gcd(K_2, K_4 + K_2) = \gcd(K_2, K_4)$
-(see Lemma \cprizeroxrefhyphen\ref{lem:cpri0:gcd0:01}), so the 
+(see Lemma \ref{lem:cpri0:gcd0:01}), so the 
 results from 
 \end{vworklemmaproof}
 
@@ -2486,8 +2502,12 @@ operation rather than a division.
 
 We can however substantially simplify and economize the code of
 Figure \ref{fig:crat0:sbla0:02} by using the technique 
-presented in Figures \ref{fig:crat0:sfdv0:fab0:03} and
-\ref{fig:crat0:sfdv0:fab0:04}, and this improved code is
+presented in Figures TBD
+%\ref{fig:crat0:sfdv0:fab0:03}
+and
+TBD
+%\ref{fig:crat0:sfdv0:fab0:04}%
+, and this improved code is
 presented as Figure \ref{fig:crat0:sbla0:03}.
 
 \begin{figure}
@@ -2701,7 +2721,8 @@ down, i.e. $z=2^{q-1}-1$, and applied as in
 \label{exe:crat0:sexe0:01}
 For Algorithm \ref{alg:crat0:sfdv0:01a}, 
 assume that one chooses $K_1 > K_3 - K_2$ (in contradiction to the
-restrictions in Figure \ref{fig:crat0:sfdv0:01a}).
+restrictions in Figure TBD.
+%\ref{fig:crat0:sfdv0:01a})
 Derive a result similar to Lemma \ref{lem:crat0:sfdv0:sprc0:01}
 for the number of base subroutine invocations in which 
 ``\texttt{A()}'' is run before it is
@@ -2809,19 +2830,5 @@ implemented.
 \vworkexercisefooter{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\vfill
-\noindent\begin{figure}[!b]
-\noindent\rule[-0.25in]{\textwidth}{1pt}
-\begin{tiny}
-\begin{verbatim}
-$HeadURL: svn://localhost/dtapublic/pubs/books/ucbka/trunk/c_rat0/c_rat0.tex $
-$Revision: 278 $
-$Date: 2019-08-14 19:10:36 -0400 (Wed, 14 Aug 2019) $
-$Author: dashley $
-\end{verbatim}
-\end{tiny}
-\noindent\rule[0.25in]{\textwidth}{1pt}
-\end{figure}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%
-%End of file C_RAT0.TEX
+%End of file c_rat0.tex
+

@@ -1,5 +1,3 @@
-%%$Header: svn://localhost/dtapublic/pubs/books/ucbka/trunk/custbook.cls 140 2017-07-03 01:59:16Z dashley $
-%%
 %% This is file `book.cls',
 %% generated with the docstrip utility.
 %%
@@ -788,30 +786,5 @@
   \onecolumn
 \fi
 \endinput
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% $Log: custbook.cls,v $
-% Revision 1.8  2004/03/12 11:08:39  dtashley
-% Modified to provide class CUSTBOOK rather than BOOK to eliminate LaTeX
-% warning.
-%
-% Revision 1.7  2003/04/17 06:04:14  dtashley
-% Some advice from Donald Arseneau that should change the "ftype" to 4 for
-% algorithms.  Apparently this is a bit-masked thing, and the value should
-% not interfere with tables and figures.  It was 3 in my initial hack and
-% there seemed not to be any ill effects, but safer is better.
-%
-% Revision 1.6  2003/04/07 07:09:33  dtashley
-% Keyword expansion finally corrected.  Change to file was the addition of
-% an "algorithm" environment that behaves like figures and tables, including
-% the capability to generate a list of algorithms.
-%
-% Revision 1.5  2003/04/07 07:00:52  dtashley
-% Additional attempt at keyword expansion.
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%$History: custbook.cls $
-% *****************  Version 1  *****************
-% User: David T. Ashley Date: 7/16/00    Time: 2:04p
-% Created in $/uC Software Multi-Volume Book (A)/LaTeX Classes And Style Files
-% Initial check-in.
-%
-% End of file `custbook.cls'.
+% End of file custbook.cls
+
