@@ -1,0 +1,578 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{The \emph{Clike} Programming Language}
+\label{ccik2}
+
+The \index{Clike@\emph{Clike}}\emph{Clike}\footnote{Mnemonic: \emph{C}-\emph{l}ike.}
+programming language is a ``glue'' language to integrate tools.  This chapter describes
+the language in detail.
+
+\emph{Clike} is designed to be similar enough to
+\index{C programming language@\emph{C} (programming language)}\emph{C}
+(with some \index{C++ programming language@\emph{C++} (programming language)}\emph{C++}
+ideas included) that any \emph{C}/\emph{C++} programmer can understand and
+use the language immediately.
+
+Entire \emph{Clike} programs contained in source files can be run; but individual
+statements can also be executed interactively.  This makes a tool aggregation that
+includes the \emph{Clike} intepreter often useful as a general utility.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rationale for \emph{Clike}}
+\label{ccik2:swno0}
+
+There are many capable scripting languages available, including
+\index{Python (scripting language)@\emph{Python} (scripting language)}\emph{Python},
+\index{Perl (scripting language)@\emph{Perl} (scripting language)}\emph{Perl}, and
+\index{Tcl (scripting language)@\emph{Tcl} (scripting language)}\emph{Tcl}.
+Why was \index{Clike (scripting language)@\emph{Clike} (scripting language)}\emph{Clike} developed?
+
+The primary use of \emph{Clike} is twofold:
+
+\begin{itemize}
+   \item Creating and manipulating source code and data directly used in the construction
+         of embedded systems.
+   \item Embedded systems engineering and development.
+\end{itemize}
+
+The first use, in particular, demands high reliability.  A software defect
+in \emph{Clike} or the underlying tools could lead to a software defect
+in an embedded system.
+
+To varying degrees, 
+\index{Python (scripting language)@\emph{Python} (scripting language)}\emph{Python},
+\index{Perl (scripting language)@\emph{Perl} (scripting language)}\emph{Perl}, and
+\index{Tcl (scripting language)@\emph{Tcl} (scripting language)}\emph{Tcl} have the 
+following disadvantages which impact reliability:
+
+\begin{itemize}
+   \item Dissimilarity to \emph{C}.  (Additional learning effort.
+         \emph{C} is the dominant language for embedded systems
+         development, and virtually every software developer is fluent.)
+   \item Inability to statically link.  (In very conservative build processes,
+         it is common to calculate the cryptographic hashes of executables and
+         compare them to the expected values to ensure that the expected tools are
+         being used in the build.  Software with dynamic library dependencies
+         renders this process less reliable.)
+   \item Difficulty debugging.  (\emph{Clike} has several features to facilitate
+         debugging, including logging and the built-in ability to emit bytecode and
+         system state.)
+   \item Inability to unit test software components.  (The \emph{Clike} interpreter
+         is built to be unit-tested.)
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{General Features of the Language and the Interpreter}
+\label{ccik2:sgft0}
+
+\emph{Clike} has the following features and characteristics.
+
+\begin{itemize}
+   \item Minimalist nature.
+         \begin{itemize}
+            \item The language is intended for basic ``glue'' scripting, and so is Turing-complete
+                  but doesn't have many common features of high-level languages.
+                  Missing features\footnote{Some of these features may be added later.}
+                  include:
+                  \begin{itemize}
+                     \item Support for non-ASCII character sets in \emph{Clike} source code.
+                     \item Direct support for processing Unicode in files.
+                     \item Object-oriented features.
+                     \item Constant variables.
+                     \item The \emph{switch()}\footnote{\emph{switch()} must be coded using
+                           \emph{else-if}.} statement.
+                     \item Programmatic interpretation of \emph{Clike} scripts.\footnote{All source code
+                           must be available at the start of the program.  The source code is byte-coded
+                           once at the start of the program, and no elements may be byte-coded later.}
+                  \end{itemize}
+         \end{itemize}
+   \item Similarity to
+         \index{C (programming language)@\emph{\emph{C} (programming language)}}\emph{C}.
+         \begin{itemize}
+            \item The similarity (plus the minimalist nature of the language) should allow
+                  a programmer to learn the language quickly.
+         \end{itemize}
+   \item Support for local multi-threading.
+      \begin{itemize}
+         \item A significant use of the \emph{Clike} language will be for scripting embedded
+               builds.
+               \begin{itemize}
+                  \item Such builds for large embedded systems now typically require over 10 minutes
+                        on a personal computer.
+                  \item Using all cores available on a personal computer is necessary to minimize
+                        build time.
+               \end{itemize}
+      \end{itemize}
+   \item Sub-optimal performance.
+      \begin{itemize}
+         \item The \emph{Clike} interpreter is not designed to be fast (unlike \emph{Python} or
+               certain other scripting languages).
+               \begin{itemize}
+                  \item However, it is anticipated that the highest-frequency operations will occur
+                        in compiled code, either within the \emph{Clike} interpreter or in spawned
+                        programs, so the performance of the \emph{Clike} interpreter itself
+                        won't have much of an effect on overall execution times for typical
+                        use cases.
+               \end{itemize}
+      \end{itemize}
+   \item Designed for reliability and debugging.
+      \begin{itemize}
+         \item Most components of the tool set are unit-tested with MC/DC coverage.
+         \item The \emph{Clike} interpreter is designed to be simple, at the possible
+               expense of speed.
+         \item The \emph{Clike} interpreter and any aggregated tools are statically linked, and so the
+               cryptographic hash of the resulting executable can be used to ensure that the intended
+               version of the executable is being used.
+         \item There are adequate debugging options, including:
+               \begin{itemize}
+                  \item Launching the interpreter with a high verbosity and/or logging level so that
+                        issues can be found.
+                  \item The availability of commands the output the internal state, including variables
+                        and call stacks.
+                  \item The ability to debug under development tools.
+               \end{itemize}
+      \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{\emph{Clike} Script and Statement Execution}
+\label{ccik2:ssfi0}
+
+A \emph{Clike} script or statement is always executed in one of the following three ways:
+
+\begin{itemize}
+   \item A tool aggregation containing a \emph{Clike} interpreter is run with
+         the name of the file containing a script\footnote{This is the master file---it may
+         include other files as described in \S{}\ref{ccik2:ssff0}.} specified as a command-line
+         parameter.  In this case, the tool aggregation program ends when the script
+         ends.
+   \item A single \emph{Clike} statement---always an assignment or expression evaluation
+         possibly involving function calls---is run interactively.
+   \item The \emph{source()} function is invoked interactively, and the 
+         \emph{Clike} interpreter executes the master file specified as the argument
+         specifed to the \emph{source()} function.  In this case, no information
+         is transferred from the interactive environment to the executed script, and the
+         tool aggregation program ends when the script ends.
+\end{itemize}
+
+There is no provision for allowing one script to run another as part of the same
+interpreter invocation, for allowing source code to be constructed and compiled to
+bytecode during the execution of a \emph{Clike} script, or for allowing bytecode
+to be modified once a script's bytecode has begin execution.
+
+File inclusion is supported (\S{}\ref{ccik2:ssff0}), but this does not change
+the paradigm.  A single
+``master'' script, which possibly includes files, is compiled to bytecode.
+The bytecode is thereafter never modified during that invocation of the 
+aggregation containing the \emph{Clike} interpreter.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{File Inclusion}
+\label{ccik2:ssff0}
+
+\emph{Clike} includes the \emph{include()} and \emph{includeonce()} directives.
+
+\emph{includeonce()} is identical to \emph{include()} except that it automatically
+prevents multiple inclusion.  (Restrictions:  same string, exactly.)
+
+These directives are evaluated before byte-coding, so the arguments cannot be calculated
+values.
+
+These may be placed anywhere within a file on their own line. 
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Comments}
+\label{ccik2:scom0}
+
+Comments may be done in either the \emph{C} or \emph{C++} styles.
+
+\emph{C} comments may be nested, with the restriction of matching comment delimiters.  (This
+decision was made due to the lack of preprocessing ability.)
+
+\emph{C++} comments take precedence over \emph{C} comments in that a \emph{C++} comment
+may block a \emph{C} comment, but not vice-versa (see Figs. \ref{fig:ccik2:scom0:01}
+and \ref{fig:ccik2:scom0:02}).
+
+\begin{figure}
+\begin{verbatim}
+/*
+//  /* The C-style comment delimiter to the left is ignored,
+//  /* and the comment block here will not cause errors.
+*/
+\end{verbatim}
+\caption{\emph{C++}-Style Comment Preventing Recognition of a \emph{C}-Style Comment}
+\label{fig:ccik2:scom0:01}
+\end{figure}
+
+\begin{figure}
+\begin{verbatim}
+//The right C-style delimiter below will not be recognized, and
+//the code will likely cause a parsing error.
+/* //C-style delimiter to the right not seen. */
+\end{verbatim}
+\caption{\emph{C}-Style Comment \emph{Not} Preventing Recognition of a \emph{C++}-Style Comment}
+\label{fig:ccik2:scom0:02}
+\end{figure}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Language Version Number Declaration}
+\label{ccik2:slvn0}
+
+The \emph{clikeversion()} directive must be the first parsable item in the master
+source file, and must provide a version number that matches the interpreter.
+
+This directive is provided and required because the language is in a state of flux.
+At this time, it is necessary to strongly pair scripts with interpreter versions.
+
+For now, the version is \emph{0.1a}.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Keywords and Lexical Tokens}
+\label{ccik2:skwd0}
+
+The keywords and lexical tokens:
+
+\begin{itemize}
+   \item Expression order of evaluation
+      \begin{itemize}
+          \item \emph{(}
+          \item \emph{)}
+      \end{itemize}
+   \item Statement blocks
+      \begin{itemize}
+          \item \emph{\{}
+          \item \emph{\}}
+      \end{itemize}
+   \item Assignment
+      \begin{itemize}
+          \item \emph{=}
+      \end{itemize}
+   \item Comparison
+      \begin{itemize}
+          \item \emph{==}
+          \item \emph{!=}
+          \item \emph{\textless}
+          \item \emph{\textless{}=}
+          \item \emph{\textgreater}
+          \item \emph{\textgreater{}=}
+      \end{itemize}
+   \item Function definition
+      \begin{itemize}
+          \item \emph{proc}
+          \item \emph{return}
+      \end{itemize}
+   \item Looping
+      \begin{itemize}
+          \item \emph{for}
+          \item \emph{while}
+          \item \emph{break}
+          \item \emph{continue}
+      \end{itemize}
+\end{itemize}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variables}
+\label{ccik2:svar0}
+
+TBD.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Literals}
+\label{ccik2:slit0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Primitive Data Types}
+\label{ccik2:ssdt0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Explicit Type Conversion}
+\label{ccik2:stcv0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Operators}
+\label{ccik2:sops0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arrays and Structure Field Selection}
+\label{ccik2:sasf0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statements}
+\label{ccik2:ssta0}
+
+Need to include the semicolon and comma operators.
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Blocks}
+\label{ccik2:sblk0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Logical Expressions}
+\label{ccik2:slex0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \emph{if()} Statement}
+\label{ccik2:sifs0}
+
+Need to include else and elseif here.
+
+No switch() statement.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \emph{while()} and \emph{for()} Loops}
+\label{ccik2:swfl0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The \emph{do-while()} Loop}
+\label{ccik2:sdwl0}
+
+TBD.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Functions}
+\label{ccik2:sfun0}
+
+Need to include pass-by-value and pass-by-reference.
+
+For pass by value, value won't have a copy made unless there is an attempt to modify the
+variable.  This is implicit const.
+
+Need to include recursion.
+
+Need to include variable-length parameter lists.
+
+Need to include default parameters.
+
+Every function returns a value.  If no return statement occurs, 0 is returned automatically.
+
+Need to have the \emph{global} keyword to allow access to anything not in the function.
+
+No notion of static.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Errors and Error Termination}
+\label{ccik2:seet0}
+
+Decided that will have the \emph{try\{\}} and \emph{catch()\{\}}
+syntax like C++.
+
+Multiple \emph{catch} clauses my be sequential.  Search performed in order.  Must immediately
+follow \emph{try}.
+
+Need to have a list of error types, codes, etc.
+
+Need to have a \emph{throw}.
+
+Errors percolate up the calling tree to first applicable \emph{catch}.  Anything uncaught terminates program.
+
+Out of memory is fatal.
+
+Mutexes and file handles (as well as, naturally, variables) may be left in an undesired state if
+not properly handled.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Built-In Functions}
+\label{ccik2:sbif0}
+
+Every built-in function should begin with an underscore.  No user-defined function may begin
+with an underscore.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Built-In Constants}
+\label{ccik2:sbic0}
+
+\_PFORM.
+\_CMDLINEPARS.
+\_ENV.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Internal Representations}
+\label{ccik2:sirp0}
+
+This should possibly go in a design section.
+
+Need to have the following data structures:
+
+\begin{itemize}
+\item Byte-coded source deck.\\
+      Fully formed by the time threads might start.\\
+      Read-only.
+\item Global variables.\\
+      Shared among all threads.\\
+      The classic IPC problems may exist, but not in a catastrophic form (the low-level operations,
+      such allocation, assignment, moving pointers, etc. are protected from threading issues).  But,
+      above that level, RMW and race conditions may exist.
+\item Call stack.\\
+      Per thread.\\
+      Contains function calls, return addresses, parameters, local variables, and return values that were
+      pushed onto the stack or exist on the stack.\\
+      Some counterintuitive protection may be necessary with pass-by-reference.
+\item Global constants.\\
+      Shared among all threads.
+      Fully formed by the time threads might start.
+      Read-only.
+\end{itemize}
+
+Need to have a way to dump the internal structures for debugging.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Multi-Threading (Concurrency)}
+\label{ccik2:scnc0}
+
+Threads, mutexes, and condition variables may be created only once; and must be created all at the
+same time.
+
+All threads must begin at UserThreadFunc() (as opposed to the primary thread, which begins at
+\emph{main()}.
+
+Effectively, the worker thread pool approach is enforced.
+
+Mutexes and so on need to be tracked so that the state can be determined on debug dumps.
+
+Each thread has access to the same pool of global variables (no notion of thread-local storage).
+
+Mutexes should be used for protection.
+
+Automatic mechanisms prevent the most egregious violations that would result in memory leaks, allocation problems, etc.
+
+Certain functions will be inherently atomic (such as \emph{puts}).
+
+There should be only three total mutexes:
+\begin{itemize}
+\item The mutex used to keep certain critical data structure operations atomic (not available to
+      \emph{Clike} programs).
+\item The mutex used to keep certain function calls atomic (not available to \emph{Clike} programs).
+\item The user mutex, used to protect critical sections between threads (manipulated by Clike programs).
+\end{itemize}
+
+The order of obtaining the mutexes will always be inherently from the last element of the enumeration
+above to the first, so deadlock should not be possible without a programming mistake.
+
+The main thread should process any sort of a break signal, then set an internal variable so that
+the worker threads can come back to a known state.
+
+Unsure of how to protect for deadlock on the user mutex.  For initial versions may allow a hang,
+then for later versions fix it.  Perhaps can put a counter in the break handler where if there are
+too many break events it gets more forcible.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Command Prompt Semantics}
+\label{ccik2:scps0}
+
+When typing a command at the command prompt, a semicolon is not required, but a continuation character can be
+used.
+
+Need to establish the correspondence between tools and the Clike namespace.  Need to do better with errors, because otherwise the
+command-line would be burdened with those.  Will need a \emph{catch} it seems.
+
+Anything that would have been caught would be a printed error.
+
+The parenthesis on a function can be omitted.
+
+\emph{tl.tool.subcommand(pars)}
+\emph{tl.tool.subcommand pars}
+
+The scripted form of a command invocation returns the outputs as an associative array.  In the
+case of command-line invocation, these will be displayed automatically.  In the case of scripted
+invocation, these will be assigned to a variable.
+
+If there are errors, these will be displayed.  Essentially, this would be an uncaught
+exception.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
