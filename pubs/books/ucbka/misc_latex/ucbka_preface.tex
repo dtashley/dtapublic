@@ -1,14 +1,3 @@
-%$Header: svn://localhost/dtapublic/pubs/books/ucbka/trunk/volshare/workprfa.tex 274 2019-08-11 21:43:05Z dashley $
-%
-%------------------------------------------------------------------------------------------------------------------
-%This file isn't used directly--instead, the Tcl script CP_SCRIPT.TCL inserts it into the the main .TEX volume.
-%In this process, the <mv> and <sv> tags on some lines are processed.  <mv> lines go only to the multi-volume
-%work, and <sv> lines to only to the single-volume work.
-%
-%For the multi-volume work, the symbolic patchup is near perfect.  But for the single-volume work, the parts
-%are numbered manually, which is a process open to human error.  This preface must be checked when chapters
-%are moved, added, or deleted.
-%------------------------------------------------------------------------------------------------------------------
 \chapter{Preface}
 
 In 1998, I began work on the
@@ -96,7 +85,6 @@ these materials:
 
 
 I have produced this set of works with the following four goals.
-\marginpar{\textbf{Goals of This Work}}
 \begin{itemize}
 \item \textbf{To share results and coordinate work
    with researchers.}  I have
@@ -135,8 +123,7 @@ I have produced this set of works with the following four goals.
    necessary to better support embedded software developers.
 \end{itemize}
 
-In \marginpar{\textbf{\emph{Small} Defined}}
-the title of this book, I've indicated that this book is
+In the title of this book, I've indicated that this book is
 about \index{small microcontroller system}\emph{small} microcontroller work.  By
 \emph{small microcontroller work}, I mean the development
 and production of small
@@ -173,7 +160,6 @@ electrical transients, and spurious resets.
 
 I use the term \index{hard problem}\emph{hard problem} throughout this book.
 I define a
-\marginpar{\textbf{\emph{Hard Problem} Defined}}
 \emph{hard} problem as a problem that
 meets the following two criteria.
 \begin{itemize}
@@ -222,9 +208,7 @@ a microcontroller using economical but lossy
 multiplication and integration (to the best of my
 knowledge, this insight does not exist anywhere).
 
-<mv>\textbf{Volume \vconzeroroman{}: \vconzerotitle{}}
-<sv>\textbf{Part I:  Concepts}
-\marginpar{\textbf{Book Contents}}
+\textbf{Part I:  Concepts}
 contains an introduction to the challenges of small microcontroller work.
 \begin{itemize}
 \item \textbf{Chapter\;\ref{cint0}, \cintzerotitle{}} explains the scope of the book 
@@ -238,8 +222,7 @@ contains an introduction to the challenges of small microcontroller work.
       unattainable goals.
 \end{itemize}
 
-<mv>\textbf{Volume \vmfrzeroroman{}: \vmfrzerotitle{}} 
-<sv>\textbf{Part II:  Mathematical Frameworks}
+\textbf{Part II:  Mathematical Frameworks}
 contains key mathematical frameworks and
 results that are divorced from any specific problem.
 \begin{itemize}
@@ -270,8 +253,7 @@ results that are divorced from any specific problem.
 \end{itemize}
 
 
-<mv>\textbf{Volume \vcswzeroroman{}:  \vcswzerotitle{}}
-<sv>\textbf{Part III:  Construction Of Embedded Software}
+\textbf{Part III:  Construction Of Embedded Software}
 details the way embedded systems are (or should be)
 constructed in practice.
 \begin{itemize}
@@ -301,8 +283,7 @@ constructed in practice.
 \end{itemize}
 
 
-<mv>\textbf{Volume \valgzeroroman{}: \valgzerotitle{}} 
-<sv>\textbf{Part IV:  Embedded System Algorithms And Techniques}
+\textbf{Part IV:  Embedded System Algorithms And Techniques}
 presents algorithms which are used in a target embedded system.
 
 \begin{itemize}
@@ -327,8 +308,7 @@ presents algorithms which are used in a target embedded system.
 \end{itemize}
 
 
-<mv>\textbf{Volume \vpaczeroroman{}: \vpaczerotitle{}} 
-<sv>\textbf{Part V:  Practical, Administrative, Incidental, And Miscellaneous Topics}
+\textbf{Part V:  Practical, Administrative, Incidental, And Miscellaneous Topics}
 discusses topics that are non-technical, only peripherally related to embedded system
 software development,
 or difficult to categorize elsewhere.
@@ -371,8 +351,7 @@ or difficult to categorize elsewhere.
 \end{itemize}
 
 
-<mv>\textbf{Volume \vijtzeroroman{}: \vijtzerotitle{}}
-<sv>\textbf{Part VI:  ESRG Tool Set Reference Guide}
+\textbf{Part VI:  ESRG Tool Set Reference Guide}
 is a reference for the research tool set for microcontroller 
 work (based on Tcl/Tk from Scriptics/Ajuba/Interwoven), which is packaged
 with this book.
@@ -407,12 +386,11 @@ with this book.
 \end{itemize}
 
 
-<mv>\textbf{Volume \vsmazeroroman{}: \vsmazerotitle{}}
-<sv>\textbf{Part VIII:  Solutions To Selected Exercises}
+\textbf{Part VIII:  Solutions To Selected Exercises}
 contains solutions for selected exercises
 found throughout the work.
 
-Although \marginpar{\textbf{Features For Readers}} I
+Although I
 know that all of my readers will be involved in some way
 with technical things---such as mathematics, computer science,
 control theory, software quality, or the design and development
@@ -440,8 +418,7 @@ reader is directed not only to technical documents,
 but also to the authors of the
 documents.
 
-Since \marginpar{\textbf{Version Identification}}
-this book will be maintained on the Web, the issue arises of how
+Since this book will be maintained on the Web, the issue arises of how
 a reader would know one version of this book from another.
 I have provided two mechanisms for this.\footnote{\TeX{}
 tradition would demand that I pick a transcendental number
@@ -466,7 +443,7 @@ version control systems will handle the task automatically.}
 
 \end{itemize}
 
-This \marginpar{\textbf{Book License}}\index{license} book is licensed under the 
+This \index{license} book is licensed under the 
 \emph{Academic Free License v. 2.0}, reproduced below for convenience.\footnote{Please
 note that \emph{The ESRG Tool Set} and certain other materials are licensed under the GPL.  At this time
 only this book is licensed under the \emph{Academic Free License}.}
@@ -609,7 +586,7 @@ Licensed under the Academic Free License version 2.0
 \end{it}
 
 
-I \marginpar{\textbf{Intellectual Property}} believe very
+I believe very
 strongly in the notion of intellectual property.  I have endeavored
 in this book to cite all references and to identify all work and
 all ideas that are not my own.\footnote{I've actually gone a step
@@ -628,25 +605,9 @@ credit in academic journals, I would take the matter less
 jovially and would very likely report the plagiarism to the journal 
 involved.
 
-I \marginpar{\textbf{Contacting the Author}}\index{contacting the author}
+I \index{contacting the author}
 can be contacted at \texttt{dtashley@aol.com}.  I invite readers
 to contact me about
 any material in this book, in \emph{The ESRG Tool Set}, or at
 the web site \texttt{http://esrg.sourceforge.net}.
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\noindent\begin{figure}[!b]
-\noindent\rule[-0.25in]{\textwidth}{1pt}
-\begin{tiny}
-\begin{verbatim}
-$HeadURL: svn://localhost/dtapublic/pubs/books/ucbka/trunk/volshare/workprfa.tex $
-$Revision: 274 $
-$Date: 2019-08-11 17:43:05 -0400 (Sun, 11 Aug 2019) $
-$Author: dashley $
-\end{verbatim}
-\end{tiny}
-\noindent\rule[0.25in]{\textwidth}{1pt}
-\end{figure}
-%
-%End of file WORKPRFA.TEX
