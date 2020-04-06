@@ -98,8 +98,8 @@ static void evaluate(char *desc, unsigned price_bottom, unsigned price_top, unsi
 
 int main(void)
 {
-  evaluate("DIA", 10000, 22000, 1000000,   5);
-  evaluate("USO", 300,   610,   500000,    5);
+  //evaluate("DIA", 12000, 29500, 2000000,   1);
+  evaluate("USO", 300,   500,   500000,    2);
   hline();
   return 0;
 }
