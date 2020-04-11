@@ -125,6 +125,7 @@
     <None Include="..\..\s_csd0\s_csd0.tex" />
     <None Include="..\..\s_fpa0\s_fpa0.tex" />
     <None Include="..\..\s_ghc0\s_ghc0.tex" />
+    <None Include="..\..\s_icp0\s_icp0.tex" />
     <None Include="..\..\s_ind0\s_ind0.tex" />
     <None Include="..\..\s_iov0\s_iov0.tex" />
     <None Include="..\..\s_ndv0\s_ndv0.tex" />

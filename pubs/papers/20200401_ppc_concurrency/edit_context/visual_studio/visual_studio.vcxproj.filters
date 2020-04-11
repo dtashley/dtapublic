@@ -51,5 +51,8 @@
     <None Include="..\..\s_atq0\s_atq0.tex">
       <Filter>LaTeX Source Files</Filter>
     </None>
+    <None Include="..\..\s_icp0\s_icp0.tex">
+      <Filter>LaTeX Source Files</Filter>
+    </None>
   </ItemGroup>
 </Project>
